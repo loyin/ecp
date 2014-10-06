@@ -3,14 +3,11 @@ package net.loyin.interceptor;
 import net.loyin.ctrl.BaseController;
 import net.loyin.jfinal.model.IdGenerater;
 import net.loyin.util.PropertiesContent;
-import net.loyin.util.safe.CipherUtil;
 
 import org.apache.commons.lang.ArrayUtils;
-import org.apache.commons.lang.StringUtils;
 
 import com.jfinal.aop.Interceptor;
 import com.jfinal.core.ActionInvocation;
-import com.jfinal.core.Controller;
 
 /**
  * 基础拦截器父类
@@ -31,7 +28,7 @@ public abstract class BaseInterceptor implements Interceptor {
 			power_url_exclude=PropertiesContent.get("power_url_exclude","").split(",");
 		
 		BaseController ctrl=(BaseController)ai.getController();
-		Long uid=ctrl.getCurrentUserId();
+		String uid=ctrl.getCurrentUserId();
 		String uri=ctrl.getRequest().getRequestURI();
 		//登录超时控制
 		if(uid==null&&(!ArrayUtils.contains(power_url_exclude,uri))){

@@ -19,7 +19,7 @@ import com.jfinal.plugin.activerecord.tx.Tx;
  */
 @TableBind(name="users")
 public class User extends Model<User> {
-	private static final long serialVersionUID = -5301851381511273243L;
+	private static final Long serialVersionUID = -5301851381511273243L;
 	public static final String tableName="users";
 	public static User dao=new User();
 	/**
@@ -36,7 +36,7 @@ public class User extends Model<User> {
 		return dao.paginate(pageNo,pageSize,"select  u.id,u.uname,ps.realname,ps.email,ps.mobile,ps.sex,ps.head_pic,u.status,u.reg_date,u.last_login_time,u.login_ip,p.name as position_name,d.name as department_name",
 				sql.toString(), parame.toArray());
 	}
-	public User qryLoginUser(Long id) {
+	public User qryLoginUser(String id) {
 		List<User>list= this.findByCache("user",id, "select * from "+tableName+" where id=?",id);
 		if(list!=null&&list.isEmpty()==false)
 		return list.get(0);
@@ -46,7 +46,7 @@ public class User extends Model<User> {
 		return this.findFirst("select u.* from "+tableName+" u where  sn=? and pwd1=?",userno,password);
 	}
 	/**更新登录信息*/
-	public void upLogin(Long id, String ip,String nowStr) {
+	public void upLogin(String id, String ip,String nowStr) {
 		Db.update("update "+tableName +" set last_login_time=login_time,last_login_ip=login_ip,login_count=login_count+1,login_time=?,login_ip=? where id=? ",nowStr, ip,id);
 	}
 	@Before(Tx.class)

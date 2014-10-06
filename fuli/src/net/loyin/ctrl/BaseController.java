@@ -77,20 +77,24 @@ public abstract class BaseController<M extends Model<M>> extends Controller {
 		return User.dao.qryLoginUser(getCurrentUserId());
 	}
 	/** 获取当前系统操作人ID */
-	public Long getCurrentUserId(){
-		String uid=getUserMap().get("uid");
+	public String getCurrentUserId(){
+		Object obj=getUserMap().get("uid");
+		if(obj==null){
+			return null;
+		}
+		String uid=obj.toString();
 		if(StringUtils.isEmpty(uid))
 			return null;
-		return Long.parseLong(uid);
+		return uid;
 	}
 
 	@SuppressWarnings("unchecked")
-	public Map<String, String> getUserMap() {
-		Map<String, String> userMap =new HashMap<String,String>();
+	public Map<String, Object> getUserMap() {
+		Map<String,Object> userMap =new HashMap<String,Object>();
 		String cookieVal = this.getCookie(PropertiesContent.get("cookie_field_key"));
 		if (StringUtils.isNotEmpty(cookieVal)){
 			cookieVal = CipherUtil.decryptData(cookieVal);
-			userMap = (Map<String, String>) JSON.parse(cookieVal);
+			userMap = (Map<String,Object>) JSON.parse(cookieVal);
 		}
 		return userMap;
 	}

@@ -1,7 +1,6 @@
 package net.loyin.jfinal.model;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Stack;
 
@@ -32,11 +31,7 @@ public class IdGenerater {
 		}
 	}
 	public String timeTo62(){
-		return this.to62(new Date().getTime());
-	}
-	/**翻转time生成*/
-	public String timeTo62_fz(){
-		return this.to62(Long.parseLong(new StringBuffer(new Date().getTime()+"").reverse().toString()));
+		return this.to62(System.nanoTime());
 	}
 	/**
 	 * 转换62位字符

@@ -5,8 +5,8 @@ import net.loyin.interceptor.PermissionInterceptor;
 import net.loyin.jfinal.plugin.AutoTableBindPlugin;
 import net.loyin.jfinal.plugin.MyRoutesUtil;
 import net.loyin.jfinal.plugin.TableNameStyle;
+import net.loyin.jfinal.plugin.activerecord.dialect.MyMySqlDialect;
 import net.loyin.jfinal.plugin.quartz.QuartzPlugin;
-import net.loyin.kit.I18N;
 import net.loyin.util.PropertiesContent;
 
 import org.apache.log4j.Logger;
@@ -21,7 +21,6 @@ import com.jfinal.config.Routes;
 import com.jfinal.ext.handler.ContextPathHandler;
 import com.jfinal.ext.handler.FakeStaticHandler;
 import com.jfinal.plugin.activerecord.CaseInsensitiveContainerFactory;
-import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.druid.DruidStatViewHandler;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
@@ -77,7 +76,7 @@ public class JFWebConfig extends JFinalConfig {
 		//添加自动绑定model与表插件
 		AutoTableBindPlugin autoTableBindPlugin = new AutoTableBindPlugin(druidPlugin, TableNameStyle.LOWER);
 		autoTableBindPlugin.setShowSql(true);
-		autoTableBindPlugin.setDialect(new MysqlDialect());
+		autoTableBindPlugin.setDialect(new MyMySqlDialect());
 		autoTableBindPlugin.setContainerFactory(new CaseInsensitiveContainerFactory(true));//postgresql时 一定要设置为true 即采用小写
 		me.add(autoTableBindPlugin);
 		/**配置定时器插件 在job.properties里配置对应的定时任务*/
@@ -101,7 +100,6 @@ public class JFWebConfig extends JFinalConfig {
 	  //该处理器将request.getContextPath()存储在root中，可以解决路径问题
 	  	ContextPathHandler path = new ContextPathHandler("root");
 	  	me.add(path);
-//	  	me.add(new FakeStaticHandler());//伪静态.html
 	  	me.add(new FakeStaticHandler(".json"));//通过.json后缀访问后台链接
 	}
 }

@@ -4,7 +4,7 @@
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
-<title>{{username}}复利投资演算系统</title>
+<title>{{userInfo.sn}}复利投资演算系统</title>
 <!-- <link rel="stylesheet" href="s/bootstrap/css/bootstrap.min.css"> -->
 <!-- <link rel="stylesheet" href="s/js/jqdialog/jDialog.css"> -->
 <link href="s/css/font-awesome.min.css" rel="stylesheet">
@@ -26,7 +26,7 @@
 </head>
 <body>
 	<div ng-repeat="msg in alertMsgList" class="alert alert-{{msg.type}}"
-		style="margin-left:35%;width: 500px; position:absolute;" role="alert">
+		style="margin-left:35%;width: 500px; position:absolute;margin-top:0px;z-index:100;" role="alert">
 		<button type="button" class="close" data-dismiss="alert" ng-click="alertMsgList.splice($index,1)">×</button>
 		{{msg.text}}
 	</div>

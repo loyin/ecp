@@ -46,7 +46,7 @@ public class IndexCtrl extends BaseController {
 		}
 			User m=User.dao.login(userno, pwd);
 			if(m!=null){
-				Long uid=m.getLong("id");
+				String uid=m.getStr("id");
 				String ip = this.getRequest().getHeader("X-Real-IP");
 				if(StringUtils.isEmpty(ip)){
 					ip=this.getRequest().getRemoteAddr();
@@ -76,5 +76,9 @@ public class IndexCtrl extends BaseController {
 		this.removeCookie(PropertiesContent.get("cookie_field_key"));
 		this.removeCookie("autoLogin");
 		this.redirect("/");
+	}
+	public void qryLoginInfo(){
+		User u=this.getCurrentUser();
+		this.rendJson(u!=null, null, "",u);
 	}
 }

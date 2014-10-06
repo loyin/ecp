@@ -17,7 +17,7 @@ userModule.controller('loginCtrl',//登录
 							$scope.c+=1;
 							$scope.data.vcode="";
 						}else{
-							$rootScope.username=$scope.data.username;
+							$rootScope.userInfo.sn=$scope.data.username;
 							$rootScope.is_login=true;
 							$rootScope.alertMsgList=[{text:"欢迎 "+$scope.data.username,type:"success"}];
 							window.location="#/home";

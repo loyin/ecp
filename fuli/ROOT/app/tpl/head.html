@@ -6,7 +6,7 @@
         <li><a href="#/home">玩家首页</a></li>
         <li><a href="#/notice">玩家公告</a></li>
         <li class="dropdown">
-          <a href="#/" class="dropdown-toggle" data-toggle="dropdown">个人设置<span class="caret"></span></a>
+          <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown">个人设置<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#/user/info">个人资料</a></li>
             <li><a href="#/user/pwd">修改密码</a></li>
@@ -14,7 +14,7 @@
           </ul>
         </li>
         <li class="dropdown">
-          <a href="#/" class="dropdown-toggle" data-toggle="dropdown">交易系统<span class="caret"></span></a>
+          <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown">交易系统<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#/">担保交易</a></li>
             <li><a href="#/">抢购金币</a></li>
@@ -24,7 +24,7 @@
           </ul>
         </li>
         <li class="dropdown">
-          <a href="#/" class="dropdown-toggle" data-toggle="dropdown">财务中心<span class="caret"></span></a>
+          <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown">财务中心<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
             <li><a href="#/">金币转账</a></li>
             <li><a href="#/">转账记录</a></li>
@@ -33,18 +33,18 @@
           </ul>
         </li>
         <li class="dropdown">
-          <a href="#/" class="dropdown-toggle" data-toggle="dropdown">帐号管理<span class="caret"></span></a>
+          <a href="javascript:" class="dropdown-toggle" data-toggle="dropdown">帐号管理<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#/">注册帐号</a></li>
-            <li><a href="#/">我的玩家帐号</a></li>
-            <li><a href="#/">激活帐号</a></li>
-            <li><a href="#/">我的新增帐号</a></li>
+            <li><a href="#/reg">注册帐号</a></li>
+            <li><a href="#/myaccount">我的玩家帐号</a></li>
+            <li><a href="#/active">激活帐号</a></li>
+            <li><a href="#/mynewaccount">我的新增帐号</a></li>
           </ul>
         </li>
-        <li><a href="#/">联络我们</a></li>
+        <li><a href="#/contactus">联络我们</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="javasript:">{{username}}，欢迎登录系统平台！</a></li>
+        <li><a href="javasript:">{{userInfo.sn}}，欢迎登录系统平台！</a></li>
         <li><a href="#/messageBox">我的消息</a></li>
         <li><a href="/logout">安全退出</a></li>
       </ul>
