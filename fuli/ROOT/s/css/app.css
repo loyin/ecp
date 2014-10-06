@@ -1,0 +1,17 @@
+@IMPORT url("../bootstrap/css/bootstrap.min.css");
+@IMPORT url("../js/jqdialog/jDialog.css");
+@IMPORT url("login.css");
+#daohang{width:100%;height:32px;background-color:#000066;margin-bottom:2px;position:relative;z-index:99}
+.tab{position:relative;display:block;float:left;cursor:pointer}
+.tab .tablink{position:relative;padding:1px 12px;line-height:30px;display:block;height:30px;color:#fff;font-size:14px;z-index:99;float:left}
+.tab .tablink a{line-height:30px;color:#FFF;text-decoration:none}
+.tab:hover{background:#FFF}
+.tab:hover .tablink{color:#357d13;border:1px solid #000066a;padding:0 11px;text-decoration:none}
+.tab:hover .tablink a{color:#357d13}
+.dropdown:hover .arwlink{border-bottom:1px solid #FFF;border-left:1px solid #000066a;height:31px}
+.dropdown ul{display:none}
+.dropdown ul li{}
+.dropdown:hover ul{position:absolute;display:block;margin-left:-1px;top:32px;left:1px;z-index:9}
+.subnav a{padding:4px 0 4px 10px;line-height:16px;white-space:nowrap;color:#333;float:left}
+.subnav :hover{text-decoration:underline;color:#080}
+.dropdown .subnav{background:#FFF;border:1px solid #390;padding:8px}

@@ -1,0 +1,45 @@
+<h1 class="sys_title">复利投资演示系统<sup>V1.0</sup></h1>
+<div class="login" style="margin-top: 50px;" ng-controller="loginCtrl">
+	<div class="header">
+		<div class="switch" id="switch">
+			<a class="switch_btn_focus" id="switch_qlogin" href="javascript:void(0);">快速登录</a>
+			<div class="switch_bottom" id="switch_bottom" style="position: absolute; width: 64px; left: 0px;"></div>
+		</div>
+	</div>
+	<div class="web_qr_login" id="web_qr_login"
+		style="padding:5px;">
+		<!--登录-->
+		<div class="web_login" id="web_login">
+			<div class="login-box">
+				<div class="login_form">
+						<input type="hidden" name="did" value="0" /> <input type="hidden"
+							name="to" value="log" />
+						<div class="uinArea" id="uinArea">
+							<label class="input-tips" for="u">帐号：</label>
+							<div class="inputOuter">
+								<input type="text" id="u" ng-model="data.username" class="inputstyle" autocomplete="off"/>
+							</div>
+						</div>
+						<div class="pwdArea">
+							<label class="input-tips" for="p">密码：</label>
+							<div class="inputOuter" id="pArea">
+								<input type="password" ng-model="data.password" class="inputstyle" />
+							</div>
+						</div>
+						<div class="pwdArea">
+							<label class="input-tips" for="p">验证：</label>
+							<div class="inputOuter" id="pArea">
+								<input type="text" maxlength="4" style="width:80px;float:left;" ng-model="data.vcode" class="inputstyle" />
+								<img style="float:left;" width="80px" ng-init="c=c+1" height="38px" ng-src="{{vcodeImg}}/{{c}}" ng-click="c=c+1;" title="看不清？点击更换"><a title="看不清？点击更换" style="font-size:18px;margin:10px 0 0 10px;" class="glyphicon glyphicon-refresh" ng-click="c=c+1;"></a>
+							</div>
+						</div>
+						<div style="padding-left: 50px; margin-top: 20px;">
+							<button ng-click="submit()" style="width:150px;padding:5px;font-size:18px;" class="button_blue">登 录</button>
+						</div>
+				</div>
+			</div>
+		</div>
+		<!--登录end-->
+	</div>
+</div>
+<div class="jianyi">*推荐使用IE9或以上版本IE浏览器或谷歌、火狐等浏览器访问本站</div>
