@@ -19,7 +19,7 @@ import com.jfinal.plugin.activerecord.tx.Tx;
  */
 @TableBind(name="users")
 public class User extends Model<User> {
-	private static final Long serialVersionUID = -5301851381511273243L;
+	private static final long serialVersionUID = 3983654365673819205L;
 	public static final String tableName="users";
 	public static User dao=new User();
 	/**

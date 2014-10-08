@@ -27,7 +27,6 @@ userModule.controller('loginCtrl',//登录
 						}
 					}).error(function(data,status) {
 						$rootScope.alertMsgList.push({text:"网络链接错误！状态码："+status,type:"danger"});
-						is_login=false;
 					});
 			}
 		});
@@ -35,9 +34,41 @@ userModule.controller('mainCtrl',//首页
 		function($rootScope,$scope, $http, $state, $stateParams) {
 			
 		});
-userModule.controller('newNoticeCtrl',//首页
+userModule.controller('modifyPwdCtrl',//修改密码
 		function($rootScope,$scope, $http, $state, $stateParams) {
-	
+	$scope.savePwd=function(){
+		$http.post(rootPath+"/user/savePwd.json",$scope.data).success(function(data,status){
+			if(data.success){
+				$rootScope.alertMsgList.push({text:data.msg,type:"success"});
+				$scope.data={};
+			}else{
+				$rootScope.alertMsgList.push({text:data.msg,type:"danger"});
+			}
+		}).error(function(data,status) {
+			$rootScope.alertMsgList.push({text:"网络链接错误！状态码："+status,type:"danger"});
+		});
+	}
+});
+userModule.controller('regCtrl',//注册帐号
+		function($rootScope,$scope, $http, $state, $stateParams) {
+	$scope.user={sn:""};
+	$scope.getSN=function(){
+		$http.get(rootPath+"/user/getSN.json").success(function(json,status){
+			$scope.user.sn=json.msg;
+		});
+	}
+	$scope.reg=function(){
+		$http.post(rootPath+"/user/reg.json",$scope.user).success(function(data,status){
+			if(data.success){
+				$rootScope.alertMsgList.push({text:data.msg,type:"success"});
+				$scope.user={sn:""};
+			}else{
+				$rootScope.alertMsgList.push({text:data.msg,type:"danger"});
+			}
+		}).error(function(data,status) {
+			$rootScope.alertMsgList.push({text:"网络链接错误！状态码："+status,type:"danger"});
+		});
+	}
 });
 userModule.controller('myMsgCtrl',//私人消息
 		function($rootScope,$scope, $http, $state, $stateParams) {

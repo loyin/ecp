@@ -10,7 +10,7 @@ var routerApp = angular.module('routerApp', ['ui.router','UserModule','filterMod
  */
 routerApp.run(function($rootScope,$state,$http,$stateParams){
     $rootScope.$state = $state;
-    $rootScope.system={name:"复利投资金币交易系统"};//存储登录用户信息
+    $rootScope.system={name:"金叶子投资理财复利系统"};
     $rootScope.userInfo={};//存储登录用户信息
     $rootScope.alertMsgList=[];//消息列表
     $rootScope.$stateParams = $stateParams;

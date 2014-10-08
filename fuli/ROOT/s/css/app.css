@@ -10,3 +10,6 @@
 .imgMenuList{margin:0 auto;width:1200px;margin-bottom:10px;}
 .imgMenuList li{list-style:none;float: left;width:140px;margin-left:10px;text-align:center;padding: 2px 10px 10px 0px;}
 .imgMenuList li img{border:none;}
+
+input.ng-invalid.ng-dirty {border-color: #FA787E;}
+input.ng-valid.ng-dirty {border-color: #78FA89;}

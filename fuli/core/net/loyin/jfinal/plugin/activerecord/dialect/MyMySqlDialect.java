@@ -17,7 +17,7 @@ import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
 public class MyMySqlDialect extends MysqlDialect {
 	@Override
 	public void forModelSave(Table table, Map<String, Object> attrs, StringBuilder sql, List<Object> paras) {
-		sql.append("insert into \"").append(table.getName()).append("\"(");
+		sql.append("insert into ").append(table.getName()).append("(");
 		String primaryKey=table.getPrimaryKey().toLowerCase();
 		if(StringUtils.isEmpty(primaryKey)){
 			primaryKey="id";
@@ -41,7 +41,7 @@ public class MyMySqlDialect extends MysqlDialect {
 					sql.append(", ");
 					temp.append(", ");
 				}
-				sql.append("\"").append(colName).append("\"");
+				sql.append(colName);
 				temp.append("?");
 				if(idVal==null){
 					paras.add(e.getValue());

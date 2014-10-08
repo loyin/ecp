@@ -12,7 +12,7 @@
   <div class="form-group">
     <label for="" class="col-sm-2 control-label">玩家编号：</label>
     <div class="col-sm-4">
-      <input type="text" class="form-control" readonly="readonly" required="required">
+      <input type="text" class="form-control" readonly="readonly" ng-model="user.sn">
     </div>
     <div class="col-sm-5">
     <a class="btn btn-success" ng-click="getSN()">换一个</a>&nbsp;&nbsp;如果觉得分配的编号不满意，可以点击按钮更换。
@@ -21,7 +21,7 @@
   <div class="form-group">
     <label for="" class="col-sm-2 control-label">推介编号：</label>
     <div class="col-sm-4">
-      <input type="text" class="form-control" required="required">
+      <input type="text" class="form-control" ng-model="user.referee_sn" required="required">
     </div>
     <div class="col-sm-5 red"> 必填
     </div>
@@ -29,7 +29,7 @@
   <div class="form-group">
     <label for="" class="col-sm-2 control-label">昵称：</label>
     <div class="col-sm-4">
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" ng-model="user.nick_name">
     </div>
     <div class="col-sm-5">请设置一个昵称，为了便于确认，请填写，建议填写中文！
     </div>
