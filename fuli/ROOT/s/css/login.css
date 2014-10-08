@@ -1,4 +1,4 @@
-body{font-family:"Microsoft Yahei";font-size:12px;margin:0;background: #fff url(../img/1.jpg) 50% 0 no-repeat;}
+body{font-family:"Microsoft Yahei";font-size:12px;margin:0;background:#fff url(../img/1.jpg) 50% 0 no-repeat;background-attachment: fixed;}
 ul{padding:0;margin:0;}
 ul li {list-style-type:none;}
 a {text-decoration:none;}
