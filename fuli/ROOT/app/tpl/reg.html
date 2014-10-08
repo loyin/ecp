@@ -1,0 +1,77 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">注册游戏帐号</h3>
+  </div>
+  <div class="panel-body">
+  <p class="text-right"></p>
+  <p>为了安全，请在注册时设置一个复杂安全的密码！<a href="" target="_blank">点击阅读注册须知</a></p>
+  <form class="form-horizontal" role="form">
+  <div class="form-group">
+  	<b>&nbsp;&nbsp;&nbsp;新的游戏帐号信息</b>
+  </div>
+  <div class="form-group">
+    <label for="" class="col-sm-2 control-label">玩家编号：</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" readonly="readonly" required="required">
+    </div>
+    <div class="col-sm-5">
+    <a class="btn btn-success" ng-click="getSN()">换一个</a>&nbsp;&nbsp;如果觉得分配的编号不满意，可以点击按钮更换。
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="" class="col-sm-2 control-label">推介编号：</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" required="required">
+    </div>
+    <div class="col-sm-5 red"> 必填
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="" class="col-sm-2 control-label">昵称：</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control">
+    </div>
+    <div class="col-sm-5">请设置一个昵称，为了便于确认，请填写，建议填写中文！
+    </div>
+  </div>
+  <div class="form-group">
+  <b>&nbsp;&nbsp;&nbsp;昵称与密码（密码要求包含英文字母与数字且与二级密码不能相同）</b>
+  </div>
+  <div class="form-group">
+    <label for="" class="col-sm-2 control-label">登录密码：</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" ng-model="user.pwd">
+    </div>
+    <div class="col-sm-5">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="" class="col-sm-2 control-label">验证登录密码：</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" ng-model="user.pwd1">
+    </div>
+    <div class="col-sm-5">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="" class="col-sm-2 control-label">二级密码：</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" ng-model="user.pwd2">
+    </div>
+    <div class="col-sm-5">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="" class="col-sm-2 control-label">验证二级密码：</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" ng-model="user.pwd2_">
+    </div>
+    <div class="col-sm-5">
+    </div>
+  </div>
+  <div class="form-group text-center">
+  	<a class="btn btn-success" ng-click="reg()">注册</a>
+  </div>
+  </form>
+  </div>
+</div>
