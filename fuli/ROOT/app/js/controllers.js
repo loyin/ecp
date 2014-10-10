@@ -52,22 +52,38 @@ userModule.controller('modifyPwdCtrl',//修改密码
 userModule.controller('regCtrl',//注册帐号
 		function($rootScope,$scope, $http, $state, $stateParams) {
 	$scope.user={sn:""};
+	var $_form=$("#regForm");
+	$_form.validator({
+		messages : {
+			required : "请填写{0}"
+		},
+		display : function(e) {
+			return $(e).closest(".form-group").find("control-label").text().replace("：","");
+		},
+		valid : function() {
+			$http.post(rootPath+"/user/reg.json",$scope.user).success(function(data,status){
+				if(data.success){
+					$rootScope.alertMsgList.push({text:data.msg,type:"success"});
+					$scope.user={sn:""};
+				}else{
+					$rootScope.alertMsgList.push({text:data.msg,type:"danger"});
+				}
+			}).error(function(data,status) {
+				$rootScope.alertMsgList.push({text:"网络链接错误！状态码："+status,type:"danger"});
+			});
+		},
+		ignore : ":hidden",
+		theme : "yellow_right",
+		timely : 1,
+		stopOnError : true
+	});
 	$scope.getSN=function(){
 		$http.get(rootPath+"/user/getSN.json").success(function(json,status){
 			$scope.user.sn=json.msg;
 		});
 	}
 	$scope.reg=function(){
-		$http.post(rootPath+"/user/reg.json",$scope.user).success(function(data,status){
-			if(data.success){
-				$rootScope.alertMsgList.push({text:data.msg,type:"success"});
-				$scope.user={sn:""};
-			}else{
-				$rootScope.alertMsgList.push({text:data.msg,type:"danger"});
-			}
-		}).error(function(data,status) {
-			$rootScope.alertMsgList.push({text:"网络链接错误！状态码："+status,type:"danger"});
-		});
+		$_form.trigger("validate");
 	}
 });
 userModule.controller('myMsgCtrl',//私人消息
