@@ -1,6 +1,44 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<h3 class="panel-title"></h3>
+		<h3 class="panel-title">游戏奖金</h3>
 	</div>
-	<div class="panel-body"></div>
+	<div class="panel-body">
+	<p>
+	您当前奖金情况---推荐奖合计：￥{{userInfo.bonus_3}}元，报单奖合计：￥{{userInfo.bonus_2}}元，市场分红合计：￥{{userInfo.bonus_0}}元，领导奖合计：￥{{userInfo.bonus_1}}元
+	</p>
+	<p class="blue">
+		为了提升系统性能，系统将只保留最近3个月内的记录。
+	</p>
+	<p>
+		<label class="fl">查询时间：</label><select ng-model="query.date" class="form-control w200 fl">
+			<option value="">全部</option>
+			<option ng-repeat="el in dateList" value="{{el.val}}">{{el.text}}</option>
+			</select>
+			<a class="btn btn-success fl" ng-click="qryPage()">查询</a>
+	</p>
+		<table class="table table-hover table-bordered" ng-if="page.totalRow>0">
+		<thead>
+			<tr>
+				<th>结算时间</th>
+				<th>奖金分类</th>
+				<th>增加金币</th>
+				<th>增加金种子</th>
+				<th>累计增加</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="el in page.list">
+				<td>{{el.create_datetime}}</td>
+				<td>{{el.bonus_type|bonus_type}}</td>
+				<td>￥{{el.gold_coins}}</td>
+				<td>￥{{el.gold_seeds}}</td>
+				<td>￥{{el.lj}}</td>
+			</tr>
+		</tbody>
+	</table>
+	<div ng-if="page.totalRow>0" class="text-right">
+	<div class="fl">{{page.pageNumber}}/{{page.totalPage}}页,共{{page.totalRow}}条记录</div><pagination boundary-links="true" total-items="page.totalRow" ng-model="query.page"items-per-page="page.pageSize" max-size="10" ng-change="qryPage()" class="pagination-sm fr" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+   </div>
+	<p ng-if="page.totalRow==0" class="text-center">没有查询到记录！</p>
+</div>
 </div>

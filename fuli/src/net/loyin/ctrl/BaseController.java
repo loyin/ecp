@@ -39,7 +39,7 @@ public abstract class BaseController<M extends Model<M>> extends Controller {
 	public static final SimpleDateFormat hmFormat=new SimpleDateFormat("HH:mm");
 	protected Class<M> modelClass;
 	protected static final String tokenName="token";
-	
+	protected Map<String,Object> jsonAttr;
 	/**文件保存路径*/
 	private static String upload_root="/upload/file";
 	/**全路径*/
@@ -50,6 +50,28 @@ public abstract class BaseController<M extends Model<M>> extends Controller {
 	protected void init(){
 		if(upload_dir==null)
 			upload_dir=this.getRequest().getRealPath(upload_root);
+	}
+	protected int getPageNo(){
+		Integer page= this.getParaToInt("page");
+		if(page==null){
+			if(jsonAttr!=null&&jsonAttr.isEmpty()==false){
+				page=(Integer)jsonAttr.get("page");
+				if(page==null)
+					page=1;
+			}
+		}
+		return page;
+	}
+	protected int getPageSize(){
+		Integer pageSize= this.getParaToInt("pageSize");
+		if(pageSize==null){
+			if(jsonAttr!=null&&jsonAttr.isEmpty()==false){
+				pageSize=(Integer)jsonAttr.get("pageSize");
+				if(pageSize==null)
+					pageSize=20;
+			}
+		}
+		return pageSize;
 	}
 	public void index(){
 		String para=this.getPara();
@@ -142,7 +164,8 @@ public abstract class BaseController<M extends Model<M>> extends Controller {
 	public Map<String,Object> getJsonAttrs(){
 		try{
 			String json = Tools.inputStream2String(this.getRequest().getInputStream());
-			return JSON.parseObject(json,Map.class);
+			jsonAttr=JSON.parseObject(json,Map.class);
+			return jsonAttr;
 		}catch(Exception e){
 			return null;
 		}

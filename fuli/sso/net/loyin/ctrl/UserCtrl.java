@@ -104,6 +104,40 @@ public class UserCtrl extends AdminBaseController<User> {
 				this.rendJson(false, null, "为提交数据！");
 				return;
 			}
+			//校验密码
+			String pwd1=(String)attr.get("pwd1");
+			String pwd1_=(String)attr.get("pwd1_");
+			String pwd2=(String)attr.get("pwd2");
+			String pwd2_=(String)attr.get("pwd2_");
+				if(StringUtils.isEmpty(pwd1)){
+					this.rendJson(false,null,"登录密码不能为空！");
+					return;
+				}
+				if(StringUtils.isEmpty(pwd1_)){
+					this.rendJson(false,null,"验证登录密码不能为空！");
+					return;
+				}
+				if(pwd1.equals(pwd1_)==false){
+					this.rendJson(false,null,"登录密码与验证登录密码不一致！");
+					return;
+				}
+				if(StringUtils.isEmpty(pwd2)){
+					this.rendJson(false,null,"二级密码不能为空！");
+					return;
+				}
+				if(StringUtils.isEmpty(pwd2_)){
+					this.rendJson(false,null,"验证二级密码不能为空！");
+					return;
+				}
+				if(pwd2.equals(pwd2_)==false){
+					this.rendJson(false,null,"二级密码与验证二级密码不一致！");
+					return;
+				}
+			String referee_sn=(String)attr.get("referee_sn");
+			if(User.dao.checkSn(referee_sn,1)){
+				this.rendJson(false,null,"推介编号不存在！");
+				return;
+			}
 			User u=new User();
 			u.setAttrs(attr);
 			u.set("creater_id",this.getCurrentUserId());

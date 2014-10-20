@@ -11,15 +11,14 @@
     <p><b>激活状态：</b><span class="red" ng-if="userInfo.status==0">未激活</span>
     <span class="green" ng-if="userInfo.status==1">已激活</span></p>
     <p><b>帐号类型：</b>{{userInfo.account_type}}</p>
-    <p><b>报单中心：</b>{{userInfo.report_center}}</p>
+    <p><b>报单中心：</b>{{userInfo.report_center|yn}}</p>
     <p><b>直属游戏帐号：</b>{{userInfo.account_count_0}}</p>
     <p><b>游戏帐号总数：</b>{{userInfo.account_count_1}}</p>
     <p><b>游戏帐号有效数：</b>{{userInfo.account_count_2}}</p>
-    <p><b>新增帐号：</b>{{userInfo.account_count_3}}</p>
-    <p><b>金币：</b><span class="red">{{userInfo.gold_coin|money}}</span></p>
-    <p><b>金种子：</b><span class="red">{{userInfo.gold_seeds|money}}</span></p>
-    <p><b>历史累计提成：</b><span class="red">{{userInfo.lsljtc|money}}</span></p>
-    <p><b>历史累计分红：</b><span class="red">{{userInfo.lsljfh|money}}</span></p>
+    <p><b>金币：</b><span class="red">{{userInfo.gold_coin}}元</span></p>
+    <p><b>金种子：</b><span class="red">{{userInfo.gold_seeds}}元</span></p>
+    <p><b>累计提成：</b><span class="red">{{(userInfo.bonus_2+userInfo.bonus_3)}}元</span></p>
+    <p><b>累计分红：</b><span class="red">{{userInfo.bonus_0}}元</span></p>
     <p><b>帐号分红出局：</b><span class="red">{{userInfo.fhcj|yn}}</span></p>
   </div>
 </div>

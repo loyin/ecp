@@ -1,6 +1,41 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
-		<h3 class="panel-title"></h3>
+		<h3 class="panel-title">金币明细</h3>
 	</div>
-	<div class="panel-body"></div>
+	<div class="panel-body">
+	<p class="blue">
+		为了提升系统性能，系统将只保留最近3个月内的记录。
+	</p>
+	<p>
+		<label class="fl">查询时间：</label><select ng-model="query.date" class="form-control w200 fl">
+			<option value="">全部</option>
+			<option ng-repeat="el in dateList" value="{{el.val}}">{{el.text}}</option>
+			</select>
+			<a class="btn btn-success fl" ng-click="qryPage()">查询</a>
+	</p>
+		<table class="table table-hover table-bordered" ng-if="page.totalRow>0">
+		<thead>
+			<tr>
+				<th>结算时间</th>
+				<th>奖金分类</th>
+				<th>增加金币</th>
+				<th>减少金币</th>
+				<th>说明</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="el in page.list">
+				<td>{{el.create_datetime}}</td>
+				<td>{{el.remark}}</td>
+				<td>￥{{el.augment}}</td>
+				<td>￥{{el.lessen}}</td>
+				<td>{{el.remark}}</td>
+			</tr>
+		</tbody>
+	</table>
+	<div ng-if="page.totalRow>0" class="text-right">
+	<div class="fl">{{page.pageNumber}}/{{page.totalPage}}页,共{{page.totalRow}}条记录</div><pagination boundary-links="true" total-items="page.totalRow" ng-model="query.page"items-per-page="page.pageSize" max-size="10" ng-change="qryPage()" class="pagination-sm fr" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+   </div>
+	<p ng-if="page.totalRow==0" class="text-center">没有查询到记录！</p>
+	</div>
 </div>

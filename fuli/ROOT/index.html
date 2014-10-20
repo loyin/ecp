@@ -5,8 +5,7 @@
 <meta name="description" content="" />
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <title>{{system.name}}</title>
-<!-- <link rel="stylesheet" href="s/bootstrap/css/bootstrap.min.css"> -->
-<!-- <link rel="stylesheet" href="s/js/jqdialog/jDialog.css"> -->
+<link rel="stylesheet" href="s/validator/jquery.validator.css">
 <link href="s/css/font-awesome.min.css" rel="stylesheet">
 <!--[if lt IE 8]>
  <link href="s/css/font-awesome-ie7.min.css" rel="stylesheet">
@@ -14,9 +13,10 @@
 <link rel="stylesheet" href="s/css/app.css">
 <script src="s/js/jquery-1.10.2.min.js"></script>
 <script src="s/angular/angular.min.js"></script>
-<script src="s/angular/angular-animate.min.js"></script>
 <script src="s/angular/angular-ui-router.min.js"></script>
 <script src="s/angular/ui-bootstrap-tpls-0.11.2.min.js"></script>
+<script src="s/validator/jquery.validator.js"></script>
+<script src="s/validator/local/zh_CN.js"></script>
 <script src="s/js/jqdialog/jDialog.js"></script>
 <script src="app/js/app.js"></script>
 <script src="app/js/route.js"></script>
@@ -25,7 +25,8 @@
 <script src="app/js/services.js"></script>
 </head>
 <body>
-	<div style="margin-left:30%;min-width:500px; position:absolute;margin-top:0px;z-index:100;border:1px;">
+<img src="s/img/bigloading.gif" ng-if="loading" style="position:fixed;top:50%;left:50%;z-index:1000;">
+	<div style="margin-left:30%;min-width:500px; position:fixed;margin-top:0px;z-index:100;">
 	<div ng-repeat="msg in alertMsgList" class="alert alert-{{msg.type}}" role="alert">
 		<button type="button" class="close" data-dismiss="alert" ng-click="alertMsgList.splice($index,1)">×</button>
 		{{msg.text}}

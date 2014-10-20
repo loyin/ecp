@@ -19,6 +19,7 @@ public class MyMySqlDialect extends MysqlDialect {
 	public void forModelSave(Table table, Map<String, Object> attrs, StringBuilder sql, List<Object> paras) {
 		sql.append("insert into ").append(table.getName()).append("(");
 		String primaryKey=table.getPrimaryKey().toLowerCase();
+		Class pktype=table.getColumnType(primaryKey);//主键类型
 		if(StringUtils.isEmpty(primaryKey)){
 			primaryKey="id";
 		}
@@ -30,10 +31,14 @@ public class MyMySqlDialect extends MysqlDialect {
 			String colName = e.getKey();
 			String idVal=null;
 			if(primaryKey.equals(colName.toLowerCase())){//获取主键值
+				if(pktype.getName().endsWith("Long")==false){//如果是长整型 则不加入INSERT语句
 				if(StringUtils.isNotEmpty((String)e.getValue())){
 					idVal=(String)e.getValue();
 				}else{
 					idVal=IdGenerater.me.timeTo62();
+				}
+				}else{
+					continue;
 				}
 			}
 			if (table.hasColumnLabel(colName)) {

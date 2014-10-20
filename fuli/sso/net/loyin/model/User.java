@@ -55,4 +55,12 @@ public class User extends Model<User> {
 			Db.update("delete  from " + tableName + " where id in ("+ id+ ")");
 		}
 	}
+	/***
+	 * 检验是否存在玩家编号账号
+	 * @param referee_sn
+	 * @return true:不存在
+	 */
+	public boolean checkSn(String sn,Integer status) {
+		return this.findFirst("select * from "+tableName+" where sn=? and status=? ",sn,status)==null;
+	}
 }

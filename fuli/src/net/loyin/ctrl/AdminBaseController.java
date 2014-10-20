@@ -25,12 +25,6 @@ import com.jfinal.plugin.activerecord.TableMapping;
  */
 public abstract class AdminBaseController<M extends Model<M>> extends BaseController<M> {
 	
-	protected int getPageNo(){
-		return this.getParaToInt("page", 1);
-	}
-	protected int getPageSize(){
-		return this.getParaToInt("rows",10);
-	}
 	/***
 	 * 组合查询条件 支持 >,>= ,<,<=,!=,=,in,Nin,like, Llike,Rlike,Nlike,NLlike,NRlike
 	 * @param where

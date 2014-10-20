@@ -1,12 +1,23 @@
 @IMPORT url("../bootstrap/css/bootstrap.min.css");
 @IMPORT url("../js/jqdialog/jDialog.css");
 @IMPORT url("login.css");
+/*回到顶部按钮*/
+#doitbegin_Back2top {display:block;width:38px;height:38px;
+    background:url(../img/to-top.png) no-repeat;position: fixed;_position:absolute;
+    right:20px;bottom: 20px;z-index: 10;cursor: pointer;text-indent: -999em;
+}
+#doitbegin_Back2top:hover {background:url(../img/to-top-hover.png) no-repeat;}
+
 .dropdown:hover .arwlink{border-bottom:1px solid #FFF;border-left:1px solid #000066a;height:31px}
 .dropdown ul{display:none}
 .dropdown:hover ul{position:absolute;display:block;margin-left:-1px;top:32px;left:1px;z-index:9}
-
+* {font-size:14px;}
 .red{color:red;}
 .green{color:green;}
+.blue{color:blue;}
+.fl{float:left;}
+.fr{float:right;}
+.w200{width:200px;}
 .imgMenuList{margin:0 auto;width:1200px;margin-bottom:10px;}
 .imgMenuList li{list-style:none;float: left;width:140px;margin-left:10px;text-align:center;padding: 2px 10px 10px 0px;}
 .imgMenuList li img{border:none;}
