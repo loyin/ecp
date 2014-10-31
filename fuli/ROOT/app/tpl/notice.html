@@ -4,7 +4,7 @@
 	</div>
 	<div class="panel-body">
 	<p class="blue">
-		为了提升系统性能，系统将只保留最近3个月内的记录。<a class="btn btn-success" ng-if="userInfo.is_m==1"><i class="fa fa-plus"></i>添加</a>
+		为了提升系统性能，系统将只保留最近3个月内的记录。<a class="btn btn-success" ng-if="userInfo.is_m==1" ui-sref="noticeEdit()"><i class="fa fa-plus"></i>添加</a>
 	</p>
 	<p>
 		<label class="fl">查询时间：</label><select ng-model="query.date" class="form-control w200 fl">
@@ -23,9 +23,9 @@
 		</thead>
 		<tbody>
 			<tr ng-repeat="el in page.list">
-				<td><a ng-click="show(el.id)">{{el.title}}</a></td>
+				<td><a ui-sref="noticeShow({id:el.id})">{{el.title}}</a></td>
 				<td>{{el.create_datetime}}</td>
-				<td ng-if="userInfo.is_m==1"><a ng-click="">修改</a><a ng-click="">删除</a></td>
+				<td ng-if="userInfo.is_m==1"><a ui-sref="noticeEdit({id:el.id})">修改</a><a ng-click="del(el.id)">删除</a></td>
 			</tr>
 		</tbody>
 	</table>

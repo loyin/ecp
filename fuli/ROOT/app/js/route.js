@@ -18,6 +18,14 @@ routerApp.config(function($stateProvider, $urlRouterProvider) {
         	'center@notice': {templateUrl: tpl+'notice.html',controller:"noticeCtrl"}
         	}
         })
+        .state('noticeEdit', {url: '/noticeEdit/:id',views: {'':{templateUrl: tpl+'home.html'},
+        	'center@noticeEdit': {templateUrl: tpl+'noticeEdit.html',controller:"noticeEditCtrl"}
+        }
+        })
+        .state('noticeShow', {url: '/noticeShow/:id',views: {'':{templateUrl: tpl+'home.html'},
+        	'center@noticeShow': {templateUrl: tpl+'noticeShow.html',controller:"noticeShowCtrl"}
+        }
+        })
         .state('userInfo', {url: '/userInfo',views: {'':{templateUrl: tpl+'home.html'},
         	'center@userInfo': {templateUrl: tpl+'userInfo.html',controller:"userInfoCtrl"}
         }

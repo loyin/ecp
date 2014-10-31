@@ -27,4 +27,13 @@ public class NoticeCtrl extends AdminBaseController<Notice> {
 		Map<String,Object> filter=this.getJsonAttrs();
 		this.rendJson(true,null,"",Notice.dao.findById(filter.get("id")));
 	}
+	public void del(){
+		Map<String,Object> filter=this.getJsonAttrs();
+		if(filter==null||filter.isEmpty()){
+			this.rendJson(false, null, "参数无效");
+			return;
+		}
+		Notice.dao.deleteById(filter.get("id"));
+		this.rendJson(true, null, "删除成功！");
+	}
 }

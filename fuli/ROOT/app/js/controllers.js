@@ -35,7 +35,10 @@ userModule.controller('loginCtrl',//登录
 		});
 userModule.controller('mainCtrl',//首页
 		function($rootScope,$scope, $http, $state, $stateParams) {
-			
+			$http.post(rootPath+"/notice/dataGrid.json",{pageSize:10,page:1}).success(function(json,status){
+				$scope.noticePage=json.data;
+				$rootScope.loading=false;
+			});
 		});
 userModule.controller('modifyPwdCtrl',//修改密码
 		function($rootScope,$scope, $http, $state, $stateParams) {
@@ -136,14 +139,36 @@ userModule.controller('noticeCtrl',//玩家公告
 			$rootScope.loading=false;
 		});
 	};
-	$scope.show=function(id){//显示
-		$rootScope.loading=true;
-		$http.post(rootPath+"/notice/qryOp.json",{id:id}).success(function(json,status){
-			$rootScope.loading=false;
-			
-		});
+	$scope.del=function(id){
+		if(confirm("确定要删除吗？")){
+			$rootScope.loading=true;
+			$http.post(rootPath+"/notice/del.json",{id:id}).success(function(json,status){
+				$rootScope.loading=false;
+				$scope.qryPage();
+			});
+		}
 	}
 	$scope.qryPage();
+});
+userModule.controller('noticeEditCtrl',//编辑公告
+		function($rootScope,$scope, $http, $state, $stateParams){
+	if($stateParams.id!=undefined&&$stateParams.id!='')
+	$http.post(rootPath+"/notice/qryOp.json",{id:$stateParams.id}).success(function(json,status){
+		$rootScope.loading=false;
+		$scope.data=json.data;
+	});
+});
+userModule.controller('noticeShowCtrl',//查看公告
+		function($rootScope,$scope, $http, $state, $stateParams){
+	$rootScope.loading=true;
+	if($stateParams.id==undefined){
+		window.history.go(-1);
+		return;
+	}
+	$http.post(rootPath+"/notice/qryOp.json",{id:$stateParams.id}).success(function(json,status){
+		$rootScope.loading=false;
+		$scope.data=json.data;
+	});
 });
 userModule.controller('transCtrl',//交易明细
 		function($rootScope,$scope, $http, $state, $stateParams){
@@ -163,12 +188,22 @@ userModule.controller('transCtrl',//交易明细
 userModule.controller('safeCtrl',//帐号安全
 		function($rootScope,$scope, $http, $state, $stateParams) {
 	$rootScope.loading=true;
-	$http.post("qryLoginInfo.json",{}).success(function(json,status){
+	$http.post(rootPath+"/qryLoginInfo.json",{}).success(function(json,status){
     	if(json.status==200){
     		$rootScope.loading=false;
     		$rootScope.userInfo=json.data;
     	}
     });
+});
+userModule.controller('buyCtrl',//抢购金币
+		function($rootScope,$scope, $http, $state, $stateParams) {
+	$rootScope.loading=true;
+	$http.post(rootPath+"/trans/buyList.json",{}).success(function(json,status){
+		if(json.status==200){
+			$rootScope.loading=false;
+			$scope.page=json.data;
+		}
+	});
 });
 userModule.controller('myMsgCtrl',//私人消息
 		function($rootScope,$scope, $http, $state, $stateParams) {

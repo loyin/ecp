@@ -24,4 +24,23 @@ public class TransCtrl extends AdminBaseController<Trans> {
 			this.rendJson(false, null, "查询数据异常");
 		}
 	}
+	/**抢购金币 列表*/
+	public void buyList(){
+		try{
+			Map<String,Object> filter=this.getJsonAttrs();
+			filter.put("usid",this.getCurrentUserId());
+			this.rendJson(true, null, "",Trans.dao.buyPage(this.getPageNo(),this.getPageSize(),filter));
+		}catch(Exception e){
+			log.error(e);
+			this.rendJson(false, null, "查询数据异常");
+		}
+	}
+	/**购买金币*/
+	public void buy(){
+		try{
+		}catch(Exception e){
+			log.error(e);
+			this.rendJson(false, null, "查询数据异常");
+		}
+	}
 }

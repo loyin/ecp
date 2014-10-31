@@ -48,7 +48,7 @@ public class Notice extends Model<Notice> {
 			}
 		}
 		sql.append(" order by create_datetime desc");
-		return this.paginate(pageNo, pageSize, "select title,create_datetime ",sql.toString(),parame.toArray());
+		return this.paginate(pageNo, pageSize, "select id,title,create_datetime ",sql.toString(),parame.toArray());
 	}
 	public void clear(Date time) {
 		Db.update("delete from "+tableName+" where create_datetime <? ",time);

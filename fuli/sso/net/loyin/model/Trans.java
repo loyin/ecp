@@ -56,4 +56,11 @@ public class Trans extends Model<Trans> {
 	public void clear(Date time) {
 		Db.update("delete from "+tableName+" where create_datetime <? ",time);
 	}
+	/**获取发布的金币抢购*/
+	public Page<Trans> buyPage(int pageNo, int pageSize, Map<String, Object> filter) {
+		StringBuffer sql=new StringBuffer(" from ");
+		sql.append(tableName);
+		sql.append(" t where t.sale_user_id!=? and t.trans_type=1");
+		return this.paginate(pageNo, pageSize, "select * ",sql.toString(),filter.get("uid"));
+	}
 }

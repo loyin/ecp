@@ -2,5 +2,54 @@
 	<div class="panel-heading">
 		<h3 class="panel-title">金币转账</h3>
 	</div>
-	<div class="panel-body"></div>
+	<div class="panel-body">
+	<form name="form" class="form-horizontal" role="form" novalidate="novalidate">
+  <div class="form-group">
+    <label for="" class="col-sm-2 control-label">会员编号：</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" ng-model="data." required="required">
+    </div>
+    <div class="col-sm-4">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="" class="col-sm-2 control-label">金币余额：</label>
+    <div class="col-sm-4">
+    </div>
+    <div class="col-sm-4">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="" class="col-sm-2 control-label">转入会员：</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" ng-model="data." required="required">
+    </div>
+    <div class="col-sm-4">
+    <p ng-if="form.pwd1.$error.required">必填！</p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="" class="col-sm-2 control-label">转入金币：</label>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" ng-model="data.amt" required="required">
+    </div>
+    <div class="col-sm-4">
+    <p ng-if="form.pwd1.$error.required">必填！</p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="" class="col-sm-2 control-label">备注：</label>
+    <div class="col-sm-4">
+      <textarea class="form-control" ng-model="data.remark"></textarea>
+    </div>
+    <div class="col-sm-4">
+    </div>
+  </div>
+  </form>
+  <p>
+  说明：
+  1、转账金币最少100起且须是100的整数倍！
+  2、转账请核对准确后提交，提交后不可返回！
+  </p>
+	</div>
 </div>

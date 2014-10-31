@@ -56,10 +56,10 @@ public abstract class BaseController<M extends Model<M>> extends Controller {
 		if(page==null){
 			if(jsonAttr!=null&&jsonAttr.isEmpty()==false){
 				page=(Integer)jsonAttr.get("page");
-				if(page==null)
-					page=1;
 			}
 		}
+		if(page==null)
+			page=1;
 		return page;
 	}
 	protected int getPageSize(){
@@ -67,10 +67,10 @@ public abstract class BaseController<M extends Model<M>> extends Controller {
 		if(pageSize==null){
 			if(jsonAttr!=null&&jsonAttr.isEmpty()==false){
 				pageSize=(Integer)jsonAttr.get("pageSize");
-				if(pageSize==null)
-					pageSize=20;
 			}
 		}
+		if(pageSize==null)
+			pageSize=20;
 		return pageSize;
 	}
 	public void index(){
@@ -164,10 +164,13 @@ public abstract class BaseController<M extends Model<M>> extends Controller {
 	public Map<String,Object> getJsonAttrs(){
 		try{
 			String json = Tools.inputStream2String(this.getRequest().getInputStream());
-			jsonAttr=JSON.parseObject(json,Map.class);
-			return jsonAttr;
+			if(StringUtils.isNotEmpty(json)){
+				jsonAttr=JSON.parseObject(json,Map.class);
+				return jsonAttr;
+			}
 		}catch(Exception e){
-			return null;
+			log.error(e);
 		}
+		return null;
 	}
 }
