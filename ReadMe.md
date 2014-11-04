@@ -3,7 +3,11 @@
 <img src="http://www.loyin.net/s/img/myson.png" title="儿子：果果 百天照" height="100px">
  <img src="https://img.alipay.com/sys/personalprod/style/mc/btn-index.png">姓名：刘声凤 支付宝账号：loyinonline@163.com<br>
  <b>虽然我不喝咖啡，但可以给我可爱的儿子购买一份小礼物^_^</b>
+ <br>
+ 请手机扫描<img src="http://www.loyin.net/alipay.png"width="150px">打赏下。
+ ====
  欢迎访问我的个人网站 <a href="http://www.loyin.net">http://www.loyin.net</a>
+====
 <div class="detail TextContent" id="p_fullcontent">
 <p>
 	ECP&nbsp; 是基于<a target="_blank" href="http://www.oschina.net/p/jfinal">jfinal</a>、<a target="_blank" href="http://www.oschina.net/p/avalon">avalon</a>、<a target="_blank" href="http://www.oschina.net/p/bootstrap">bootstrap</a>、<a target="_blank" href="http://www.oschina.net/p/jqgrid">jqGrid</a>、<a target="_blank" href="http://www.oschina.net/p/snaker">snaker</a>工作流开发的客户关系及进销存财务系统。</p><p>
