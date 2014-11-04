@@ -1,3 +1,0 @@
-<#include "../inc/layout.html"> 
-<@layout title="用户">
-</@layout>

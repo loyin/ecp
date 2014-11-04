@@ -1,9 +1,0 @@
-第一步出创建view菜单 将url设置为
-https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx20695ab4edce50dd&redirect_uri=http%3A%2F%2Fguniang.loyin.net%2FWebchat%2Foauth2&response_type=code&scope=snsapi_base&state=123#wechat_redirect
-需要按实际的运行设置appid和redirect_uri
-注意redirect_uid需要使用urlencode进行加密处理。
-第二步
-在redirect_uri连接处理中获取code值
-第三步
-根据code获取access_token 此时可以获取openid
-获取URL：https://api.weixin.qq.com/sns/oauth2/access_token?appid=【APPID】&secret=【SECRET】&code=【CODE】&grant_type=authorization_code
