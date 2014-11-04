@@ -1,0 +1,49 @@
+package net.loyin.util.wechat.bean;
+
+public class WcBroadRcd {
+	private String wx_hostName;
+	private String wx_hostPhone;
+	private String wx_idNumber;
+	private String fromUserName;
+	private String areaCode;
+	private Long createTime;
+
+
+	public String getWx_hostName() {
+		return wx_hostName;
+	}
+	public void setWx_hostName(String wxHostName) {
+		wx_hostName = wxHostName;
+	}
+	public String getWx_hostPhone() {
+		return wx_hostPhone;
+	}
+	public void setWx_hostPhone(String wxHostPhone) {
+		wx_hostPhone = wxHostPhone;
+	}
+	public String getWx_idNumber() {
+		return wx_idNumber;
+	}
+	public void setWx_idNumber(String wxIdNumber) {
+		wx_idNumber = wxIdNumber;
+	}
+	public Long getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Long createTime) {
+		this.createTime = createTime;
+	}
+	public String getFromUserName() {
+		return fromUserName;
+	}
+	public void setFromUserName(String fromUserName) {
+		this.fromUserName = fromUserName;
+	}
+	public String getAreaCode() {
+		return areaCode;
+	}
+	public void setAreaCode(String areaCode) {
+		this.areaCode = areaCode;
+	}
+
+}

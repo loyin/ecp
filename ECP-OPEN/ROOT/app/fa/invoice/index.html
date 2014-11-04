@@ -1,0 +1,43 @@
+<#include "../../inc/layout.html">
+<@layout title="票据" js="fa/invoice/index.js">
+<div class="wrapper" ms-controller="view">
+  <div class="mod-search cf">
+    <div class="fl">
+      <ul class="ul-inline">
+      	<li>
+          <input type="text" id="keyword" class="ui-input con" ms-duplex="data.keyword" placeholder="请输入订单号、票据号">
+        </li>
+        <li>
+        <label>类型:</label>
+        <select ms-duplex="data.type" id="type" class="ui-input">
+        	<option value=""></option>
+        	<option ms-repeat="type" ms-value="$index">{{el}}</option>
+        </select>
+        </li>
+        <li>
+        <label>票据类型:</label>
+        <select ms-duplex="data.pjlx" id="pjlx" class="ui-input">
+        	<option value=""></option>
+        	<option ms-repeat="pjlx" ms-value="$index">{{el}}</option>
+        </select>
+        </li>
+        <li>
+          <label>开票日期:</label>
+          <input type="text" id="beginDate" class="ui-input ui-datepicker-input" ms-duplex="data.start_date">
+          <span>-</span>
+          <input type="text" id="endDate" class="ui-input ui-datepicker-input"ms-duplex="data.end_date">
+        </li>
+        <li><a class="ui-btn mrb" id="search" title="查询"><i class="fa fa-search"></i></a></li>
+      </ul>
+    </div>
+    <div class="fr">
+    <a class="ui-btn ui-btn-sp mrb" id="add" title="新增票据"><i class="fa fa-plus"></i>新增</a>
+    </div>
+  </div>
+  <div class="grid-wrap">
+    <table id="grid">
+    </table>
+    <div id="page"></div>
+  </div>
+</div>
+</@layout>

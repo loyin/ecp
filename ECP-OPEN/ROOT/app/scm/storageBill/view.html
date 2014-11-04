@@ -1,0 +1,73 @@
+<#include "../../inc/layout.html">
+<@layout title="出库入库" js="scm/storageBill/view.js">
+<style>
+body{background: #fff;}
+.table1 td{padding:2px;}
+</style>
+<div class="manage-wrapper" ms-controller="ctrl">
+    <div class="manage-wrap">
+    				<table style="width:100%;" class="table1">
+    				<tr>
+    					<td width="100px" align="right">仓库：</td>
+    					<td width="20%">
+    					{{data.depot_name}} [{{billType[data.type]}}]
+    					</td>
+    					<td width="100px" align="right">单据日期：</td>
+    					<td width="20%">{{data.bill_date}}</td>
+    					<td width="100px;" align="right">单据编号：</td>
+    					<td width="20%">{{data.billsn}}</td>
+    				</tr>
+    				<tr>
+    					<td align="right">负责人：</td>
+    					<td>{{data.head_name}}</td>
+    				</tr>
+    				</table>
+    		</ul>
+    		<br>
+    		<table class="table table-hover table-striped table_thead_fixed table-bordered table-condensed" id="prodcutTable">
+  				<thead>
+  					<tr>
+  						<th width="50px">&nbsp;</th>
+  						<th>商品</th>
+  						<th width="55px">单位</th>
+  						<th>数量</th>
+  						<th>备注</th>
+  					</tr>
+  				</thead>
+  				<tbody style="max-height:400px;">
+  					<tr ms-repeat="data.productlist">
+  						<td width="50px">{{$index+1}}</td>
+  						<td>{{el.product_name}}</td>
+	          			<td>{{el.unit|custParame}}</td>
+  						<td>{{el.amount}}</td>
+  						<td>{{el.remark}}</td>
+  					</tr>
+  				</tbody>
+  				<tfoot>
+  				<tr>
+  					<td colspan="3" align="right">合计</td>
+  					<td>{{totalAmount}}</td>
+  					<td></td>
+  				</tr>
+  				</tfoot>
+    		</table>
+    		<div id="amountArea">
+    		<p>
+    				创建人：&nbsp;&nbsp;
+					{{data.creater_name}}&nbsp;&nbsp;
+    				创建时间：&nbsp;&nbsp;
+					{{data.create_datetime}}&nbsp;&nbsp;
+    				修改人：&nbsp;&nbsp;
+    				{{data.updater_name}}&nbsp;&nbsp;
+    				修改时间：&nbsp;&nbsp;
+    				{{data.update_datetime}}
+    		</p>
+           <p>
+			 备注：
+           <br>
+           {{data.remark}}
+           </p>
+       </div>
+    </div>
+</div>
+</@layout>

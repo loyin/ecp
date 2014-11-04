@@ -1,0 +1,38 @@
+<#include "../../inc/layout.html">
+<@layout title="商品价目表管理" js="scm/productPriceOrder/index.js">
+<div class="wrapper" ms-controller="ctrl">
+  <div class="mod-search cf">
+    <div class="fl">
+      <ul class="ul-inline">
+        <li>
+          <input type="text" class="ui-input con" ms-duplex="data.keyword" placeholder="请输入主题">
+        </li>
+        <li>
+        <li>
+          <label>开始日期:</label>
+          <input type="text"  ms-duplex="data.beginDate" value="" class="ui-input ui-datepicker-input">
+          <span>-</span>
+          <input type="text"  ms-duplex="data.endDate" value="" class="ui-input ui-datepicker-input">
+        </li>
+        <li>
+          <label>结束日期:</label>
+          <input type="text"  ms-duplex="data.beginDate1" value="" class="ui-input ui-datepicker-input">
+          <span>-</span>
+          <input type="text"  ms-duplex="data.endDate1" value="" class="ui-input ui-datepicker-input">
+        </li>
+        <li><a class="ui-btn mrb" id="search" title="查询"><i class="fa fa-search"></i></a></li>
+      </ul>
+    </div>
+    <div class="fr"><a class="ui-btn ui-btn-sp mrb" id="add" title="新增"><i class="fa fa-plus"></i></a>
+    <a class="ui-btn mrb" id="import" title="导入"><i class="fa fa-upload"></i></a>
+    <a class="ui-btn mrb" id="import" title="导出"><i class="fa fa-download"></i></a>
+    <a href="#" class="ui-btn" id="btn-batchDel" title="批量删除"><i class="red fa fa-trash-o"></i></a>
+    </div>
+  </div>
+  <div class="grid-wrap">
+    <table id="grid">
+    </table>
+    <div id="page"></div>
+  </div>
+</div>
+</@layout>

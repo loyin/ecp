@@ -1,0 +1,86 @@
+package net.loyin.util.wechat.bean;
+
+import java.util.Date;
+
+/**
+ * @author Mr.von
+ */
+public class Options implements java.io.Serializable {
+	/** 描述 */
+	private static final long serialVersionUID = -549651181787580035L;
+	private Integer opId; // 主键
+	private Integer parentId;
+	private String userNo;
+	private String cont; // 内容
+	private String opt; // 选项
+	private String userName;
+	private Date createTime;
+	private Date modifyTime;
+
+	public Options() {
+	}
+
+	public Integer getOpId() {
+		return opId;
+	}
+
+	public void setOpId(Integer opId) {
+		this.opId = opId;
+	}
+
+	public Integer getParentId() {
+		return parentId;
+	}
+
+	public String getUserNo() {
+		return userNo;
+	}
+
+	public void setUserNo(String userNo) {
+		this.userNo = userNo;
+	}
+
+	public void setParentId(Integer parentId) {
+		this.parentId = parentId;
+	}
+
+	public String getCont() {
+		return cont;
+	}
+
+	public void setCont(String cont) {
+		this.cont = cont;
+	}
+
+	public String getOpt() {
+		return opt;
+	}
+
+	public void setOpt(String opt) {
+		this.opt = opt;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Date getModifyTime() {
+		return modifyTime;
+	}
+
+	public void setModifyTime(Date modifyTime) {
+		this.modifyTime = modifyTime;
+	}
+}

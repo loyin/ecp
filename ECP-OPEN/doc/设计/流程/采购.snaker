@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<process displayName="采购" name="caigou">
+<start displayName="start1" layout="23,32,-1,-1" name="start1"/>
+<end displayName="end1" layout="422,50,-1,-1" name="end1"/>
+<task autoExecute="Y" displayName="task1" layout="128,37,-1,-1" name="task1" performType="ANY" taskType="Major"/>
+</process>

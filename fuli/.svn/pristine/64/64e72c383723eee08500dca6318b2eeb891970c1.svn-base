@@ -1,0 +1,77 @@
+package net.loyin.util.wechat.bean.act;
+
+public class ActSc {
+	private int scid;
+	private String fromUserName;
+	private int createTime;
+	private String type;
+	private String name;
+	private String phone;
+	private int mcode;
+	private int ucode;
+
+	public int getScid() {
+		return scid;
+	}
+
+	public void setScid(int scid) {
+		this.scid = scid;
+	}
+
+	public String getFromUserName() {
+		return fromUserName;
+	}
+
+	public void setFromUserName(String fromUserName) {
+		this.fromUserName = fromUserName;
+	}
+
+	public int getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(int createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public int getMcode() {
+		return mcode;
+	}
+
+	public void setMcode(int mcode) {
+		this.mcode = mcode;
+	}
+
+	public int getUcode() {
+		return ucode;
+	}
+
+	public void setUcode(int ucode) {
+		this.ucode = ucode;
+	}
+
+}

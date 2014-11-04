@@ -1,0 +1,76 @@
+package net.loyin.util.wechat.bean;
+
+public class WcBus {
+	private int busId;
+	private String busCode;
+	private String busName;
+	private String busCont;
+	private String subName;
+	private int subPay;
+	private int subSum;
+	private String busFlag;
+
+	public int getBusId() {
+		return busId;
+	}
+
+	public void setBusId(int busId) {
+		this.busId = busId;
+	}
+
+	public String getBusCode() {
+		return busCode;
+	}
+
+	public void setBusCode(String busCode) {
+		this.busCode = busCode;
+	}
+
+	public String getBusName() {
+		return busName;
+	}
+
+	public void setBusName(String busName) {
+		this.busName = busName;
+	}
+
+	public String getBusCont() {
+		return busCont;
+	}
+
+	public void setBusCont(String busCont) {
+		this.busCont = busCont;
+	}
+
+	public String getSubName() {
+		return subName;
+	}
+
+	public void setSubName(String subName) {
+		this.subName = subName;
+	}
+
+	public int getSubPay() {
+		return subPay;
+	}
+
+	public void setSubPay(int subPay) {
+		this.subPay = subPay;
+	}
+
+	public int getSubSum() {
+		return subSum;
+	}
+
+	public void setSubSum(int subSum) {
+		this.subSum = subSum;
+	}
+
+	public String getBusFlag() {
+		return busFlag;
+	}
+
+	public void setBusFlag(String busFlag) {
+		this.busFlag = busFlag;
+	}
+}

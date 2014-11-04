@@ -1,0 +1,34 @@
+<#include "../../inc/layout.html">
+<@layout title="初始化库存" js="scm/stock/init.js">
+<style>
+.comboDiv{position:absolute;}
+</style>
+<div class="wrapper" ms-controller="view">
+  <div class="mod-search cf">
+    <div class="fl">
+    <ul class="ul-inline">
+        <li>
+          <input type="text" id="keyword" class="ui-input con" value="" ms-duplex="data.keyword" placeholder="请输入商品名称或型号">
+        </li>
+        <li>
+        <label>类别:</label>
+          <input type="text" id="category" class="ui-input" style="width:200px" readonly="readonly">
+        </li>
+        <li>
+        <label>仓库:</label>
+          <span id="depot"></span>
+        </li>
+        <li><a class="ui-btn mrb" id="search" title="查询"><i class="fa fa-search"></i></a></li>
+      </ul>
+    </div>
+    <div class="fr"><a class="ui-btn ui-btn-sp mrb" id="add" title="导入"><i class="fa fa-upload"></i></a>
+<!--     <a href="#" class="ui-btn" id="btn-batchDel" title="批量删除库存"><i class="red fa fa-trash-o"></i></a> -->
+    </div>
+  </div>
+  <div class="grid-wrap">
+    <table id="grid">
+    </table>
+    <div id="page"></div>
+  </div>
+</div>
+</@layout>

@@ -1,0 +1,195 @@
+<#include "../../inc/layout.html"> <@layout title="销售目标"
+js="em/saleGoal/edit.js">
+<style>
+body {background: #fff;}
+.manage-wrap .ui-input{width:100px;text-align: right;}
+.cc {margin-top: 15px;}
+.tab1 {float:left;
+background-color: #fff;
+border: 1px #d8d8d8 solid;
+width: 220px;
+margin-right: 15px;
+padding:10px;
+}
+</style>
+<div class="manage-wrapper" ms-controller="ctrl">
+<form action=""id="base_form">
+	<div class="manage-wrap">
+		<div class="crm-salestarget-setting-container">
+	<div>
+			<select class="ui-input" ms-duplex="data.year" ms-change="init(this.value)">
+				<option ms-repeat="yearList" ms-value="el">{{el}}年</option>
+			</select>
+	</div>
+	<div class="crm-salestarget-setting-total-container fn-clear">
+		<span class="crm-salestarget-setting-who">我</span>{{data.year}}年度业务目标是 ¥&nbsp;<input  ms-duplex="data.y" class="ui-input">&nbsp;元
+		<span ms-if="data.id!=''">,完成&nbsp;{{data.yv|money}}&nbsp;元</span>
+		&nbsp;<a ms-click="average" class="ui-btn">平均分配到月</a>
+	</div>
+	<div class="cc fn-clear">
+		<div class="tab1 fn-left fn-clear">
+			<table>
+				<thead>
+					<tr>
+						<th>
+							第一季度
+						</th>
+						<th>
+							 ¥&nbsp;<input  ms-duplex="data.q1" class="ui-input">&nbsp;元
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							{{data.year}}年1月
+						</td>
+						<td>
+							¥&nbsp;<input  ms-duplex="data.m1" class="ui-input">&nbsp;元
+						</td>
+					</tr>
+					<tr>
+						<td>
+							{{data.year}}年2月
+						</td>
+						<td>
+							¥&nbsp;<input  ms-duplex="data.m2" class="ui-input">&nbsp;元
+						</td>
+					</tr>
+					<tr>
+						<td>
+							{{data.year}}年3月
+						</td>
+						<td>
+							¥&nbsp;<input  ms-duplex="data.m3" class="ui-input">&nbsp;元
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="tab1 fn-left fn-clear">
+			<table>
+				<thead>
+					<tr>
+						<th>
+							第二季度
+						</th>
+						<th>
+							 ¥&nbsp;<input  ms-duplex="data.q2" class="ui-input">&nbsp;元
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							{{data.year}}年4月
+						</td>
+						<td>
+							¥&nbsp;<input  ms-duplex="data.m4" class="ui-input">&nbsp;元
+						</td>
+					</tr>
+					<tr>
+						<td>
+							{{data.year}}年5月
+						</td>
+						<td>
+							¥&nbsp;<input  ms-duplex="data.m5" class="ui-input">&nbsp;元
+						</td>
+					</tr>
+					<tr>
+						<td>
+							{{data.year}}年6月
+						</td>
+						<td>
+							¥&nbsp;<input  ms-duplex="data.m6" class="ui-input">&nbsp;元
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="tab1 fn-left">
+			<table>
+				<thead>
+					<tr>
+						<th>
+							第三季度
+						</th>
+						<th>
+							 ¥&nbsp;<input  ms-duplex="data.q3" class="ui-input">&nbsp;元
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							{{data.year}}年7月
+						</td>
+						<td>
+							¥&nbsp;<input  ms-duplex="data.m7" class="ui-input">&nbsp;元
+						</td>
+					</tr>
+					<tr>
+						<td>
+							{{data.year}}年8月
+						</td>
+						<td>
+							¥&nbsp;<input  ms-duplex="data.m8" class="ui-input">&nbsp;元
+						</td>
+					</tr>
+					<tr>
+						<td>
+							{{data.year}}年9月
+						</td>
+						<td>
+							¥&nbsp;<input  ms-duplex="data.m9" class="ui-input">&nbsp;元
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="tab1 tab1-last fn-left">
+			<table>
+				<thead>
+					<tr>
+						<th>
+							第四季度
+						</th>
+						<th>
+							 ¥&nbsp;<input  ms-duplex="data.q4" class="ui-input">&nbsp;元
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							{{data.year}}年10月
+						</td>
+						<td>
+							¥&nbsp;<input  ms-duplex="data.m10" class="ui-input">&nbsp;元
+						</td>
+					</tr>
+					<tr>
+						<td>
+							{{data.year}}年11月
+						</td>
+						<td>
+							¥&nbsp;<input  ms-duplex="data.m11" class="ui-input">&nbsp;元
+						</td>
+					</tr>
+					<tr>
+						<td>
+							{{data.year}}年12月
+						</td>
+						<td>
+							¥&nbsp;<input  ms-duplex="data.m12" class="ui-input">&nbsp;元
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+	</div>
+	</form>
+</div>
+</@layout>

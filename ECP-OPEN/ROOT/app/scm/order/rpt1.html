@@ -1,0 +1,121 @@
+<#include "../../inc/layout.html">
+<@layout title="商品销售/采购明细表" js="scm/order/rpt1.js">
+<style>
+html{overflow:auto;}
+.comboDiv{position:absolute;left:61px;}
+.comboDiv div{height:30px;}
+</style>
+<div class="wrapper" ms-controller="view">
+  <div class="mod-search cf" ms-if="nprint">
+    <div class="fl">
+      <ul class="ul-inline">
+      	<li>
+        	<label>商品:</label>
+        	<input type="text" class="ui-input" style="width:130px;" ms-keyup="qryProduct(this.value)" ms-click="qryProduct(this.value)" ms-duplex="query.product_name">
+		    <div class="comboDiv" style="width:260px;" ms-visible="pdctComboV">
+		    	<div ms-repeat="productList" ms-click="chooseProduct(el)">{{el.billsn}}&nbsp;&nbsp;{{el.name}}</div>
+		    </div>
+        </li>
+      	<li>
+        	<label>来往单位:</label>
+        	<input type="text" class="ui-input" autocomplete="off" style="width:130px;" ms-keyup="qryCustomer(this.value)" ms-click="qryCustomer(this.value)" ms-duplex="query.customer_name">
+		    <div class="comboDiv" style="width:260px;left:277px;" ms-visible="custComboV">
+		    	<div ms-repeat="customerList" ms-click="chooseCust(el)">{{el.sn}}&nbsp;&nbsp;{{el.name}}</div>
+		    </div>
+        </li>
+      	<li ms-if="query.type==0">
+        	<label>销售员:</label>
+        	<input type="text" class="ui-input" autocomplete="off" style="width:130px;" ms-keyup="qryUser(this.value)" ms-click="qryUser(this.value)" ms-duplex="query.head_name">
+		    <div class="comboDiv" style="width:260px;left:481px;" ms-visible="userComboV">
+		    	<div ms-repeat="userList" ms-click="chooseUser(el)">{{el.realname}}-{{el.position_name}}-{{el.department_name}}</div>
+		    </div>
+        </li>
+        <li>
+          <label>日期:</label>
+          <input type="text" id="beginDate" class="ui-input ui-datepicker-input" ms-duplex="query.start_date">
+          <span>-</span>
+          <input type="text" id="endDate" class="ui-input ui-datepicker-input"ms-duplex="query.end_date">
+        </li>
+        <li>
+        <label ms-if="query.type==0" class="ui-chk" ms-class-checked="query.m==1" ms-click="mCheck()">计算毛利</label>
+        <label class="ui-chk" ms-class-checked="query.t==0" ms-click="tCheck()">统计退货</label>
+        <label class="ui-chk" ms-class-checked="query.tax==1" ms-click="taxCheck()">含税</label>
+        <a class="ui-btn mrb" ms-click="loadData" title="查询"><i class="fa fa-search"></i></a>
+        <a class="ui-btn" ms-click="printRpt" title="打印"><i class="fa fa-print"></i></a>
+        </li>
+      </ul>
+    </div>
+    <div class="fr">
+<!-- <a class="ui-btn" ms-click="printRpt" title="打印"><i class="fa fa-print"></i></a>     -->
+<!--     <a class="ui-btn mrb" id="btn_down" title="导出"><i class="fa fa-download"></i></a> -->
+    </div>
+  </div>
+  <div class="no-query" ms-if="list.length==0"></div>
+  <div class="bills" ms-if="list.length>0">
+    <p style="font-size:24px;text-align:center;">
+    	<span  ms-if="type_==1">采购</span><span  ms-if="type_==0">销售</span>明细表
+    </p>
+    <p>
+日期：{{query.start_date}}至{{query.end_date}}<span class="fr">制表人：{{user.realname}}&nbsp;&nbsp;制表日期：${(now?string('yyyy年MM月dd日'))}</span>
+    </p>
+	<table class="table table-bordered table-striped able-hover">
+		<thead>
+			<tr>
+				<th ms-if="query.type==0">销售员</th>
+				<th>单据日期</th>
+				<th>单据号</th>
+				<th>业务类型</th>
+				<th ms-if="query.type==0">客户</th>
+				<th ms-if="query.type==1">供应商</th>
+				<th>商品编号</th>
+				<th>商品名称</th>
+				<th>规格型号</th>
+				<th>计量单位</th>
+				<th>数量</th>
+				<th>单价</th>
+				<th ms-if="query.type==0">销售收入</th>
+				<th ms-if="query.type==1">采购支出</th>
+				<th ms-if="query.m>0">单位成本</th>
+				<th ms-if="query.m>0">销售成本</th>
+				<th ms-if="query.m>0">毛利</th>
+				<th ms-if="query.m>0">毛利率</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ms-repeat="list">
+				<th ms-if="query.type==0">{{el.head_name}}</th>
+				<td>{{el.sign_date}}</td>
+				<td>{{el.billsn}}</td>
+				<td>{{el.ordertype|ordertype}}</td>
+				<td>{{el.customer_name}}</td>
+				<td>{{el.sn}}</td>
+				<td>{{el.product_name}}</td>
+				<td>{{el.model}}</td>
+				<td>{{el.unit|custParame}}</td>
+				<td align="right">{{el.amount}}</td>
+				<td align="right">{{el.sale_price|money}}</td>
+				<td align="right">{{el.amt|money}}</td>
+				<td align="right" ms-if="query.m>0">{{el.purchase_price|money}}</td>
+				<td align="right" ms-if="query.m>0">{{el.cost|money}}</td>
+				<td align="right" ms-if="query.m>0">{{el.ml|money}}</td>
+				<td align="right" ms-if="query.m>0">{{(el.ml/el.amt*100)|money}}%</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td ms-attr-colspan="query.type==1?8:9" align="right"><b>合计</b></td>
+				<td align="right">{{amount_total}}</td>
+				<td align="right"></td>
+				<td align="right">{{amt_total|money}}</td>
+				<td align="right" ms-if="query.m>0"></td>
+				<td align="right" ms-if="query.m>0">{{cost_total|money}}</td>
+				<td align="right" ms-if="query.m>0">{{ml_total|money}}</td>
+				<td align="right" ms-if="query.m>0">{{(ml_total/amt_total*100)|money}}%</td>
+			</tr>
+		</tfoot>
+	</table>
+  </div>
+</div>
+<script>
+var type=${type!0},f=${f!0};</script>
+</@layout>

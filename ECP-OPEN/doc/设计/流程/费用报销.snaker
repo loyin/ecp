@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<process displayName="费用报销" name="feiyongbaoxiao">
+<start displayName="start1" layout="19,16,-1,-1" name="start1">
+<transition g="" name="transition1" offset="0,0" to="task1"/>
+</start>
+<task autoExecute="Y" displayName="上级领导审批" layout="128,15,-1,-1" name="task1" performType="ANY" taskType="Major">
+<transition g="" name="transition2" offset="0,0" to="task2"/>
+</task>
+<task autoExecute="Y" displayName="总经理审批" layout="276,16,-1,-1" name="task2" performType="ANY" taskType="Major">
+<transition g="" name="transition3" offset="0,0" to="task3"/>
+</task>
+<task autoExecute="Y" displayName="财务付款" layout="415,17,-1,-1" name="task3" performType="ANY" taskType="Major">
+<transition g="" name="transition4" offset="0,0" to="end1"/>
+</task>
+<end displayName="end1" layout="557,19,-1,-1" name="end1"/>
+</process>

@@ -1,0 +1,98 @@
+package net.loyin.util.wechat.bean;
+
+@SuppressWarnings("serial")
+public class WeChat implements java.io.Serializable {
+	private Integer weChatId;
+	private String userNo;
+	private String fromUserName;
+	private Long createTime;
+	private String phone; // 用户的手机号码
+	private String passwd; // 密码
+	private String sessionkey;
+	private String flag;
+	private String city;
+
+	public WeChat() {
+	}
+
+	public WeChat(Long createTime, String fromUserName, String flag, String userNo, String city) {
+		this.createTime = createTime;
+		this.fromUserName = fromUserName;
+		this.flag = flag;
+		this.userNo = userNo;
+		this.city = city;
+	}
+
+	public Integer getWeChatId() {
+		return weChatId;
+	}
+
+	public void setWeChatId(Integer weChatId) {
+		this.weChatId = weChatId;
+	}
+
+	public String getUserNo() {
+		return userNo;
+	}
+
+	public void setUserNo(String userNo) {
+		this.userNo = userNo;
+	}
+
+	public String getFromUserName() {
+		return fromUserName;
+	}
+
+	public void setFromUserName(String fromUserName) {
+		this.fromUserName = fromUserName;
+	}
+
+	public Long getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Long createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getPasswd() {
+		return passwd;
+	}
+
+	public void setPasswd(String passwd) {
+		this.passwd = passwd;
+	}
+
+	public String getSessionkey() {
+		return sessionkey;
+	}
+
+	public void setSessionkey(String sessionkey) {
+		this.sessionkey = sessionkey;
+	}
+
+	public String getFlag() {
+		return flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+}

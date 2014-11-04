@@ -1,0 +1,68 @@
+/**
+ *
+ */
+package net.loyin.util.wechat;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import net.loyin.util.PropertiesContent;
+import net.sf.json.JSONObject;
+
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpMethod;
+import org.apache.commons.httpclient.methods.GetMethod;
+import org.apache.commons.httpclient.protocol.Protocol;
+import org.apache.commons.httpclient.protocol.ProtocolSocketFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import com.weixin.utils.https.MySecureProtocolSocketFactory;
+
+/**
+ * 获取access_token工具类
+ */
+public final class TokenUtil {
+	/**微信临时存放参数*/
+	public static Map<String,Object> weChatConfig=new HashMap<String,Object>();
+	private static final Log log = LogFactory.getLog(TokenUtil.class);
+	public static String getToken(){
+		Long nowtime=new Date().getTime();
+		String accessToken;
+		if(weChatConfig.isEmpty()||weChatConfig.keySet().isEmpty()){
+			accessToken = getAccessToken();
+			weChatConfig.put("access_token",accessToken);
+			weChatConfig.put("exptime",nowtime+7200);
+			return getAccessToken();
+		}
+		if (nowtime > ((Long)weChatConfig.get("exptime"))) {
+			accessToken = getAccessToken();
+			weChatConfig.put("access_token",accessToken);
+			weChatConfig.put("exptime",nowtime+7200);
+			return accessToken;
+		} else {
+			accessToken=(String) weChatConfig.get("access_token");
+		}
+		return accessToken;
+	}
+
+	private static String getAccessToken() {
+		ProtocolSocketFactory fcty = new MySecureProtocolSocketFactory();
+		Protocol.registerProtocol("https", new Protocol("https", fcty, 443));
+		String ACCESS_TOKEN_URL = PropertiesContent.get("ACCESS_TOKEN_URL");
+		HttpClient client = new HttpClient();
+		HttpMethod getmethod = new GetMethod(ACCESS_TOKEN_URL + "&appid=" + PropertiesContent.get("appid") + "&secret=" + PropertiesContent.get("secret"));
+		log.info("--->获取ACCESS_TOKEN的URL: " + ACCESS_TOKEN_URL + "&appid=" + PropertiesContent.get("appid") + "&secret=" + PropertiesContent.get("secret"));
+		try {
+			client.executeMethod(getmethod);
+			String json = getmethod.getResponseBodyAsString();
+			JSONObject jb = JSONObject.fromObject(json);
+			return jb.getString("access_token");
+		} catch (Exception e) {
+			log.error(e);
+			return "error";
+		}
+	}
+
+}

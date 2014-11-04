@@ -1,0 +1,188 @@
+<#include "../../inc/layout.html">
+<@layout title="客户" js="crm/customer/view.js">
+<style>
+body{background:#fff;display:block;}
+</style>
+<div class="manage-wrapper" ms-controller="view">
+   <div class="manage-wrap">
+   	<ul class="nav nav-tabs" >
+  		<li class="active" ms-click="showTab(0,this)"ms-class="active:tabActive==0"><a href="#">客户信息</a></li>
+  		<li ms-click="showTab(1,this)" ms-class="active:tabActive==1"><a href="#">首要联系人</a></li>
+  		<li ms-click="showTab(2,this)" ms-class="active:tabActive==2"><a href="#">联系人列表</a></li>
+  		<li ms-click="showTab(3,this)" ms-class="active:tabActive==3"><a href="#">评论</a></li>
+<!--   		<li ms-click="showTab(4,this)" ms-class="active:tabActive==4"><a href="#">订单</a></li> -->
+	</ul>
+<div ms-visible="tabActive==0" style="padding-top:5px;">
+    		<ul class="mod-form-rows base-form" >
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="number">类别</label></div>
+    				<div class="ctn-wrap">
+    				{{data.type|type}}
+					</div>
+    			</li>
+    		</ul>
+    		<ul class="mod-form-rows base-form" >
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="name">客户名称</label></div>
+    				<div class="ctn-wrap">{{data.name}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="sn">客户编号</label></div>
+    				<div class="ctn-wrap">{{data.sn}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="sn">会员卡号</label></div>
+    				<div class="ctn-wrap">{{data.member_card}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="sn">金额</label></div>
+    				<div class="ctn-wrap">{{data.amt|money}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="">负责人</label></div>
+    				<div class="ctn-wrap">{{data.head_name}}</div>
+    			</li>
+    			<li class="row-item">
+    				
+    				<div class="label-wrap"><label for="">客户来源</label></div>
+    				<div class="ctn-wrap">
+	    				{{data.origin|custParame}}
+    				</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="">客户级别</label></div>
+    				<div class="ctn-wrap">
+	    				{{data.rating|rating}}
+    				</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="">与公司关系</label></div>
+    				<div class="ctn-wrap">
+	    				{{data.ownership|custParame}}
+    				</div>
+    			</li>
+    			<li class="row-item" ms-visible="data.type==1">
+    				<div class="label-wrap"><label for="">行业</label></div>
+    				<div class="ctn-wrap">
+	    				{{data.industry|custParame}}
+    				</div>
+    			</li>
+    			<li class="row-item" ms-visible="data.type==1">
+    				<div class="label-wrap"><label for="">人员规模</label></div>
+    				<div class="ctn-wrap">
+	    				{{data.staff_size|custParame}}
+    				</div>
+    			</li>
+    			<li class="row-item" ms-visible="data.type==1">
+    				<div class="label-wrap"><label for="">企业类别</label></div>
+    				<div class="ctn-wrap">
+	    				{{data.ent_cate|custParame}}
+    				</div>
+    			</li>
+    			<li class="row-item" ms-visible="data.type==1">
+    				<div class="label-wrap"><label for="">年营业额</label></div>
+    				<div class="ctn-wrap">
+	    				{{data.year_turnover|custParame}}
+    				</div>
+    			</li>
+    			<li class="row-item" ms-visible="data.type==1">
+    				<div class="label-wrap"><label for="">公司阶段</label></div>
+    				<div class="ctn-wrap">
+	    				{{data.ent_stage|custParame}}
+    				</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="email">邮箱</label></div>
+    				<div class="ctn-wrap"> {{data.email}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="telephone">电话</label></div>
+    				<div class="ctn-wrap"> {{data.telephone}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="telephone">传真</label></div>
+    				<div class="ctn-wrap">{{data.fax}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="telephone">地区</label>
+    				</div>
+    				<div class="ctn-wrap">{{data.province|area}}-{{data.city|area}} </div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="">地址</label></div>
+    				<div class="ctn-wrap"> {{data.address}}</div>
+    			</li>
+    		</ul>
+    		<ul class="mod-form-rows">
+    			<li class="row-item pb0">
+    				<div class="label-wrap"><label for="remark">备注</label></div>
+    				<div class="ctn-wrap">{{data.remark}}</div>
+    			</li>
+    		</ul>
+    </div>
+    <div style="padding-top:5px;"ms-visible="tabActive==1" >
+    <!-- 添加联系人 -->
+    	<ul class="mod-form-rows base-form" >
+    			<li class="row-item">
+    				<div class="label-wrap"><label>姓名</label></div>
+    				<div class="ctn-wrap">{{contacts.name}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>性别</label></div>
+    				<div class="ctn-wrap"><span ms-visible="contacts.sex==1">男</span><span ms-visible="contacts.sex==0">女</span></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>称呼</label></div>
+    				<div class="ctn-wrap">{{contacts.saltname}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>部门</label></div>
+    				<div class="ctn-wrap">{{contacts.department}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>职位</label></div>
+    				<div class="ctn-wrap">{{contacts.post}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>电话</label></div>
+    				<div class="ctn-wrap">{{contacts.telephone}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>手机</label></div>
+    				<div class="ctn-wrap">{{contacts.mobile}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>邮箱</label></div>
+    				<div class="ctn-wrap">{{contacts.email}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>QQ</label></div>
+    				<div class="ctn-wrap">{{contacts.qq}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>身份证</label></div>
+    				<div class="ctn-wrap">{{contacts.idcard}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>联系地址</label></div>
+    				<div class="ctn-wrap">{{contacts.address}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>备注</label></div>
+    				<div class="ctn-wrap">{{contacts.description}}</div>
+    			</li>
+    	</ul>
+    </div>
+    <div class="grid-wrap"style="padding-top:5px;"ms-visible="tabActive==2" >
+    	<table id="grid"></table>
+    </div>
+    <div class="grid-wrap" style="padding-top:5px;"ms-visible="tabActive==3" >
+    <!-- 评论 -->
+    </div>
+    <div class="grid-wrap"style="padding-top:5px;"ms-visible="tabActive==4" >
+    	<!-- 订单 -->
+    	<table id="order_grid"></table>
+    </div>
+    </div>
+</div>
+</@layout>

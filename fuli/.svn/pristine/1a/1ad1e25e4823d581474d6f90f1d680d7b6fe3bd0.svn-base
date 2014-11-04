@@ -1,0 +1,16 @@
+package net.loyin.ctrl;
+
+import net.loyin.jfinal.anatation.RouteBind;
+import net.loyin.model.sys.MobileApp;
+/**
+ * 移动app管理
+ * 
+ * @author 龙影
+ */
+@RouteBind(path="/app")
+public class MobileAppCtrl extends AdminBaseController<MobileApp> {
+	public MobileAppCtrl() {
+		this.tableName = MobileApp.tableName;
+		this.modelClass = MobileApp.class;
+	}
+}

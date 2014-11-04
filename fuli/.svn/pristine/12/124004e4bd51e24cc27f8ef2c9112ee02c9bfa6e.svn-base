@@ -1,0 +1,68 @@
+package net.loyin.util.wechat.bean.ztApi;
+
+/**
+ * 订单查询
+ *
+ * @author RedHome
+ *
+ */
+public class OrderChange {
+	private int chid; // 订单编号
+	private String fromUserName; // 订单名称
+	private int createTime; // 创建时间
+	private String businessName; // 订单名称
+	private String orderId; // 订单编号
+	private String orderStatus; // 业务状态
+	private String linkCode; //环节编码
+	private String linkState; //环节状态
+
+	public int getChid() {
+		return chid;
+	}
+	public void setChid(int chid) {
+		this.chid = chid;
+	}
+	public String getFromUserName() {
+		return fromUserName;
+	}
+	public void setFromUserName(String fromUserName) {
+		this.fromUserName = fromUserName;
+	}
+	public int getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(int createTime) {
+		this.createTime = createTime;
+	}
+	public String getBusinessName() {
+		return businessName;
+	}
+	public void setBusinessName(String businessName) {
+		this.businessName = businessName;
+	}
+	public String getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
+	}
+	public String getOrderStatus() {
+		return orderStatus;
+	}
+	public void setOrderStatus(String orderStatus) {
+		this.orderStatus = orderStatus;
+	}
+	public String getLinkCode() {
+		return linkCode;
+	}
+	public void setLinkCode(String linkCode) {
+		this.linkCode = linkCode;
+	}
+	public String getLinkState() {
+		return linkState;
+	}
+	public void setLinkState(String linkState) {
+		this.linkState = linkState;
+	}
+
+}

@@ -1,0 +1,73 @@
+<#include "../../inc/layout.html">
+<@layout title="关系人管理" js="crm/contacts/edit.js">
+<style>
+body{background:#fff;display:block;}
+</style>
+<div class="manage-wrapper" ms-controller="view">
+   <div class="manage-wrap" style="padding-top:5px;">
+    <form action=""id="base_form">
+    	<ul class="mod-form-rows base-form" >
+    			<li class="row-item oneRow">
+    				<div class="label-wrap"><label>所属{{data.custType|type}}</label></div>
+    				<div class="ctn-wrap">
+    				<span class="ui-combo-wrap" id="customer">
+          			<input type="text" id="customer" class="input-txt" autocomplete="off" data-ref="date" ms-keyup="qryCustomer(this.value)" ms-duplex="data.customer_name" data-rule="required;">
+          			<i class="ui-icon-ellipsis" ms-click="customerDialog()"></i></span>
+          			<div class="comboDiv" style="left:94px;width:260px;" ms-visible="custComboV">
+          				<div ms-repeat="customerList" ms-click="chooseCust(el)">{{el.sn}}&nbsp;&nbsp;{{el.name}}</div>
+          			</div>
+          			</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>姓名</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="data.name"id="c_name" data-rule="required;"  maxlength="20" placeholder="请输入客户名称"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>性别</label></div>
+    				<div class="ctn-wrap"><label class="radio" ms-class-checked="data.sex==1" ms-click="setSex(1)">男</label><label class="radio" ms-class-checked="data.sex==0" ms-click="setSex(0)">女</label></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>称呼</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="data.saltname"id="c_saltname" maxlength="20" placeholder="请输入称呼"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>部门</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="data.department"id="c_depart" maxlength="20" placeholder="请输入部门"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>职位</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="data.post"id="c_post" maxlength="20" placeholder="请输入职位"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>电话</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="data.telephone"id="c_telephone" maxlength="20" placeholder="请输入电话"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>手机</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="data.mobile"id="c_mobile" maxlength="20" placeholder="请输入手机"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>邮箱</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="data.email"id="cemail" maxlength="50" placeholder="请输入邮箱"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>QQ</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="data.qq"id="qq" maxlength="20" placeholder="请输入QQ"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>联系地址</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="data.address"id="data_address" maxlength="50" placeholder="请输入地址"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>身份证</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="data.idcard"id="data_idcard" maxlength="50" placeholder="请输入身份证号"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>备注</label></div>
+    				<div class="ctn-wrap"><textarea class="ui-input" ms-duplex="data.description" placeholder="请输入客户名称"></textarea></div>
+    			</li>
+    	</ul>
+    	</form>
+    </div>
+</div>
+</@layout>

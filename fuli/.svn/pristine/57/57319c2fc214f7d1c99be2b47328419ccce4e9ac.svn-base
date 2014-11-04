@@ -1,0 +1,84 @@
+package net.loyin.util.wechat.bean;
+
+public class WcMessageMail {
+
+	private int mmid;
+
+	private String fromUserName;
+
+	private String answer;
+
+	private String question;
+
+	private int createTime;
+
+	private String createTimeDesc;
+
+	private int answerTime;
+
+	private String answerTimeDesc;
+
+	public int getMmid() {
+		return mmid;
+	}
+
+	public void setMmid(int mmid) {
+		this.mmid = mmid;
+	}
+
+	public String getFromUserName() {
+		return fromUserName;
+	}
+
+	public void setFromUserName(String fromUserName) {
+		this.fromUserName = fromUserName;
+	}
+
+	public String getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+
+	public String getQuestion() {
+		return question;
+	}
+
+	public void setQuestion(String question) {
+		this.question = question;
+	}
+
+	public int getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(int createTime) {
+		this.createTime = createTime;
+	}
+
+	public int getAnswerTime() {
+		return answerTime;
+	}
+
+	public void setAnswerTime(int answerTime) {
+		this.answerTime = answerTime;
+	}
+
+	public String getCreateTimeDesc() {
+		return createTimeDesc;
+	}
+
+	public void setCreateTimeDesc(String createTimeDesc) {
+		this.createTimeDesc = createTimeDesc;
+	}
+
+	public String getAnswerTimeDesc() {
+		return answerTimeDesc;
+	}
+
+	public void setAnswerTimeDesc(String answerTimeDesc) {
+		this.answerTimeDesc = answerTimeDesc;
+	}
+}

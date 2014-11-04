@@ -1,0 +1,93 @@
+package net.loyin.ctrl;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
+
+import com.gson.WeChat;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
+import com.sun.jmx.snmp.Timestamp;
+
+import net.loyin.jfinal.anatation.RouteBind;
+import net.loyin.model.sys.WxOrder;
+
+/***
+ * 微信订单
+ * @author xd
+ */
+@RouteBind(path="/wxOrder")
+public class WxOrderCtrl extends AdminBaseController<WxOrder>{
+	public WxOrderCtrl(){
+		this.tableName=WxOrder.tableName;
+		this.modelClass=WxOrder.class;
+	}
+	public void list(){
+		String openid=this.getPara("openid");
+		List<Object> param = new ArrayList<Object>();
+		StringBuffer where = new StringBuffer();
+		/** 添加查询字段条件*/
+		if(openid!=null&&!"".equals(openid)){
+			param.add(openid);
+			where.append(" and buyer_openid=? ");
+		}
+		qryField(where, param);
+		sortField(where);
+		Page<Record> p = Db.paginate(getPageNo(), getPageSize(), "select t.* ", "from " + this.tableName+ " t where 1=1 " + where.toString(), param.toArray());
+		this.setAttr("page", p);
+	
+	}
+	/**
+	 * 通过order id 同步订单
+	 */
+	public void syc(){
+		String order_id=this.getPara(0);
+		if(StringUtils.isEmpty(order_id)){
+			order_id=this.getPara("order_id");
+		}
+		if(StringUtils.isNotEmpty(order_id)){
+			WxOrder order=WxOrder.dao.findFirst("select * from "+tableName+" where order_id=?",order_id);
+			if(order==null){
+				try {
+					Map attrs=(Map)WeChat.orderInfo(order_id).get("order");
+					if(attrs==null){
+						this.rendJson_(false, "此订单不存在微信小店中！");
+						return;
+					}
+					if(attrs.get("order_create_time")!=null){
+						Integer time=(Integer)attrs.get("order_create_time");
+						attrs.put("order_create_time",new Timestamp(time.longValue()*10000).getDate());
+					}
+					try{
+						WxOrder.dao.install(attrs);
+						log.debug("保持订单成功！");
+						this.rendJson_(true, "同步成功！");
+					}catch(Exception e){
+						throw e;
+					}
+				} catch (Exception e) {
+					log.error("",e);
+					this.rendJson_(false, "订单同步异常！");
+				}
+				
+			}else{
+				this.rendJson_(false, "订单已经存在！无需同步！");
+			}
+		}
+	}
+	public void view(){
+		Long id=this.getParaToLong(0);
+		WxOrder wxorder=WxOrder.dao.findById(id);
+		//获取订单详情
+		try {
+			Map order=(Map)WeChat.orderInfo(wxorder.getStr("order_id")).get("order");
+			wxorder.setAttrs(order);
+			wxorder.update();
+		} catch (Exception e) {
+		}
+		this.setAttr("po",wxorder);
+	}
+}

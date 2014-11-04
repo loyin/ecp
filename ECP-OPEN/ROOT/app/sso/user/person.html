@@ -1,0 +1,122 @@
+<#include "../../inc/layout.html">
+<@layout title="个人设置" js="sso/user/person.js">
+<style>
+body{background: #fff;}
+</style>
+<script>
+var id="${uid}";</script>
+<div class="manage-wrapper" ms-controller="ctrl">
+    <div class="manage-wrap">
+    	<form action=""id="base_form">
+    		<ul class="mod-form-rows base-form" >
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="position">部门</label></div>
+    				<div class="ctn-wrap">
+					{{data.department_name}}
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="position">岗位</label></div>
+    				<div class="ctn-wrap">
+					{{data.position_name}}
+					</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="uname">用户帐号</label></div>
+    				<div class="ctn-wrap">{{data.uname}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="realname">姓名</label></div>
+    				<div class="ctn-wrap">{{data.realname}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="number">性别</label></div>
+    				<div class="ctn-wrap" id="sex">
+    					<label class="radio" ms-class="checked:data.sex==0">女</label>
+				        <label class="radio" ms-class="checked:data.sex==1">男</label>
+					</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="email">Email</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" data-rule="email" id="email" ms-duplex="data.email" placeholder="请输入电子邮箱"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="mobile">手机</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" data-rule="mobile"id="mobile" ms-duplex="data.mobile"placeholder="请输入手机号码"></div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="telephone">电话</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" data-rule="tel" id="telepone" placeholder="请输入电话号码" ms-duplex="data.telephone"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="address">地址</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" maxlength="100"placeholder="请输入地址" ms-duplex="data.address"></div>
+    			</li>
+    		</ul>
+    		<ul class="mod-form-rows">
+    			<li class="row-item pb0" style="width:100%;">
+    				<div class="label-wrap"><label for="remark">头像</label></div>
+    				<div class="ctn-wrap">
+    				<div class="fl">
+    				<img ms-attr-src="data.head_pic"width="150px"><br>
+    				<a ms-click="setUpImg">上传头像</a>
+    				</div>
+    				<#assign logoImgId = IdGenerater.timeTo62()/>
+<#assign uploadUrl = TextUtil.URLEncoder("http://"+PropertiesContent.get("server_domain")+"/file/camera", "UTF-8")>
+<#assign url ="/assets/flash/camera.swf?inajax=1&appid=1&input=" + logoImgId+ "&agent=a523e70c80e13e4eaee37c7f4bde4f2c&FiledataFileName=head.jpg&ucapi="+ uploadUrl + "&avatartype=virtual&nt=1">
+<script>var logoImgId="${logoImgId}";</script>
+	<div class="fl" ms-visible="upImg" style="position:absolute;top:30%;border: 1px #eee solid;left:30%;z-index:1000;">
+	<i class="fa fa-close" style="font-size:20px;position: absolute;right: 0px;cursor:pointer;"title="关闭" ms-click="setUpImg"></i>
+	<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" width="447" height="250" id="mycamera" align="middle">
+		<param name="allowScriptAccess" value="always" />
+		<param name="scale" value="exactfit" />
+		<param name="wmode" value="transparent" />
+		<param name="quality" value="high" />
+		<param name="bgcolor" value="#ffffff" />
+		<param name="movie" value="${url}" />
+		<param name="menu" value="false" />
+		<embed src="${url}" quality="high" bgcolor="#ffffff" width="447"
+			height="250" name="mycamera" align="middle" allowScriptAccess="always"
+			allowFullScreen="false" scale="exactfit" wmode="transparent"
+			type="application/x-shockwave-flash"
+			pluginspage="http://www.macromedia.com/go/getflashplayer" /></object>
+    </div>
+    				</div>
+    			</li>
+    		</ul>
+    		<ul class="mod-form-rows" style="width:100%;">
+    			<li class="row-item" style="width:100%;">
+    				<div class="label-wrap"><label for="remark">备注</label></div>
+    				<div class="ctn-wrap"><textarea class="ui-input" style="width:100%;" placeholder="添加备注信息" ms-duplex="data.remark"></textarea></div>
+    			</li>
+    		</ul>
+    		<center>
+    		<a class="ui-btn" ms-click="submit()"><i class="fa fa-save"></i>保存个人信息</a>
+    		</center>
+    	</form>
+    	<br>
+    	<hr>
+    	<br>
+    	<form id="pwd_form">
+    		<ul class="mod-form-rows base-form" >
+    		<li class="row-item oneRow">
+    				<div class="label-wrap"><label for="password">原密码</label></div>
+    				<div class="ctn-wrap"><input type="password" class="ui-input" ms-duplex="pwd.pwd" id="password" maxlength="16" data-rule="required;password;" data-msg-required="请填写原密码"></div>
+    			</li>
+    			<li class="row-item oneRow">
+    				<div class="label-wrap"><label for="password">新密码</label></div>
+    				<div class="ctn-wrap"><input type="password" class="ui-input" ms-duplex="pwd.pwd1" id="pwd1" name="pwd1" maxlength="16" data-rule="required;password;" data-msg-required="请填写新密码"></div>
+    			</li>
+    			<li class="row-item oneRow">
+    				<div class="label-wrap"><label for="password">确认新密码</label></div>
+    				<div class="ctn-wrap"><input type="password" class="ui-input" ms-duplex="pwd.pwd2" id="pwd2" name="pwd2" maxlength="16" data-rule="required;password;match(pwd1);" data-msg-match="新密码与确认新密码不一致" data-msg-required="请填写确认新密码"></div>
+    			</li>
+    			<li class="row-item oneRow">
+    				<div class="label-wrap"><label for="password"></label></div>
+    				<div class="ctn-wrap"><a class="ui-btn" ms-click="savePwd()"><i class="fa fa-save"></i>修改密码</a></div>
+    			</li>
+    		</ul>
+    	</form>
+    </div>
+</div>
+</@layout>

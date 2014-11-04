@@ -1,0 +1,24 @@
+<#include "../../inc/layout.html">
+<@layout title="会员等级" js="crm/custRating/view.js">
+<style>
+body{background: #fff;}
+</style>
+<div class="manage-wrapper" ms-controller="ctrl">
+    <div class="manage-wrap">
+    		<ul class="mod-form-rows base-form" >
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="uname">名称</label></div>
+    				<div class="ctn-wrap">{{data.name}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="uname">积分区间</label></div>
+    				<div class="ctn-wrap">{{data.integral_start}}至{{data.integral_end}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="uname">星星数</label></div>
+    				<div class="ctn-wrap">{{data.name}}</div>
+    			</li>
+    		</ul>
+    </div>
+</div>
+</@layout>

@@ -1,0 +1,71 @@
+<#include "../../inc/layout.html">
+<@layout title="用户管理" js="sso/user/edit.js">
+<style>
+body{background: #fff;}
+.comboDiv{position:absolute;}
+</style>
+<div class="manage-wrapper" ms-controller="ctrl">
+    <div class="manage-wrap">
+    	<form action=""id="base_form">
+		<input type="hidden" name="id" id="id" ms-duplex="data.id">
+    		<ul class="mod-form-rows base-form" >
+    			<li class="row-item odd">
+    				<input type="hidden" name="position_id" id="position_id" ms-duplex="data.position_id">
+    				<div class="label-wrap"><label for="position">岗位</label></div>
+    				<div class="ctn-wrap">
+					<input type="text" value="" class="ui-input" id="position" readonly ms-duplex="data.position_name">
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="status">状态</label></div>
+    				<div class="ctn-wrap" id="status">
+						<label class="radio" ms-class-checked="data.status==0" ms-click="setStatus(0)">禁用</label>
+						<label class="radio" ms-class-checked="data.status==1" ms-click="setStatus(1)">激活</label>
+					</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="uname">用户帐号</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" name="uname" ms-duplex="data.uname" data-rule="required;username"  maxlength="20"id="uname" placeholder="请输入帐号"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="password">密码</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" name="password" id="password" ms-duplex="data.password"placeholder="请输入密码" maxlength="20" data-rule="password"></div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="realname">姓名</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" name="realname" ms-duplex="data.realname" id="realname" data-rule="required;chinese" maxlength="10"placeholder="请输入姓名"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="number">性别</label></div>
+    				<div class="ctn-wrap" id="sex">
+						<label class="radio" ms-class-checked="data.sex==0" ms-click="setSex(0)">女</label>
+						<label class="radio" ms-class-checked="data.sex==1" ms-click="setSex(1)">男</label>
+					</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="email">Email</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" name="email" id="email" data-rule="email" ms-duplex="data.email" placeholder="请输入电子邮箱"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="mobile">手机</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" name="mobile" id="mobile" data-rule="mobile" ms-duplex="data.mobile"placeholder="请输入手机号码"></div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="telephone">电话</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" name="telephone" id="telephone" data-rule="tel"placeholder="请输入电话号码" ms-duplex="data.telephone"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="address">地址</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" name="address" id="address" maxlength="100"placeholder="请输入地址" ms-duplex="data.address"></div>
+    			</li>
+    		</ul>
+    		<ul class="mod-form-rows">
+    			<li class="row-item pb0">
+    				<div class="label-wrap"><label for="remark">备注</label></div>
+    				<div class="ctn-wrap"><textarea name="remark" id="remark" class="ui-input" placeholder="添加备注信息" ms-duplex="data.remark"></textarea></div>
+    			</li>
+    		</ul>
+    	</form>
+    </div>
+</div>
+</@layout>

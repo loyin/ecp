@@ -1,0 +1,132 @@
+<#include "../inc/layout.html">
+<@layout title="系统参数" js="sso/sysparame.js">
+<style>
+.mod-form-rows .label-wrap{width:130px;}
+#base_form li{width:90%;min-width:800px;}
+.ui-input{width:400px;}
+</style>
+<div class="wrapper" ms-controller="ctrl">
+  <div class="mod-search cf">
+    <div class="fl">
+    </div>
+    <div class="fr">
+    </div>
+  </div>
+  <div style="width:500px;">
+   <form id="base_form">
+  <ul class="mod-form-rows base-form" >
+    <li class="row-item">
+   		<div class="label-wrap"><label>企业代码</label></div>
+		<div class="ctn-wrap">{{data.code}}</div>
+	</li>
+    <li class="row-item">
+   		<div class="label-wrap"><label>企业名称</label></div>
+		<div class="ctn-wrap"><input type="text" class="ui-input" data-rule="required" ms-duplex="data.name" id="name"></div>
+	</li>
+    <li class="row-item">
+   		<div class="label-wrap"><label>企业简称</label></div>
+		<div class="ctn-wrap"><input type="text" class="ui-input" data-rule="required" ms-duplex="data.short_name" id="name"></div>
+	</li>
+    <li class="row-item">
+   		<div class="label-wrap"><label>行业</label></div>
+		<div class="ctn-wrap">
+			<select ms-duplex="data.industry" class="ui-input">
+	    		<option ms-repeat="parameList[3]" ms-value="el.id">{{el.name}}</option>
+	    	</select>
+		</div>
+	</li>
+    <!-- <li class="row-item">
+   		<div class="label-wrap"><label>规模</label></div>
+		<div class="ctn-wrap"><input type="text" class="ui-input" data-rule="required" ms-duplex="data." id=""></div>
+	</li> -->
+    <li class="row-item">
+   		<div class="label-wrap"><label>省份地市</label></div>
+		<div class="ctn-wrap">
+			<select style="width:80px"class="ui-input" ms-duplex="data.province" data-rule="required" id="province" ms-change="changeCity(this.value)">
+	    		<option value="">省份</option>
+	    		<option ms-repeat="provinceList" ms-value="el.id">{{el.name}}</option>
+	    	</select>
+	    	<select style="width:80px"class="ui-input" data-rule="required" id="city" ms-duplex="data.city">
+	    		<option value="">地市</option>
+	    		<option ms-repeat="cityList" ms-value="el.id">{{el.name}}</option>
+	    	</select>
+		</div>
+	</li>
+    <li class="row-item">
+   		<div class="label-wrap"><label>地址</label></div>
+		<div class="ctn-wrap"><input type="text" class="ui-input" data-rule="required" ms-duplex="data.address" id="address"></div>
+	</li>
+    <li class="row-item">
+   		<div class="label-wrap"><label>电话</label></div>
+		<div class="ctn-wrap"><input type="text" class="ui-input" data-rule="required" ms-duplex="data.telephone" id="telephone"></div>
+	</li>
+    <li class="row-item">
+   		<div class="label-wrap"><label>传真</label></div>
+		<div class="ctn-wrap"><input type="text" class="ui-input" data-rule="required" ms-duplex="data.fax" id="fax"></div>
+	</li>
+    <!-- <li class="row-item">
+   		<div class="label-wrap"><label>文件存储</label></div>
+		<div class="ctn-wrap"></div>
+	</li> -->
+    <li class="row-item">
+   		<div class="label-wrap"><label>注册日期</label></div>
+		<div class="ctn-wrap">{{data.reg_date}}</div>
+	</li>
+    <li class="row-item">
+   		<div class="label-wrap"><label>失效日期</label></div>
+		<div class="ctn-wrap">{{data.expiry_date}}</div>
+	</li>
+    <li class="row-item">
+   		<div class="label-wrap"><label>合同提醒时间</label></div>
+		<div class="ctn-wrap"><input type="text" class="ui-input" data-rule="required" ms-duplex="data.config.p_pact_alarm" style="width:50px"id="pactalarm">天</div>
+	</li>
+    <li class="row-item">
+   		<div class="label-wrap"><label>客户池回收周期</label></div>
+		<div class="ctn-wrap"><input type="text" class="ui-input" style="width:50px;" data-rule="required;degitis" ms-duplex="data.config.p_custpool_c"  maxlength="20"id="custpool">天</div>
+	</li>
+    <li class="row-item">
+   		<div class="label-wrap"><label>会员卡支付</label></div>
+		<div class="ctn-wrap">
+		<label class="radio" ms-click="radio5('false')" ms-class-checked="data.config.p_member_card_pay=='false'">不启用</label>
+		<label class="radio" ms-click="radio5('true')" ms-class-checked="data.config.p_member_card_pay=='true'">启用</label>
+		</div>
+	</li>
+    <li class="row-item">
+   		<div class="label-wrap"><label>销售订单启用审核</label></div>
+		<div class="ctn-wrap">
+		<label class="radio" ms-click="radio1('false')" ms-class-checked="data.config.p_sale_audit=='false'">不启用</label>
+		<label class="radio" ms-click="radio1('true')" ms-class-checked="data.config.p_sale_audit=='true'">启用</label>
+		</div>
+	</li>
+    <li class="row-item" ms-if="data.config.p_sale_audit=='true'">
+   		<div class="label-wrap"><label>销售订单审核级次</label></div>
+		<div class="ctn-wrap">
+		<label class="radio" ms-click="radio3('false')" ms-class-checked="data.config.p_sale_audit_type=='false'">直接领导</label>
+		<label class="radio" ms-click="radio3('true')" ms-class-checked="data.config.p_sale_audit_type=='true'">直至顶级领导</label>
+		</div>
+	</li>
+    <li class="row-item">
+   		<div class="label-wrap"><label>销售退货启用审核</label></div>
+		<div class="ctn-wrap">
+		<label class="radio" ms-click="radio2('false')" ms-class-checked="data.config.p_saletui_audit=='false'">不启用</label>
+		<label class="radio" ms-click="radio2('true')" ms-class-checked="data.config.p_saletui_audit=='true'">启用</label>
+		</div>
+	</li>
+    <li class="row-item" ms-if="data.config.p_saletui_audit=='true'">
+   		<div class="label-wrap"><label>销售退货启用审核</label></div>
+		<div class="ctn-wrap">
+		<label class="radio" ms-click="radio4('false')" ms-class-checked="data.config.p_saletui_audit_type=='false'">直接领导</label>
+		<label class="radio" ms-click="radio4('true')" ms-class-checked="data.config.p_saletui_audit_type=='true'">直至顶级领导</label>
+		</div>
+	</li>
+	<li class="row-itme">
+		<div class="label-wrap"><label></label></div>
+		<div class="ctn-wrap">
+			<a class="ui-btn ui-btn-sp mrb" ms-click="postData" title="保存"><i class="fa fa-save"></i>保存</a>
+		</div>
+	</li>
+	</ul>
+  </form>
+  </div>
+</div>
+</@layout>

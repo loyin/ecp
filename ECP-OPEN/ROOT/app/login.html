@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>####</title>
+        <link rel="icon" href="${root!}/favicon.ico" type="image/x-icon" />
+        <link rel="shortcut icon" href="${root!}/favicon.ico" type="image/x-icon" />
+		<link href="${root!}/assets/css/login.css" rel="stylesheet">
+        <script src="${root!}/assets/js/libs/jquery-1.10.2.min.js"></script>
+        <script src="${root!}/assets/avalon/avalon.min.js"></script>
+    </head>
+    <script>
+    window.history.go(2);
+    <#if f??>
+    <#else>
+    if(window.parent!=undefined&&window.parent!=null){
+    	//window.parent.location.href="${root!}/?f";
+    }
+    </#if>
+        var rootPath = "${root!}";
+    </script>
+    <body>
+ 	<!--[if lte IE 6]>
+    	<div class="alert alert-danger ie6">您所使用的浏览器版本太低，无法正常浏览器本站。请升级或更换IE8及以上版本或谷歌火狐等浏览器。</div>
+    <![endif]-->
+        <!--头部 开始-->
+        <div class="header">
+	        <div class="top-line"></div>
+	        <div class="wrapper">
+		        <div class="top"><a href="${root!}/logout">登录</a>&nbsp;|&nbsp;
+                <a href="${root!}/reg">注册</a></div>
+                <div class="nav clearfix">
+                    <h1><a href="#">中小企业云平台</a></h1>
+                    <ul class="main-nav">
+                        <li><a href="#">首页</a></li>
+                        <li><a href="#">帮助中心</a></li>
+                        <li><a href="#">关于我们</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!--头部 结束-->
+<!--中部内容区 开始-->
+<div class="login-wrap" ms-controller="loginCtrl">
+    <div class="wrapper">
+        <div class="login-txt"></div>
+        <div class="login">
+            <h2 class="form-title">欢迎您 , 请登录</h2>
+            <div class="form-cnt">
+                <div id="errorContainer" ms-visible="errMsg!=''" class="form-error">{{errMsg}}</div>
+                <div class="form-item">
+                    <label class="label">企业名称:</label>
+                    <input type="text" class="inp-txt" placeholder="请输入企业全称" ms-duplex="data.company"  value=""/>
+                </div>
+                <div class="form-item">
+                    <label class="label">帐号:</label>
+                    <input type="text"class="inp-txt" value=""  ms-duplex="data.userno" placeholder="请输入用户名、手机号或邮箱" />
+                </div>
+                <div class="form-item">
+                    <label class="label">密码:</label>
+                    <input type="password" ms-duplex="data.pwd" class="inp-txt pass" value=""  placeholder="请输入密码" />
+                </div>
+                <div class="form-item form-code">
+                    <label class="label">验证码:</label>
+                    <input type="text" class="inp-txt" placeholder="验证码" value="" maxlength="4" ms-duplex="data.validCode" ms-focus="showVc"
+                        value="" autocompletetype="disabled" />
+                    <span ms-visible="vcV">
+                        <img id="validCodeImg" style="cursor: pointer;"ms-src="vcUrl" ms-click="ldCode" alt="验证码" title="看不清,换一张" />
+                        <a id="refreshCode" href="#" title="看不清,换一张"ms-click="ldCode">刷新</a> </span>
+                </div>
+                <div class="form-item form-txt">
+                    <span class="fl">
+                        <input type="checkbox" id="autoLogin"  ms-duplex-radio="data.autoLogin" name="autoLogin" >自动登录</span> <a href="#" class="fr" target="_blank">忘记密码？</a>
+                </div>
+                <div class="form-item">
+                    <a href="javascript:void();" class="btn-big" ms-click="submit">登&nbsp;录</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--中部内容区 结束 -->
+<div class="footDiv black">
+    <div class="wal">
+        <ul>
+            <li>
+                <h5>
+                    <a href="#" target="_blank">####</a></h5>
+                <dl>
+                    <dd> <a href="#" target="_blank">####</a></dd>
+                </dl>
+            </li>
+            <li>
+                <h5>
+                    <a href="#" target="_blank">####</a></h5>
+                <dl>
+                    <dd> <a href="#" target="_blank">####</a></dd>
+                </dl>
+            </li>
+            <li>
+                <h5>
+                    <a href="#" target="_blank">####</a></h5>
+                <dl>
+                    <dd> <a href="#" target="_blank">####</a></dd>
+                </dl>
+            </li>
+            <li>
+                <h5>
+                    <a href="#" target="_blank">####</a></h5>
+                <dl>
+                    <dd> <a href="#" target="_blank">####</a></dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+</div>
+        <div class="footer" id="footer" style="position: fixed;bottom: 0px;">
+	            <p><a href="http://www.cnlentis.com" target="_blank">关于朗天鑫业</a><a href="#" target="_blank">服务协议</a>
+	            &copy;2014 cnlentis 京ICP证12009912号-1</p>
+        </div>
+        <script src="${root!}/app/login.js"></script>
+    </body>
+</html>

@@ -1,0 +1,76 @@
+<#include "../../inc/layout.html">
+<@layout title="票据" js="fa/payReceivOrder/view.js">
+<style>
+body{background:#fff;}
+</style>
+<div class="manage-wrapper" ms-controller="view">
+    <div class="manage-wrap base-form">
+    	<ul class="mod-form-rows manage-wrap" >
+    			<li class="row-item">
+    				<div class="label-wrap"><label><span ms-if="data.type==1">收款</span><span ms-if="data.type==0">付款</span>单号</label></div>
+    				<div class="ctn-wrap">{{data.billsn}}</div>
+    			</li>
+    			<li class="row-item" ms-if="data.payables_id!=''">
+    				<div class="label-wrap"><label><span ms-if="data.type==1">应收</span><span ms-if="data.type==0">应付</span>主题</label></div>
+    				<div class="ctn-wrap">
+    					{{data.ables_name}}
+    				</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label><span ms-if="data.type==1">收款</span><span ms-if="data.type==0">付款</span>主题</label></div>
+    				<div class="ctn-wrap">
+    					{{data.name}}
+    				</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>来往单位</label></div>
+    				<div class="ctn-wrap">
+    					{{data.customer_name}}
+    				</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="head_id">负责人</label></div>
+    				<div class="ctn-wrap">
+					{{data.head_name}}
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>状态</label></div>
+    				<div class="ctn-wrap">
+    					{{data.status|status}}
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="kprq">支付日期</label></div>
+    				<div class="ctn-wrap">
+					{{data.pay_datetime}}
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="amt">金额</label></div>
+    				<div class="ctn-wrap">
+					{{data.amt|money}}
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="amt">账号</label></div>
+    				<div class="ctn-wrap">
+					{{data.account_name}}
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="amt">财务科目</label></div>
+    				<div class="ctn-wrap">
+					{{data.subject_name}}
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="remark">描述</label></div>
+    				<div class="ctn-wrap">
+					{{data.description}}
+					</div>
+    			</li>
+    		</ul>
+    </div>
+</div>
+</@layout>

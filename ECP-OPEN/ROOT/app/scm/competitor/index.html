@@ -1,0 +1,31 @@
+<#include "../../inc/layout.html">
+<@layout title="竞争对手管理" js="scm/competitor/index.js">
+<div class="wrapper" ms-controller="view">
+  <div class="mod-search cf">
+    <div class="fl">
+    <ul class="ul-inline">
+        <li>
+          <input type="text"  ms-duplex="query.keyword" class="ui-input con" value="" placeholder="请输入编号或名称">
+        </li>
+        <li>
+          <label>日期:</label>
+          <input type="text" ms-duplex="query.start_date" class="ui-input ui-datepicker-input">
+          <span>-</span>
+          <input type="text" ms-duplex="query.end_date" class="ui-input ui-datepicker-input">
+        </li>
+        <a class="ui-btn" id="search" title="查询"><i class="fa fa-search"></i></a>
+        <a class="ui-btn" id="refresh" title="刷新"><i class="fa fa-refresh"></i></a>
+        </li>
+      </ul>
+    </div>
+    <div class="fr"><a class="ui-btn ui-btn-sp mrb" id="add" title="新增"><i class="fa fa-plus"></i></a>
+    <a href="#" class="ui-btn" id="btn-batchDel" title="批量删除"><i class="red fa fa-trash-o"></i></a>
+    </div>
+  </div>
+  <div class="grid-wrap">
+    <table id="grid">
+    </table>
+    <div id="page"></div>
+  </div>
+</div>
+</@layout>

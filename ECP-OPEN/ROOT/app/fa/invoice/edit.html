@@ -1,0 +1,68 @@
+<#include "../../inc/layout.html">
+<@layout title="票据" js="fa/invoice/edit.js">
+<style>
+body{background:#fff;}
+</style>
+<div class="manage-wrapper" ms-controller="view">
+    <div class="manage-wrap base-form">
+    	<form action=""id="base_form">
+    		<ul class="mod-form-rows manage-wrap" >
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="kpnr">开票内容</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" data-rule="required;" ms-duplex="data.kpnr"  maxlength="10"id="kpnr" placeholder="请输入开票内容"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="type">类型</label></div>
+    				<div class="ctn-wrap">
+    					<select id="type"class="ui-input"  data-rule="required" ms-duplex="data.type">
+    					<option ms-repeat="type" ms-value="$index">{{el}}</option>
+    					</select>
+					</div>
+    			</li>
+    			<li class="row-item odd ">
+    				<div class="label-wrap"><label for="pjlx">票据类型</label></div>
+    				<div class="ctn-wrap">
+    					<select id="pjlx"class="ui-input"  data-rule="required" ms-duplex="data.pjlx">
+    					<option ms-repeat="pjlx" ms-value="$index">{{el}}</option>
+    					</select>
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="fpsn">票据号码</label></div>
+    				<div class="ctn-wrap">
+					<input type="text" class="ui-input" id="fpsn" ms-duplex="data.fpsn"></div>
+    			</li>
+    			<li class="row-item odd ">
+    				<div class="label-wrap"><label for="order_billsn">订单编号</label></div>
+    				<div class="ctn-wrap">
+					<input type="text" class="ui-input" id="order_billsn" ms-duplex="data.order_billsn"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="head_id">负责人</label></div>
+    				<div class="ctn-wrap">
+					<select class="ui-input" ms-duplex="data.head_id" id="head_id">
+						<option></option>
+						<option ms-repeat="userList" ms-value="el.id">{{el.name}}</option>
+					</select>
+					</div>
+    			</li>
+    			<li class="row-item odd ">
+    				<div class="label-wrap"><label for="kprq">开票日期</label></div>
+    				<div class="ctn-wrap">
+					<input type="text" class="ui-input ui-datepicker-input" id="kprq" ms-duplex="data.kprq"data-rule="required;date"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="amt">金额</label></div>
+    				<div class="ctn-wrap">
+					<input type="text" class="ui-input" id="amt" data-rule="required;money" ms-duplex="data.amt"></div>
+    			</li>
+    			<li class="row-item odd ">
+    				<div class="label-wrap"><label for="remark">备注</label></div>
+    				<div class="ctn-wrap">
+					<textarea class="ui-input" id="remark" ms-duplex="data.remark"></textarea></div>
+    			</li>
+    		</ul>
+    	</form>
+    </div>
+</div>
+</@layout>

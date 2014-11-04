@@ -1,0 +1,38 @@
+<#include "../../inc/layout.html">
+<@layout title="系统自定义参数" js="sso/parame/view.js">
+<style>
+body{background:#fff;}
+</style>
+<div class="manage-wrapper" ms-controller="ctrl">
+    <div class="manage-wrap">
+    	<form action=""id="base_form">
+    		<ul class="mod-form-rows manage-wrap" >
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="name">名称</label></div>
+    				<div class="ctn-wrap"id="name">{{data.name}}</div>
+    			</li>
+    			<li class="row-item odd ">
+    				<div class="label-wrap"><label>是否终态</label></div>
+    				<div class="ctn-wrap" id="is_end">{{data.is_end}}</div>
+    			</li>
+    			<li class="row-item odd ">
+    				<div class="label-wrap"><label>类别</label></div>
+    				<div class="ctn-wrap" id="typ">{{data.type|custParameType}}</div>
+    			</li>
+    			<li class="row-item odd ">
+    				<div class="label-wrap"><label for="parent_name">父级参数</label></div>
+    				<div class="ctn-wrap" id="parent_name">{{data.parent_name}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>排序号</label></div>
+    				<div class="ctn-wrap" id="sort_num">{{data.sort_num}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="description">备注</label></div>
+    				<div class="ctn-wrap" id="description" >{{data.description}}</div>
+    			</li>
+    		</ul>
+    	</form>
+    </div>
+</div>
+</@layout>

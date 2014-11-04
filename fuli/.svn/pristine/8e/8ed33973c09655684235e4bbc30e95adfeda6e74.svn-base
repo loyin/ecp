@@ -1,0 +1,43 @@
+<#include "../inc/layout.html"> <@layout title="用户">
+<div class="nav">
+	<ul class="cc">
+		<li class="current"><a href="${root!}/wxOrder/listl">微信小店订单</a></li>
+	</ul>
+</div>
+<div class="common-form">
+	<form method="post" class="J_ajaxForm" action="#">
+		<div class="table_list">
+			<table width="100%">
+				<thead>
+					<tr>
+						<td>ID</td>
+						<td>微信昵称</td>
+						<td>收货人姓名</td>
+						<td>商品名称</td>
+						<td>商品价格(元)</td>
+						<td>商品个数</td>
+						<td>操作</td>
+					</tr>
+				</thead>
+				<tbody>
+					<#list page.list as u>
+					<tr>
+						<td align='center'>${(u.id)!}</td>
+						<td>${(u.buyer_nick)!}</td>
+						<td>${(u.receiver_name)!}</td>
+						<td>${(u.product_name)!}</td>
+						<td>${(u.product_price)!}</td>
+						<td>${(u.product_count)!}</td>
+						<td align='center'>
+							<a href="javascript:open_iframe_dialog('${root!}/wxOrder/view/${u.id}','菜单内容');">详情</a>|
+					</tr>
+					</#list>
+				</tbody>
+			</table>
+			<div class="p10"><@paginate
+				action="/user/list" pageNo=pageNo totalPage=page.totalPage!0
+				totalCount=page.totalRow!0/></div>
+		</div>
+	</form>
+</div>
+</@layout>

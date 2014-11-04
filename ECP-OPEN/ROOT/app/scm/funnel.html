@@ -1,0 +1,39 @@
+<#include "../inc/layout.html">
+<@layout title="销售商机漏斗" js="scm/funnel.js">
+<style>
+body{background:#fff;}
+html{overflow:auto;}
+.comboDiv{position:absolute;left:61px;}
+.comboDiv div{height:30px;}
+</style>
+<div class="wrapper" ms-controller="ctrl">
+  <div class="mod-search cf">
+    <div class="fl">
+    <ul class="ul-inline">
+	        <li>
+        	<label>销售员:</label>
+        	<input type="text" class="ui-input" autocomplete="off" style="width:150px;" ms-keyup="qryUser(this.value)" ms-click="qryUser(this.value)" ms-duplex="query.head_name">
+		    <div class="comboDiv" style="width:260px;left:74px;" ms-visible="userComboV">
+		    	<div ms-repeat="userList" ms-click="chooseUser(el)">{{el.realname}}-{{el.position_name}}-{{el.department_name}}</div>
+		    </div>
+        </li>
+       <!--  <li>
+        	<label>部门:</label>
+        	<input type="text" class="ui-input" id="department"readonly>
+        </li> -->
+	        <li>
+	          <label>日期:</label>
+	          <input type="text" ms-duplex="query.start_date" class="ui-input ui-datepicker-input" placeholder="起始日期">
+	          <span>-</span>
+	          <input type="text" ms-duplex="query.end_date" class="ui-input ui-datepicker-input" placeholder="截止日期">
+	        </li>
+	       	<li>
+	        <a class="ui-btn" id="search" ms-click="qry" title="查询"><i class="fa fa-search"></i></a>
+	        <a class="ui-btn" id="refresh" ms-click="init" title="重置查询条件"><i class="fa fa-refresh"></i></a>
+	        </li>
+	   </ul>
+	 </div>
+  </div>
+  <div class="grid-wrap" id="chart" style="width:100%;height:600px;">
+  </div>
+</div></@layout>

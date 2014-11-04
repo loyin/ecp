@@ -1,0 +1,60 @@
+<#include "inc/layout.html">
+<@layout js="index.js">
+<link href="${root!}/assets/css/blue/default.css" rel="stylesheet" type="text/css" id="defaultFile">
+<script>
+var CONFIG = {
+	SERVICE_URL: 'http://${(PropertiesContent.server_domain)!'127.0.0.1'}:${port!}${root!}',
+	custParameType:["商品类别","计量单位",<#--//商品 0,1-->
+	                "客户来源","行业","年营业额","与公司关系","供应商等级",<#--//客户 /供应商  2,3,4,5,6--> 
+	                "联系类别","关怀类别","客户状态","销售阶段",<#--//客户关怀、联系 7,8,9,10-->
+	                "纪念日类别",<#--//纪念日 11-->
+	                "商机类别","商机状态", <#--//12,13-->
+	                "企业资讯栏目","知识栏目","话题栏目","工作报告类别",<#--//办公 14,15,16,17-->
+	                "人员规模","公司性质","公司阶段"<#--//18,19,20-->
+	               ]
+};
+</script>
+<div id="container" class="cf" ms-controller="ctrl">
+  <div id="col-side">
+  <div ms-include-src="menuHtml" data-include-rendered="callback"></div>
+<#--   <img class="nav-user-photo" height="68px" width="68px" src="${root!}/assets/img/head.jpg" alt="" style="border-radius: 50px; margin: 8px 0 5px 8px;border: 4px solid #eee;"> -->
+   <#--include "menu.html"-->
+  </div>
+  <div id="col-main">
+    <div id="main-hd" class="cf">
+      <div class="tit"> <span class="company" id="companyName"></span> <span class="period" id="period"></span> </div>
+      <ul class="user-menu">
+      	<#-- <li style="margin-right: 10px;">
+		  <div class="input-group pull-right" style="width:300px;margin-right: 10px;">
+		      <input type="text" class="form-control" id="searchkey"  placeholder="输入客户名称或编号">
+		      <span class="input-group-btn">
+		        <button class="btn btn-default" type="button" style="padding:1px 2px 1px 2px;height:24px;"><i class="glyphicon glyphicon-search"></i></button>
+		      </span>
+		</div>
+		  </li> -->
+<!--       	<li id="sysSkin">换肤</li> -->
+      	<li><a id="user_realName" title="点击进入个人信息"></a></li>
+        <li class="space">|</li>
+      	<li><a id="msg" data-tab="1">消息({{messageCount}})</a></li>
+        <li class="space">|</li>
+<!--       	<li><a class="service-tab" data-tab="3">在线提问</a></li> -->
+<!--         <li class="space">|</li> -->
+<!--         <li><a href="#" target="_blank">帮助</a></li> -->
+<!--         <li class="space">|</li> -->
+        <li><a href="javascript:" id="logoutBtn">退出</a></li>
+      </ul>
+    </div>
+    <div id="main-bd">
+      <div class="page-tab" id="page-tab"> 
+      </div>
+    </div>
+  </div>
+</div>
+<#-- <div id="selectSkin" class="shadow dn">
+	<ul class="cf">
+    	<li><a id="skin-default"><span></span><small>经典</small></a></li>
+        <li><a id="skin-blue"><span></span><small>丰收</small></a></li>
+        <li><a id="skin-green"><span></span><small>小清新</small></a></li>
+    </ul>
+</div> -->
+</@layout>

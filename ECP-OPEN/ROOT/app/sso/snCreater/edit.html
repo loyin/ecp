@@ -1,0 +1,53 @@
+<#include "../../inc/layout.html">
+<@layout title="序号规则" js="sso/snCreater/edit.js">
+<style>
+body{background: #fff;}
+</style>
+<div class="manage-wrapper" ms-controller="ctrl">
+    <div class="manage-wrap">
+    	<form action=""id="base_form">
+    		<ul class="mod-form-rows base-form" >
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>编码</label></div>
+    				<div class="ctn-wrap"><input id="code" class="ui-input" ms-duplex="data.code" data-rule="required;"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>名称</label></div>
+    				<div class="ctn-wrap"><input id="name" class="ui-input" ms-duplex="data.name" data-rule="required;"></div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>前缀</label></div>
+    				<div class="ctn-wrap"><input id="qz" class="ui-input" ms-duplex="data.qz" data-rule="required;"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>启用日期</label></div>
+    				<div class="ctn-wrap">
+    				<label class="radio" ms-class-checked="data.qyrq==1" ms-click="setQyrq(1)">是</label>
+    				<label class="radio" ms-class-checked="data.qyrq==0" ms-click="setQyrq(0)">否</label>
+    				</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>日期格式</label></div>
+    				<div class="ctn-wrap"><input id="rqgs" class="ui-input" ms-duplex="data.rqgs"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>当前序号</label></div>
+    				<div class="ctn-wrap"><input id="dqxh" class="ui-input" ms-duplex="data.dqxh" data-rule="required;digits"></div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>更新周期</label></div>
+    				<div class="ctn-wrap">
+    				<select id="sfmrgx" class="ui-input" ms-duplex="data.sfmrgx">
+    					<option ms-repeat="gxzqSel" ms-value="$index">{{el}}</option>
+    				</select>
+    				</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>序号位数</label></div>
+    				<div class="ctn-wrap"><input id="ws" class="ui-input" ms-duplex="data.ws" data-rule="required;digits"></div>
+    			</li>
+    		</ul>
+    	</form>
+    </div>
+</div>
+</@layout>

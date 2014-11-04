@@ -1,0 +1,41 @@
+package net.loyin.util.wechat.bean.ztApi;
+
+/**
+ * 积量查询
+ *
+ * @author Mr_von
+ * @创建时间 2013-12-19 上午11:40:07
+ */
+public class Bqrbytype {
+	private int usedValue;
+	private int initValue;
+	private int spareValue;
+	private String type;
+
+	public int getUsedValue() {
+		return usedValue;
+	}
+	public void setUsedValue(int usedValue) {
+		this.usedValue = usedValue;
+	}
+	public int getInitValue() {
+		return initValue;
+	}
+	public void setInitValue(int initValue) {
+		this.initValue = initValue;
+	}
+	public int getSpareValue() {
+		return spareValue;
+	}
+	public void setSpareValue(int spareValue) {
+		this.spareValue = spareValue;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+
+
+}

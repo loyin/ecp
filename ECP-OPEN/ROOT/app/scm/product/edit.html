@@ -1,0 +1,66 @@
+<#include "../../inc/layout.html">
+<@layout title="商品" js="scm/product/edit.js">
+<style>
+body{background: #fff;}
+.dn{display:none;}
+.comboDiv {position:absolute;}
+</style>
+<div class="manage-wrapper" ms-controller="view">
+    <div class="manage-wrap">
+    	<form action=""id="base_form">
+		<input type="hidden" name="id" id="id" ms-duplex="data.id">
+    		<ul class="mod-form-rows base-form" >
+    			<li class="row-item">
+    				<input type="hidden" id="category" ms-duplex="data.category">
+    				<div class="label-wrap"><label for="category_sel">类别</label></div>
+    				<div class="ctn-wrap">
+					<input type="text" class="ui-input" id="category_sel" readonly  ms-duplex="data.category_name"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="status">状态</label></div>
+    				<div class="ctn-wrap">
+    					<label class="radio" ms-class-checked="data.status==0" ms-click="setStatus(0)">禁用</label>
+    					<label class="radio" ms-class-checked="data.status==1" ms-click="setStatus(1)">启用</label>
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="billsn">编号</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" maxlength="20" ms-duplex="data.billsn"id="billsn" placeholder="请输入编号，不输人则自动生成"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="name">名称</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" id="name"placeholder="请输入名称" maxlength="50" data-rule="required" ms-duplex="data.name"></div>
+    			</li>
+    			<li class="row-item">
+    				<input type="hidden" id="unit" ms-duplex="data.unit">
+    				<div class="label-wrap"><label for="unit_sel">计量单位</label></div>
+    				<div class="ctn-wrap">
+					<input type="text" class="ui-input" id="unit_sel"  ms-duplex="data.unit_name" readonly></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="model">型号</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" id="model" data-rule="required" maxlength="50"placeholder="请输入型号" ms-duplex="data.model"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="purchase_price">采购价(元)</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" id="purchase_price" data-rule="money" placeholder="请输入采购价" ms-duplex="data.purchase_price"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="sale_price">销售价(元)</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" id="sale_price" data-rule="money"placeholder="请输入销售价" ms-duplex="data.sale_price"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="purchase_price">库存预警</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" id="stock_warn" data-rule="digits" placeholder="请输入库存预警量" ms-duplex="data.stock_warn"></div>
+    			</li>
+    		</ul>
+    		<ul class="mod-form-rows">
+    			<li class="row-item pb0">
+    				<div class="label-wrap"><label for="remark">备注</label></div>
+    				<div class="ctn-wrap"><textarea id="remark" class="ui-input" placeholder="添加备注信息" ms-duplex="data.remark"></textarea></div>
+    			</li>
+    		</ul>
+    	</form>
+    </div>
+</div>
+</@layout>

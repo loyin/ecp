@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<sqlGroupList>
+	<sqlGroup name="webadmin">
+		<sql id="login">
+			 select * from USERS where userno=? and pwd=?
+		</sql>
+	</sqlGroup>
+</sqlGroupList>

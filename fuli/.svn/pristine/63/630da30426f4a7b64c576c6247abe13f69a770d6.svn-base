@@ -1,0 +1,72 @@
+package net.loyin.util.wechat.bean;
+
+public class WcReply implements java.io.Serializable {
+	/** 序列化 */
+	private static final long serialVersionUID = 6559045743316482299L;
+	private int replyId;
+	private String userNo;
+	private String fromUserName;
+	private String replyCont;
+	private String replyFlag;
+	private int replyTime;
+
+	public WcReply() {
+	}
+
+	public WcReply(String userNo, String fromUserName, String replyCont, String replyFlag, int replyTime) {
+		super();
+		this.userNo = userNo;
+		this.fromUserName = fromUserName;
+		this.replyCont = replyCont;
+		this.replyFlag = replyFlag;
+		this.replyTime = replyTime;
+	}
+
+	public int getReplyId() {
+		return replyId;
+	}
+
+	public void setReplyId(int replyId) {
+		this.replyId = replyId;
+	}
+
+	public String getUserNo() {
+		return userNo;
+	}
+
+	public void setUserNo(String userNo) {
+		this.userNo = userNo;
+	}
+
+	public String getFromUserName() {
+		return fromUserName;
+	}
+
+	public void setFromUserName(String fromUserName) {
+		this.fromUserName = fromUserName;
+	}
+
+	public String getReplyCont() {
+		return replyCont;
+	}
+
+	public void setReplyCont(String replyCont) {
+		this.replyCont = replyCont;
+	}
+
+	public String getReplyFlag() {
+		return replyFlag;
+	}
+
+	public void setReplyFlag(String replyFlag) {
+		this.replyFlag = replyFlag;
+	}
+
+	public int getReplyTime() {
+		return replyTime;
+	}
+
+	public void setReplyTime(int replyTime) {
+		this.replyTime = replyTime;
+	}
+}

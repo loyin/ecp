@@ -1,0 +1,24 @@
+package net.loyin.util.vcode;
+
+import java.util.Date;
+
+import com.sun.jmx.snmp.Timestamp;
+
+
+public class TestClz {
+	public static void main(String[] args) {
+		try{
+		 /*Captcha captcha = new SpecCaptcha(150,40,5);// png格式验证码
+	        captcha.out(new FileOutputStream("E:/1.png"));
+	        System.out.println(captcha.text());
+	        captcha = new GifCaptcha(150,40,5);//   gif格式动画验证码
+	        captcha.out(new FileOutputStream("E:/1.gif"));
+	        System.out.println(captcha.text());*/
+//			System.out.println(TestClz.class.getResource("/").toString());
+//			System.out.println(URLEncoder.encode("http://guniang.loyin.net/Wechat/oauth2"));
+			System.out.println(new Timestamp(1397130470).getDate());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+}

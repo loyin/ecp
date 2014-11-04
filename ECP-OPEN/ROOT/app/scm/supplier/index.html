@@ -1,0 +1,45 @@
+<#include "../../inc/layout.html">
+<@layout title="客户管理" js="scm/supplier/index.js">
+<div class="wrapper" ms-controller="view">
+  <div class="mod-search cf">
+    <div class="fl">
+      <ul class="ul-inline">
+        <li>
+          <input type="text"  ms-duplex="query.keyword" class="ui-input con" value="" placeholder="请输入客户编号或客户名称">
+        </li>
+        <li>
+          <label>日期:</label>
+          <input type="text" ms-duplex="query.start_date" class="ui-input ui-datepicker-input">
+          <span>-</span>
+          <input type="text" ms-duplex="query.end_date" class="ui-input ui-datepicker-input">
+        </li>
+        <li>
+        <a class="ui-btn" id="search" title="查询"><i class="fa fa-search"></i></a>
+        <a class="ui-btn" id="refresh" title="刷新"><i class="fa fa-refresh"></i></a>
+        </li>
+      </ul>
+    </div>
+    <div class="fr"><a class="ui-btn ui-btn-sp mrb" id="add" title="新增"><i class="fa fa-plus"></i>新增</a>
+    <div class="dropdown fr">
+  <a class="ui-btn dropdown-toggle" data-toggle="dropdown">
+   更多操作
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu">
+	  <li ms-visible="query.qryType==100"><a ms-click="qry(0)" id="backbox" title="未删除"><i class="fa fa-trash-o"></i>正常数据</a></li>
+	  <li ms-visible="query.qryType!=100"><a ms-click="qry(100)" id="backbox" title="回收站"><i class=""></i>回收站</a></li>
+	  <li ms-visible="query.qryType!=100">  <a id="import" title="导入"><i class="fa fa-upload"></i>导入</a></li>
+	  <li ms-visible="query.qryType!=100"> <a id="import" title="导出"><i class="fa fa-download"></i>导出</a></li>
+	  <li> <a href="#"  id="btn-batchDel" title="批量删除"><i class="red fa fa-trash-o"></i>批量删除</a></li>
+	  <li ms-visible="query.qryType==100"> <a href="#"  id="btn-batchReply" title="批量恢复"><i class="red fa fa-reply"></i>批量恢复</a></li>
+  </ul>
+  </div>
+    </div>
+  </div>
+  <div class="grid-wrap">
+    <table id="grid">
+    </table>
+    <div id="page"></div>
+  </div>
+</div>
+</@layout>

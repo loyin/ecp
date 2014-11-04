@@ -1,0 +1,81 @@
+package net.loyin.util.wechat.bean;
+
+@SuppressWarnings("serial")
+public class WcActRcd implements java.io.Serializable {
+	private int rid;
+	private String fromUserName;
+	private long createTime;
+	private String sendName;
+	private String linkman;
+	private String sendPhone;
+	private String prod_sel;
+	private String gm_sel;
+
+	public WcActRcd() {
+	}
+
+	public int getRid() {
+		return rid;
+	}
+
+	public void setRid(int rid) {
+		this.rid = rid;
+	}
+
+	public String getFromUserName() {
+		return fromUserName;
+	}
+
+	public void setFromUserName(String fromUserName) {
+		this.fromUserName = fromUserName;
+	}
+
+	public long getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(long createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getSendName() {
+		return sendName;
+	}
+
+	public void setSendName(String sendName) {
+		this.sendName = sendName;
+	}
+
+	public String getLinkman() {
+		return linkman;
+	}
+
+	public void setLinkman(String linkman) {
+		this.linkman = linkman;
+	}
+
+	public String getSendPhone() {
+		return sendPhone;
+	}
+
+	public void setSendPhone(String sendPhone) {
+		this.sendPhone = sendPhone;
+	}
+
+	public String getProd_sel() {
+		return prod_sel;
+	}
+
+	public void setProd_sel(String prodSel) {
+		prod_sel = prodSel;
+	}
+
+	public String getGm_sel() {
+		return gm_sel;
+	}
+
+	public void setGm_sel(String gmSel) {
+		gm_sel = gmSel;
+	}
+
+}

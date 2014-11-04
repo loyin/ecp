@@ -1,0 +1,44 @@
+<#include "../inc/layout.html">
+<@layout title="修改密码">
+		<div class="nav">
+			<ul class="cc">
+				<li class="current"><a href="#">修改密码</a></li>
+			</ul>
+		</div>
+		<div class="common-form">
+			<form method="post" class="J_ajaxForm"
+				action="${root!}/user/savePwd">
+				<div class="table_list">
+					<table cellpadding="0" cellspacing="0" class="table_form"
+						width="100%">
+						<tbody>
+							<tr>
+								<td width="100">原始密码:</td>
+								<td><input type="password" class="input"
+									name="oldpwd" id="old_password" value=""
+									style="width: 250px;"><span class="must_red">*</span></td>
+							</tr>
+							<tr>
+								<td>新密码:</td>
+								<td><input type="password" class="input" name="newpwd"
+									id="password" value="" style="width: 250px;"><span
+									class="must_red">*</span></td>
+							</tr>
+							<tr>
+								<td>重复新密码:</td>
+								<td><input type="password" class="input" name="reppwd"
+									id="repassword" value="" style="width: 250px;"><span
+									class="must_red">*</span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="btn_wrap">
+					<div class="btn_wrap_pd">
+						<button class="btn btn_submit mr10 J_ajax_submit_btn"
+							type="submit">更新</button>
+					</div>
+				</div>
+			</form>
+		</div>
+</@layout>

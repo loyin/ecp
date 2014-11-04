@@ -1,0 +1,204 @@
+<#include "../../inc/layout.html">
+<@layout title="客户" js="crm/customer/edit.js">
+<style>
+body{background:#fff;display:block;}
+.comboDiv{position:}
+</style>
+<div class="manage-wrapper" ms-controller="view">
+   <div class="manage-wrap">
+    <form action=""id="base_form">
+   	<ul class="nav nav-tabs" >
+  		<li class="active" ms-click="showTab(0,this)"ms-class="active:tabActive==0"><a href="#">客户信息</a></li>
+  		<li ms-click="showTab(1,this)" ms-class="active:tabActive==1"><a href="#">首要联系人信息</a></li>
+	</ul>
+<div id="tab1" ms-visible="tabActive==0" style="padding-top:5px;">
+    		<input type="hidden" ms-duplex="data.id" id="id">
+    		<ul class="mod-form-rows base-form" >
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="number">类别</label></div>
+    				<div class="ctn-wrap" id="sex">
+    					<label ms-repeat="custType" class="radio" ms-class="checked:data.type==$index" ms-visible="$index>0" ms-click="setType($index)">{{el}}</label>
+					</div>
+    			</li>
+    		</ul>
+    		<ul class="mod-form-rows base-form" >
+    			<li class="row-item">
+    				<div class="label-wrap"><label>客户名称</label><font color="red">*</font></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="data.name"id="name" data-rule="required;"  maxlength="20" placeholder="请输入客户名称"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="sn">客户编号</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="data.sn" id="sn"placeholder="自动生成" maxlength="20"  readonly="readonly"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="telephone">会员卡号</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="data.member_card" id="member_card" placeholder="请输入会员卡号"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="telephone">金额</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input"id="amt" ms-duplex="data.amt" data-rule="money" placeholder="请输入金额"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="">负责人</label><font color="red">*</font></div>
+    				<div class="ctn-wrap">
+    				<input type="text" ms-duplex="data.head_name" class="ui-input" readonly="readonly" id="headCombo" data-rule="required"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="">客户来源</label></div>
+    				<div class="ctn-wrap">
+	    				<select ms-duplex="data.origin" class="ui-input">
+	    					<option ms-repeat="parameList[2]" ms-value="el.id">{{el.name}}</option>
+	    				</select>
+    				</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="">客户级别</label></div>
+    				<div class="ctn-wrap">
+	    				<select ms-duplex="data.rating" class="ui-input">
+	    					<option ms-repeat="custRating" ms-value="el.id">{{el.name}}</option>
+	    				</select>
+    				</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="">与公司关系</label></div>
+    				<div class="ctn-wrap">
+	    				<select ms-duplex="data.ownership" class="ui-input">
+	    					<option ms-repeat="parameList[5]" ms-value="el.id">{{el.name}}</option>
+	    				</select>
+    				</div>
+    			</li>
+    			<li class="row-item" ms-visible="data.type!=2">
+    				<div class="label-wrap"><label for="">行业</label></div>
+    				<div class="ctn-wrap">
+	    				<select ms-duplex="data.industry" class="ui-input">
+	    					<option ms-repeat="parameList[3]" ms-value="el.id">{{el.name}}</option>
+	    				</select>
+    				</div>
+    			</li>
+    			<li class="row-item" ms-visible="data.type!=2">
+    				<div class="label-wrap"><label for="">人员规模</label></div>
+    				<div class="ctn-wrap">
+	    				<select ms-duplex="data.staff_size" class="ui-input">
+	    					<option ms-repeat="parameList[18]" ms-value="el.id">{{el.name}}</option>
+	    				</select>
+    				</div>
+    			</li>
+    			<li class="row-item" ms-visible="data.type!=2">
+    				<div class="label-wrap"><label for="">企业类别</label></div>
+    				<div class="ctn-wrap">
+	    				<select ms-duplex="data.ent_cate" class="ui-input">
+	    					<option ms-repeat="parameList[19]" ms-value="el.id">{{el.name}}</option>
+	    				</select>
+    				</div>
+    			</li>
+    			<li class="row-item" ms-visible="data.type!=2">
+    				<div class="label-wrap"><label for="">年营业额</label></div>
+    				<div class="ctn-wrap">
+	    				<select ms-duplex="data.year_turnover" class="ui-input">
+	    					<option ms-repeat="parameList[4]" ms-value="el.id">{{el.name}}</option>
+	    				</select>
+    				</div>
+    			</li>
+    			<li class="row-item" ms-visible="data.type!=2">
+    				<div class="label-wrap"><label for="">公司阶段</label></div>
+    				<div class="ctn-wrap">
+	    				<select ms-duplex="data.ent_stage" class="ui-input">
+	    					<option ms-repeat="parameList[20]" ms-value="el.id">{{el.name}}</option>
+	    				</select>
+    				</div>
+    			</li>
+    			<li class="row-item" ms-visible="data.type!=2">
+    				<div class="label-wrap"><label for="email">邮箱</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="data.email" id="email" data-rule="email" placeholder="请输入电子邮箱"></div>
+    			</li>
+    			<li class="row-item" ms-visible="data.type!=2">
+    				<div class="label-wrap"><label for="telephone">电话</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="data.telephone" id="telephone" data-rule="tel"placeholder="请输入电话号码"></div>
+    			</li>
+    			<li class="row-item" ms-visible="data.type!=2">
+    				<div class="label-wrap"><label for="telephone">传真</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input"id="fax" data-rule="tel" ms-duplex="data.fax" placeholder="请输入电话号码"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="telephone">地区<font color="red">*</font></label>
+    				</div>
+    				<div class="ctn-wrap">
+	    				<select style="width:80px"class="ui-input" ms-duplex="data.province" data-rule="required;" id="province" ms-change="changeCity(this.value)">
+	    				 <option value="">省份</option>
+	    				 <option ms-repeat="provinceList" ms-value="el.id">{{el.name}}</option>
+	    				</select>
+	    				<select style="width:80px"class="ui-input" data-rule="required;" id="city" ms-duplex="data.city">
+	    				<option value="">地市</option>
+	    				<option ms-repeat="cityList" ms-value="el.id">{{el.name}}</option>
+	    				</select>
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="address">地址</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="data.address" id="address"maxlength="100"placeholder="请输入地址"></div>
+    			</li>
+    		</ul>
+    		<ul class="mod-form-rows">
+    			<li class="row-item pb0">
+    				<div class="label-wrap"><label for="remark">备注</label></div>
+    				<div class="ctn-wrap"><textarea ms-duplex="data.remark" id="remark" class="ui-input"placeholder="添加备注信息"></textarea></div>
+    			</li>
+    		</ul>
+    </div>
+    <div id="tab2" ms-visible="tabActive==1" style="padding-top:5px;">
+    <!-- 添加联系人 -->
+    	<ul class="mod-form-rows base-form" >
+    			<li class="row-item">
+    				<div class="label-wrap"><label>姓名</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="contacts.name"id="c_name" data-rule="required;"  maxlength="20" placeholder="请输入姓名"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>性别</label></div>
+    				<div class="ctn-wrap"><label class="radio" ms-class-checked="contacts.sex==1" ms-click="setSex(1)">男</label><label class="radio" ms-class-checked="contacts.sex==0" ms-click="setSex(0)">女</label></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>称呼</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="contacts.saltname"id="c_saltname" maxlength="20" placeholder="请输入称呼"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>部门</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="contacts.department"id="c_depart" maxlength="20" placeholder="请输入部门"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>职位</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="contacts.post"id="c_post" maxlength="20" placeholder="请输入职位"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>电话</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="contacts.telephone"id="c_telephone" maxlength="20" placeholder="请输入电话"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>手机</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="contacts.mobile"id="c_mobile" maxlength="20" placeholder="请输入手机"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>邮箱</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="contacts.email"id="cemail" maxlength="50" placeholder="请输入邮箱"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>QQ</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="contacts.qq"id="qq" data-rule="qq" maxlength="20" placeholder="请输入QQ"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>身份证</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="contacts.idcard"id="c_idcard" data-rule="IDcard" maxlength="20" placeholder="请输入身份证号"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>联系地址</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="contacts.address"id="contacts_address" maxlength="50" placeholder="请输入地址"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>备注</label></div>
+    				<div class="ctn-wrap"><textarea class="ui-input" ms-duplex="contacts.description" placeholder="请输入客户名称"></textarea></div>
+    			</li>
+    	</ul>
+    </div>
+    	</form>
+    </div>
+</div>
+</@layout>

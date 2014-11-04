@@ -1,0 +1,94 @@
+<#include "../../inc/layout.html">
+<@layout title="出库入库" js="scm/storageBill/edit.js">
+<style>
+body{background: #fff;}
+#prodcutTable .ui-input{width:100%;}
+.comboDiv{position:absolute;left:94px;}
+.comboDiv ul li{margin:2px; }
+.table .comboDiv{position:absolute;left:133px;}
+.table tbody tr td{padding:0px;}
+.table tbody tr td .ui-input{width:100%;height:34px;}
+.table tbody tr .tdPd{padding:8px;}
+.table1 td{padding:2px;}
+</style>
+<div class="manage-wrapper" ms-controller="ctrl">
+    <div class="manage-wrap">
+    	<form action=""id="base_form">
+    				<table style="width:100%;" class="table1">
+    				<tr>
+    					<td width="100px" align="right">仓库：</td>
+    					<td width="20%">
+    					<select ms-duplex="data.depot_id" class="ui-input" style="width:100px" data-msg="调出仓库必选" data-rule="required">
+    						<option ms-repeat="depotList" ms-value="el.id">{{el.name}}</option>
+    					</select>
+    					<span ms-if="fillOrder">{{billType[data.type]}}</span>
+    					<select ms-duplex="data.type" class="ui-input" style="width:100px;" ms-if="fillOrder==false">
+			        		<option ms-repeat="billType" ms-value="$index">{{el}}</option>
+			        	</select>
+    					</td>
+    					<td width="100px" align="right">单据日期：</td>
+    					<td width="20%"><input id="sign_date" class="ui-input ui-datepicker-input" style="width:100px;" ms-duplex="data.bill_date" data-msg="单据日期" data-rule="required;"></td>
+    					<td width="100px;" align="right">单据编号：</td>
+    					<td width="20%">{{data.billsn}}</td>
+    				</tr>
+    				<tr>
+    					<td align="right">负责人：</td>
+    					<td><select ms-duplex="data.head_id" class="ui-input" style="width:220px;" data-rule="required" data-msg="请选择负责人">
+    					<option></option>
+    					<option ms-repeat="userList" ms-value="el.id">{{el.realname}}({{el.department_name}}-{{el.position_name}})</option>
+    				</select></td>
+    				<td ms-if="fillOrder" align="right">业务单：</td>
+    					<td ms-if="fillOrder">
+    					{{data.ordersn}}
+    					</td>
+    				</tr>
+    				</table>
+    		</ul>
+    		<br>
+    		<table class="table table-hover table-striped table_thead_fixed table-bordered table-condensed" id="prodcutTable">
+  				<thead>
+  					<tr>
+  						<th width="50px">&nbsp;</th>
+  						<th width="50px">&nbsp;</th>
+  						<th>商品</th>
+  						<th width="55px">单位</th>
+  						<th>数量</th>
+  						<th>备注</th>
+  					</tr>
+  				</thead>
+  				<tbody style="max-height:400px;">
+  					<tr ms-repeat="data.productlist">
+  						<td width="50px" class="tdPd">{{$index+1}}</td>
+  						<td width="50px" class="tdPd"><nobr><i class="fa fa-plus mrb" ms-click="addRow" title="移除"></i><i class="fa fa-trash mrb" ms-click="delRow" title="移除"></i></nobr></td>
+  						<td>
+	          			<input type="text"class="ui-input" ms-attr-id="ix{{$index}}" ms-keyup="qryProduct(this.value,$index)"ms-click="qryProduct(this.value,$index)"
+	          			 ms-duplex="el.product_name" data-rule="required;" data-msg="请选择商品">
+	          			<div class="comboDiv" style="width:260px;"ms-visible="productComboDiv==$index">
+	          				<ul>
+	          				<li ms-repeat="productlist" ms-click="chooseProduct(el,productComboDiv)">{{el.billsn}}&nbsp;&nbsp;{{el.product_name}}</li>
+	          				</ul>
+	          			</div></td>
+	          			<td class="tdPd">{{el.unit|custParame}}</td>
+  						<td><input class="ui-input" ms-attr-id="id3{{$index}}"data-rule="required;number" ms-duplex="el.amount" data-msg="数量必填且为数字！" ms-change="jisuan"></td>
+  						<td><input class="ui-input" ms-attr-id="id1{{$index}}" ms-duplex="el.remark"></td>
+  					</tr>
+  				</tbody>
+  				<tfoot>
+  				<tr>
+  					<td colspan="4" align="right">合计</td>
+  					<td>{{totalAmount}}</td>
+  					<td></td>
+  				</tr>
+  				</tfoot>
+    		</table>
+    		<div>
+	           <p>
+				 备注：
+	           <br>
+	           <textarea ms-duplex="data.remark" id="remark" class="ui-input" style="height:100px;width:100%;"></textarea>
+	           </p>
+       		</div>
+    	</form>
+    </div>
+</div>
+</@layout>

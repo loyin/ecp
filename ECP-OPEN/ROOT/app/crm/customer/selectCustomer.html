@@ -1,0 +1,24 @@
+<#include "../../inc/layout.html"> <@layout title="客户选择"
+js="crm/customer/selectCustomer.js">
+<style>
+body {background: #fff;display: block;}
+</style>
+<div class="container fix p20">
+	<div class="mod-search m0 cf">
+		<div class="fl">
+			<ul class="ul-inline">
+				<li><input type="text" id="matchCon"
+					class="ui-input ui-input-ph" placeholder="输入编号 / 名称 / 联系人 / 电话查询">
+				</li>
+				<li><a class="ui-btn mrb" id="search">查询</a>
+				<!-- <a class="ui-btn" id="refresh">刷新</a> --></li>
+			</ul>
+		</div>
+	</div>
+	<div class="grid-wrap" style="width: 735px;">
+		<table id="grid">
+		</table>
+		<div id="page"></div>
+	</div>
+</div>
+</@layout>

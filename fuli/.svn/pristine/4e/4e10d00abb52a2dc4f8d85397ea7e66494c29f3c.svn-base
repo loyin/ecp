@@ -1,0 +1,65 @@
+<#include "../inc/layout.html"> <@layout title="文章">
+<div class="nav">
+	<ul class="cc">
+		<li class="current"><a href="${root!}/article/list">文章</a></li>
+		<li><a href="${root!}/article/edit">添加文章</a></li>
+	</ul>
+</div>
+<form class="J_ajaxForm" action="${root!}/article/list?qryField=title$like,cateid" method="post">
+<div class="search_type cc mb10">
+		<div class="mb10">
+			<span class="mr20">
+			标题： <input type="text"
+				class="input" name="uname$like" style="width: 200px;" value="${(request.getParameter("uname$like"))!}"
+				placeholder="请输入姓名...">
+			类型：<select name="cateid" class="normal_select">
+								<option value=""></option>
+								<#list cateList as r>
+								<#if ((r.pid)!0) !=0>
+				 				<#else>
+								<option value="${r.id}" <#if cateid??&&cateid!=''&&r.id==cateid?number>selected="selected"</#if>>${r.name}</option>
+									<#list cateList as r1>
+									<#if (r1.pid)??&& r1.pid==r.id>
+										<option value="${r1.id}" <#if cateid??&&cateid!=''&&r1.id==cateid?number>selected="selected"</#if>>&nbsp;&nbsp;&nbsp;└─${r1.name}</option>
+									</#if>
+									</#list>
+								</#if>
+								</#list>
+								</select>
+			<input type="submit" class="btn" value="搜索"></span>
+		</div>
+	</div>
+	<div class="table_list">
+		<table width="100%">
+			<thead>
+				<tr>
+					<td>ID</td>
+					<td>类别</td>
+					<td>标题</td>
+					<td>添加时间</td>
+					<td>管理操作</td>
+				</tr>
+			</thead>
+			<tbody>
+			<#if page.list??>
+			<#list page.list as u>
+				 <tr>
+					<td align='center'>${(u.id)!}</td>
+					<td>${(u.artcatename)!}</td>
+					<td>${(u.title)!}</td>
+					<td>${(u.ctime)!}</td>
+					<td class="text-c">
+					<a href="${root!}/articleShow/${u.id}" target="_blank">浏览</a>|
+					<a href="${root!}/article/edit/${u.id}">修改</a>|
+					<a class="J_ajax_del" href="${root!}/article/del/${u.id}">删除</a></td>
+				</tr>
+					</#list>
+				</#if>
+			</tbody>
+		</table>
+		<div class="p10"><@paginate
+			action="/article/list" pageNo=pageNo totalPage=page.totalPage!0
+			totalCount=page.totalRow!0/></div>
+	</div>
+</form>
+</@layout>

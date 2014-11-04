@@ -1,0 +1,99 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge" />
+<title>系统后台</title>
+<link href="/statics/css/admin_style.css" rel="stylesheet" />
+<link href="/statics/js/artDialog/skins/default.css" rel="stylesheet" />
+<script type="text/javascript">
+	//全局变量
+	var GV = {
+		DIMAUB : "/",
+		JS_ROOT : "statics/js/",
+		TOKEN : ""
+	};
+</script>
+<script src="/statics/js/wind.js"></script>
+<script src="/statics/js/jquery.js"></script>
+<body class="J_scroll_fixed">
+	<div class="wrap jj">
+		<div class="nav">
+			<ul class="cc">
+				<li class="current"><a href="/wx/collectadmin/userlist.html">粉丝列表</a></li>
+			</ul>
+		</div>
+		<div class="common-form">
+			<form method="post" class="J_ajaxForm" action="">
+				<div class="table_list">
+					<table cellpadding="0" cellspacing="0" class="table_form"
+						width="100%">
+						<thead>
+							<tr class="">
+								<td class="bold">ID</td>
+								<td class="bold">昵称</td>
+								<td class="bold">头像</td>
+								<td class="bold">性别</td>
+								<td class="bold">关注时间</td>
+								<td class="bold">省</td>
+								<td class="bold">市</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>9</td>
+								<td>曾祥鑫</td>
+								<td><img width="70" height="70"
+									src="http://wx.qlogo.cn/mmopen/0nn3FBrD9a3kbue6Der5nu62fAAwephhIkgMcAC01TO1ia8ALpXYvM9pVRC2Udy6QmbHTPl5731I7JoRr73AJsg/0" /></td>
+								<td>男</td>
+								<td>2014-06-07 10:07:20</td>
+								<td>上海</td>
+								<td>奉贤</td>
+							</tr>
+							<tr>
+								<td>6</td>
+								<td></td>
+								<td><img width="70" height="70" src="" /></td>
+								<td>女</td>
+								<td>2014-04-12 15:50:50</td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>5</td>
+								<td></td>
+								<td><img width="70" height="70" src="" /></td>
+								<td>女</td>
+								<td>2014-03-14 10:32:28</td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>4</td>
+								<td>赵志海</td>
+								<td><img width="70" height="70"
+									src="http://wx.qlogo.cn/mmopen/Nc1krk0BzXq04ibicBrh47zB7YNBcaqmzKibwVJH9EiauCK9CxQNqAW0p6Xj4qwPjEgXupnFSPh0hzic2378kdbTzicjQGOVO7mzz5/0" /></td>
+								<td>男</td>
+								<td>2014-03-13 16:53:59</td>
+								<td>马德里</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>3</td>
+								<td>拖拉机</td>
+								<td><img width="70" height="70"
+									src="http://wx.qlogo.cn/mmopen/Nc1krk0BzXq04ibicBrh47zJyUtjS4fTBuniaZJMeCr69qCMjzFic5vhg8QVnqNTzFz6qvN0o6wzpZ2jeXicpVsVknMLw1HNTuTek/0" /></td>
+								<td>男</td>
+								<td>2014-03-13 14:13:52</td>
+								<td>上海</td>
+								<td>徐汇</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

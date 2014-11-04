@@ -1,0 +1,59 @@
+<#include "../../inc/layout.html">
+<@layout title="用户管理" js="sso/user/view.js">
+<style>
+body{background: #fff;}
+</style>
+<div class="manage-wrapper" ms-controller="ctrl">
+    <div class="manage-wrap">
+    		<ul class="mod-form-rows base-form" >
+    			<li class="row-item odd">
+    				<input type="hidden" name="position_id" id="position_id">
+    				<div class="label-wrap"><label for="position">岗位</label></div>
+    				<div class="ctn-wrap">{{data.position_name}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="status">状态</label></div>
+    				<div class="ctn-wrap">{{data.status|status}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="uname">用户帐号</label></div>
+    				<div class="ctn-wrap">{{data.uname}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="password">密码</label></div>
+    				<div class="ctn-wrap">不可查看</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="realname">真实姓名</label></div>
+    				<div class="ctn-wrap">{{data.realname}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>性别</label></div>
+    				<div class="ctn-wrap">{{data.sex|sex}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="email">Email</label></div>
+    				<div class="ctn-wrap">{{data.email}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="mobile">手机</label></div>
+    				<div class="ctn-wrap">{{data.mobile}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="telephone">电话</label></div>
+    				<div class="ctn-wrap">{{data.telephone}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="address">地址</label></div>
+    				<div class="ctn-wrap">{{data.address}}</div>
+    			</li>
+    		</ul>
+    		<ul class="mod-form-rows">
+    			<li class="row-item pb0">
+    				<div class="label-wrap"><label for="remark">备注</label></div>
+    				<div class="ctn-wrap">{{data.remark}}</div>
+    			</li>
+    		</ul>
+    </div>
+</div>
+</@layout>

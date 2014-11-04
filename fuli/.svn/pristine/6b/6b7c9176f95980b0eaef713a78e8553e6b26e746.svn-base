@@ -1,0 +1,175 @@
+package net.loyin.model.sys;
+
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import net.loyin.jfinal.anatation.TableBind;
+import net.loyin.util.PropertiesContent;
+
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.gson.WeChat;
+import com.gson.bean.UserInfo;
+import com.jfinal.aop.Before;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Model;
+import com.jfinal.plugin.activerecord.Record;
+import com.jfinal.plugin.activerecord.tx.Tx;
+/**
+ * 微信用户
+ * @author 龙影
+ */
+@TableBind(name="sp_wx_user")
+public class WxUser extends Model<WxUser> {
+	private static Logger log=Logger.getLogger(WxUser.class);
+	private static final long serialVersionUID = 72274314871183505L;
+	public static final String tableName="sp_wx_user";
+	public static WxUser dao=new WxUser();
+	public void insert() throws Exception {
+		List<String> openIdList=new ArrayList<String>();
+		JSONObject jo1 =WeChat.user.getFollwersList(WeChat.getAccessToken(),"");
+		openIdList=getOpenidList(jo1.getJSONObject("data"));
+		/*Object[][] paras=new Object[1][openIdList.size()];
+		Integer i=0;
+		for(String id:openIdList){
+			paras[i++]=new Object[]{id};
+		}
+		Db.batch("INSERT IntegerO "+tableName+" (openid) values(?)",paras,openIdList.size());*/
+		for(String id:openIdList){
+			try{
+				getFromOpenId(id);
+			}catch(Exception e){
+				continue;
+			}
+		}
+	}
+	/**提过openId获取用户信息*/
+	public WxUser getFromOpenId(String openId) throws Exception{
+		WxUser u=this.findByOpenId(openId);
+		if(u!=null){
+			return u;
+		}
+		UserInfo jo =WeChat.user.getUserInfo(WeChat.getAccessToken(),openId);
+		if (jo != null) {
+			u=new WxUser();
+			try{
+				u.set("subscribe",jo.getSubscribe());
+				u.set("openid",jo.getOpenid());
+				u.set("nickname",jo.getNickname());
+				u.set("sex",jo.getSex());
+				u.set("language",jo.getLanguage());
+				u.set("city",jo.getCity());
+				u.set("province",jo.getProvince());
+				u.set("country",jo.getCountry());
+				u.set("headimgurl",jo.getHeadimgurl());
+				u.set("subscribe_time",jo.getSubscribe_time());
+				u.save();
+			}catch(Exception e){
+				log.error("加入用户异常",e);
+				u=u.findByOpenId(jo.getOpenid());
+				if(u!=null){
+					u.update();
+				}
+			}
+			return u;
+		}
+		return null;
+	}
+	private List<String> getOpenidList(JSONObject j) {
+		List<String> strList = new ArrayList<String>();
+		JSONArray ja =j.getJSONArray("openid");
+		for (Object o : ja){
+			strList.add(o.toString());
+		}
+		return strList;
+	}
+	public WxUser findByOpenId(String openid) {
+		return this.findFirst("select * from "+tableName+" where openid=?",openid);
+	}
+	/***
+	 * 加入酒帮
+	 * @param 当前用户
+	 * @param cjid 场景ID
+	 * @return 返回消息
+	 */
+	public String join(WxUser u,Long cjid ){
+		WxUser bzu=WxUser.dao.findById(cjid);//获取帮主
+		if(bzu==null){
+			return WxAnswer.dao.getRep("00000");
+		}
+		//先判断 openid是否已经是成员了
+		Integer jbm=u.getInt("jbm");//获取酒帮成员标识
+		Integer typ=u.getInt("typ");//用户类型 0：消费者 1：经销商
+		if(jbm==null){
+		   jbm=0;
+		}
+		if(typ==null){
+			typ=0;
+		}
+		if(u.getStr("openid").equals(bzu.getStr("jbopenid"))){//判断扫描人是否是 推广人的帮主
+			return MessageFormat.format(WxAnswer.dao.getRep("00007"),bzu.getStr("nickname"));
+		}else if(u.getStr("openid").equals(bzu.getStr("openid"))){//判断扫描人是否是 推广人的帮主
+			return WxAnswer.dao.getRep("00008");
+		}
+		String jbopenid=bzu.getStr("openid");
+		switch(jbm){
+		case 0://非成员
+			//判断加入的酒帮是否已满员8人
+			Integer JIUBANG_MENBER_LIMIT_COUNT=PropertiesContent.getToInteger("JIUBANG_MENBER_LIMIT_COUNT",8);
+			Record ctr=Db.findFirst("select count(1) ct from "+WxUser.tableName+" where jbopenid=?",jbopenid);
+			Integer ct=ctr.getLong("ct").intValue();
+			if(ct>=JIUBANG_MENBER_LIMIT_COUNT&&typ==0){//普通消费者才有人数限制
+				try{
+					WeChat.message.sendText(WeChat.getAccessToken(), jbopenid, WxAnswer.dao.getRep("00009"));
+				}catch(Exception e){}
+				return WxAnswer.dao.getRep("00010");
+			}
+			Record r=Db.findFirst("select ifnull(max(jbn),0)+1 jbn from "+WxUser.tableName+" where jbopenid=? ",jbopenid);
+			//加入酒帮
+			u.set("jbopenid",jbopenid);
+			u.set("jbm",1);//设置成员类型
+			u.set("jbn",r.get("jbn"));//设置酒帮成员编号
+			u.update();
+			if(bzu.getInt("jbm")==1){
+				bzu.set("jbm",2);
+				bzu.update();
+			}
+			try{
+				WeChat.message.sendText(WeChat.getAccessToken(), jbopenid, MessageFormat.format(WxAnswer.dao.getRep("00011"),u.getStr("nickname")));
+			}catch(Exception e){}
+			return MessageFormat.format(WxAnswer.dao.getRep("00012"),bzu.getStr("nickname"));
+		case 1://已经是成员
+			if(u.getStr("jbopenid").equals(jbopenid))
+//			return "您已经是该酒帮的成员，您可以在购买商品后可以创建自己的酒帮:)";
+			return MessageFormat.format(WxAnswer.dao.getRep("00013"),bzu.getStr("nickname"));
+			else{
+//				return "您已经是其他酒帮的成员，不能再次加入其他酒帮！";
+				return WxAnswer.dao.getRep("00014");
+			}
+		case 2://已经是帮主
+//			return "您已经是帮主了，不能加入其他的酒帮！:(";
+			return WxAnswer.dao.getRep("00015");
+		}
+		return null;
+	}
+	/**
+	 * 计算酒帮奖
+	 * @param openid 帮主id
+	 */
+	@Before(Tx.class)
+	public void jiuBangBonus(String openid) {
+		//获取目前酒帮成员购买次数 即是否8个成员都购买了
+		Record r = Db.findFirst("SELECT sum(u.buyct)ct FROM "+ tableName+ " u WHERE u.buyct!=0 and u.jbopenid=?",openid);
+			Long count=r.getLong("ct");
+			if(count>=8){
+				//计算奖金
+				Db.update("update "+tableName+" u set u.Bonus1=u1.fanli2*0.5 where u.openid=? ",openid);//单次酒帮奖
+				Db.update("update "+tableName+" u set u.Bonus=u.Bonus+Bonus1,u.fanli2=0 where u.openid=? ",openid);//累计酒帮奖 
+																											//重置成员用于计算酒帮奖金返利
+				Db.update("update "+tableName+" u set u.buyct=0 where jbopenid=?",openid);//重置成员购买统计次数
+			}
+	}
+}

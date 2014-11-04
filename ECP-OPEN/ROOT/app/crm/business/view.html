@@ -1,0 +1,112 @@
+<#include "../../inc/layout.html">
+<@layout title="商机" js="crm/business/view.js">
+<style>
+body{background: #fff;}
+#prodcutTable .ui-input{width:150px;}
+.comboDiv div{height:30px;}
+</style>
+<div class="manage-wrapper" ms-controller="ctrl">
+    <div class="manage-wrap">
+    	<form action=""id="base_form">
+    		<ul class="mod-form-rows base-form" >
+    			<li class="row-item">
+    				<div class="label-wrap"><label>商机名称</label></div>
+    				<div class="ctn-wrap">{{data.name}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>负责人</label></div>
+    				<div class="ctn-wrap">{{data.head_name}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>客户</label></div>
+    				<div class="ctn-wrap">
+	    				{{data.customer_name}}
+          			</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>联系人</label></div>
+    				<div class="ctn-wrap">{{data.contacts_name}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>商机类型</label></div>
+    				<div class="ctn-wrap">{{data.type|custParame}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>状态</label></div>
+    				<div class="ctn-wrap">{{data.status|custParame}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>商机来源</label></div>
+					<div class="ctn-wrap">{{data.origin|custParame}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>赢单率</label></div>
+    				<div class="ctn-wrap">{{data.gain_rate}}%</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>预计金额</label></div>
+    				<div class="ctn-wrap">{{data.estimate_price|money}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>预计成交日期</label></div>
+    				<div class="ctn-wrap">{{data.due_date}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>下次联系</label></div>
+    				<div class="ctn-wrap">{{data.nextstep}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>联系时间</label></div>
+    				<div class="ctn-wrap">{{data.nextstep_date}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>备注</label></div>
+    				<div class="ctn-wrap">{{data.remark}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>创建人</label></div>
+    				<div class="ctn-wrap">{{data.creater_name}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>创建时间</label></div>
+    				<div class="ctn-wrap">{{data.create_datetime}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>修改人</label></div>
+    				<div class="ctn-wrap">{{data.updater_name}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>修改时间</label></div>
+    				<div class="ctn-wrap">{{data.update_dateime}}</div>
+    			</li>
+    		</ul>
+    		<br>
+    		<p><b>相关商品</b> </p>
+    		<table class="table table-hover table-striped table_thead_fixed table-bordered" id="prodcutTable">
+  				<thead>
+  					<tr>
+  						<th width="50px">&nbsp;</th>
+  						<th>商品</th>
+  						<th>售价</th>
+  						<th>报价</th>
+  						<th>数量</th>
+  						<th>金额</th>
+  						<th>描述</th>
+  					</tr>
+  				</thead>
+  				<tbody style="max-height:400px;">
+  					<tr ms-repeat="data.productlist">
+  						<td width="50px">{{$index+1}}</td>
+  						<td>{{el.product_name}}</td>
+  						<td>{{el.sale_price|money}}</td>
+  						<td>{{el.quoted_price|money}}</td>
+  						<td>{{el.amount}}</td>
+  						<td>{{(el.amount*el.quoted_price)|money}}</td>
+  						<td>{{el.description}}</td>
+  					</tr>
+  				</tbody>
+    		</table>
+    	</form>
+    </div>
+</div>
+</@layout>

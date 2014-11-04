@@ -1,0 +1,22 @@
+<#include "../../inc/layout.html">
+<@layout title="仓库" js="wf/process/upfile.js">
+<div class="manage-wrapper" ms-controller="ctrl">
+    <div class="manage-wrap">
+    	<form action=""id="base_form">
+		<input type="hidden" name="id" id="id" ms-duplex="data.id">
+    		<ul class="mod-form-rows base-form" >
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="name">名称</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" name="name" ms-duplex="data.name" data-rule="required;"  maxlength="20"id="name" placeholder="请输入帐号"></div>
+    			</li>
+    		</ul>
+    		<ul class="mod-form-rows">
+    			<li class="row-item pb0">
+    				<div class="label-wrap"><label for="remark">文件</label></div>
+    				<div class="ctn-wrap"><span id="upfile_btn"></span></div>
+    			</li>
+    		</ul>
+    	</form>
+    </div>
+</div>
+</@layout>

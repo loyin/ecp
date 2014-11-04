@@ -1,0 +1,66 @@
+<#macro paginate action pageNo=1 totalPage=0 totalCount=0 pageSize=20>
+<script>
+function goPage(pn){
+	<#--if(isNaN(pn)==false){
+		if(pn>${totalPage}||pn<0){
+			alert("输入的数字不能大于${totalPage}且不能小于0");
+			return ;
+		}
+	}else{
+		alert("请输入数字");
+		return ;
+	}-->
+	$("#pageNo").val(pn);
+//	var form=$("#pageNo").parent("form");
+//	form.submit();
+	$("#page_btn").click();
+	$("form").submit();
+}
+</script>
+	<#if (totalPage <= 0) || (pageNo > totalPage)><#return></#if>
+	<#local startPage = pageNo-4>
+	<#if (startPage < 1)><#local startPage = 1></#if>
+	<#local endPage = pageNo + 4>
+	<#if (endPage > totalPage)><#local endPage = totalPage></#if>
+	<#if totalPage gt 1>
+	<div class="pages">
+			<#if (pageNo <= 8)>
+				<#local startPage = 1>
+			</#if>
+			<#if ((totalPage-pageNo) < 8)>
+				<#local endPage = totalPage>
+			</#if>
+			
+			<#if (pageNo > 8)>
+				<a href="javascript:goPage(#{pageNo-1})" val="#{pageNo-1}" class="prev_page">上页</a>
+			</#if>
+			<#if (pageNo > 8)>
+				<a href="javascript:goPage(#{1})" val="#{1}">#{1}</a>
+				<a href="javascript:goPage(#{2})" val="#{2}">#{2}</a>
+				<a class="gap">…</a>
+			</#if>
+			
+			<#list startPage..endPage as i>
+				<#if pageNo == i>
+					<span class="current">#{i}</span>
+				<#else>
+					<a href="javascript:goPage(#{i})" val="#{i}">#{i}</a>
+				</#if>
+			</#list>
+			
+			<#if ((totalPage-pageNo) >= 8)>
+				<a class="gap">…</a>
+				<a href="javascript:goPage(#{totalPage-1})" val="#{totalPage-1}">#{totalPage-1}</a>
+				<a href="javascript:goPage(#{totalPage})" val="#{totalPage}">#{totalPage}</a>
+			</#if>
+			<#if (pageNo < (totalPage-8))>
+				<a href="javascript:goPage(#{pageNo+1})" val="#{pageNo+1}">下页</a>
+			</#if>
+			共${totalPage}页/${totalCount}条信息
+	</div>
+	<input type="button" id="page_btn" style="display:none;">
+	<input type="hidden" name="pageNo" value="" id="pageNo">
+	<#-- <div class="fl" style="margin-bottom:0px;">跳转到<input type="text" id="gotoPageNum" value="${pageNo!}" style="height:14px;width:20px;" size="3">页
+	<a href="javascript:gotoP(this);return false;" class="btn">跳转</a></div> -->
+	</#if>
+</#macro>

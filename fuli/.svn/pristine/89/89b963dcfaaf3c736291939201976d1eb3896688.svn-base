@@ -1,0 +1,71 @@
+package net.loyin.model.sys;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import net.loyin.jfinal.anatation.TableBind;
+import net.loyin.util.PropertiesContent;
+import net.loyin.util.wechat.TokenUtil;
+import net.loyin.util.wechat.https.WeixinUtil;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
+import com.jfinal.aop.Before;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Model;
+import com.jfinal.plugin.activerecord.tx.Tx;
+/**
+ * 微信用户
+ * @author 龙影
+ */
+@TableBind(name="sp_wx_user")
+public class WxUser extends Model<WxUser> {
+	private static final long serialVersionUID = 72274314871183505L;
+	public static final String tableName="sp_wx_user";
+	public static WxUser dao=new WxUser();
+	private String access_token;
+	private String next_openid="";
+	@Before(Tx.class)
+	public void insert() {
+		access_token=TokenUtil.getToken();
+		List<String> openIdList=new ArrayList<String>();
+		getGroups(openIdList);
+		Object[][] paras=new Object[1][openIdList.size()];
+		int i=0;
+		for(String id:openIdList){
+			paras[i++]=new Object[]{id};
+		}
+		Db.batch("INSERT INTO "+tableName+" (openid) values(?)",paras,openIdList.size());
+		for(String id:openIdList){
+			access_token=TokenUtil.getToken();
+			JSONObject jo = WeixinUtil.me.httpRequest(PropertiesContent.get("USER_INFO_URL") + access_token + "&next_openid=" + next_openid, "GET", "");
+			if (jo != null) {
+				Db.update("update "+tableName+" set subscribe_time=?,headimgurl=?,language=?,province=?,country=?,city=?,sex=?,nickname=? where openid=?"
+						,jo.get("subscribe_time"),jo.get("headimgurl"),jo.get("language"),jo.get("province"),jo.get("country")
+						,jo.get("city"),jo.get("sex"),jo.get("nickname"),id);
+			}
+		}
+	}
+	private void getGroups(List<String> openIdList) {
+		JSONObject jo = WeixinUtil.me.httpRequest(PropertiesContent.get("USER_GET_URL") + access_token + "&next_openid=" + next_openid, "GET", "");
+		if (jo != null) {
+			JSONObject j = jo.getJSONObject("data");
+			if (!j.isEmpty()) {
+				openIdList.addAll(getOpenidList(j));
+				next_openid = jo.getString("next_openid");
+				getGroups(openIdList);
+			}
+		} else {
+			getGroups(openIdList);
+		}
+	}
+
+	private List<String> getOpenidList(JSONObject j) {
+		List<String> strList = new ArrayList<String>();
+		JSONArray ja = JSONArray.fromObject(j.getString("openid"));
+		for (Object o : ja) {
+			strList.add(o.toString());
+		}
+		return strList;
+	}
+}

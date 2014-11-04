@@ -1,0 +1,10 @@
+<#include "../inc/weixin_layout.html">
+<@layout title=(po.title)!>
+<h2 class="rich_media_title" id="activity-name">${(po.title)!}</h2>
+<div class="rich_media_meta_list">
+	<em id="post-date" class="rich_media_meta text">${(po.ctime)!}</em> <a
+		class="rich_media_meta link nickname" href="javascript:viewProfile();"
+		id="post-user">古酿定制酒</a>
+</div>
+<div id="page-content">${(po.content)!}</div>
+</@layout>

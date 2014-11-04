@@ -1,0 +1,114 @@
+package net.loyin.cfg;
+
+import net.loyin.handler.CookieHandler;
+import net.loyin.handler.SessionHandler;
+import net.loyin.interceptor.ManagerPowerInterceptor;
+import net.loyin.jfinal.plugin.AutoTableBindPlugin;
+import net.loyin.jfinal.plugin.MyRoutesUtil;
+import net.loyin.jfinal.plugin.TableNameStyle;
+import net.loyin.jfinal.plugin.sqlXml.SqlInXmlPlugin;
+import net.loyin.kit.I18N;
+import net.loyin.util.PropertiesContent;
+
+import com.alibaba.druid.filter.stat.StatFilter;
+import com.alibaba.druid.wall.WallFilter;
+import com.jfinal.config.Constants;
+import com.jfinal.config.Handlers;
+import com.jfinal.config.Interceptors;
+import com.jfinal.config.JFinalConfig;
+import com.jfinal.config.Plugins;
+import com.jfinal.config.Routes;
+import com.jfinal.plugin.activerecord.CaseInsensitiveContainerFactory;
+import com.jfinal.plugin.activerecord.dialect.MysqlDialect;
+import com.jfinal.plugin.druid.DruidPlugin;
+import com.jfinal.plugin.druid.DruidStatViewHandler;
+import com.jfinal.plugin.ehcache.CacheKit;
+import com.jfinal.plugin.ehcache.EhCachePlugin;
+/**
+ * API引导式配置
+ * @author loyin 龙影
+ *2013-6-5
+ */
+public class JFWebConfig extends JFinalConfig {
+	public static DruidPlugin druidPlugin;
+	public static SqlInXmlPlugin sqlInXmlPlugin;
+	/**
+	 * 配置常量
+	 */
+	public void configConstant(Constants me) {
+//		loadPropertyFile("a_little_config.txt");				// 加载少量必要配置，随后可用getProperty(...)获取值
+		me.setDevMode(PropertiesContent.getToBool("devmode",true));
+//		me.setViewType(ViewType.JSP); 							// 设置视图类型为Jsp，否则默认为FreeMarker
+		me.setError404View("/WEB-INF/views/err404.html");
+		me.setError500View("/WEB-INF/views/err500.html");
+		me.setBaseViewPath("/WEB-INF/views/");
+		/**国际化properties文件加载 只调用一次*/
+		I18N.init("i18n","dic", null);//字典
+		I18N.init("i18n","msg",null);//信息
+		I18N.init("i18n","err",null);//异常
+		me.setMaxPostSize(PropertiesContent.getToInteger("maxPostSize",104857600));//默认100M
+	}
+	
+	/**
+	 * 配置路由
+	 */
+	public void configRoute(Routes me) {
+		MyRoutesUtil.add(me);
+	}
+	/**
+	 * 配置插件
+	 */
+	public void configPlugin(Plugins me) {
+		String jdbc_dbType=PropertiesContent.get("jdbc.dbType");
+		me.add(new EhCachePlugin());
+		// 配置数据库连接池插件
+		druidPlugin = new DruidPlugin(PropertiesContent.get(jdbc_dbType+".jdbc.url"),
+												  PropertiesContent.get(jdbc_dbType+".jdbc.username"),
+												  PropertiesContent.get(jdbc_dbType+".jdbc.password"),
+												  PropertiesContent.get(jdbc_dbType+".jdbc.driver"));
+		WallFilter wall = new WallFilter();
+		wall.setDbType(jdbc_dbType);
+		druidPlugin.addFilter(wall);
+		druidPlugin.addFilter(new StatFilter());
+		me.add(druidPlugin);
+		//添加自动绑定model与表插件
+		AutoTableBindPlugin autoTableBindPlugin = new AutoTableBindPlugin(druidPlugin, TableNameStyle.LOWER);
+		autoTableBindPlugin.setShowSql(true);
+//		if("sqlserver".equals(jdbc_dbType))
+//			autoTableBindPlugin.setDialect(new MssqlDialect());
+//		if("mysql".equals(jdbc_dbType))
+			autoTableBindPlugin.setDialect(new MysqlDialect());
+		autoTableBindPlugin.setContainerFactory(new CaseInsensitiveContainerFactory());
+		me.add(autoTableBindPlugin);
+		sqlInXmlPlugin=new SqlInXmlPlugin();
+		me.add(sqlInXmlPlugin);
+		//移除所有的缓存
+		Thread thread=new Thread(){
+			public void run(){
+				try{Thread.sleep(1000);
+				CacheKit.getCacheManager().clearAll();//移除所有的缓存
+				}catch(Exception e){}
+			}
+		};
+		thread.start();
+	}
+	
+	/**
+	 * 配置全局拦截器
+	 */
+	public void configInterceptor(Interceptors me) {
+		me.add(new ManagerPowerInterceptor());//权限控制
+	}
+	
+	/**
+	 * 配置处理器
+	 */
+	public void configHandler(Handlers me) {
+		//me.add(new FakeStaticHandler());//后缀.html伪静态
+//		me.add(new ServletHandler());//添加处理Servlet的handler
+		me.add(new SessionHandler());//将session里的参数传递到request中直接得到
+		me.add(new CookieHandler());//将cookie里的参数传递到request中直接得到
+		DruidStatViewHandler dvh =  new DruidStatViewHandler("/druid");
+	    me.add(dvh);
+	}
+}

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge" />
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta charset="utf-8">
+<title>${PropertiesContent.get('system.name')}</title>
+<meta name="description" content="This is page-header (.page-header &gt; h1)">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="author" content="loyin_龙影QQ290238838">
+<meta name="copyright" content="loyin_龙影">
+<META HTTP-EQUIV="pragma" CONTENT="no-cache">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="${root!}/tpl_admin/default/res/reset.css" rel="stylesheet">
+<link href="${root!}/tpl_admin/default/res/bootstrap.min.css" rel="stylesheet">
+<!-- <link href="${root!}/tpl_admin/default/res/bootstrap-responsive.min.css" rel="stylesheet"> -->
+<link rel="stylesheet"
+	href="${root!}/tpl_admin/default/res/css/font-awesome.min.css">
+<!--[if IE ]><link rel="stylesheet" href="${root!}/tpl_admin/default/res/css/font-awesome-ie7.min.css" /><![endif]-->
+<link rel="stylesheet" href="${root!}/tpl_admin/default/res/prettify.css">
+<link rel="stylesheet" href="${root!}/tpl_admin/default/res/ace.min.css">
+<!-- <link rel="stylesheet" href="${root!}/tpl_admin/default/res/ace-responsive.min.css"> -->
+<link rel="stylesheet" href="${root!}/tpl_admin/default/res/ace-skins.min.css">
+<!--[if lte IE 8]><link rel="stylesheet" href="${root!}/tpl_admin/default/res/ace-ie.min.css" /><![endif]-->
+<link rel="stylesheet" href="${root!}/tpl_admin/default/res/style_new.css">
+<link rel="stylesheet" href="${root!}/tpl_admin/default/res/theme_blue.css">
+<link rel="stylesheet" href="${root!}/tpl_admin/default/res/hack.css">
+<script>
+	//全局变量
+	var GV = {
+		HOST : "guniang.loyin.net",
+		DIMAUB : "/",
+		JS_ROOT : "static/js/",
+		TOKEN : ""
+	};
+</script>
+</head>
+<body style="min-width: 900px;" screen_capture_injected="true">
+	<div id="loading">
+		<i class="loadingicon"></i><span>正在加载...</span>
+	</div>
+	<div id="right_tools_wrapper">
+		<!--<span id="right_tools_clearcache" title="清除缓存" onclick="javascript:openapp('/admin/setting/clearcache','right_tool_clearcache','清除缓存');"><i class="fa fa-trash-o right_tool_icon"></i></span>		-->
+		<span id="refresh_wrapper" title="刷新当前页"><i
+			class="fa fa-refresh right_tool_icon"></i></span>
+	</div>
+	<div class="navbar">
+		<div class="navbar-inner">
+			<div class="container-fluid">
+				<a href="javascript:void();" class="brand"><small><img height="30px" width="30px"
+						src="${root!}/logo.jpg">${PropertiesContent.get('system.name')}</small></a>
+				<ul class="nav ace-nav pull-right">
+					<li class="light-blue"><a data-toggle="dropdown" href="#"
+						class="dropdown-toggle"><img class="nav-user-photo"
+							src="${root!}/tpl_admin/default/res/user.jpg" alt="demo"><span
+							class="user-info"><small>欢迎,</small>${Login_User.nicename}</span><i
+							class="fa fa-caret-down"></i></a>
+					<ul
+							class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-closer">
+							<li><a
+								href="javascript:openapp('/admin/setting/site','index_site','站点管理');"><i
+									class="fa fa-cog"></i>站点管理</a></li>
+							<li><a
+								href="javascript:openapp('user/info','index_userinfo','个人资料');"><i
+									class="fa fa-user"></i>个人资料</a></li>
+							<li class="divider"></li>
+							<li><a href="${root!}/logout"><i class="fa fa-off"></i>退出</a></li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="main-container container-fluid">
+		<a class="menu-toggler" id="menu-toggler" href="#"><span
+			class="menu-text"></span></a>
+		<div class="sidebar" id="sidebar">
+		<#--<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+				<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+					<a class="btn btn-small btn-success"
+						href="javascript:openapp('/admin/term/index','index_termlist','分类管理');"
+						title="分类管理"><i class="fa fa-th"></i></a><a
+						class="btn btn-small btn-info"
+						href="javascript:openapp('/admin/post/index','index_postlist','文章管理');"
+						title="文章管理"><i class="fa fa-pencil"></i></a><a
+						class="btn btn-small btn-warning" href="/" title="前台首页"
+						target="_blank"><i class="fa fa-home"></i></a><a
+						class="btn btn-small btn-danger"
+						href="javascript:openapp('/admin/setting/clearcache','index_clearcache','清除缓存');"
+						title="清除缓存"><i class="fa fa-trash-o"></i></a>
+				</div>
+				<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+					<span class="btn btn-success"></span><span class="btn btn-info"></span><span
+						class="btn btn-warning"></span><span class="btn btn-danger"></span>
+				</div>
+			</div>-->
+			<div class="sidebar-collapse" id="sidebar-collapse">
+				<i class="fa fa-angle-double-left"></i>
+			</div>
+			<div id="nav_wraper">
+				<ul class="nav nav-list">
+					<li><a href="#" class="dropdown-toggle"><i
+							class="fa fa-cogs"></i><span class="menu-text">设置</span><b
+							class="arrow fa fa-angle-down"></b></a>
+					<ul class="submenu">
+							<li><a href="#" class="dropdown-toggle"><i
+									class="fa fa-angle-double-right"></i><span class="menu-text">个人信息</span><b
+									class="arrow fa fa-angle-down"></b></a>
+							<ul class="submenu">
+									<li><a
+										href="javascript:openapp('${root!}/user/info','mdfuserinfo','修改信息');"><i
+											class="fa fa-leaf"></i><span class="menu-text">修改信息</span></a></li>
+									<li><a
+										href="javascript:openapp('user/pwd','mdfpwd','修改密码');"><i
+											class="fa fa-leaf"></i><span class="menu-text">修改密码</span></a></li>
+								</ul></li>
+						<#--<li><a
+								href="javascript:openapp('/admin/setting/site/menuid/284','webinfo','网站信息');"><i
+									class="fa fa-angle-double-right"></i><span class="menu-text">网站信息</span></a></li>
+							<li><a href="#" class="dropdown-toggle"><i
+									class="fa fa-angle-double-right"></i><span class="menu-text">邮箱配置</span><b
+									class="arrow fa fa-angle-down"></b></a>
+							<ul class="submenu">
+									<li><a
+										href="javascript:openapp('/admin/mailer/index/menuid/526','smtpset','SMTP配置');"><i
+											class="fa fa-leaf"></i><span class="menu-text">SMTP配置</span></a></li>
+									<li><a
+										href="javascript:openapp('/admin/mailer/active/menuid/528','emailmode','邮件模板');"><i
+											class="fa fa-leaf"></i><span class="menu-text">邮件模板</span></a></li>
+								</ul></li>
+							<li><a
+								href="javascript:openapp('/admin/setting/clearcache/menuid/298','clcache','清除缓存');"><i
+									class="fa fa-angle-double-right"></i><span class="menu-text">清除缓存</span></a></li>
+						 -->
+						</ul></li>
+					<li><a href="#" class="dropdown-toggle"><i
+							class="fa fa-group"></i><span class="menu-text">用户管理</span><b
+							class="arrow fa fa-angle-down"></b></a>
+					<ul class="submenu">
+									<li><a href="javascript:openapp('/role/list','rolem','角色管理');">
+									<i class="fa fa-leaf"></i><span class="menu-text">角色管理</span></a></li>
+									<li><a href="javascript:openapp('/user/list','userm','平台用户');">
+									<i class="fa fa-leaf"></i><span class="menu-text">平台用户</span></a></li>
+									<li><a href="javascript:openapp('/operalog/list','operalog','操作日志');">
+									<i class="fa fa-leaf"></i><span class="menu-text">操作日志</span></a></li>
+						</ul></li>
+					<#--
+					<li><a href="#" class="dropdown-toggle"><i
+							class="fa fa-list"></i><span class="menu-text">菜单管理</span><b
+							class="arrow fa fa-angle-down"></b></a>
+					<ul class="submenu">
+							<li><a href="#" class="dropdown-toggle"><i
+									class="fa fa-angle-double-right"></i><span class="menu-text">前台菜单</span><b
+									class="arrow fa fa-angle-down"></b></a>
+							<ul class="submenu">
+									<li><a
+										href="javascript:openapp('/admin/nav/index/menuid/295','295Admin','菜单管理');"><i
+											class="fa fa-leaf"></i><span class="menu-text">菜单管理</span></a></li>
+									<li><a
+										href="javascript:openapp('/admin/navcat/index/menuid/296','296Admin','菜单分类');"><i
+											class="fa fa-leaf"></i><span class="menu-text">菜单分类</span></a></li>
+								</ul></li>
+							<li><a
+								href="javascript:openapp('/admin/menu/index/menuid/297','297Admin','后台菜单');"><i
+									class="fa fa-angle-double-right"></i><span class="menu-text">后台菜单</span></a></li>
+						</ul></li>
+					-->
+					<li><a href="#" class="dropdown-toggle"><i
+							class="fa fa-tags"></i><span class="menu-text">微信管理</span><b
+							class="arrow fa fa-angle-down"></b></a>
+					<ul class="submenu">
+							<#--<li><a
+								href="javascript:openapp('/wx/indexadmin/index/menuid/495','wxzhxx','账号信息');"><i
+									class="fa fa-angle-double-right"></i><span class="menu-text">账号信息</span></a></li>-->
+							<li><a href="#" class="dropdown-toggle"><i
+									class="fa fa-angle-double-right"></i><span class="menu-text">回复设置</span><b
+									class="arrow fa fa-angle-down"></b></a>
+							<ul class="submenu">
+								<#--
+									<li><a
+										href="javascript:openapp('/wxanswer','308Wx','默认回复');"><i
+											class="fa fa-leaf"></i><span class="menu-text">默认回复</span></a></li>
+									<li><a
+										href="javascript:openapp('/wxanswer/fixed','309Wx','固定回复');"><i
+											class="fa fa-leaf"></i><span class="menu-text">固定回复</span></a></li>
+									<li><a
+										href="javascript:openapp('/wxanswer/robot','310Wx','智能回复');"><i
+											class="fa fa-leaf"></i><span class="menu-text">智能回复</span></a></li>
+								-->
+									<li><a href="javascript:openapp('/wxanswer/sys','311Wx','系统回复');"><i
+											class="fa fa-leaf"></i><span class="menu-text">系统回复</span></a></li>
+								</ul></li>
+							<li><a href="#" class="dropdown-toggle"><i
+									class="fa fa-angle-double-right"></i><span class="menu-text">数据分析</span><b
+									class="arrow fa fa-angle-down"></b></a>
+							<ul class="submenu">
+									<#-- <li><a
+										href="javascript:openapp('/wx/collectadmin/answer/menuid/314','314Wx','回复数量');"><i
+											class="fa fa-leaf"></i><span class="menu-text">回复数量</span></a></li>
+									<li><a
+										href="javascript:openapp('/wx/collectadmin/location/menuid/313','313Wx','地理位置');"><i
+											class="fa fa-leaf"></i><span class="menu-text">地理位置</span></a></li>
+									<li><a
+										href="javascript:openapp('/wx/collectadmin/users/menuid/317','317Wx','关注趋势');"><i
+											class="fa fa-leaf"></i><span class="menu-text">关注趋势</span></a></li> -->
+									<li><a href="javascript:openapp('/wxuser/list','wxuser','粉丝列表');">
+									<i class="fa fa-leaf"></i><span class="menu-text">粉丝列表</span></a></li>
+								</ul></li>
+							<li><a href="javascript:openapp('/wxmenu/list','Wxmenu','菜单管理');"><i
+									class="fa fa-angle-double-right"></i><span class="menu-text">菜单管理</span></a></li>
+						</ul></li>
+					<li><a href="#" class="dropdown-toggle"><i
+							class="fa fa-group"></i><span class="menu-text">订单管理</span><b
+							class="arrow fa fa-angle-down"></b></a>
+					<ul class="submenu">
+									<li><a href="javascript:openapp('/wxOrder/list','wxorder','微信小店订单');">
+									<i class="fa fa-leaf"></i><span class="menu-text">微信小店订单</span></a></li>
+						</ul></li>
+					<li><a href="#" class="dropdown-toggle"><i
+							class="fa fa-cloud"></i><span class="menu-text">酒帮管理</span><b
+							class="arrow fa fa-angle-down"></b></a>
+					<ul class="submenu">
+									<li><a href="javascript:openapp('/wxuser/jblist?jbm=2','jbcx','酒帮查询');"><i
+											class="fa fa-leaf"></i><span class="menu-text">酒帮查询</span></a></li>
+									<#-- <li><a href="javascript:openapp('','496Admin','酒帮消费查询');"><i
+											class="fa fa-leaf"></i><span class="menu-text">酒帮消费查询</span></a></li> -->
+							<li><a href="javascript:openapp('/wxuser/jblist','496Admin','酒帮返利');">
+								<i class="fa fa-leaf"></i><span class="menu-text">酒帮返利</span></a></li>
+						</ul></li>
+					<#-- <li><a href="#" class="dropdown-toggle"><i
+							class="fa fa-cloud"></i><span class="menu-text">客服管理</span><b
+							class="arrow fa fa-angle-down"></b></a>
+							<ul class="submenu">
+							</ul>
+						</li> 
+					-->
+					<li><a href="#" class="dropdown-toggle"><i
+							class="fa fa-cloud"></i><span class="menu-text">扩展工具</span><b
+							class="arrow fa fa-angle-down"></b></a>
+					<ul class="submenu">
+							<li><a href="javascript:openapp('/dbm/list','dbm1','数据备份管理');">
+							<i class="fa fa-leaf"></i><span class="menu-text">数据备份管理</a>
+							</li>
+						</ul></li>
+				</ul>
+			</div>
+		</div>
+		<div class="main-content">
+			<div class="breadcrumbs" id="breadcrumbs">
+				<!-- <ul class="breadcrumb"><li><i class="fa fa-home home-icon"></i><a
+						href="#">首页</a><span class="divider"><i
+							class="fa fa-angle-right arrow-icon"></i></span></li><li class="active">Typography</li></ul> -->
+				<a id="task-pre" class="task-changebt">←</a>
+				<div id="task-content">
+					<ul class="macro-component-tab" id="task-content-inner">
+						<li class="macro-component-tabitem noclose" app-id="0"
+							app-url="${root!}/desktop" app-name="首页"><span
+							class="macro-tabs-item-text">首页</span></li>
+					</ul>
+					<div style="clear: both;"></div>
+				</div>
+				<a id="task-next" class="task-changebt">→</a>
+			</div>
+			<div class="page-content" id="content">
+				<iframe src="" style="width: 100%; height: 100%;" frameborder="0" id="appiframe-0"
+					class="appiframe"></iframe>
+			</div>
+		</div>
+	</div>
+	<script src="${root!}/tpl_admin/default/res/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript">
+		if ("ontouchend" in document)
+			document.write("<script src='${root!}/tpl_admin/default/res/jquery.mobile.custom.min.js'>"+ "<"+"/script>");
+	</script>
+	<script src="${root!}/tpl_admin/default/res/bootstrap.min.js"></script>
+	<script src="${root!}/tpl_admin/default/res/prettify.js"></script>
+	<script src="${root!}/tpl_admin/default/res/ace-elements.min.js"></script>
+	<script src="${root!}/tpl_admin/default/res/ace.min.js"></script>
+	<script src="${root!}/tpl_admin/default/res/jquery.nicescroll.js"></script>
+	<script src="${root!}/tpl_admin/default/res/script.js"></script>
+	<script src="${root!}/tpl_admin/default/res/index.js"></script>
+	<script type="text/javascript">
+		$(function() {
+			window.prettyPrint && prettyPrint();
+			$('#id-check-horizontal')
+					.removeAttr('checked')
+					.on('click',
+							function() {
+								$('#dt-list-1')
+										.toggleClass('dl-horizontal')
+										.prev()
+										(
+												this.checked ? '&lt;dl class="dl-horizontal"&gt;'
+														: '&lt;dl&gt;');
+							});
+
+		})
+	</script>
+</body>
+</html>

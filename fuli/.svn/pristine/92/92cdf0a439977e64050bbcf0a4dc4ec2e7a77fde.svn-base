@@ -1,0 +1,66 @@
+package net.loyin.util.wechat.bean.act;
+
+/**
+ * 人品活动
+ */
+public class WcActRenpinRcd {
+	private int rid;
+	private int rpid;
+	private long createday;
+	private long createTime;
+	private String cookie;
+	private String rip;
+
+	public WcActRenpinRcd() {
+
+	}
+
+	public int getRid() {
+		return rid;
+	}
+
+	public void setRid(int rid) {
+		this.rid = rid;
+	}
+
+	public int getRpid() {
+		return rpid;
+	}
+
+	public void setRpid(int rpid) {
+		this.rpid = rpid;
+	}
+
+	public long getCreateday() {
+		return createday;
+	}
+
+	public void setCreateday(long createday) {
+		this.createday = createday;
+	}
+
+	public long getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(long createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getCookie() {
+		return cookie;
+	}
+
+	public void setCookie(String cookie) {
+		this.cookie = cookie;
+	}
+
+	public String getRip() {
+		return rip;
+	}
+
+	public void setRip(String rip) {
+		this.rip = rip;
+	}
+
+}

@@ -1,0 +1,133 @@
+<#include "../../inc/layout.html">
+<@layout title="商机" js="crm/business/edit.js">
+<style>
+body{background:#fff;}
+#prodcutTable .ui-input{width:100%;}
+.comboDiv{position:absolute;left:125px;}
+.comboDiv div{height:30px;}
+.table .comboDiv{position:absolute;left:108px;}
+.table tbody tr td{padding:0px;}
+.table tbody tr td .ui-input{width:100%;height:34px;}
+.table tbody tr .tdPd{padding:8px;}
+.table .ui-input{border:none;}
+</style>
+<div class="manage-wrapper" ms-controller="ctrl">
+    <div class="manage-wrap">
+    	<form action=""id="base_form">
+    		<ul class="mod-form-rows base-form" >
+    			<li class="row-item">
+    				<div class="label-wrap"><label>商机名称</label><font color="red">*</font></div>
+    				<div class="ctn-wrap"><input id="name" class="ui-input" ms-duplex="data.name" data-rule="required;"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>负责人</label><font color="red">*</font></div>
+    				<div class="ctn-wrap">
+    				<select ms-duplex="data.head_id" id="head_id" class="ui-input" data-rule="required">
+    					<option></option>
+    					<option ms-repeat="userList" ms-value="el.id">{{el.realname}}({{el.department_name}}-{{el.position_name}})</option>
+    				</select>
+          			</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>客户</label><font color="red">*</font></div>
+    				<div class="ctn-wrap">
+	    				<span class="ui-combo-wrap">
+	          			<input type="text" id="customer" class="input-txt" autocomplete="off" data-ref="date" ms-keyup="qryCustomer(this.value)" ms-click="qryCustomer(this.value)" ms-duplex="data.customer_name" data-rule="required;">
+	          			</span>
+	          			<div class="comboDiv" style="width:260px;" ms-visible="custComboV"><div ms-repeat="customerList" ms-click="chooseCust(el)">{{el.sn}}&nbsp;&nbsp;{{el.name}}</div></div>
+          			</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>商机类型</label><font color="red">*</font></div>
+    				<div class="ctn-wrap">
+					<select ms-duplex="data.type" class="ui-input" id="type" data-rule="required">
+			        	<option ms-repeat="parameList[12]" ms-value="{{el.id}}">{{el.name}}</option>
+			        </select>
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>联系人</label><font color="red">*</font></div>
+    				<div class="ctn-wrap">
+						<span class="ui-combo-wrap">
+	          			<input type="text" id="contacts" class="input-txt" autocomplete="off" data-ref="date" ms-keyup="qryContacts(this.value)" ms-click="qryContacts(this.value)" ms-duplex="data.contacts_name">
+	          			</span>
+	          			<div class="comboDiv" style="width:260px;" ms-visible="contactsComboV"><div ms-repeat="contactsList" ms-click="chooseContacts(el)">{{el.sn}}&nbsp;&nbsp;{{el.name}}</div></div>
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>状态</label><font color="red">*</font></div>
+    				<div class="ctn-wrap">
+					<select ms-duplex="data.status" class="ui-input" data-rule="required">
+			        	<option ms-repeat="parameList[13]" ms-value="{{el.id}}">{{el.name}}</option>
+	    	    	</select>
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>商机来源</label></div>
+    				<div class="ctn-wrap">
+					<select ms-duplex="data.origin" class="ui-input">
+			        	<option ms-repeat="parameList[2]" ms-value="{{el.id}}">{{el.name}}</option>
+	    	    	</select>
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>赢单率</label><font color="red">*</font></div>
+    				<div class="ctn-wrap"><input id="gain_rate" data-rule="digits;required" class="ui-input" ms-duplex="data.gain_rate">%</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>预计金额</label></div>
+    				<div class="ctn-wrap"><input id="email" data-rule="money" class="ui-input" ms-duplex="data.estimate_price"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>预计成交日期</label></div>
+    				<div class="ctn-wrap"><input id="due_date" class="ui-input ui-datepicker-input" ms-duplex="data.due_date"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>下次联系</label></div>
+    				<div class="ctn-wrap"><input id="nextstep" class="ui-input" ms-duplex="data.nextstep"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>联系时间</label></div>
+    				<div class="ctn-wrap"><input id="nextstep_date" class="ui-input ui-datepicker-input" ms-duplex="data.nextstep_date"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>备注</label></div>
+    				<div class="ctn-wrap"><textarea id="remark" class="ui-input" ms-duplex="data.remark"></textarea></div>
+    			</li>
+    		</ul>
+    		<br>
+    		<p><b>相关商品</b> </p>
+    		<table class="table table-hover table-striped table_thead_fixed table-bordered table-condensed" id="prodcutTable">
+  				<thead>
+  					<tr>
+  						<th width="50px">&nbsp;</th>
+  						<th width="50px">&nbsp;</th>
+  						<th width="167px">商品</th>
+  						<th width="167px">售价</th>
+  						<th width="167px">报价</th>
+  						<th width="167px">数量</th>
+  						<th width="167px">金额</th>
+  						<th width="167px">描述</th>
+  					</tr>
+  				</thead>
+  				<tbody>
+  					<tr ms-repeat="data.productlist">
+  						<td class="tdPd" width="50px">{{$index+1}}</td>
+  						<td width="50px" class="tdPd"><nobr><i class="fa fa-plus mrb" ms-click="addRow" title="移除"></i><i class="fa fa-trash" ms-click="delRow" title="移除"></i></nobr></td>
+  						<td>
+	          			<input type="text" id="customer" class="ui-input" autocomplete="off" data-ref="date" ms-keyup="qryProduct(this.value,$index)"ms-click="qryProduct(this.value,$index)" ms-duplex="el.product_name" data-rule="required;">
+	          			<div class="comboDiv" ms-visible="productComboDiv==$index">
+	          				<div ms-repeat="productlist" ms-click="chooseProduct(el,productComboDiv)">{{el.billsn}}&nbsp;&nbsp;{{el.name}}</div>
+	          			</div></td>
+  						<td><input class="ui-input" data-rule="required;money" id="saleprice_{{$index}}" ms-duplex="el.sale_price" readonly="readonly" ms-change="jisuan"></td>
+  						<td><input class="ui-input" data-rule="required;money" id="quoted_price_{{$index}}" ms-duplex="el.quoted_price" ms-change="jisuan"></td>
+  						<td><input class="ui-input" data-rule="required;number" id="amount_{{$index}}" ms-duplex="el.amount" ms-change="jisuan"></td>
+  						<td><input class="ui-input" readonly="readonly" id="amt_{{$index}}" ms-value="el.amount*el.quoted_price"></td>
+  						<td><input class="ui-input" maxlength="30" id="description_{{$index}}" ms-duplex="el.description"></td>
+  					</tr>
+  				</tbody>
+    		</table>
+    	</form>
+    </div>
+</div>
+</@layout>

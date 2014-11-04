@@ -1,0 +1,93 @@
+var contentData,api = frameElement.api,oper = api.data.oper,id=api.data.rowId,$_form=$("#base_form"),addNew=false;
+var model=avalon.define({
+	$id:"ctrl",
+	data:{id:"",content:"",sort_num:1}
+});
+var THISPAGE = {
+	init : function() {
+		this.initDom();
+		this.initBtn();
+	},
+	initDom : function() {
+		if(id!=undefined&&id!=''&&id!='undefined'){
+			Public.ajaxPost(rootPath+"/sso/dailyPhrase/qryOp.json",{id:id}, function(json){
+				if(json.status==200){
+					model.data=json.data;
+				}else{
+					parent.Public.tips({type: 1, content : json.msg});
+				}
+			});
+		}else{
+			THISPAGE.initEvent();
+		}
+	},
+	initBtn:function(){
+		var e = "add" ==  api.data.oper ? [ "<i class='fa fa-save mrb'></i>保存", "关闭" ] : [ "<i class='fa fa-save mrb'></i>确定", "取消" ];
+		api.button({
+			id : "save",
+			name : e[0],
+			focus : !0,
+			callback : function() {
+				addNew=false;
+				$_form.trigger("validate");
+				return false;
+			}
+		}, {
+				id : "saveAndNew",
+				name : "<i class='fa fa-save mrb'></i>保存并新建",
+				focus : !0,
+				callback : function() {
+					$_form.trigger("validate");
+					addNew=true;
+					return false;
+				}
+			}, {
+			id : "cancel",
+			name : e[1]
+		})
+	},
+	initEvent:function(){
+		this.initValidator();
+	},
+	initValidator:function() {
+		$_form.validator({
+			rules : {
+			},
+			messages : {
+				required : "请填写{0}"
+			},
+			fields : {
+			},
+			display : function(e) {
+				return $(e).closest(".row-item").find("label").text()
+			},
+			valid : function() {
+				postData();
+			},
+			ignore : ":hidden",
+			theme : "yellow_bottom",
+			timely : 1,
+			stopOnError : true
+		});
+	}
+};
+function postData(){
+	var e = "add" == oper ? "新增日精进" : "修改日精进";
+	Public.ajaxPost(rootPath+"/sso/dailyPhrase/save.json",model.data.$model, function(t) {
+		if (200 == t.status) {
+			parent.parent.Public.tips({	content : e + "成功！"	});
+			if(addNew){
+				addNew=false;
+				base_form.reset();
+			}else{
+				model.data.id=t.data;
+			}
+			parent.THISPAGE.reloadData(null);
+		} else
+			parent.parent.Public.tips({
+				type : 1,
+				content : e + "失败！" + t.msg
+			});
+	});
+}
+THISPAGE.init();

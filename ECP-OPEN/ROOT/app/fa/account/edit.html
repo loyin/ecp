@@ -1,0 +1,47 @@
+<#include "../../inc/layout.html">
+<@layout title="财务账户" js="fa/account/edit.js">
+<style>
+body{background:#fff;}
+</style>
+<div class="manage-wrapper" ms-controller="view">
+    <div class="manage-wrap">
+    	<form action=""id="base_form">
+    		<input type="hidden" name="id" id="id" ms-duplex="data.id">
+    		<ul class="mod-form-rows manage-wrap" >
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="name">名称</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" name="name" data-rule="required;" ms-duplex="data.name"  maxlength="10"id="name" placeholder="请输入名称"></div>
+    			</li>
+    			<li class="row-item odd ">
+    				<div class="label-wrap"><label>类型</label></div>
+    				<div class="ctn-wrap">
+    					<select name="yh" id="yh"class="ui-input"  data-rule="required" ms-duplex="data.yh">
+    					<option ms-repeat="accountType" ms-value="$index">{{el}}</option>
+    					</select>
+					</div>
+    			</li>
+    			<li class="row-item odd " ms-visible="data.yh==1">
+    				<div class="label-wrap"><label for="parent_name">开户银行</label></div>
+    				<div class="ctn-wrap">
+					<input type="text" value="" class="ui-input" name="bankname" id="bankname" ms-duplex="data.bankname"></div>
+    			</li>
+    			<li class="row-item odd " ms-visible="data.yh==1">
+    				<div class="label-wrap"><label for="parent_name">开户名称</label></div>
+    				<div class="ctn-wrap">
+					<input type="text" value="" class="ui-input" name="khmc" id="khmc" ms-duplex="data.khmc"></div>
+    			</li>
+    			<li class="row-item odd ">
+    				<div class="label-wrap"><label for="parent_name">账户</label></div>
+    				<div class="ctn-wrap">
+					<input type="text" value="" class="ui-input" name="account" id="account" ms-duplex="data.account"></div>
+    			</li>
+    			<li class="row-item odd ">
+    				<div class="label-wrap"><label for="parent_name">金额</label></div>
+    				<div class="ctn-wrap">
+					<input type="text" value="" class="ui-input" name="amt" id="amt" data-rule="required;number" ms-duplex="data.amt"></div>
+    			</li>
+    		</ul>
+    	</form>
+    </div>
+</div>
+</@layout>

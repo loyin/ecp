@@ -1,0 +1,62 @@
+<#include "../../inc/layout.html">
+<@layout title="组织机构" js="sso/position/edit.js">
+<style>
+body{background:#fff;}
+.comboDiv {position:absolute;}
+</style>
+<div class="manage-wrapper" ms-controller="ctrl">
+    <div class="manage-wrap">
+    	<form action=""id="base_form">
+    		<ul class="mod-form-rows manage-wrap" >
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="name">名称</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="data.name" data-rule="required;"  maxlength="30"id="name" placeholder="请输入名称"></div>
+    			</li>
+    			<!-- 岗位 START -->
+    			<li class="row-item odd" ms-visible="data.type==1">
+    				<div class="label-wrap"><label for="department">部门</label></div>
+    				<div class="ctn-wrap">
+					<input type="text" class="ui-input" id="department" ms-duplex="data.department_name" readonly></div>
+    			</li>
+    			<li class="row-item odd" ms-visible="data.type==1">
+    				<div class="label-wrap"><label for="position">上级岗位</label></div>
+    				<div class="ctn-wrap">
+					<input type="text" ms-duplex="data.parent_name" class="ui-input" id="position" readonly></div>
+    			</li>
+    			<li class="row-item odd" ms-visible="data.type==1">
+    				<div class="label-wrap"><label>类别</label></div>
+    				<div class="ctn-wrap" id="m">
+    					<label class="radio" ms-class-checked="data.m==0" ms-click="setM(0)">非管理类</label>
+				      	<label class="radio" ms-class-checked="data.m==1" ms-click="setM(1)">管理类</label>
+					</div>
+    			</li>
+    			<li class="row-item odd" ms-visible="data.type==1">
+    				<div class="label-wrap"><label>部门负责</label></div>
+    				<div class="ctn-wrap" id="is_head">
+    					<label class="radio" ms-class-checked="data.is_head==1" ms-click="setIs_head(1)">是</label>
+    					<label class="radio" ms-class-checked="data.is_head==0" ms-click="setIs_head(0)">否</label>
+					</div>
+    			</li>
+    			<li class="row-item odd" ms-visible="data.type==1">
+    				<div class="label-wrap"><label>岗位配额</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="data.quota" value="1" id="quota" data-rule="digits"></div>
+    			</li>
+    			<!-- 岗位 END -->
+    			<!-- 部门 START -->
+    			<li class="row-item odd" ms-visible="data.type==0">
+    				<div class="label-wrap"><label for="parent_depart">上级部门</label></div>
+    				<div class="ctn-wrap">
+					<input type="text" class="ui-input" id="parent_depart" ms-duplex="data.parent_name" readonly></div>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>排序号</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="data.sort_num" id="sort_num" data-rule="digits"></div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="description">备注</label></div>
+    				<div class="ctn-wrap"><textarea ms-duplex="data.description" id="description" class="ui-input" cols="15" placeholder="添加备注信息"></textarea></div>
+    			</li>
+    		</ul>
+    	</form>
+    </div>
+</div>
+</@layout>

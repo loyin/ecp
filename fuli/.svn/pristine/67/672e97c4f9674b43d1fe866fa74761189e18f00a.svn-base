@@ -1,0 +1,78 @@
+<#include "../inc/layout.html"> <@layout title="微信菜单">
+<#assign typ=typ!'-1'>
+<#if typ==''><#assign typ=-1></#if>
+<#assign typ=(typ!'-1')?number>
+<div class="nav">
+	<ul class="cc">
+		<li class="current">返利及奖金明细列表</li>
+	</ul>
+</div>
+<div class="h_a">搜索</div>
+<form method="post"	action="${root!}/wxuser/income">
+	<div class="search_type cc mb10">
+		<div class="mb10">
+			<span class="mr20">
+			姓名： <input type="text"
+				class="input" name="uname$like" style="width: 200px;" value="${(request.getParameter("uname$like"))!}"
+				placeholder="请输入姓名...">
+			昵称： <input type="text"
+				class="input" name="nickname$like" style="width: 200px;" value="${(request.getParameter("nickname$like"))!}"
+				placeholder="请输入昵称...">
+			手机： <input type="text" class="input" name="phone$like" style="width: 200px;" value="${(request.getParameter("phone$like"))!}"
+				placeholder="请输入手机...">
+			<input type="submit" class="btn" value="搜索">
+			<a href="${root!}/wxuser/dldin" target="_blank" class="btn">导出上月</a>
+			<a href="${root!}/wxuser/dldin/1" target="_blank" class="btn">导出本月</a>
+			</span>
+		</div>
+	</div>
+	<div class="table_list">
+		<div class="p10">
+		<@paginate	action="/wxuser/list" pageNo=pageNo totalPage=page.totalPage!0
+			totalCount=page.totalRow!0/></div>
+		<table width="100%">
+			<thead>
+				<tr>
+					<td class="bold">姓名</td>
+					<td class="bold">昵称</td>
+					<td class="bold">头像</td>
+					<td class="bold">性别</td>
+					<td class="bold">手机</td>
+					<td class="bold">用户类型</td>
+					<td class="bold">类型</td>
+					<td class="bold">金额(元)</td>
+					<td class="bold">时间</td>
+				</tr>
+			</thead>
+			<tbody>
+				<#list page.list as u>
+				<tr>
+					<td>${(u.uname)!}</td>
+					<td>${(u.nickname)!}</td>
+					<td align='center'><img src="${(u.headimgurl)!}" height="35px;"></td>
+					<td>${sex[(u.sex)!0]}</td>
+					<td>${(u.phone)!}</td>
+					<td><#if u.jbm gt -1>${jbm[(u.jbm)!0]}</#if></td>
+					<td><#if u.typ==1>酒帮奖<#else>返利</#if></td>
+					<td>${((u.amt)!0)?string('#,##0.00')}</td>
+					<td>${u.ctime?string("yyyy-MM-dd HH:mm:ss")}</td>
+				</tr>
+				</#list>
+			</tbody>
+		</table>
+		<div class="p10"><@paginate	action="/wxuser/income" pageNo=pageNo totalPage=page.totalPage!0 totalCount=page.totalRow!0/></div>
+	</div>
+</form>
+<script>
+function js(){
+	if(confirm("此为手动触发月底结算，确定结算吗？")){
+		$.ajax({url:'${root!}/wxuser/js',type:'POST',dataType:'json',success:function(json){
+			if(js.success){
+				window.location.reload();
+			}
+			alert(json.msg);
+		}});
+	}
+}
+</script>
+</@layout>

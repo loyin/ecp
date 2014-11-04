@@ -1,0 +1,46 @@
+<#include "../inc/layout.html"> 
+<@layout title="平台用户">
+		<div class="common-form">
+			<form method="post" class="J_ajaxForm" action="${root!}/user/save">
+				<input type="hidden" name="id" value="${(po.id)!}">
+				<div class="h_a">用户基本属性</div>
+				<div class="table_list">
+					<table cellpadding="0" cellspacing="0" class="table_form" width="100%">
+						<tbody>
+							<tr>
+								<td width="200">用户名:</td>
+								<td><input type="text" class="input" name="login" value="${(po.login)!}" <#if (po.id)??>readonly="readonly"</#if>></td>
+							</tr>
+							<tr>
+								<td>昵称:</td>
+								<td><input type="text" class="input" name="nicename" value="${(po.nicename)!}"></td>
+							</tr>
+							<tr>
+								<td>密码:</td>
+								<td><input type="password" class="input" name="pass" value=""></td>
+							</tr>
+							<tr>
+								<td>邮箱:</td>
+								<td><input type="text" class="input" name="email" value="${(po.email)!}"></td>
+							</tr>
+							<tr>
+								<td>角色:</td>
+								<td><select name="role_id" class="normal_select">
+								<#list roleList as r>
+								<option value="${r.id}" <#if r.id==(po.role_id)!0>selected="selected"</#if>>${r.name}</option>
+								</#list>
+								</select></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="btn_wrap">
+					<div class="btn_wrap_pd">
+						<button class="btn btn_submit mr10 J_ajax_submit_btn"
+							type="submit"><#if (po.id)??>修改<#else>添加</#if></button>
+						<a class="btn" href="${root!}/user/list">返回</a>
+					</div>
+				</div>
+			</form>
+		</div>
+ ·</@layout>

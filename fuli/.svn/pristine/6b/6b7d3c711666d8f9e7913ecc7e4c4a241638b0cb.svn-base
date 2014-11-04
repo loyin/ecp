@@ -1,0 +1,122 @@
+package net.loyin.util.wechat.bean.act;
+
+public class WcActLipin {
+	private int lid;
+	private String actno;
+	private String opt;
+	private String cardid;
+	private String name;
+	private String phone;
+	private String pro;
+	private String city;
+	private String county;
+	private String street;
+	private String source;
+	private long createTime;
+	private String flag;
+
+	public int getLid() {
+		return lid;
+	}
+
+	public void setLid(int lid) {
+		this.lid = lid;
+	}
+
+	public String getActno() {
+		return actno;
+	}
+
+	public void setActno(String actno) {
+		this.actno = actno;
+	}
+
+	public String getOpt() {
+		return opt;
+	}
+
+	public void setOpt(String opt) {
+		this.opt = opt;
+	}
+
+	public String getCardid() {
+		return cardid;
+	}
+
+	public void setCardid(String cardid) {
+		this.cardid = cardid;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getPro() {
+		return pro;
+	}
+
+	public void setPro(String pro) {
+		this.pro = pro;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getCounty() {
+		return county;
+	}
+
+	public void setCounty(String county) {
+		this.county = county;
+	}
+
+	public String getStreet() {
+		return street;
+	}
+
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+	public long getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(long createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getFlag() {
+		return flag;
+	}
+
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+
+}

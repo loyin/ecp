@@ -1,0 +1,44 @@
+<#include "../inc/layout.html"> <@layout title="微信菜单内容">
+<div class="nav">
+	<ul class="cc">
+		<li class="current"><a href="${root!}/wxmenuDetail/list?qryField=keywd&keywd=${keywd}">菜单内容</a></li>
+		<li><a href="${root!}/wxmenuDetail/editpic?keywd=${keywd}">添加图文信息</a></li>
+		<li><a href="${root!}/wxmenuDetail/edittext?keywd=${keywd}">添加关联信息</a></li>
+	</ul>
+</div>
+<form class="J_ajaxForm" action="${root!}/wxmenuDetail/list?qryField=keywd&keywd=${keywd}" method="post" enctype="multipart/form-data">
+	<div class="table_list">
+		<table width="100%">
+			<thead>
+				<tr>
+					<td>排序</td>
+					<td>类型</td>
+					<td>图片</td>
+					<td>标题</td>
+					<td>内容</td>
+					<td>链接</td>
+					<td>修改时间</td>
+					<td>创建时间</td>
+					<td>管理操作</td>
+				</tr>
+			</thead>
+			<tbody>
+				<#list page.list as u>
+				 <tr>
+					<td>${(u.sort)!}</td>
+					<td align='center'><#if (u.flag)=='pic'>图文<#else>文本</#if></td>
+					<td>${(u.pic)!}</td>
+					<td>${(u.title)!}</td>
+					<td><#if (u.flag)!='pic'>${(u.conts)!}</#if></td>
+					<td>${(u.url)!}</td>
+					<td>${(u.update_time)!}</td>
+					<td>${(u.create_time)!}</td>
+					<td class="text-c"><a href="${root!}/wxmenuDetail/edit${u.flag}/${u.id}">修改</a>|
+					<a class="J_ajax_del" href="${root!}/wxmenuDetail/del/${u.id}">删除</a></td>
+				</tr>
+				</#list>
+			</tbody>
+		</table>
+	</div>
+</form>
+</@layout>

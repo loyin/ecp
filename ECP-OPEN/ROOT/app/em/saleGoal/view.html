@@ -1,0 +1,321 @@
+<#include "../../inc/layout.html"> <@layout title="销售目标"
+js="em/saleGoal/view.js">
+<style>
+body {background: #fff;}
+.manage-wrap .ui-input{width:100px;text-align: right;}
+.cc {margin-top: 15px;}
+.tab1 {float:left;
+background-color: #fff;
+border: 1px #d8d8d8 solid;
+width: 220px;
+margin-right: 15px;
+padding:10px;
+}
+.text-right{padding-right:10px;}
+</style>
+<div class="manage-wrapper" ms-controller="ctrl">
+<form action=""id="base_form">
+	<div class="manage-wrap">
+		<div class="crm-salestarget-setting-container">
+		姓名：{{data.realname}}
+		部门：{{data.department_name}}
+	<div>
+	</div>
+	<div class="crm-salestarget-setting-total-container fn-clear">
+		{{data.year}}年度业务目标是 ¥&nbsp;{{data.y|money}}&nbsp;元，完成{{data.yv|money}}元，{{fixedNum((data.yv/data.y)*100)}}%
+	</div>
+	<div class="cc fn-clear">
+		<div class="tab1 fn-left fn-clear">
+			<table>
+				<thead>
+					<tr>
+						<th>
+							第一季度
+						</th>
+						<th>
+							 ¥&nbsp;{{data.q1|money}}&nbsp;元
+						</th>
+					</tr>
+					<tr>
+						<th class="text-right">
+							完成
+						</th>
+						<th ms-class-red="data.qv1<data.q1">
+							 ¥&nbsp;{{data.qv1|money}}&nbsp;元
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							{{data.year}}年1月
+						</td>
+						<td>
+							¥&nbsp;{{data.m1|money}}&nbsp;元
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							完成
+						</td>
+						<td ms-class-red="data.mv1<data.m1">
+							¥&nbsp;{{data.mv1|money}}&nbsp;元
+						</td>
+					</tr>
+					<tr>
+						<td>
+							{{data.year}}年2月
+						</td>
+						<td>
+							¥&nbsp;{{data.m2|money}}&nbsp;元
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							完成
+						</td>
+						<td ms-class-red="data.mv2<data.m2">
+							¥&nbsp;{{data.mv2|money}}&nbsp;元
+						</td>
+					</tr>
+					<tr>
+						<td>
+							{{data.year}}年3月
+						</td>
+						<td>
+							¥&nbsp;{{data.m3|money}}&nbsp;元
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							完成
+						</td>
+						<td ms-class-red="data.mv3<data.m3">
+							¥&nbsp;{{data.mv3|money}}&nbsp;元
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="tab1 fn-left fn-clear">
+			<table>
+				<thead>
+					<tr>
+						<th>
+							第二季度
+						</th>
+						<th>
+							 ¥&nbsp;{{data.q2|money}}&nbsp;元
+						</th>
+					</tr>
+					<tr>
+						<th class="text-right">
+							完成
+						</th>
+						<th ms-class-red="data.qv2<data.q2">
+							 ¥&nbsp;{{data.qv2|money}}&nbsp;元
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							{{data.year}}年4月
+						</td>
+						<td>
+							¥&nbsp;{{data.m4|money}}&nbsp;元
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+						完成
+						</td>
+						<td ms-class-red="data.mv4<data.m4">
+							¥&nbsp;{{data.mv4|money}}&nbsp;元
+						</td>
+					</tr>
+					<tr>
+						<td>
+							{{data.year}}年5月
+						</td>
+						<td>
+							¥&nbsp;{{data.m5|money}}&nbsp;元
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							完成
+						</td>
+						<td ms-class-red="data.mv5<data.m5">
+							¥&nbsp;{{data.mv5|money}}&nbsp;元
+						</td>
+					</tr>
+					<tr>
+						<td>
+							{{data.year}}年6月
+						</td>
+						<td>
+							¥&nbsp;{{data.m6|money}}&nbsp;元
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							完成
+						</td>
+						<td ms-class-red="data.mv6<data.m6">
+							¥&nbsp;{{data.mv6|money}}&nbsp;元
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="tab1 fn-left">
+			<table>
+				<thead>
+					<tr>
+						<th>
+							第三季度
+						</th>
+						<th>
+							 ¥&nbsp;{{data.q3|money}}&nbsp;元
+						</th>
+					</tr>
+					<tr>
+						<th class="text-right">
+							完成
+						</th>
+						<th ms-class-red="data.qv3<data.q3">
+							 ¥&nbsp;{{data.qv3|money}}&nbsp;元
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							{{data.year}}年7月
+						</td>
+						<td>
+							¥&nbsp;{{data.m7|money}}&nbsp;元
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							完成
+						</td>
+						<td ms-class-red="data.mv7<data.m7">
+							¥&nbsp;{{data.mv7|money}}&nbsp;元
+						</td>
+					</tr>
+					<tr>
+						<td>
+							{{data.year}}年8月
+						</td>
+						<td>
+							¥&nbsp;{{data.m8|money}}&nbsp;元
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							完成
+						</td>
+						<td ms-class-red="data.mv8<data.m8">
+							¥&nbsp;{{data.mv8|money}}&nbsp;元
+						</td>
+					</tr>
+					<tr>
+						<td>
+							{{data.year}}年9月
+						</td>
+						<td>
+							¥&nbsp;{{data.m9|money}}&nbsp;元
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							完成
+						</td>
+						<td ms-class-red="data.mv9<data.m9">
+							¥&nbsp;{{data.mv9|money}}&nbsp;元
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="tab1 tab1-last fn-left">
+			<table>
+				<thead>
+					<tr>
+						<th>
+							第四季度
+						</th>
+						<th>
+							 ¥&nbsp;{{data.q4|money}}&nbsp;元
+						</th>
+					</tr>
+					<tr>
+						<th class="text-right">
+							完成
+						</th>
+						<th ms-class-red="data.qv4<data.q4">
+							 ¥&nbsp;{{data.qv4|money}}&nbsp;元
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							{{data.year}}年10月
+						</td>
+						<td>
+							¥&nbsp;{{data.m10|money}}&nbsp;元
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							完成
+						</td>
+						<td ms-class-red="data.mv10<data.m10">
+							¥&nbsp;{{data.mv10|money}}&nbsp;元
+						</td>
+					</tr>
+					<tr>
+						<td>
+							{{data.year}}年11月
+						</td>
+						<td>
+							¥&nbsp;{{data.m11|money}}&nbsp;元
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							完成
+						</td>
+						<td ms-class-red="data.mv11<data.m11">
+							¥&nbsp;{{data.mv11|money}}&nbsp;元
+						</td>
+					</tr>
+					<tr>
+						<td>
+							{{data.year}}年12月
+						</td>
+						<td>
+							¥&nbsp;{{data.m12|money}}&nbsp;元
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							完成
+						</td>
+						<td ms-class-red="data.mv12<data.m12">
+							¥&nbsp;{{data.mv12|money}}&nbsp;元
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+	</div>
+	</form>
+</div>
+</@layout>

@@ -1,0 +1,28 @@
+package net.loyin.ctrl;
+
+import net.loyin.jfinal.anatation.RouteBind;
+
+/**
+ * 微信回复设置
+ * @author 龙影
+ */
+@RouteBind(path="/wxanswer")
+@SuppressWarnings("rawtypes")
+public class WxAnswerCtrl extends AdminBaseController {
+	/**默认回复*/
+	public void index() {
+
+	}
+	/**固定回复*/
+	public void fixed() {
+
+	}
+	/**智能回复*/
+	public void roboot() {
+
+	}
+	/**系统回复*/
+	public void sys() {
+
+	}
+}

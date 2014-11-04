@@ -1,0 +1,28 @@
+package net.loyin.ctrl;
+
+import net.loyin.jfinal.anatation.RouteBind;
+import net.loyin.model.sys.WxUser;
+/**
+ * 微信用户管理
+ * @author 龙影
+ */
+@RouteBind(path = "/wxuser")
+public class WxUserCtrl extends AdminBaseController<WxUser> {
+	
+	public WxUserCtrl(){
+		this.tableName=WxUser.tableName;
+		this.modelClass=WxUser.class;
+	}
+	/***
+	 * 从微信公众平台获取关注的用户。
+	 */
+	public void getUserList(){
+		try{
+		WxUser.dao.insert();
+			this.rendJson_(true, "获取成功！");
+		}catch(Exception e){
+			this.rendJson_(false, "获取失败！");
+		}
+	}
+	
+}

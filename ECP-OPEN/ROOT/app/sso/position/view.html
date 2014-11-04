@@ -1,0 +1,56 @@
+<#include "../../inc/layout.html">
+<@layout title="组织机构" js="sso/position/view.js">
+<style>
+body{background:#fff;}
+.type1,.type0{display:none;}
+</style>
+<div class="manage-wrapper" ms-controller="view">
+    <div class="manage-wrap">
+    		<ul class="mod-form-rows manage-wrap" >
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="name">名称</label></div>
+    				<div class="ctn-wrap"><span id="name">{{data.name}}</span></div>
+    			</li>
+    			<!-- 岗位 START -->
+    			<li class="row-item odd type1">
+    				<input type="hidden" name="department_id" id="department_id">
+    				<div class="label-wrap"><label for="department">部门</label></div>
+    				<div class="ctn-wrap">
+					<span id="department" >{{data.department_name}}</span></div>
+    			</li>
+    			<li class="row-item odd type1">
+    				<div class="label-wrap"><label for="position">上级岗位</label></div>
+    				<div class="ctn-wrap">
+					<span id="position" >{{data.parent_name}}</span></div>
+    			</li>
+    			<li class="row-item odd type1">
+    				<div class="label-wrap"><label>类别</label></div>
+    				<div class="ctn-wrap" id="m">{{data.m|m}}</div>
+    			</li>
+    			<li class="row-item odd type1">
+    				<div class="label-wrap"><label>部门负责</label></div>
+    				<div class="ctn-wrap" id="is_head">{{data.is_head|isHead}}</div>
+    			</li>
+    			<li class="row-item odd type1">
+    				<div class="label-wrap"><label>岗位配额</label></div>
+    				<div class="ctn-wrap" id="quota">{{data.quota}}</div>
+    			</li>
+    			<!-- 岗位 END -->
+    			<!-- 部门 START -->
+    			<li class="row-item odd type0">
+    				<div class="label-wrap"><label for="parent_depart">上级部门</label></div>
+    				<div class="ctn-wrap">
+					<span id="parent_depart" >{{data.parent_name}}</span></div>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>排序</label></div>
+    				<div class="ctn-wrap" id="sort_num">{{data.sort_num}}</div>
+    			</li>
+    			<!-- 部门 END -->
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="description">备注</label></div>
+    				<div class="ctn-wrap" id="description">{{data.description|html}}</div>
+    			</li>
+    		</ul>
+    </div>
+</div>
+</@layout>

@@ -1,0 +1,76 @@
+<#include "../../inc/layout.html">
+<@layout title="应收应付明细表" js="fa/payReceivAbles/wlqk.js">
+<style>
+html{overflow:auto;}
+.comboDiv{position:absolute;left:90px;}
+.comboDiv div{height:30px;}
+</style>
+<div class="wrapper" ms-controller="view">
+  <div class="mod-search cf" ms-if="nprint">
+    <div class="fl">
+      <ul class="ul-inline">
+        <li>
+        	<label>来往单位:</label>
+        	<input type="text" id="customer" class="ui-input" autocomplete="off" style="width:216px;" ms-keyup="qryCustomer(this.value)" ms-click="qryCustomer(this.value)">
+		    <div class="comboDiv" style="width:260px;" ms-visible="custComboV">
+		    	<div ms-repeat="customerList" ms-click="chooseCust(el)">{{el.sn}}&nbsp;&nbsp;{{el.name}}</div>
+		    </div>
+        </li>
+        <li>
+        	<label>来往单位性质:</label>
+        	<select ms-duplex="query.csttype" class="ui-input" style="width:200px;">
+        		<option value="">全部</option>
+        		<option ms-repeat="csttypeList" ms-value="$index">{{el}}</option>
+        	</select>
+        </li>
+        <li>
+        <a class="ui-btn mrb" ms-click="loadData" title="查询"><i class="fa fa-search"></i></a>
+        </li>
+      </ul>
+    </div>
+    <div class="fr">
+    <a class="ui-btn mrb" ms-click="printRpt" title="打印"><i class="fa fa-print"></i></a>
+<!--     <a class="ui-btn mrb" id="btn_down" title="导出"><i class="fa fa-download"></i></a> -->
+    </div>
+  </div>
+  <div class="bills">
+    <p style="font-size:24px;text-align:center;">
+    	往来单位欠款表
+    </p>
+    <p>
+    <span class="fr">制表人：{{user.realname}}&nbsp;&nbsp;制表日期：${(now?string('yyyy年MM月dd日'))}</span>
+    </p>
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>行号</th>
+				<th>往来单位编号</th>
+				<th>名称</th>
+				<th>来往单位性质</th>
+				<th>应收余额</th>
+				<th>应付余额</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ms-repeat="list">
+				<td>{{$index+1}}</td>
+				<td>{{el.sn}}</td>
+				<td>{{el.customer_name}}</td>
+				<td>{{el.csttype|csttype}}</td>
+				<td align="right">{{el.amt1|money}}</td>
+				<td align="right">{{el.amt0|money}}</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="4" align="right"><b>合计</b></td>
+				<td align="right">{{amt1_t|money}}</td>
+				<td align="right">{{amt0_t|money}}</td>
+			</tr>
+		</tfoot>
+	</table>
+  </div>
+</div>
+<script>
+var type=${type!0};</script>
+</@layout>

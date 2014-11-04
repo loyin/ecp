@@ -1,0 +1,50 @@
+package net.loyin.util.wechat.bean;
+
+public class WcCj {
+	private int cjId;
+	private long cjTime;
+	private String cjPhone;
+	private String cjNum;
+	private String remark;
+
+	public int getCjId() {
+		return cjId;
+	}
+
+	public void setCjId(int cjId) {
+		this.cjId = cjId;
+	}
+
+	public long getCjTime() {
+		return cjTime;
+	}
+
+	public void setCjTime(long cjTime) {
+		this.cjTime = cjTime;
+	}
+
+	public String getCjPhone() {
+		return cjPhone;
+	}
+
+	public void setCjPhone(String cjPhone) {
+		this.cjPhone = cjPhone;
+	}
+
+	public String getCjNum() {
+		return cjNum;
+	}
+
+	public void setCjNum(String cjNum) {
+		this.cjNum = cjNum;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+}

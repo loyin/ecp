@@ -1,0 +1,106 @@
+<#include "../../inc/layout.html">
+<@layout title="营销活动" js="crm/campaigns/edit.js">
+<style>
+body{background: #fff;}
+</style>
+<div class="manage-wrapper" ms-controller="ctrl">
+    <div class="manage-wrap">
+    	<form action=""id="base_form">
+    		<ul class="mod-form-rows base-form" >
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>活动名称<font color="red">*</font></label></div>
+    				<div class="ctn-wrap"><input id="name" class="ui-input" ms-duplex="data.name" max-length="50" data-rule="required;"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>活动状态</label><font color="red">*</font></div>
+    				<div class="ctn-wrap">
+						<select ms-duplex="data.status" class="ui-input" data-rule="required;">
+							<option ms-repeat="status" ms-value="$index">{{el}}</option>
+						</select>
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>负责人</label><font color="red">*</font></div>
+    				<div class="ctn-wrap">
+    				<select ms-duplex="data.head_id" class="ui-input" data-rule="required">
+    					<option></option>
+    					<option ms-repeat="userList" ms-value="el.id">{{el.realname}}({{el.department_name}}-{{el.position_name}})</option>
+    				</select>
+          			</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>活动类型</label><font color="red">*</font></div>
+    				<div class="ctn-wrap">
+						<select ms-duplex="data.type" class="ui-input">
+							<option ms-repeat="type" ms-value="el">{{el}}</option>
+						</select>
+					</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>预期结束日期</label></div>
+    				<div class="ctn-wrap"><input id="end_date" class="ui-input ui-datepicker-input" ms-duplex="data.end_date"></div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>目标听众</label></div>
+    				<div class="ctn-wrap"><input id="hearer" class="ui-input" ms-duplex="data.hearer"></div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>目标大小</label></div>
+    				<div class="ctn-wrap"><input id="hearer_size" class="ui-input" ms-duplex="data.hearer_size" data-rule="digits"></div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>发送数量</label></div>
+    				<div class="ctn-wrap"><input id="send_count" class="ui-input" ms-duplex="data.send_count" data-rule="digits"></div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>成本预算</label></div>
+    				<div class="ctn-wrap"><input id="cost_budget" class="ui-input" ms-duplex="data.cost_budget" data-rule="money"></div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>预期反应</label></div>
+    				<div class="ctn-wrap">
+    					<select ms-duplex="data.expect_reaction" class="ui-input">
+							<option ms-repeat="expect_reaction" ms-value="el">{{el}}</option>
+						</select></div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>预期收入</label></div>
+    				<div class="ctn-wrap"><input id="expect_income" class="ui-input" ms-duplex="data.expect_income" data-rule="money"></div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>预期销量</label></div>
+    				<div class="ctn-wrap"><input id="exp_sale_count" class="ui-input" ms-duplex="data.exp_sale_count" data-rule="digits"></div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>预期反应数量</label></div>
+    				<div class="ctn-wrap"><input id="exp_rec_count" class="ui-input" ms-duplex="data.exp_rec_count" data-rule="digits"></div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>预期回报率</label></div>
+    				<div class="ctn-wrap"><input id="exp_rate_return" class="ui-input" style="width:100px" ms-duplex="data.exp_rate_return" data-rule="digits">%</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>实际成本</label></div>
+    				<div class="ctn-wrap"><input id="fact_cost" class="ui-input" ms-duplex="data.fact_cost" data-rule="money"></div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>实际销量</label></div>
+    				<div class="ctn-wrap"><input id="fact_sale_count" class="ui-input" ms-duplex="data.fact_sale_count" data-rule="digits"></div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>实际反应数量</label></div>
+    				<div class="ctn-wrap"><input id="fact_rec_count" class="ui-input" ms-duplex="data.fact_rec_count" data-rule="digits"></div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>实际回报率</label></div>
+    				<div class="ctn-wrap"><input id="fact_rate_return" class="ui-input" style="width:100px" ms-duplex="data.fact_rate_return" data-rule="digits">%</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>备注</label></div>
+    				<div class="ctn-wrap"><textarea id="remark" class="ui-input" ms-duplex="data.remark"></textarea></div>
+    			</li>
+    		</ul>
+    	</form>
+    </div>
+</div>
+</@layout>

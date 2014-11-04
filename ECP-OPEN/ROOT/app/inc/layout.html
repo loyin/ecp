@@ -1,0 +1,60 @@
+<#macro layout title="" js="">
+<!doctype html>
+<html>
+<head>
+<title>${title!}-朗天中小企业管理平台</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1280, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<META HTTP-EQUIV="pragma" CONTENT="no-cache">
+<link href="${root!}/assets/js/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="${root!}/assets/js/plugins/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css">
+<link href="${root!}/assets/css/common.css" rel="stylesheet" type="text/css">
+<link href="${root!}/assets/css/blue/ui.min.css" rel="stylesheet">
+<link href="${root!}/assets/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet" href="${root!}/assets/js/plugins/validator/jquery.validator.css">
+<link rel="stylesheet" href="${root!}/assets/css/zTreeStyle.css">
+<style>html{overflow:auto;}</style>
+<!--[if lt IE 8]>
+ <link href="${root!}/assets/css/font-awesome-ie7.min.css" rel="stylesheet">
+<![endif]-->
+<link href="${root!}/assets/css/base.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="${root!}/assets/back2top/back2top.css">
+<script src="${root!}/assets/js/libs/jquery-1.10.2.min.js"></script>
+</head>
+<body>
+<#nested>
+<script src="${root!}/assets/js/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="${root!}/assets/js/libs/json2.js"></script>
+<script src="${root!}/assets/js/libs/json-tool.js"></script>
+<script type="text/javascript" charset="utf-8" src="${root!}/assets/js/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="${root!}/assets/js/ueditor/third-party/zeroclipboard/ZeroClipboard.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="${root!}/assets/js/ueditor/ueditor.all.min.js"> </script>
+<script type="text/javascript" charset="utf-8" src="${root!}/assets/js/ueditor/lang/zh-cn/zh-cn.js"></script>
+<script src="${root!}/assets/js/grid.js"></script>
+<script src="${root!}/assets/js/plugins.js"></script>
+<script src="${root!}/assets/js/plugins/jquery.dialog.js?self=true"></script>
+<script src="${root!}/assets/js/plugins/validator/jquery.validator.js"></script>
+<script src="${root!}/assets/js/plugins/validator/local/zh_CN.js"></script>
+<script src="${root!}/assets/avalon/avalon.min.js"></script>
+<script src="${root!}/assets/js/plugins/uploadify/jquery.uploadify.min.js"></script>
+<script src="${root!}/assets/js/tabs.js"></script>
+<script src="${root!}/assets/js/common.js"></script>
+<script src="${root!}/assets/back2top/back2top.js"></script>
+<script src="${root!}/assets/js/esl/esl.js"></script>
+<!-- <script src="${root!}/assets/js/echarts/r.js"></script> -->
+<script type="text/javascript">
+var rootPath = "${root!}",oniuiDir=rootPath+"/assets/avalon/oniui/";
+if(!SYSTEM){
+	var SYSTEM=parent.SYSTEM;
+}
+if(!CONFIG){
+	var CONFIG=parent.CONFIG;
+}
+</script>
+<#if js!=''>
+<script src="${root!}/app/${js}"></script>
+</#if>
+</body>
+</html>
+</#macro>

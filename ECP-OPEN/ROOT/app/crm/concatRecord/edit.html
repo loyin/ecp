@@ -1,0 +1,82 @@
+<#include "../../inc/layout.html"> <@layout title="客户联系记录"
+js="crm/concatRecord/edit.js">
+<style>
+body {background: #fff;display: block;}
+.comboDiv{position:absolute;left:125px;}
+</style>
+<div class="manage-wrapper" ms-controller="ctrl">
+	<div class="manage-wrap">
+		<form action="" id="base_form">
+			<ul class="mod-form-rows base-form" >
+    			<li class="row-item">
+    				<div class="label-wrap"><label>联系主题</label><font color="red">*</font></div>
+    				<div class="ctn-wrap"><input id="subject" class="ui-input" ms-duplex="data.subject" data-rule="required;"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>联系类型</label><font color="red">*</font></div>
+    				<div class="ctn-wrap">
+					<select ms-duplex="data.concat_type" class="ui-input" id="catype" data-rule="required">
+			        	<option ms-repeat="parameList[7]" ms-value="{{el.id}}">{{el.name}}</option>
+			        </select>
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>客户状态</label><font color="red">*</font></div>
+    				<div class="ctn-wrap">
+					<select ms-duplex="data.cust_status" class="ui-input" id="cust_status" data-rule="required">
+			        	<option ms-repeat="parameList[9]" ms-value="{{el.id}}">{{el.name}}</option>
+			        </select>
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>销售阶段</label><font color="red">*</font></div>
+    				<div class="ctn-wrap">
+					<select ms-duplex="data.sale_stage" class="ui-input" id="sale_stage" data-rule="required">
+			        	<option ms-repeat="parameList[10]" ms-value="{{el.id}}">{{el.name}}</option>
+			        </select>
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>客户</label><font color="red">*</font></div>
+    				<div class="ctn-wrap">
+	    				<span class="ui-combo-wrap">
+	          			<input type="text" id="customer" class="input-txt" autocomplete="off" ms-keyup="qryCustomer(this.value)" ms-click="qryCustomer(this.value)" ms-duplex="data.customer_name" data-rule="required;">
+	          			</span>
+	          			<div class="comboDiv" style="width:260px;" ms-visible="custComboV"><div ms-repeat="customerList" ms-click="chooseCust(el)">{{el.sn}}&nbsp;&nbsp;{{el.name}}</div></div>
+          			</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>联系日期</label></div>
+    				<div class="ctn-wrap"><input id="concat_datetime" class="ui-input ui-datepicker-input" ms-duplex="data.concat_datetime"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>联系人</label><font color="red">*</font></div>
+    				<div class="ctn-wrap">
+						<span class="ui-combo-wrap">
+	          			<input type="text" id="contacts" class="input-txt" autocomplete="off" ms-keyup="qryContacts(this.value)" ms-duplex="data.contacts_name">
+	          			</span>
+	          			<div class="comboDiv" style="width:260px;" ms-visible="contactsComboV"><div ms-repeat="contactsList" ms-click="chooseContacts(el)">{{el.sn}}&nbsp;&nbsp;{{el.name}}</div></div>
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>下次回访日期</label></div>
+    				<div class="ctn-wrap"><input id="next_datetime" class="ui-input ui-datepicker-input" ms-duplex="data.next_datetime"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>商机</label></div>
+    				<div class="ctn-wrap">
+	    				<span class="ui-combo-wrap">
+	          			<input type="text" id="business_id" class="input-txt" autocomplete="off" ms-keyup="qryBiz(this.value)" ms-duplex="data.business_name">
+	          			</span>
+	          			<div class="comboDiv" style="width:260px;" ms-visible="bizComboV"><div ms-repeat="bizList" ms-click="chooseBiz(el)">{{el.name}}</div></div>
+          			</div>
+    			</li>
+    			<li class="row-item oneRow">
+    				<div class="label-wrap"><label>联系内容</label></div>
+    				<div class="ctn-wrap"><textarea id="content" style="width:100%;" class="ui-input" ms-duplex="data.content"></textarea></div>
+    			</li>
+    		</ul>
+		</form>
+	</div>
+</div>
+</@layout>

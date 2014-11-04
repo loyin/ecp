@@ -1,0 +1,56 @@
+<#include "../../inc/layout.html">
+<@layout title="财务科目" js="fa/subject/edit.js">
+<style>
+body{background:#fff;}
+</style>
+<div class="manage-wrapper" ms-controller="ctrl">
+    <div class="manage-wrap">
+    	<form action=""id="base_form">
+    		<input type="hidden" name="id" id="id" ms-duplex="data.id">
+    		<input type="hidden" name="level" id="level" value="1" ms-duplex="data.level">
+    		<input type="hidden" name="parent_id" id="parent_id" ms-duplex="data.parent_id">
+    		<ul class="mod-form-rows manage-wrap" >
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="code">编码</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" name="code" data-rule="required;"  maxlength="10"id="code" placeholder="请输入编码" ms-duplex="data.code"></div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="name">名称</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" name="name" data-rule="required;"  maxlength="10"id="name" placeholder="请输入名称" ms-duplex="data.name"></div>
+    			</li>
+    			<li class="row-item odd ">
+    				<div class="label-wrap"><label>类型</label></div>
+    				<div class="ctn-wrap">
+    					<select name="type" id="type"class="ui-input"  data-rule="required" ms-duplex="data.type" ms-change="typeChange(this.value)">
+    					<option ms-repeat="type" ms-value="$index">{{el}}</option>
+    					</select>
+					</div>
+    			</li>
+    			<li class="row-item odd ">
+    				<div class="label-wrap"><label>科目类别</label></div>
+    				<div class="ctn-wrap">
+    					<select name="category" id="category"class="ui-input" data-rule="required"ms-duplex="data.category">
+    					<option ms-repeat="category_json" ms-value="el.val">{{el.text}}</option>
+    					</select>
+					</div>
+    			</li>
+    			<li class="row-item odd ">
+    				<div class="label-wrap"><label for="parent_name">上级科目</label></div>
+    				<div class="ctn-wrap">
+					<input type="text" value="" class="ui-input" id="parent_name" readonly  ms-duplex="data.parent_name"></div>
+    			</li>
+    			<li class="row-item odd ">
+    				<div class="label-wrap"><label>余额方向</label></div>
+    				<div class="ctn-wrap" id="direction">
+    					<label class="radio" ms-repeat="direction" ms-class-checked="data.direction==$index" ms-click="setDirection($index)">{{el}}</label>
+					</div>
+    			</li>
+    			<!-- <li class="row-item odd">
+    				<div class="label-wrap"><label for="description">备注</label></div>
+    				<div class="ctn-wrap"><textarea name="description"  ms-duplex="data.description"id="description" class="ui-input" cols="15" placeholder="添加备注信息"></textarea></div>
+    			</li> -->
+    		</ul>
+    	</form>
+    </div>
+</div>
+</@layout>

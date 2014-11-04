@@ -1,0 +1,60 @@
+package net.loyin.ctrl;
+
+import net.loyin.jfinal.anatation.RouteBind;
+import net.loyin.jfinal.model.IdGenerater;
+import net.loyin.model.sys.WxmenuDetail;
+import net.loyin.util.PropertiesContent;
+
+import com.jfinal.upload.UploadFile;
+
+/**
+ * 微信菜单详情管理
+ * 
+ * @author 龙影
+ */
+@RouteBind(path = "/wxmenuDetail")
+public class WxmenuDetailCtrl extends AdminBaseController<WxmenuDetail> {
+	public WxmenuDetailCtrl() {
+		this.tableName = WxmenuDetail.tableName;
+		this.modelClass = WxmenuDetail.class;
+	}
+
+	public void init() {
+		if (uploadDir == null) {
+			uploadDir = this.getRequest().getRealPath("/upload/");
+		}
+	}
+	public void editpic(){
+		super.edit();
+	}
+	public void edittext(){
+		super.edit();
+	}
+	public void save(){
+		init();
+		UploadFile uf = this.getFile("file");//注意：必须要要先处理上传文件 然后才能获取request的里值
+		String pic=null;
+		if (uf != null) {
+			String filename = IdGenerater.me.timeTo62() + ".jpg";
+			pic = PropertiesContent.get("domain") + "upload/menu/"+ filename;
+			UploadTools.uploadFile(uf.getFile(), filename, uploadDir + "/menu/");
+			uf.getFile().delete();
+		}
+		
+		WxmenuDetail m = (WxmenuDetail) this.getModel2(modelClass);
+		if(pic!=null)
+		m.set("pic", pic);
+		Long id = m.getLong("id");
+		try {
+			if (id == null || id == 0L) {
+				m.save();
+			} else {
+				m.update();
+			}
+			this.rendJson_(true, "保存成功！");
+		} catch (Exception e) {
+			log.error("添加微信菜单内容异常", e);
+			this.rendJson_(false, "保存异常，请检查是否填写正确！");
+		}
+	}
+}

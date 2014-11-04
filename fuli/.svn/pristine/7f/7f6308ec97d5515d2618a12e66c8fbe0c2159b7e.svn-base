@@ -1,0 +1,94 @@
+package net.loyin.util.wechat.bean;
+
+public class WcBqn {
+	private int bqnId;
+	private String fromUserName;
+	private long createTime;
+	private String bqnPhone;
+	private String bqnName;
+	private String isSuccess;
+	private String errorcode;
+	private String source;
+	private String bqnMsg;
+	private String bqnLogs;
+
+	public int getBqnId() {
+		return bqnId;
+	}
+
+	public void setBqnId(int bqnId) {
+		this.bqnId = bqnId;
+	}
+
+	public String getFromUserName() {
+		return fromUserName;
+	}
+
+	public void setFromUserName(String fromUserName) {
+		this.fromUserName = fromUserName;
+	}
+
+	public long getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(long createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getBqnPhone() {
+		return bqnPhone;
+	}
+
+	public void setBqnPhone(String bqnPhone) {
+		this.bqnPhone = bqnPhone;
+	}
+
+	public String getBqnName() {
+		return bqnName;
+	}
+
+	public void setBqnName(String bqnName) {
+		this.bqnName = bqnName;
+	}
+
+	public String getIsSuccess() {
+		return isSuccess;
+	}
+
+	public void setIsSuccess(String isSuccess) {
+		this.isSuccess = isSuccess;
+	}
+
+	public String getErrorcode() {
+		return errorcode;
+	}
+
+	public void setErrorcode(String errorcode) {
+		this.errorcode = errorcode;
+	}
+
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+	public String getBqnMsg() {
+		return bqnMsg;
+	}
+
+	public void setBqnMsg(String bqnMsg) {
+		this.bqnMsg = bqnMsg;
+	}
+
+	public String getBqnLogs() {
+		return bqnLogs;
+	}
+
+	public void setBqnLogs(String bqnLogs) {
+		this.bqnLogs = bqnLogs;
+	}
+}

@@ -1,0 +1,74 @@
+<#include "../../inc/layout.html"> <@layout title="客户联系记录"
+js="crm/concatRecord/view.js">
+<style>
+body {background: #fff;display: block;}
+</style>
+<div class="manage-wrapper" ms-controller="view">
+	<div class="manage-wrap">
+		<form action="" id="base_form">
+			<ul class="mod-form-rows base-form" >
+    			<li class="row-item">
+    				<div class="label-wrap"><label>联系主题</label></div>
+    				<div class="ctn-wrap">{{data.subject}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>联系类型</label></div>
+    				<div class="ctn-wrap">
+					{{data.concat_type|custParame}}
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>客户状态</label></div>
+    				<div class="ctn-wrap">
+						{{data.cust_status|custParame}}
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>销售阶段</label></div>
+    				<div class="ctn-wrap">
+					{{data.sale_stage|custParame}}
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>客户</label></div>
+    				<div class="ctn-wrap">
+	    				{{data.customer_name}}
+          			</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>联系人</label></div>
+    				<div class="ctn-wrap">
+	          			{{data.contacts_name}}
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>商机</label></div>
+    				<div class="ctn-wrap">
+	          			{{data.business_name}}
+          			</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>联系日期</label></div>
+    				<div class="ctn-wrap">{{data.concat_datetime}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>下次回访日期</label></div>
+    				<div class="ctn-wrap">{{data.next_datetime}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>创建人</label></div>
+    				<div class="ctn-wrap">{{data.creater_name}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>创建</label></div>
+    				<div class="ctn-wrap">{{data.create_datetime}}</div>
+    			</li>
+    			<li class="row-item oneRow">
+    				<div class="label-wrap"><label>联系内容</label></div>
+    				<div class="ctn-wrap">{{data.content}}</div>
+    			</li>
+    		</ul>
+		</form>
+	</div>
+</div>
+</@layout>

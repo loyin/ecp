@@ -1,0 +1,59 @@
+package net.loyin.util.wechat.bean;
+
+public class WcCofRcd {
+	private int crId;
+	private String fromUserName;
+	private long createTime;
+	private int crsort;
+	private String crAward;
+
+	public WcCofRcd() {
+	}
+
+	public WcCofRcd(String fromUserName, long createTime, int crsort, String crAward) {
+		this.fromUserName = fromUserName;
+		this.createTime = createTime;
+		this.crsort = crsort;
+		this.crAward = crAward;
+	}
+
+	public int getCrId() {
+		return crId;
+	}
+
+	public void setCrId(int crId) {
+		this.crId = crId;
+	}
+
+	public String getFromUserName() {
+		return fromUserName;
+	}
+
+	public void setFromUserName(String fromUserName) {
+		this.fromUserName = fromUserName;
+	}
+
+	public long getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(long createTime) {
+		this.createTime = createTime;
+	}
+
+	public int getCrsort() {
+		return crsort;
+	}
+
+	public void setCrsort(int crsort) {
+		this.crsort = crsort;
+	}
+
+	public String getCrAward() {
+		return crAward;
+	}
+
+	public void setCrAward(String crAward) {
+		this.crAward = crAward;
+	}
+}

@@ -1,0 +1,112 @@
+<#include "../../inc/layout.html">
+<@layout title="营销活动" js="crm/campaigns/view.js">
+<style>
+body{background: #fff;}
+</style>
+<div class="manage-wrapper" ms-controller="ctrl">
+    <div class="manage-wrap">
+    	<form action=""id="base_form">
+    		<ul class="mod-form-rows base-form" >
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>活动名称</label></div>
+    				<div class="ctn-wrap">{{data.name}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>活动状态</label></div>
+    				<div class="ctn-wrap">
+						{{data.status|status}}
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>负责人</label></div>
+    				<div class="ctn-wrap">
+    				{{data.head_name}}
+          			</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>活动类型</label></div>
+    				<div class="ctn-wrap">
+						{{data.type}}
+					</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>预期结束日期</label></div>
+    				<div class="ctn-wrap">{{data.end_date}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>目标听众</label></div>
+    				<div class="ctn-wrap">{{data.hearer}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>目标大小</label></div>
+    				<div class="ctn-wrap">{{data.hearer_size}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>发送数量</label></div>
+    				<div class="ctn-wrap">{{data.send_count}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>成本预算</label></div>
+    				<div class="ctn-wrap">{{data.cost_budget}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>预期反应</label></div>
+    				<div class="ctn-wrap">{{data.expect_reaction}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>预期收入</label></div>
+    				<div class="ctn-wrap">{{data.expect_income}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>预期销量</label></div>
+    				<div class="ctn-wrap">{{data.exp_sale_count}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>预期反应数量</label></div>
+    				<div class="ctn-wrap">{{data.exp_rec_count}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>预期回报率</label></div>
+    				<div class="ctn-wrap">{{data.exp_rate_return}}%</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>实际成本</label></div>
+    				<div class="ctn-wrap">{{data.fact_cost}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>实际销量</label></div>
+    				<div class="ctn-wrap">{{data.fact_sale_count}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>实际反应数量</label></div>
+    				<div class="ctn-wrap">{{data.fact_rec_count}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>实际回报率</label></div>
+    				<div class="ctn-wrap">{{data.fact_rate_return}}%</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>创建人</label></div>
+    				<div class="ctn-wrap">{{data.creater_name}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>创建时间</label></div>
+    				<div class="ctn-wrap">{{data.create_datetime}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>修改人</label></div>
+    				<div class="ctn-wrap">{{data.updater_name}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>修改时间</label></div>
+    				<div class="ctn-wrap">{{data.update_datetime}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>备注</label></div>
+    				<div class="ctn-wrap">{{data.remark}}</div>
+    			</li>
+    		</ul>
+    	</form>
+    </div>
+</div>
+</@layout>

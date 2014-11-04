@@ -7,14 +7,15 @@
   <div class="form-group">
     <label for="" class="col-sm-2 control-label">会员编号：</label>
     <div class="col-sm-4">
-      <input type="text" class="form-control" ng-model="data." required="required">
+    {{userInfo.sn}}
+<!--       <input type="text" class="form-control" ng-model="data." required="required"> -->
     </div>
     <div class="col-sm-4">
     </div>
   </div>
   <div class="form-group">
     <label for="" class="col-sm-2 control-label">金币余额：</label>
-    <div class="col-sm-4">
+    <div class="col-sm-4">￥&nbsp;{{userInfo.gold_coin}}&nbsp;元
     </div>
     <div class="col-sm-4">
     </div>
@@ -45,6 +46,10 @@
     <div class="col-sm-4">
     </div>
   </div>
+<center>
+  	<a class="btn btn-success">确定</a>
+  	<a class="btn btn-default">取消</a>
+  </center>
   </form>
   <p>
   说明：

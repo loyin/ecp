@@ -1,0 +1,12 @@
+package net.loyin.ctrl;
+
+import net.loyin.jfinal.anatation.RouteBind;
+import net.loyin.model.sys.Jbmember;
+import net.loyin.rmi.RmiBind;
+@RouteBind(path = "/jbmember")
+public class JbmemberCtrl extends AdminBaseController<Jbmember> {
+	public JbmemberCtrl(){
+		this.tableName=Jbmember.tableName;
+		this.modelClass=Jbmember.class;
+	}
+}

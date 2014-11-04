@@ -1,0 +1,179 @@
+package net.loyin.util.wechat.bean;
+
+public class WcActGua {
+	private int gid;
+	private String fromUserName;
+	private long gtime;
+	private int istake;
+	private int isWin; // 0不中奖，1中奖
+	private String result;
+	private String cok1;
+	private String val1;
+	private String cok2;
+	private String val2;
+	private String cok3;
+	private String val3;
+	private String cok4;
+	private String val4;
+	private String cok5;
+	private String val5;
+	private int valNum; //
+	private int vinLevel; // 中奖等级：0:特等,1:一等,……,5:不中奖.
+
+
+	public WcActGua() {
+
+	}
+
+	public WcActGua(String fromUserName, long gtime) {
+		this.fromUserName = fromUserName;
+		this.gtime = gtime;
+	}
+
+	public int getGid() {
+		return gid;
+	}
+
+	public void setGid(int gid) {
+		this.gid = gid;
+	}
+
+	public String getFromUserName() {
+		return fromUserName;
+	}
+
+	public void setFromUserName(String fromUserName) {
+		this.fromUserName = fromUserName;
+	}
+
+	public long getGtime() {
+		return gtime;
+	}
+
+	public void setGtime(long gtime) {
+		this.gtime = gtime;
+	}
+
+	public int getIstake() {
+		return istake;
+	}
+
+	public void setIstake(int istake) {
+		this.istake = istake;
+	}
+
+	public int getIsWin() {
+		return isWin;
+	}
+
+	public void setIsWin(int isWin) {
+		this.isWin = isWin;
+	}
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+
+	public String getCok1() {
+		return cok1;
+	}
+
+	public void setCok1(String cok1) {
+		this.cok1 = cok1;
+	}
+
+	public String getVal1() {
+		return val1;
+	}
+
+	public void setVal1(String val1) {
+		this.val1 = val1;
+	}
+
+	public String getCok2() {
+		return cok2;
+	}
+
+	public void setCok2(String cok2) {
+		this.cok2 = cok2;
+	}
+
+	public String getVal2() {
+		return val2;
+	}
+
+	public void setVal2(String val2) {
+		this.val2 = val2;
+	}
+
+	public String getCok3() {
+		return cok3;
+	}
+
+	public void setCok3(String cok3) {
+		this.cok3 = cok3;
+	}
+
+	public String getVal3() {
+		return val3;
+	}
+
+	public void setVal3(String val3) {
+		this.val3 = val3;
+	}
+
+	public String getCok4() {
+		return cok4;
+	}
+
+	public void setCok4(String cok4) {
+		this.cok4 = cok4;
+	}
+
+	public String getVal4() {
+		return val4;
+	}
+
+	public void setVal4(String val4) {
+		this.val4 = val4;
+	}
+
+	public String getCok5() {
+		return cok5;
+	}
+
+	public void setCok5(String cok5) {
+		this.cok5 = cok5;
+	}
+
+	public String getVal5() {
+		return val5;
+	}
+
+	public void setVal5(String val5) {
+		this.val5 = val5;
+	}
+
+	public int getValNum() {
+		return valNum;
+	}
+
+	public void setValNum(int valNum) {
+		this.valNum = valNum;
+	}
+
+	public int getVinLevel() {
+		return vinLevel;
+	}
+
+	public void setVinLevel(int vinLevel) {
+		this.vinLevel = vinLevel;
+	}
+
+
+
+}

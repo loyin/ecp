@@ -1,0 +1,29 @@
+<#include "../../inc/layout.html">
+<@layout title="商品选择" js="scm/product/choose.js">
+<style>
+#matchCon { width: 200px; }
+.grid-wrap{position:relative;}
+.ztreeDefault{position: absolute;right: 0;top: 0;background-color: #fff;border: 1px solid #D6D5D5;width: 140px;height: 406px;overflow-y: auto;}
+</style>
+<div class="container fix p10" ms-controller="ctrl">
+	  <div class="mod-search m0 cf">
+	    <div class="fl">
+	      <ul class="ul-inline">
+	        <li>
+	          <input type="text" id="matchCon" ms-duplex="data.keyword" class="ui-input" placeholder="请输入商品编号或名称或型号">
+	        </li>
+	        <li>
+        <label>类别:</label>
+          <input type="text" id="category" class="ui-input" style="width:200px" readonly="readonly">
+        </li>
+	        <li><a class="ui-btn mrb" id="search">查询</a><!-- <a class="ui-btn" id="refresh">刷新</a> --></li>
+	      </ul>
+	    </div>
+	  </div>
+	  <div class="grid-wrap">
+	    <table id="grid">
+	    </table>
+	    <div id="page"></div>
+	  </div>
+</div>
+</@layout>

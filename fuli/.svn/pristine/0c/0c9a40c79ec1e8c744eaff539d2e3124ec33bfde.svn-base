@@ -1,0 +1,8 @@
+<#include "../inc/web_layout.html"> <@layout title=(po.title)!>
+<div id="contenter" style="text-align:left;Padding:30px 20px 20px 20px;font-size:150%;">
+<h2 style="text-align:center;width:100%;">${(po.title)!}</h2>
+${(po.ctime)!}
+<br>
+${(po.content)!}
+</div>
+</@layout>

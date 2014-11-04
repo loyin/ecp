@@ -1,0 +1,58 @@
+package net.loyin.p2f;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import net.loyin.util.PropertiesContent;
+
+/**
+ * office文件转swf 支持2007文件格式 doc docx xlsx xls ppt pptx
+ * @author loyin
+ */
+public class Office2Swf {
+	public static SimpleDateFormat df=new SimpleDateFormat("yyyyMM");
+	/**
+	 * 转换
+	 * @param f 需要转换的资源文件 (全路径文件名称)
+	 * @param t 转换后的SWF文件 (全路径文件名称)
+	 */
+	static String f_,t_;
+	public static void tran(String f, String t) {
+		try {
+			f_=f;
+			t_=t;
+			Thread thread=new Thread(){
+				public void run(){
+					try{
+						String cmd=MessageFormat.format(PropertiesContent.get("print2flashCmd"),new Object[] { f_, t_,df.format(new Date()) });
+						System.out.println("调用Print2Flash："+cmd);
+						Process process = Runtime.getRuntime().exec(cmd);
+						BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+						String line;
+						while ((line = bufferedReader.readLine()) != null) {
+							System.out.println(line);
+						}
+						bufferedReader = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+						while ((line = bufferedReader.readLine()) != null) {
+							System.out.println(line);
+						}
+						process.destroy();
+					}catch(Exception e){
+						
+					}
+				}
+			};
+			thread.start();
+		} catch (Exception e) {
+			System.err.print(e.getMessage());
+		}
+	}
+
+	public static void main(String[] args) {
+		String dir = "E:/temp/print2flash/";
+		Office2Swf.tran(dir + "1.doc", dir + "1.swf");
+	}
+}

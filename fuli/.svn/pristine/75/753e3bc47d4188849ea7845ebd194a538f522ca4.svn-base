@@ -1,0 +1,22 @@
+package net.loyin.util.wechat.bean.mo;
+
+public class Balance {
+	private String name;
+	private String plays;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPlays() {
+		return plays;
+	}
+
+	public void setPlays(String plays) {
+		this.plays = plays;
+	}
+}

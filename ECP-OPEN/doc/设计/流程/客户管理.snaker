@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<process displayName="客户管理" name="custm">
+<start displayName="start1" layout="18,18,-1,-1" name="start1">
+<transition g="" name="transition1" offset="0,0" to="task1"/>
+</start>
+<task autoExecute="Y" displayName="task1" layout="114,17,-1,-1" name="task1" performType="ANY" taskType="Major"/>
+</process>

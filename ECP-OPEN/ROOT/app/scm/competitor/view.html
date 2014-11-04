@@ -1,0 +1,36 @@
+<#include "../../inc/layout.html">
+<@layout title="竞争对手管理" js="scm/competitor/view.js">
+<style>
+body{background: #fff;}
+</style>
+<div class="manage-wrapper" ms-controller="ctrl">
+    <div class="manage-wrap">
+    		<ul class="mod-form-rows base-form" >
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>名称</label></div>
+    				<div class="ctn-wrap">{{data.name}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>企业类别</label></div>
+    				<div class="ctn-wrap">{{data.qyxz|custParame}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>知名度</label></div>
+    				<div class="ctn-wrap">{{data.ppzmd}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>市场占有</label></div>
+    				<div class="ctn-wrap">{{data.sczy}}%</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>竞争威胁</label></div>
+    				<div class="ctn-wrap">{{data.jzwx}}</div>
+    			</li>
+    			<li class="row-item pb0">
+    				<div class="label-wrap"><label for="remark">备注</label></div>
+    				<div class="ctn-wrap">{{data.remark}}</div>
+    			</li>
+    		</ul>
+    </div>
+</div>
+</@layout>

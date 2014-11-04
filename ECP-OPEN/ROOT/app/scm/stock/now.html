@@ -1,0 +1,35 @@
+<#include "../../inc/layout.html">
+<@layout title="当前库存" js="scm/stock/now.js">
+<style>
+.comboDiv{position:absolute;}
+</style>
+<div class="wrapper" ms-controller="view">
+  <div class="mod-search cf">
+    <div class="fl">
+    <ul class="ul-inline">
+        <li>
+          <input type="text" id="keyword" class="ui-input con" value="" ms-duplex="data.keyword" placeholder="请输入商品名称或型号">
+        </li>
+        <li>
+        <label>类别:</label>
+          <input type="text" id="category" class="ui-input" style="width:200px" readonly="readonly">
+        </li>
+        <li>
+        <label>仓库:</label>
+<!--           <span id="depot"></span> -->
+			<select ms-duplex="data.depot_id" class="ui-input" style="width:200px;">
+				<option value="-1">全部</option>
+				<option ms-repeat="depotList" ms-value="el.id">{{el.name}}</option>
+			</select>
+        </li>
+        <li><a class="ui-btn mrb" id="search" title="查询"><i class="fa fa-search"></i></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="grid-wrap">
+    <table id="grid">
+    </table>
+    <div id="page"></div>
+  </div>
+</div>
+</@layout>

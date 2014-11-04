@@ -1,0 +1,106 @@
+<#include "../../inc/layout.html">
+<@layout title="收发明细表" js="scm/storageBill/rpt.js">
+<style>
+html{overflow:auto;}
+.comboDiv{position:absolute;left:61px;}
+.comboDiv div{height:30px;}
+</style>
+<div class="wrapper" ms-controller="view">
+  <div class="mod-search cf" ms-if="nprint">
+    <div class="fl">
+      <ul class="ul-inline">
+      	<li>
+        	<label>商品:</label>
+        	<input type="text" class="ui-input" style="width:150px;" ms-keyup="qryProduct(this.value)" ms-click="qryProduct(this.value)" ms-duplex="query.product_name">
+		    <div class="comboDiv" style="width:260px;" ms-visible="pdctComboV">
+		    	<div ms-repeat="productList" ms-click="chooseProduct(el)">{{el.billsn}}&nbsp;&nbsp;{{el.name}}</div>
+		    </div>
+        </li>
+        <li>
+        	<label>负责人:</label>
+        	<input type="text" class="ui-input" autocomplete="off" style="width:150px;" ms-keyup="qryUser(this.value)" ms-click="qryUser(this.value)" ms-duplex="query.head_name">
+		    <div class="comboDiv" style="width:260px;left:297px;" ms-visible="userComboV">
+		    	<div ms-repeat="userList" ms-click="chooseUser(el)">{{el.realname}}-{{el.position_name}}-{{el.department_name}}</div>
+		    </div>
+        </li>
+       <li>
+        	<label>盘点仓库:</label>
+        	<select class="ui-input w100" ms-duplex="query.depot_id">
+        		<option></option>
+        		<option ms-repeat="depotList" ms-value="el.id">{{el.name}}</option>
+        	</select>
+        </li>
+        <li>
+          <label>日期:</label>
+          <input type="text" id="beginDate" class="ui-input ui-datepicker-input" ms-duplex="query.start_date">
+          <span>-</span>
+          <input type="text" id="endDate" class="ui-input ui-datepicker-input"ms-duplex="query.end_date">
+        </li>
+        <li>
+        <a class="ui-btn mrb" ms-click="loadData" title="查询"><i class="fa fa-search"></i></a>
+        </li>
+      </ul>
+    </div>
+    <div class="fr">
+    <a class="ui-btn mrb" ms-click="printRpt" title="打印"><i class="fa fa-print"></i></a>
+<!--     <a class="ui-btn mrb" id="btn_down" title="导出"><i class="fa fa-download"></i></a> -->
+    </div>
+  </div>
+  <div class="no-query" ms-if="list.length==0"></div>
+  <div class="bills" ms-if="list.length>0">
+    <p style="font-size:24px;text-align:center;">
+    	收发明细表
+    </p>
+    <p>
+日期：{{query.start_date}}至{{query.end_date}}<span class="fr">制表人：{{user.realname}}&nbsp;&nbsp;制表日期：${(now?string('yyyy年MM月dd日'))}</span>
+    </p>
+	<table class="table table-bordered table-striped able-hover">
+		<thead>
+			<tr>
+				<th>行号</th>
+				<th>单据日期</th>
+				<th>盘点单号</th>
+				<th>业务类型</th>
+				<th>负责人</th>
+				<th>仓库</th>
+				<th>商品编号</th>
+				<th>商品名称</th>
+				<th>规格型号</th>
+				<th>计量单位</th>
+				<th>入库数量</th>
+				<th>入库结余</th>
+				<th>出库数量</th>
+				<th>出库结余</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ms-repeat="list">
+				<td>{{$index+1}}</td>
+				<td>{{el.bill_date}}</td>
+				<td>{{el.billsn}}</td>
+				<td>{{el.type|type}}</td>
+				<td>{{el.head_name}}</td>
+				<td>{{el.depot_name}}</td>
+				<td>{{el.sn}}</td>
+				<td>{{el.product_name}}</td>
+				<td>{{el.model}}</td>
+				<td>{{el.unit|custParame}}</td>
+				<td align="right">{{el.amount_in}}</td>
+				<td align="right">{{el.balance_in}}</td>
+				<td align="right">{{el.amount_out}}</td>
+				<td align="right">{{el.balance_out}}</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="10" align="right">合计</td>
+				<td align="right">{{amount_in_total}}</td>
+				<td></td>
+				<td align="right">{{amount_out_total}}</td>
+				<td></td>
+			</tr>
+		</tfoot>
+	</table>
+  </div>
+</div>
+</@layout>

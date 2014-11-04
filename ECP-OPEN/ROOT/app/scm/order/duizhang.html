@@ -1,0 +1,86 @@
+<#include "../../inc/layout.html">
+<@layout title="对账表" js="scm/order/duizhang.js">
+<style>
+.comboDiv{position:absolute;left:90px;}
+.comboDiv div{height:30px;}
+</style>
+<div class="wrapper" ms-controller="view">
+  <div class="mod-search cf" ms-if="nprint">
+    <div class="fl">
+      <ul class="ul-inline">
+        <li>
+        	<label>来往单位:</label>
+        	<input type="text" id="customer" class="ui-input" autocomplete="off" style="width:216px;" ms-keyup="qryCustomer(this.value)" ms-click="qryCustomer(this.value)" ms-duplex="query.customer_name" query-rule="required;"ms-query-msg="(type>1?'客户':'供应商')+'必选！'">
+		    <div class="comboDiv" style="width:260px;" ms-visible="custComboV">
+		    	<div ms-repeat="customerList" ms-click="chooseCust(el)">{{el.sn}}&nbsp;&nbsp;{{el.name}}</div>
+		    </div>
+        </li>
+        <li>
+        </li>
+        <li>
+          <label>日期:</label>
+          <input type="text" id="beginDate" class="ui-input ui-datepicker-input" ms-duplex="query.start_date">
+          <span>-
+          <input type="text" id="endDate" class="ui-input ui-datepicker-input"ms-duplex="query.end_date">
+        </li>
+        <li>
+        <a class="ui-btn mrb" ms-click="loadData" title="查询"><i class="fa fa-search"></i></a>
+        </li>
+      </ul>
+    </div>
+    <div class="fr">
+    <a class="ui-btn mrb" ms-click="printRpt" title="打印"><i class="fa fa-print"></i></a>
+<!--     <a class="ui-btn mrb" id="btn_down" title="导出"><i class="fa fa-download"></i></a> -->
+    </div>
+  </div>
+  <div class="bills">
+    <p style="font-size:24px;text-align:center;">
+    	<span>供应商</span><span>客户</span>对账单
+    </p>
+    <p>
+    ：
+    <br>
+    日期：{{query.start_date}}至{{query.end_date}}
+    </p>
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>单据日期</th>
+				<th>单据编号</th>
+				<th>业务类型</th>
+				<th>销售金额</th>
+				<th>折扣金额</th>
+				<th>应收金额</th>
+				<th>实收金额</th>
+				<th>应收款余额</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ms-repeat="list">
+				<td>[{{el.sign_date}}]</td>
+				<td>[{{el.billsn}}]</td>
+				<td>[{{el.ordertype|ordertype}}]</td>
+				<td align="right">{{el.amt1|money}}</td>
+				<td align="right">{{(el.order_amt-el.rebate_amt)|money}}</td>
+				<td align="right">{{el.rebate_amt|money}}</td>
+				<td align="right">{{el.order_amt|money}}</td>
+				<td align="right">{{el.pay_amt|money}}</td>
+				<td align="right">{{(el.order_amt-el.pay_amt)|money}}</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="3" align="right"><b>合计</b></td>
+				<td align="right">{{userData.amt0|money}}</td>
+				<td align="right">{{userData.amt1|money}}</td>
+				<td align="right">{{userData.amt2|money}}</td>
+				<td align="right">{{userData.amt3|money}}</td>
+				<td align="right">{{userData.amt4|money}}</td>
+			</tr>
+		</tfoot>
+	</table>
+  </div>
+</div>
+<script>
+var type=${type!0};</script>
+</@layout>

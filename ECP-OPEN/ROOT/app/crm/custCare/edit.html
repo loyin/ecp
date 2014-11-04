@@ -1,0 +1,57 @@
+<#include "../../inc/layout.html"> <@layout title="客户关怀"
+js="crm/custCare/edit.js">
+<style>
+body {background: #fff;display: block;}
+.comboDiv{position:absolute;left:125px;}
+</style>
+<div class="manage-wrapper" ms-controller="ctrl">
+	<div class="manage-wrap">
+		<form action="" id="base_form">
+			<ul class="mod-form-rows base-form" >
+    			<li class="row-item">
+    				<div class="label-wrap"><label>关怀主题</label><font color="red">*</font></div>
+    				<div class="ctn-wrap"><input id="subject" class="ui-input" ms-duplex="data.subject" data-rule="required;"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>关怀类型</label><font color="red">*</font></div>
+    				<div class="ctn-wrap">
+					<select ms-duplex="data.care_type" class="ui-input" id="catype" data-rule="required">
+			        	<option ms-repeat="parameList[8]" ms-value="{{el.id}}">{{el.name}}</option>
+			        </select>
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>客户</label><font color="red">*</font></div>
+    				<div class="ctn-wrap">
+	    				<span class="ui-combo-wrap">
+	          			<input type="text" id="customer" class="input-txt" autocomplete="off" data-ref="date" ms-keyup="qryCustomer(this.value)" ms-click="qryCustomer(this.value)" ms-duplex="data.customer_name" data-rule="required;">
+	          			</span>
+	          			<div class="comboDiv" style="width:260px;" ms-visible="custComboV"><div ms-repeat="customerList" ms-click="chooseCust(el)">{{el.sn}}&nbsp;&nbsp;{{el.name}}</div></div>
+          			</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>关怀日期</label></div>
+    				<div class="ctn-wrap"><input id="care_datetime" class="ui-input ui-datepicker-input" ms-duplex="data.care_datetime"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>联系人</label><font color="red">*</font></div>
+    				<div class="ctn-wrap">
+						<span class="ui-combo-wrap">
+	          			<input type="text" id="contacts" class="input-txt" autocomplete="off" data-ref="date" ms-keyup="qryContacts(this.value)" ms-click="qryContacts(this.value)" ms-duplex="data.contacts_name">
+	          			</span>
+	          			<div class="comboDiv" style="width:260px;" ms-visible="contactsComboV"><div ms-repeat="contactsList" ms-click="chooseContacts(el)">{{el.sn}}&nbsp;&nbsp;{{el.name}}</div></div>
+					</div>
+    			</li>
+    			<li class="row-item oneRow">
+    				<div class="label-wrap"><label>简述</label></div>
+    				<div class="ctn-wrap"><input type="text" id="description" style="width:500px;" class="ui-input" ms-duplex="data.description"></div>
+    			</li>
+    			<li class="row-item oneRow">
+    				<div class="label-wrap"><label>关怀内容</label></div>
+    				<div class="ctn-wrap"><textarea id="content" style="width:100%;" class="ui-input" ms-duplex="data.content"></textarea></div>
+    			</li>
+    		</ul>
+		</form>
+	</div>
+</div>
+</@layout>

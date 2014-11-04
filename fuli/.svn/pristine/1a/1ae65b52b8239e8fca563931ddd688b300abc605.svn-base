@@ -1,0 +1,266 @@
+package net.loyin.ctrl;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.Random;
+
+import javax.servlet.http.HttpServletRequest;
+
+import net.loyin.jfinal.TypeConverter;
+import net.loyin.model.sys.User;
+import net.loyin.util.safe.CipherUtil;
+import net.loyin.vo.TreeNode;
+
+import org.apache.commons.lang.ArrayUtils;
+
+import com.alibaba.fastjson.JSON;
+import com.jfinal.aop.Before;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Model;
+import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
+import com.jfinal.plugin.activerecord.Table;
+import com.jfinal.plugin.activerecord.TableMapping;
+import com.jfinal.plugin.spring.IocInterceptor;
+import com.jfinal.token.TokenManager;
+
+/**
+ * 后台管理基础Controller
+ * @author 刘声凤 2012-9-3 下午10:37:28
+ */
+@Before(IocInterceptor.class)
+public abstract class AdminBaseController<M extends Model<M>> extends BaseController<M> {
+	/** 获取当前系统操作人ID */
+	protected Long getCurrentUserId(){
+		String login_user_id=this.getCookie("login_user_id");
+		login_user_id=CipherUtil.decryptData(login_user_id);
+		if(login_user_id!=null){
+			login_user_id=login_user_id.split("_")[1];
+		}else{
+			login_user_id="0";
+		}
+		return idGenerater.to10(login_user_id);
+	}
+	protected User getCurrentUser() {
+		return User.dao.findById(this.getCurrentUserId());
+	}
+	public void list(){
+		List<Object> param = new ArrayList<Object>();
+		StringBuffer where = new StringBuffer();
+		/** 添加查询字段条件*/
+		qryField(where, param);
+		sortField(where);
+		Page<Record> p = Db.paginate(getPageNo(), getPageSize(), "select t.* ", "from " + this.tableName+ " t where 1=1 " + where.toString(), param.toArray());
+		this.setAttr("page", p);
+	}
+	/***
+	 * @param boolean a 是否是被子类调用 true
+	 * @throws Exception 
+	 */
+	public void save(boolean a) throws Exception {
+		try {
+			Model<M> m = this.getModel();
+			id = m.getLong("ID");
+			Long tokenl=this.getParaToLong("token");
+			if(tokenl!=null){
+				if(!TokenManager.validateToken(this, tokenName)){
+					this.rendJson_(false, getI18nText("err.token.error", "会话令牌错误！"),id,new Random().nextLong());
+					return;
+				}
+			}
+			Long uid=getCurrentUserId();
+			Date now=new Date();
+			if (id != null && id != 0) {
+				m.set("utime",now);//修改时间
+				m.set("updater",uid);//修改人
+				m.update();
+			} else {
+				m.set("creater",uid);//创建人
+				m.set("ctime",now);//创建时间
+				m.set("create_time",now);
+				m.save();
+			}
+			id = m.getLong("ID");
+			if(a)
+			rendJson_(true, getI18nText("msg.save_suc", "保存成功！"), id,new Random().nextLong());
+		} catch (Exception e) {
+			log.error("保存异常", e);
+			if(a){
+				rendJson_(false, getI18nText("msg.save_fail","保存失败！"));
+			}else {
+				throw e;
+			}
+		}
+	}
+	public void save() throws Exception{
+			save(true);
+	}
+	/**是否有子集 针对树形数据*/
+	public boolean hashChild(Long id){
+		try{
+		Table Table = TableMapping.me().getTable(modelClass);
+		if(Table.hasColumnLabel("pid")){
+			List<Record> list=Db.find("select * from "+this.tableName+" where pid=?", id);
+			return list!=null&&list.isEmpty()==false;
+		}
+		}catch(Exception e){
+			return false;
+		}
+		return false;
+	}
+	public void del() {
+		try {
+			id = this.getParaToLong(0);
+			if (id == null||id==0L){
+				ids = this.getPara("ids");
+				if (ids != null && !"".equals(ids)) {
+					try{
+						Db.update("delete from " + this.tableName + " where id in ("+ ids+ ") and creater="+this.getCurrentUserId());
+					}catch(Exception e){
+						Db.update("delete from " + this.tableName + " where id in ("+ ids+ ") ");
+					}
+				} else {
+					id = this.getParaToLong("ID");
+				}
+			}
+			if(id!=null&&id!=0L){
+				Model<M>m=	modelClass.newInstance();
+				m.deleteById(id);
+			}
+			rendJson_(true, this.getI18nText("msg.del_suc","删除成功！"),id);
+		} catch (Exception e) {
+			log.error("删除异常", e);
+			rendJson_(false, this.getI18nText("msg.del_fail","删除失败！"));
+		}
+	}
+
+	public void edit() {
+		try {
+			id = this.getParaToLong(0, 0L);
+			if (id != 0L) {
+				po = get(id);
+				Long uid=this.getCurrentUserId();
+				Long creater=po.getLong("creater");
+				if(creater!=null&&uid!=creater&&!creater.equals(uid)){
+					this.renderText("<h1><font color=red>您无权限操作他人所创建的信息！</font></h1>");
+					return;
+				}
+			}else{
+				String pidField=this.getPara("pidField");//父级参数
+				if(pidField!=null&&!"".equals(pidField)){
+					po=modelClass.newInstance();
+					po.set(pidField.toLowerCase(), this.getPara(pidField));
+				}
+			}
+			TokenManager.createToken(this, tokenName, tokenTout);
+			 this.setAttr("po",po);
+		} catch (Exception e) {
+			log.error("编辑异常", e);
+		}
+	}
+
+	public Model<M> get(Long id) {
+		try {
+			Model<M>	model_ = modelClass.newInstance();
+			return model_.findById(id);
+		} catch (Exception e) {}
+		return null;
+	}
+
+	public void view() {
+		id= this.getParaToLong(0,0L);
+		if(id!=null&&id!=0L){
+			this.po=get(id);
+			this.setAttr("po",po);
+		}else{
+			this.setAttr("po",new Record());
+		}
+	}
+	protected Model<M> getModel() throws Exception {
+		HttpServletRequest request = this.getRequest();
+		Model<M> model_ = modelClass.newInstance();
+		Table Table = TableMapping.me().getTable(modelClass);
+		model_.getAttrNames();
+		Enumeration<String> attrNames = request.getParameterNames();
+		while(attrNames.hasMoreElements()) {
+			String attr = attrNames.nextElement();
+			Class<?> colType = null;
+			if (Table.hasColumnLabel(attr.toLowerCase()))
+				colType = Table.getColumnType(attr.toLowerCase());
+			if (Table.hasColumnLabel(attr.toUpperCase())) {
+				colType = Table.getColumnType(attr.toUpperCase());
+			}
+			if (colType != null) {
+				String value = request.getParameter(attr);
+				model_.set(attr.toLowerCase(),
+						value != null ? TypeConverter.convert(colType, value): null);
+			}
+		}
+		return model_;
+	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	protected Model getModel2(Class clz)  {
+		HttpServletRequest request = this.getRequest();
+		try{
+			Model model_ = (Model) clz.newInstance();
+			Table Table = TableMapping.me().getTable(clz);
+			model_.getAttrNames();
+			Enumeration<String> attrNames = request.getParameterNames();
+			while(attrNames.hasMoreElements()) {
+				String attr = attrNames.nextElement();
+				Class<?> colType = null;
+				if (Table.hasColumnLabel(attr.toLowerCase()))
+					colType = Table.getColumnType(attr.toLowerCase());
+				if (Table.hasColumnLabel(attr.toUpperCase())) {
+					colType = Table.getColumnType(attr.toUpperCase());
+				}
+				if (colType != null) {
+					String value = request.getParameter(attr);
+					model_.set(attr.toLowerCase(),
+							value != null ? TypeConverter.convert(colType, value): null);
+				}
+			}
+			return model_;
+		}catch(Exception e){
+			return null;
+		}
+	}
+	/**
+	 * 通过pid字段关联
+	 * @param dataList 集合
+	 * @param pnode 父节点
+	 * @param cname 节点名称字段
+	 */
+	protected void fillTree(List<? extends Record> dataList,TreeNode pnode,String cname,Boolean canChk,List<Long>ckidList) {
+		List<TreeNode> childelist = new ArrayList<TreeNode>();
+		for (Record m : dataList) {
+			Long pid_ = m.getLong("pid");
+			if (pnode.getId() == pid_) {
+				Long id = m.getLong("id");
+				TreeNode nodechild = new TreeNode();
+				nodechild.setId(id);
+				nodechild.setText(m.getStr(cname));
+				nodechild.setCanChk(canChk);
+				childelist.add(nodechild);
+				if(ckidList!=null&&ArrayUtils.contains(ckidList.toArray(), id))
+				nodechild.setChecked(true);
+				Long hasChild=m.getLong("hasChild");
+				if(hasChild!=null&&hasChild>0L){
+					nodechild.setState("closed");
+				}else if(pid_==0L){
+					nodechild.setState("open");
+				}
+				fillTree(dataList, nodechild,cname,canChk,ckidList);
+			}
+		}
+		if (childelist.isEmpty() == false && childelist.size() > 0) {
+			pnode.setChildren(childelist);
+		}
+	}
+	/**通过Gson生成*/
+	public void renderJson_(Object obj) {
+		renderJson(JSON.toJSONString(obj));
+	}
+}

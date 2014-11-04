@@ -1,0 +1,22 @@
+<#include "../../inc/layout.html">
+<@layout title="仓库管理" js="scm/depot/view.js">
+<style>
+body{background: #fff;}
+</style>
+<div class="manage-wrapper" ms-controller="ctrl">
+    <div class="manage-wrap">
+    		<ul class="mod-form-rows base-form" >
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="uname">名称</label></div>
+    				<div class="ctn-wrap">{{data.name}}</div>
+    			</li>
+    		</ul>
+    		<ul class="mod-form-rows">
+    			<li class="row-item pb0">
+    				<div class="label-wrap"><label for="remark">备注</label></div>
+    				<div class="ctn-wrap">{{data.remark}}</div>
+    			</li>
+    		</ul>
+    </div>
+</div>
+</@layout>

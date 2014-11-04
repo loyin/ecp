@@ -1,0 +1,43 @@
+package net.loyin.util.wechat.bean.act;
+
+public class ActScRcd {
+	private int scrid;
+	private int orderId;
+	private String fromUserName;
+	private int createTime;
+	private String jianPin;
+
+	public int getScrid() {
+		return scrid;
+	}
+	public void setScrid(int scrid) {
+		this.scrid = scrid;
+	}
+	public int getOrderId() {
+		return orderId;
+	}
+	public void setOrderId(int orderId) {
+		this.orderId = orderId;
+	}
+	public String getFromUserName() {
+		return fromUserName;
+	}
+	public void setFromUserName(String fromUserName) {
+		this.fromUserName = fromUserName;
+	}
+	public int getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(int createTime) {
+		this.createTime = createTime;
+	}
+	public String getJianPin() {
+		return jianPin;
+	}
+	public void setJianPin(String jianPin) {
+		this.jianPin = jianPin;
+	}
+
+
+
+}

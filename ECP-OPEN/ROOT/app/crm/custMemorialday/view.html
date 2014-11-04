@@ -1,0 +1,56 @@
+<#include "../../inc/layout.html"> <@layout title="客户纪念日"
+js="crm/custMemorialday/view.js">
+<style>
+body {background: #fff;display: block;}
+</style>
+<div class="manage-wrapper" ms-controller="view">
+	<div class="manage-wrap">
+		<form action="" id="base_form">
+			<ul class="mod-form-rows base-form" >
+    			<li class="row-item">
+    				<div class="label-wrap"><label>纪念日主题</label></div>
+    				<div class="ctn-wrap">{{data.subject}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>纪念日类型</label></div>
+    				<div class="ctn-wrap">
+					{{data.care_type|custParame}}
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>客户</label></div>
+    				<div class="ctn-wrap">
+	    				{{data.customer_name}}
+          			</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>联系人</label></div>
+    				<div class="ctn-wrap">
+	          			{{data.contacts_name}}
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>纪念日日期</label></div>
+    				<div class="ctn-wrap">{{data.care_datetime}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>创建人</label></div>
+    				<div class="ctn-wrap">{{data.creater_name}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>创建</label></div>
+    				<div class="ctn-wrap">{{data.create_datetime}}</div>
+    			</li>
+    			<li class="row-item oneRow">
+    				<div class="label-wrap"><label>简述</label></div>
+    				<div class="ctn-wrap">{{data.description}}</div>
+    			</li>
+    			<li class="row-item oneRow">
+    				<div class="label-wrap"><label>纪念日内容</label></div>
+    				<div class="ctn-wrap">{{data.content}}</div>
+    			</li>
+    		</ul>
+		</form>
+	</div>
+</div>
+</@layout>

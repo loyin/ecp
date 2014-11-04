@@ -1,0 +1,16 @@
+package net.loyin.model.sys;
+
+import net.loyin.jfinal.anatation.TableBind;
+import com.jfinal.plugin.activerecord.Model;
+/**
+ * 酒帮管理
+ * @author xd
+ * 
+ * 
+ */
+@TableBind(name="sp_jiubang",pk="ID")
+public class Jiubang extends Model<Jiubang> {
+	private static final long serialVersionUID = -7996568801390220823L;
+	public static String tableName="sp_jiubang";
+	public static final Jiubang dao=new Jiubang();
+}

@@ -1,0 +1,76 @@
+<#include "../../inc/layout.html">
+<@layout title="序号规则管理" js="crm/leads/view.js">
+<style>
+body{background: #fff;}
+</style>
+<div class="manage-wrapper" ms-controller="ctrl">
+    <div class="manage-wrap">
+    		<ul class="mod-form-rows base-form" >
+    			<li class="row-item">
+    				<div class="label-wrap"><label>主题</label></div>
+    				<div class="ctn-wrap">{{data.name}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>客户名称</label></div>
+    				<div class="ctn-wrap">{{data.customer_name}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>联系人姓名</label></div>
+    				<div class="ctn-wrap">{{data.contacts_name}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>联系人称呼</label></div>
+    				<div class="ctn-wrap">{{data.saltname}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>手机号码</label></div>
+    				<div class="ctn-wrap">{{data.mobile}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>电话</label></div>
+    				<div class="ctn-wrap">{{data.telephone}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>Email</label></div>
+    				<div class="ctn-wrap">{{data.email}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>地址</label></div>
+    				<div class="ctn-wrap">{{data.address}}</div>
+    			</li>
+    			<#-- <li class="row-item">
+    				<div class="label-wrap"><label>是否转换</label></div>
+    				<div class="ctn-wrap">{{data.is_transformed|yn}}</div>
+    			</li> -->
+    			<li class="row-item">
+    				<div class="label-wrap"><label>下次联系</label></div>
+    				<div class="ctn-wrap">{{data.nextstep}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>联系时间</label></div>
+    				<div class="ctn-wrap">{{data.nextstep_date}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>备注</label></div>
+    				<div class="ctn-wrap">{{data.remark}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>创建人</label></div>
+    				<div class="ctn-wrap">{{data.creater_name}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>创建时间</label></div>
+    				<div class="ctn-wrap">{{data.create_datetime}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>修改人</label></div>
+    				<div class="ctn-wrap">{{data.updater_name}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>修改时间</label></div>
+    				<div class="ctn-wrap">{{data.update_datetime}}</div>
+    			</li>
+    		</ul>
+    </div>
+</div>
+</@layout>

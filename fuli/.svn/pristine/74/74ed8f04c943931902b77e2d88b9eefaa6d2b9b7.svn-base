@@ -1,0 +1,5 @@
+#JobA
+a.job=net.loyin.quartz.job.JsJob
+\u6BCF\u4E2A\u6708\u6700\u540E23\u70B9
+a.cron=0 0 23 L * ?
+a.enable=true

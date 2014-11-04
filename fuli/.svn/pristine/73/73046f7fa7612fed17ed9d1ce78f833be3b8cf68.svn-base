@@ -1,0 +1,19 @@
+<#include "../inc/web_layout.html"> <@layout title="手机APP">
+<div id="contenter">
+  <div class="list">
+<ul>
+			<#list list as u>
+				<li>
+          <div class="figure">
+            <div class="tup"><a href="${root!}/yxAddGo/${(u.id)!}" rel="external"><img src="${(u.img)!}" alt="${u.name}"/></a></div>
+            <p><a class="name" href="${root!}/yxAddGo/${(u.id)!}" rel="external">${(u.name)!}</a><br />
+              类别：${(u.lb)!}<br />
+              <span class="left">人气指数:</span><i class="starbasic star${(u.rq)!0}"></i>(${(u.lcs)!})</p>
+            <div class="jr"><a href="${root!}/yxAddGo/${(u.id)!}" rel="external"><img src="${root!}/static/images/edy/play.gif" alt="进入游戏"/></a></div>
+          </div>
+        </li>
+		</#list>
+	</ul>
+</div>
+</div>
+</@layout>

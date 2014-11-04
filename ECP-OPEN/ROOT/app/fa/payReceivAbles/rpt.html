@@ -1,0 +1,81 @@
+<#include "../../inc/layout.html">
+<@layout title="应收应付明细表" js="fa/payReceivAbles/rpt.js">
+<style>
+html{overflow:auto;}
+.comboDiv{position:absolute;left:90px;}
+.comboDiv div{height:30px;}
+</style>
+<div class="wrapper" ms-controller="view">
+  <div class="mod-search cf" ms-if="nprint">
+    <div class="fl">
+      <ul class="ul-inline">
+        <li>
+        	<label>来往单位:</label>
+        	<input type="text" id="customer" class="ui-input" autocomplete="off" style="width:216px;" ms-keyup="qryCustomer(this.value)" ms-click="qryCustomer(this.value)" ms-duplex="query.customer_name" query-rule="required;"ms-query-msg="(type>1?'客户':'供应商')+'必选！'">
+		    <div class="comboDiv" style="width:260px;" ms-visible="custComboV">
+		    	<div ms-repeat="customerList" ms-click="chooseCust(el)">{{el.sn}}&nbsp;&nbsp;{{el.name}}</div>
+		    </div>
+        </li>
+        <li>
+          <label>日期:</label>
+          <input type="text" id="beginDate" class="ui-input ui-datepicker-input" ms-duplex="query.start_date">
+          <span>-</span>
+          <input type="text" id="endDate" class="ui-input ui-datepicker-input"ms-duplex="query.end_date">
+        </li>
+        <li>
+        <a class="ui-btn mrb" ms-click="loadData" title="查询"><i class="fa fa-search"></i></a>
+        </li>
+      </ul>
+    </div>
+    <div class="fr">
+    <a class="ui-btn mrb" ms-click="printRpt" title="打印"><i class="fa fa-print"></i></a>
+<!--     <a class="ui-btn mrb" id="btn_down" title="导出"><i class="fa fa-download"></i></a> -->
+    </div>
+  </div>
+  <div class="no-query" ms-if="list.length==0"></div>
+  <div class="bills" ms-if="list.length>0">
+    <p style="font-size:24px;text-align:center;">
+    	<span  ms-if="type_==1">应收</span><span  ms-if="type_==0">应付</span>明细报表
+    </p>
+    <p>
+    日期：{{query.start_date}}至{{query.end_date}}<span class="fr">制表人：{{user.realname}}&nbsp;&nbsp;制表日期：${(now?string('yyyy年MM月dd日'))}</span>
+    </p>
+	<table class="table table-bordered table-striped able-hover">
+		<thead>
+			<tr>
+				<th>来往单位</th>
+				<th>单据日期</th>
+				<th>单据编号</th>
+				<th>业务类型</th>
+				<th>单据金额</th>
+				<th ms-if="type_==1">增加应收款</th>
+				<th ms-if="type_==0">增加应付款</th>
+				<th ms-if="type_==1">应收余额</th>
+				<th ms-if="type_==0">应付余额</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ms-repeat="list">
+				<td ms-if="el.customer_name!='小计'">{{el.customer_name}}&nbsp;[{{el.csttype|csttype}}]</td>
+				<td ms-if="el.customer_name=='小计'" colspan="5" align="right">{{el.customer_name}}</td>
+				<td ms-if="el.customer_name!='小计'">{{el.sign_date}}</td>
+				<td ms-if="el.customer_name!='小计'">{{el.billsn}}</td>
+				<td ms-if="el.customer_name!='小计'">{{el.ordertype|ordertype}}</td>
+				<td ms-if="el.customer_name!='小计'" align="right">{{el.order_amt|money}}</td>
+				<td align="right" ms-if="el.customer_name!='小计'">{{el.amt|money}}</td>
+				<td align="right" ms-if="el.customer_name=='小计'">{{el.amt0|money}}</td>
+				<td align="right">{{el.amt0|money}}</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="6" align="right"><b>合计</b></td>
+				<td align="right">{{userData.amt0_total|money}}</td>
+			</tr>
+		</tfoot>
+	</table>
+  </div>
+</div>
+<script>
+var type=${type!0};</script>
+</@layout>

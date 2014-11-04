@@ -1,0 +1,29 @@
+<#include "../../inc/layout.html">
+<@layout title="会员级别" js="crm/custRating/edit.js">
+<style>
+body{background: #fff;}
+</style>
+<div class="manage-wrapper" ms-controller="ctrl">
+    <div class="manage-wrap">
+    	<form action=""id="base_form">
+		<input type="hidden" name="id" id="id" ms-duplex="data.id">
+    		<ul class="mod-form-rows base-form" >
+    			<li class="row-item oneRow">
+    				<div class="label-wrap"><label for="name">名称</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="data.name" data-rule="required;"  maxlength="20"id="name" placeholder="请输入帐号"></div>
+    			</li>
+    			<li class="row-item oneRow">
+    				<div class="label-wrap"><label for="name">积分区间</label></div>
+    				<div class="ctn-wrap">
+    				<input type="text" class="ui-input"style="width:120px;" ms-duplex="data.integral_start" data-rule="required;digits"  maxlength="20"id="name" placeholder="请输入帐号">
+					至<input type="text" class="ui-input w100"style="width:120px;" ms-duplex="data.integral_end" data-rule="required;digits"  maxlength="20"id="name" placeholder="请输入帐号"></div>
+    			</li>
+    			<li class="row-item oneRow">
+    				<div class="label-wrap"><label for="name">星星数</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" ms-duplex="data.rate_star" data-rule="required;digits"  maxlength="20"id="name" placeholder="请输入帐号"></div>
+    			</li>
+    		</ul>
+    	</form>
+    </div>
+</div>
+</@layout>

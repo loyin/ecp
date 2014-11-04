@@ -1,0 +1,72 @@
+<#include "../../inc/layout.html">
+<@layout title="竞争对手" js="scm/competitor/edit.js">
+<style>
+body{background: #fff;}
+</style>
+<div class="manage-wrapper" ms-controller="ctrl">
+    <div class="manage-wrap">
+    	<form action=""id="base_form">
+		<input type="hidden" name="id" id="id" ms-duplex="data.id">
+    		<ul class="mod-form-rows base-form" >
+    			<li class="row-item">
+    				<div class="label-wrap"><label>名称</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" id="name" ms-duplex="data.name" data-rule="required;"  maxlength="20"placeholder="请输入名称"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>企业类别</label></div>
+    				<div class="ctn-wrap">
+						<select ms-duplex="data.qyxz" class="ui-input">
+	    					<option ms-repeat="parameList[19]" ms-value="el.id">{{el.name}}</option>
+	    				</select>
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>品牌知名度</label></div>
+    				<div class="ctn-wrap">
+						<select ms-duplex="data.ppzmd" class="ui-input">
+	    					<option>高</option>
+	    					<option>中</option>
+	    					<option>低</option>
+	    					<option>未知</option>
+	    				</select>
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>市场占有</label></div>
+    				<div class="ctn-wrap">
+						<select ms-duplex="data.sczy" class="ui-input" style="width:200px;">
+	    					<option>10</option>
+	    					<option>20</option>
+	    					<option>30</option>
+	    					<option>40</option>
+	    					<option>50</option>
+	    					<option>60</option>
+	    					<option>70</option>
+	    					<option>80</option>
+	    					<option>90</option>
+	    					<option>100</option>
+	    				</select>%
+					</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>竞争威胁</label></div>
+    				<div class="ctn-wrap">
+						<select ms-duplex="data.jzwx" class="ui-input">
+	    					<option>高</option>
+	    					<option>中</option>
+	    					<option>低</option>
+	    					<option>未知</option>
+	    				</select>
+					</div>
+    			</li>
+    		</ul>
+    		<ul class="mod-form-rows">
+    			<li class="row-item pb0">
+    				<div class="label-wrap"><label for="remark">备注</label></div>
+    				<div class="ctn-wrap"><textarea id="remark" class="ui-input" placeholder="添加备注信息" ms-duplex="data.remark"></textarea></div>
+    			</li>
+    		</ul>
+    	</form>
+    </div>
+</div>
+</@layout>

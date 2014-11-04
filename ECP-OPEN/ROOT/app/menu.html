@@ -1,0 +1,239 @@
+ <ul id="nav" class="cf">
+ <li ms-if="showMenu('A2_1_S')" class="item item-BG"> <a href="javascript:void(0);" class="BG main-nav">办公<span class="arrow"></span></a>
+        <div class="sub-nav-wrap"><#--group-nav-t0-->
+          <ul class="sub-nav" >
+          	<li><a href="/oa/workreport" rel=pageTab tabid="BG-1">工作日志报告</a></li>
+<!--           	<li><a href="/wf" rel=pageTab tabid="BG-2">工作流程</a></li> -->
+          	<li><a href="/oa/event" rel=pageTab tabid="BG-3">日程</a></li>
+<!--           	<li><a href="/" rel=pageTab tabid="BG-4">消息</a></li> -->
+<!--           	<li><a href="/oa/task" rel=pageTab tabid="BG-5">任务</a></li> -->
+          	<li><a href="/oa/notice/viewList" rel=pageTab tabid="BG-7" title="企业资讯新闻及公告">企业资讯</a></li>
+<!--           	<li><a href="/oa/bbs" rel=pageTab tabid="BG-7" title="员工互动社区">互生社区</a></li> -->
+          </ul>
+        </div>
+      </li>
+<!--  客户关系 -->
+ 	<li ms-if="showMenu('A1_1_S')" class="item item-kh"> <a href="javascript:void(0);" class="kh main-nav">客户<span class="arrow"></span></a>
+        <div class="sub-nav-wrap cf group-nav" style="width:120px;">
+          <div class="nav-item" ms-if="showMenu('A1_1_S')">
+            <h3>客户维护</h3>
+	          <ul class="sub-nav" >
+	          	<li><a href="/crm/customer" rel=pageTab tabid="kh-1">客户信息</a></li>
+	          	<li><a href="/crm/custPool" rel=pageTab tabid="kh-2">客户池</a></li>
+	          	<li><a href="/crm/contacts" rel=pageTab tabid="kh-3">客户联系人</a></li>
+	          	<li><a href="/crm/concatRecord" rel=pageTab tabid="kh-4">客户联系记录</a></li>
+	          	<li><a href="/crm/custCare" rel=pageTab tabid="kh-5">客户关怀</a></li>
+<!-- 	          	<li><a href="/crm/custMemorialday" rel=pageTab tabid="kh-6">客户纪念日</a></li> -->
+	          </ul>
+          </div>
+          <div class="nav-item cf last hide" ms-if="showMenu('A1_2_S')">
+            <h3>客户服务</h3>
+	          <ul class="sub-nav" >
+	          	<li><a href="/crm/custServer" rel=pageTab tabid="kh-11">客服控制台</a></li>
+	          	<li><a href="/crm/custServer/server" rel=pageTab tabid="kh-12">客户服务</a></li>
+	          	<li><a href="/crm/custServer/complaint" rel=pageTab tabid="kh-13">客户投诉</a></li>
+	          	<li><a href="/crm/custServer/commonproblem" rel=pageTab tabid="kh-14">常见问题</a></li>
+	          	<li><a href="/crm/custServer/statistics" rel=pageTab tabid="kh-15">客服统计</a></li>
+	          </ul>
+          </div>
+        </div>
+      </li>
+<!--      销售 -->
+ 	<li ms-if="showMenu('A3_1_S')" class="item item-xs"> <a href="javascript:void(0);" class="xs main-nav">销售<span class="arrow"></span></a>
+        <div class="sub-nav-wrap cf group-nav" style="width:240px;">
+          <div class="nav-item">
+            <h3>售前</h3>
+	          <ul class="sub-nav" >
+	          	<li><a href="/crm/leads" rel=pageTab tabid="xs-1">线索</a></li>
+	          	<li><a href="/crm/business" rel=pageTab tabid="xs-2">商机</a></li>
+	          	<li><a href="/scm/order?type=4" rel=pageTab tabid="xs-3">报价单</a></li>
+	          	<li><a href="/scm/competitor" rel=pageTab tabid="xs-4">竞争对手</a></li>
+	          	<li><a href="/crm/campaigns" rel=pageTab tabid="xs-5">营销活动</a></li>
+	          </ul>
+          </div>
+          <div class="nav-item">
+            <h3>销售</h3>
+	          <ul class="sub-nav" >
+	          	<li><a href="/scm/order?type=2" rel=pageTab tabid="xs-11">订单合同</a></li>
+	          	<li><a href="/scm/order?type=3" rel=pageTab tabid="xs-12">销售退货</a></li>
+	          </ul>
+          </div>
+          <div class="nav-item cf last">
+            <h3>统计</h3>
+	          <ul class="sub-nav" >
+	          	<li><a href="/?go=scm/funnel" rel=pageTab tabid="xs-21">销售漏斗</a></li>
+	          	<li><a href="/em/saleGoal" rel=pageTab tabid="xs-22">销售目标</a></li>
+	          	<li><a href="/scm/performance/rpt.html" rel=pageTab tabid="xs-23">员工绩效</a></li>
+	          </ul>
+          </div>
+        </div>
+      </li>
+ 	<li ms-if="showMenu('A4_1_S')" class="item item-cg"> <a href="javascript:void(0);" class="cg main-nav">采购<span class="arrow"></span></a>
+        <div class="sub-nav-wrap">
+          <ul class="sub-nav" >
+          	<li><a href="/scm/order?type=0" rel=pageTab tabid="cg-1">进货</a></li>
+          	<li><a href="/scm/order?type=1" rel=pageTab tabid="cg-3">采购退货</a></li>
+			<li><a href="/?go=scm/supplier/index" rel=pageTab tabid="cg-2">供应商</a></li>
+          	<li><a href="/scm/stock/warn" rel=pageTab tabid="cg-4">库存预警</a></li>
+          	<li><a href="/scm/product" rel=pageTab tabid="cg-5">商品</a></li>
+          	<li><a href="/scm/productPriceOrder" rel=pageTab tabid="cg-6">商品价目表</a></li>
+<!--           	<li><a href="/scm/productCate" rel=pageTab tabid="cg-7">商品类别</a></li> -->
+          </ul>
+        </div>
+    </li>
+ 	<li ms-if="showMenu('A5_1_S')" class="item item-ck"> <a href="javascript:void(0);" class="ck main-nav">仓库<span class="arrow"></span></a>
+        <div class="sub-nav-wrap">
+          <ul class="sub-nav" >
+          	<li><a href="/scm/storageBill" rel=pageTab tabid="ck-1">入库／出库</a></li>
+          	<li><a href="/scm/stockAllot" rel=pageTab tabid="ck-2">调拨</a></li>
+          	<li><a href="/scm/stockCheck" rel=pageTab tabid="ck-3">盘点</a></li>
+          	<li><a href="/scm/stock/now" rel=pageTab tabid="ck-4">当前库存</a></li>
+          	<li><a href="/scm/stock/warn" rel=pageTab tabid="ck-5">库存预警</a></li>
+          	<li><a href="/scm/stock/init" rel=pageTab tabid="ck-6">初始化库存</a></li>
+          	<li><a href="/scm/storageBill/flowBill" rel=pageTab tabid="ck-7">库存流水账</a></li>
+          	<li><a href="/scm/depot" rel=pageTab tabid="ck-8">仓库设置</a></li>
+          </ul>
+        </div>
+      </li>
+ 	<li ms-if="showMenu('A6_1_S')" class="item item-RL"> <a href="javascript:void(0);" class="RL main-nav">人力<span class="arrow"></span></a>
+        <div class="sub-nav-wrap">
+          <ul class="sub-nav" >
+          	<li><a href="/?go=hr/customer" rel=pageTab tabid="RL-1">入职、离职</a></li>
+          	<li><a href="/?go=hr/customer" rel=pageTab tabid="RL-1">人员信息</a></li>
+          	<li><a href="/" rel=pageTab tabid="RL-2">薪资</a></li>
+          	<li><a href="/" rel=pageTab tabid="RL-3">社保</a></li>
+          	<li><a href="/" rel=pageTab tabid="RL-4">考勤</a></li>
+          	<li><a href="/" rel=pageTab tabid="RL-5">绩效考核</a></li>
+          	<li><a href="/" rel=pageTab tabid="RL-7">人事合同</a></li>
+          	<li><a href="/" rel=pageTab tabid="RL-8">人事调动</a></li>
+          	<li><a href="/" rel=pageTab tabid="RL-9">奖惩</a></li>
+          	<li><a href="/" rel=pageTab tabid="RL-6">培训</a></li>
+          	<li><a href="/" rel=pageTab tabid="RL-6">活动</a></li>
+          </ul>
+        </div>
+      </li>
+ 	<li ms-if="showMenu('A7_1_S')" class="item item-CW"> <a href="javascript:void(0);" class="CW main-nav">财务<span class="arrow"></span></a>
+        <div class="sub-nav-wrap">
+          <ul class="sub-nav">
+<!--           	<li><a href="/fa/payReceivAbles" rel=pageTab tabid="CW-0">预收预付</a></li> -->
+          	<li><a href="/fa/payReceivAbles" rel=pageTab tabid="CW-1">应收应付</a></li>
+          	<li><a href="/fa/payReceivOrder" rel=pageTab tabid="CW-3">收款付款</a></li>
+          	<li><a href="/fa/invoice" rel=pageTab tabid="CW-5">票据</a></li>
+<!--           	<li><a href="/fa/wlqiankuan" rel=pageTab tabid="CW-6">往来单位欠款表</a></li> -->
+<!--           	<li><a href="/fa" rel=pageTab tabid="CW-7">费用报销</a></li> -->
+          	<li><a href="/fa/account" rel=pageTab tabid="CW-8">账户</a></li>
+<!--           	<li><a href="/fa/" rel=pageTab tabid="CW-9">开支</a></li> -->
+          	<li><a href="/fa/subject" rel=pageTab tabid="CW-11">财务科目</a></li>
+          </ul>
+        </div>
+      </li>
+      <li ms-if="showMenu('A8_1_S')" class="item item-BB"> <a href="javascript:void(0);" class="BB main-nav">报表<span class="arrow"></span></a>
+       <ul class="sub-nav-wrap cf group-nav" style="min-width:120px;width:600px;">
+          <li ms-if="showMenu('A8_2_S')" class="nav-item">
+            <h3>财务报表</h3>
+	          <ul class="sub-nav" >
+	          	<li><a href="/fa/payReceivAbles/rpt?type=1" rel=pageTab tabid="BB-00">应收明细报表</a></li>
+	          	<li><a href="/fa/payReceivAbles/rpt?type=0" rel=pageTab tabid="BB-003">应付明细报表</a></li>
+	          	<li><a href="/fa/payReceivAbles/rptsum?type=1" rel=pageTab tabid="BB-01">应收汇总报表</a></li>
+	          	<li><a href="/fa/payReceivAbles/rptsum?type=0" rel=pageTab tabid="BB-04">应付汇总报表</a></li>
+<!-- 	          	<li><a href="/scm/order/duizhang?type=1" rel=pageTab tabid="BB-02">客户对账表</a></li> -->
+<!-- 	          	<li><a href="/scm/order/duizhang?type=2" rel=pageTab tabid="BB-03">供应商对账表</a></li> -->
+	          	<li><a href="/fa/account/rpt" rel=pageTab tabid="BB-05">现金银行表</a></li>
+<!-- 	          	<li><a href="/fa/incomeStatment" rel=pageTab tabid="BB-06">损益表</a></li> -->
+	          	<li><a href="/fa/payReceivOrder/rpt1" rel=pageTab tabid="BB-06">科目收支报表</a></li>
+	          </ul>
+          </li>
+          <li ms-if="showMenu('A8_3_S')" class="nav-item">
+            <h3>销售报表</h3>
+	          <ul class="sub-nav" >
+	          	<li><a href="/scm/order/rpt" rel=pageTab tabid="BB-100">销售汇总(按商品)</a></li>
+	          	<li><a href="/scm/order/rpt?f=1" rel=pageTab tabid="BB-101">销售汇总(按客户)</a></li>
+	          	<li><a href="/scm/order/rpt?f=2" rel=pageTab tabid="BB-102">销售汇总(按销售员)</a></li>
+	          	<li><a href="/scm/order/rpt1" rel=pageTab tabid="BB-103">销售明细表</a></li>
+<!-- 	          	<li><a href="/scm/order/track" rel=pageTab tabid="BB-104">销售订单跟踪表</a></li> -->
+	          	<li><a href="/fa/payReceivAbles/wlqk" rel=pageTab tabid="BB-105">往来单位欠款表</a></li>
+	          </ul>
+          </li>
+          <li class="nav-item" ms-if="showMenu('A8_4_S')">
+            <h3>采购报表</h3>
+	          <ul class="sub-nav" >
+<!-- 	          	<li><a href="/scm/order" rel=pageTab tabid="BB-200">采购订单跟踪表</a></li> -->
+	          	<li><a href="/scm/order/rpt1?type=1" rel=pageTab tabid="BB-201">采购明细表</a></li>
+	          	<li><a href="/scm/order/rpt?type=1&f=0" rel=pageTab tabid="BB-202">采购汇总(按商品)</a></li>
+	          	<li><a href="/scm/order/rpt?type=1&f=1" rel=pageTab tabid="BB-203">采购汇总(按供应商)</a></li>
+	          </ul>
+          </li>
+          <li class="nav-item" ms-if="showMenu('A8_5_S')">
+            <h3>仓储报表</h3>
+	          <ul class="sub-nav" >
+	          	<li><a href="/scm/storageBill/rpt" rel=pageTab tabid="BB-300">收发明细表</a></li>
+	          	<li><a href="/scm/stockAllot/rpt" rel=pageTab tabid="BB-302">调拨明细表</a></li>
+	          	<li><a href="/scm/stockCheck/rpt" rel=pageTab tabid="BB-304">盘点明细表</a></li>
+	          </ul>
+          </li>
+          <li class="nav-item cf last" ms-if="showMenu('A8_6_S')">
+            <h3>综合报表</h3>
+	          <ul class="sub-nav" >
+	          	<li><a href="/scm/saleFunnel" rel=pageTab tabid="xs-21">综合汇总报表</a></li>
+	          	<li><a href="/report-cy" rel=pageTab tabid="BB-2">常用报表</a></li>
+	          	<li><a href="/report-gszh" rel=pageTab tabid="BB-3">公司账户统计</a></li>
+	          	<li><a href="/report-nzxs" rel=pageTab tabid="BB-4">年终销售报表</a></li>
+	          	<li><a href="/report-mb" rel=pageTab tabid="BB-5">企业驾驶舱</a></li>
+	          </ul>
+          </li>
+        </ul>
+      </li>
+      <li ms-if="showMenu('A9_1_S')" class="item item-yun"> <a href="javascript:void(0);" class="yun main-nav">企业云<span class="arrow"></span></a>
+       <div class="sub-nav-wrap">
+          <ul class="sub-nav" >
+            	<li><a href="/report-zh" rel=pageTab tabid="yun-1">云知识库</a></li>
+            	<li><a href="/report-zh" rel=pageTab tabid="yun-2">企业云</a></li>
+            	<li><a href="/report-zh" rel=pageTab tabid="yun-3">云应用</a></li>
+            </ul>
+          </div>
+      </li>
+      <li ms-if="showMenu('A10_1_S')" class="item item-GL"> <a href="javascript:void(0);" class="GL main-nav">管理<span class="arrow"></span></a>
+        <div class="sub-nav-wrap">
+          <ul class="sub-nav" >
+<!--           	<li><a href="/em/team" rel=pageTab tabid="GL-0">团队</a></li> -->
+          	<li><a href="/em/saleGoal?f=1" rel=pageTab tabid="GL-1">销售目标</a></li>
+<!--           	<li><a href="/em/" rel=pageTab tabid="GL-2">机制</a></li> -->
+          	<li><a href="/scm/performance/rpt.html" rel=pageTab tabid="GL-3">销售绩效</a></li>
+<!--           	<li><a href="/em/" rel=pageTab tabid="GL-4">职业规划</a></li> -->
+          </ul>
+        </div>
+      </li>
+      <li class="item item-setting" > <a href="javascript:void(0);" class="setting main-nav">系统<span class="arrow"></span></a>
+        <div class="sub-nav-wrap group-nav" style="width:300px;"><#--group-nav-b0-->
+          <div class="nav-item"  ms-if="showMenu('A11_1_S')">
+            <h3>系统</h3>
+            <ul class="sub-nav" id="setting-base">
+            	<li><a href="/sso/position" rel=pageTab tabid="setting-1">组织机构</a></li>
+            	<li><a href="/sso/sysparame" rel=pageTab tabid="setting-2">企业设置</a></li>
+            	<li><a href="/sso/operlog" rel=pageTab tabid="setting-3">操作日志</a></li>
+            	<li><a href="/sso/parame" rel=pageTab tabid="setting-4">自定义参数</a></li>
+            	<li><a href="/sso/snCreater" rel=pageTab tabid="setting-5">序号规则</a></li>
+            </ul>
+          </div>
+          <div class="nav-item" >
+            <h3>个人</h3>
+            <ul class="sub-nav" id="setting-base">
+            	<li><a href="/sso/user/person" rel=pageTab tabid="setting-person">个人信息</a></li>
+            	<li><a href="/sso/operlog?type=1" rel=pageTab tabid="setting-log">操作日志</a></li>
+            </ul>
+          </div>
+          <div class="nav-item cf last" ms-if="showMenu('A11_1_S')">
+            <h3>其他</h3>
+            <ul class="sub-nav" id="setting-advancedSetting">
+          	<li><a href="/sso/dailyPhrase" rel=pageTab tabid="setting-6">日精进</a></li>
+<!--           	<li><a href="/wf/process" rel=pageTab tabid="setting-7">流程管理</a></li> -->
+<!--           	<li><a href="/sso/parame" rel=pageTab tabid="setting-8">自定义表单</a></li> -->
+          	<li><a href="/oa/workreporttemp" rel=pageTab tabid="setting-9">工作报告模版</a></li>
+          	<li><a href="/crm/custRating" rel=pageTab tabid="setting-10">会员级别</a></li>
+<!--           	<li><a href="/sso/workflow" rel=pageTab tabid="setting-10">邮箱stmp设置</a></li> -->
+<!--           	<li><a href="/sso/workflow" rel=pageTab tabid="setting-11">邮件模版</a></li> -->
+            </ul>
+          </div>
+        </div>
+      </li>
+    </ul>

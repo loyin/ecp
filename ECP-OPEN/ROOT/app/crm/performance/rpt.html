@@ -1,0 +1,104 @@
+<#include "../../inc/layout.html">
+<@layout title="员工绩效" js="crm/performance/rpt.js">
+<style>
+html{overflow:auto;}
+.comboDiv{position:absolute;left:61px;}
+.comboDiv div{height:30px;}
+</style>
+<div class="wrapper" ms-controller="view">
+  <div class="mod-search cf" ms-if="nprint">
+    <div class="fl">
+      <ul class="ul-inline">
+      	<li>
+        	<label>销售员:</label>
+        	<input type="text" class="ui-input" autocomplete="off" style="width:150px;" ms-keyup="qryUser(this.value)" ms-click="qryUser(this.value)" ms-duplex="query.head_name">
+		    <div class="comboDiv" style="width:260px;left:74px;" ms-visible="userComboV">
+		    	<div ms-repeat="userList" ms-click="chooseUser(el)">{{el.realname}}-{{el.position_name}}-{{el.department_name}}</div>
+		    </div>
+        </li>
+        <li>
+          <label>日期:</label>
+          <input type="text" id="beginDate" class="ui-input ui-datepicker-input" ms-duplex="query.start_date">
+          <span>-</span>
+          <input type="text" id="endDate" class="ui-input ui-datepicker-input"ms-duplex="query.end_date">
+        </li>
+        <li>
+        <a class="ui-btn mrb" ms-click="loadData" title="查询"><i class="fa fa-search"></i></a>
+        </li>
+      </ul>
+    </div>
+    <div class="fr">
+    <a class="ui-btn mrb" ms-click="printRpt" title="打印"><i class="fa fa-print"></i></a>
+<!--     <a class="ui-btn mrb" id="btn_down" title="导出"><i class="fa fa-download"></i></a> -->
+    </div>
+  </div>
+  <div class="no-query" ms-if="list.length==0"></div>
+  <div class="bills" ms-if="list.length>0">
+  <p>
+  日期：{{query.start_date}}至{{query.end_date}}<span class="fr">制表人：{{user.realname}}&nbsp;&nbsp;制表日期：${(now?string('yyyy年MM月dd日'))}</span>
+  </p>
+	<table class="table table-bordered table-striped able-hover">
+		<thead>
+			<tr>
+				<th>行号</th>
+				<th>员工姓名</th>
+				<th>部门</th>
+				<th>总客户数</th>
+				<th>新客户</th>
+				<th>联系记录</th>
+				<th>线索</th>
+				<th>商机</th>
+				<th>商机金额</th>
+				<th>报价单</th>
+				<th>报价金额</th>
+				<th>合同订单</th>
+				<th>合同金额</th>
+				<th>未收款</th>
+				<th>已收款</th>
+				<th>退货金额</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ms-repeat="list">
+				<td>{{$index+1}}</td>
+				<td>{{el.realname}}</td>
+				<td>{{el.department_name}}</td>
+				<td align="right">{{el.cust_ct}}</td>
+				<td align="right">{{el.newcust_ct}}</td>
+				<td align="right">{{el.contact_ct}}</td>
+				<td align="right">{{el.leads_ct}}</td>
+				<td align="right">{{el.biz_ct}}</td>
+				<td align="right">{{el.biz_amt|money}}</td>
+				<td align="right">{{el.quoted_ct}}</td>
+				<td align="right">{{el.quoted_amt|money}}</td>
+				<td align="right">{{el.order_ct}}</td>
+				<td align="right">{{el.order_amt|money}}</td>
+				<td align="right">{{el.nopay_amt|money}}</td>
+				<td align="right">{{el.pay_amt|money}}</td>
+				<td align="right">{{el.tui_amt|money}}</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="3"><b>合计</b></td>
+				<td align="right">{{cust_ct}}</td>
+				<td align="right">{{newcust_ct}}</td>
+				<td align="right">{{contact_ct}}</td>
+				<td align="right">{{leads_ct}}</td>
+				<td align="right">{{biz_ct}}</td>
+				<td align="right">{{biz_amt|money}}</td>
+				<td align="right">{{quoted_ct}}</td>
+				<td align="right">{{quoted_amt|money}}</td>
+				<td align="right">{{order_ct}}</td>
+				<td align="right">{{order_amt|money}}</td>
+				<td align="right">{{nopay_amt|money}}</td>
+				<td align="right">{{pay_amt|money}}</td>
+				<td align="right">{{tui_amt|money}}</td>
+			</tr>
+		</tfoot>
+	</table>
+  </div>
+</div>
+<script>
+var type=${type!0},f=${f!0};</script>
+</@layout>

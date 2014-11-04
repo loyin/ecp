@@ -1,0 +1,64 @@
+<#include "../../inc/layout.html">
+<@layout title="客户" js="crm/contacts/view.js">
+<style>
+body{background:#fff;display:block;}
+</style>
+<div class="manage-wrapper" ms-controller="view">
+   <div class="manage-wrap">
+    		<ul class="mod-form-rows base-form" >
+    			<li class="row-itemoneRow oneRow">
+    				<div class="label-wrap"><label>所属{{data.custType|type}}</label></div>
+    				<div class="ctn-wrap">{{data.customer_name}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>姓名</label></div>
+    				<div class="ctn-wrap">{{data.name}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>性别</label></div>
+    				<div class="ctn-wrap"><span ms-visible="data.sex==1">男</span><span ms-visible="data.sex==0">女</span></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>称呼</label></div>
+    				<div class="ctn-wrap">{{data.saltname}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>部门</label></div>
+    				<div class="ctn-wrap">{{data.department}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>职位</label></div>
+    				<div class="ctn-wrap">{{data.post}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>电话</label></div>
+    				<div class="ctn-wrap">{{data.telephone}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>手机</label></div>
+    				<div class="ctn-wrap">{{data.mobile}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>邮箱</label></div>
+    				<div class="ctn-wrap">{{data.email}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>QQ</label></div>
+    				<div class="ctn-wrap">{{data.qq}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>身份证</label></div>
+    				<div class="ctn-wrap">{{data.idcard}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>联系地址</label></div>
+    				<div class="ctn-wrap">{{data.address}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>备注</label></div>
+    				<div class="ctn-wrap">{{data.description}}</div>
+    			</li>
+    		</ul>
+    </div>
+</div>
+</@layout>

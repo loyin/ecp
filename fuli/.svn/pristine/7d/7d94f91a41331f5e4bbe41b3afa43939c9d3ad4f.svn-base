@@ -1,0 +1,69 @@
+<#include "../inc/layout.html"> 
+<@layout title="微信菜单">
+		<div class="common-form">
+			<form method="post" class="J_ajaxForm" action="${root!}/wxmenu/save">
+				<input type="hidden" name="id" value="${(po.id)!}">
+				<div class="h_a">微信菜单</div>
+				<div class="table_list">
+					<table cellpadding="0" cellspacing="0" class="table_form" width="100%">
+						<tbody>
+							<tr>
+								<td width="200">父菜单:</td>
+								<td><select name="pid" class="normal_select">
+								<option value="">顶级菜单</option>
+								<#list WxmenuList as r>
+								<#if ((r.pid)!0) !=0>
+				 				<#else>
+								<option value="${r.id}" <#if r.id==(po.pid)!0>selected="selected"</#if>>${r.name}</option>
+									<#list WxmenuList as r1>
+									<#if (r1.pid)??&& r1.pid==r.id>
+										<option value="${r1.id}" <#if r1.id==(po.pid)!0>selected="selected"</#if>>&nbsp;&nbsp;&nbsp;└─${r1.name}</option>
+									</#if>
+									</#list>
+								</#if>
+								</#list>
+								</select>
+							</tr>
+							<tr>
+								<td width="200">菜单名称:</td>
+								<td><input type="text" class="input" name="name" value="${(po.name)!}"></td>
+							</tr>
+							<tr>
+								<th>类型</th>
+								<td><label><input type="radio" name="type" value="view" <#if ((po.type)!'view')=='view' >checked</#if>>链接</label>
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									<label><input type="radio" name="type" value="click" <#if ((po.type)!'click') =='click' >checked</#if>>点击
+								</label></td>
+							</tr>
+							<tr>
+								<th>状态</th>
+								<td><label><input type="radio" name="status" value="1" <#if ((po.status)!1)==1 >checked</#if>>启用</label>
+									&nbsp;&nbsp;&nbsp;&nbsp;
+									<label><input type="radio" name="status" value="0" <#if ((po.status)!1) ==0 >checked</#if>>禁止
+								</label></td>
+							</tr>
+							<tr>
+								<td width="200">链接:</td>
+								<td><input type="text" class="input" name="url" value="${(po.url)!}"></td>
+							</tr>
+							<tr>
+								<td width="200">KEY:</td>
+								<td><input type="text" class="input" name="key" value="${(po.key)!}"></td>
+							</tr>
+							<tr>
+								<td width="200">排序:</td>
+								<td><input type="text" class="input" name="listorder" value="${(po.listorder)!1}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="btn_wrap">
+					<div class="btn_wrap_pd">
+						<button class="btn btn_submit mr10 J_ajax_submit_btn"
+							type="submit"><#if (po.id)??>修改<#else>添加</#if></button>
+						<a class="btn" href="${root!}/wxmenu/list">返回</a>
+					</div>
+				</div>
+			</form>
+		</div>
+ ·</@layout>

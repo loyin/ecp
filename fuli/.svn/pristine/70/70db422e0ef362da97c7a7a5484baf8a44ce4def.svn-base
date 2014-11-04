@@ -1,0 +1,75 @@
+package net.loyin.util.wechat.bean.act;
+
+/**
+ * 人品活动
+ */
+public class WcActRenpin {
+	private int rpid;
+	private String fromUserName;
+	private String nickname;
+	private String phone;
+	private long createTime;
+	private int goodman;
+	private int badman;
+
+	public WcActRenpin() {
+
+	}
+
+	public int getRpid() {
+		return rpid;
+	}
+
+	public void setRpid(int rpid) {
+		this.rpid = rpid;
+	}
+
+	public String getFromUserName() {
+		return fromUserName;
+	}
+
+	public void setFromUserName(String fromUserName) {
+		this.fromUserName = fromUserName;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public long getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(long createTime) {
+		this.createTime = createTime;
+	}
+
+	public int getGoodman() {
+		return goodman;
+	}
+
+	public void setGoodman(int goodman) {
+		this.goodman = goodman;
+	}
+
+	public int getBadman() {
+		return badman;
+	}
+
+	public void setBadman(int badman) {
+		this.badman = badman;
+	}
+
+}

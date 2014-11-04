@@ -1,0 +1,63 @@
+<#include "../../inc/layout.html">
+<@layout title="线索" js="crm/leads/edit.js">
+<style>
+body{background: #fff;}
+</style>
+<div class="manage-wrapper" ms-controller="ctrl">
+    <div class="manage-wrap">
+    	<form action=""id="base_form">
+    		<ul class="mod-form-rows base-form" >
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>主题</label></div>
+    				<div class="ctn-wrap"><input id="name" class="ui-input" ms-duplex="data.name" data-rule="required;"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>客户名称</label></div>
+    				<div class="ctn-wrap">
+						<span class="ui-combo-wrap">
+	          			<input type="text" id="customer" class="input-txt" autocomplete="off" data-ref="date" ms-keyup="qryCustomer(this.value)" ms-click="qryCustomer(this.value)" ms-duplex="data.customer_name" data-rule="required;">
+	          			</span>
+	          			<div class="comboDiv" style="width:260px;" ms-visible="custComboV"><div ms-repeat="customerList" ms-click="chooseCust(el)">{{el.sn}}&nbsp;&nbsp;{{el.name}}</div></div>
+					</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>联系人姓名</label></div>
+    				<div class="ctn-wrap"><input id="contacts_name" class="ui-input" ms-duplex="data.contacts_name" data-rule="required;"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>联系人称呼</label></div>
+    				<div class="ctn-wrap"><input id="saltname" class="ui-input" ms-duplex="data.saltname"></div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>手机号码</label></div>
+    				<div class="ctn-wrap"><input id="moblie" class="ui-input" ms-duplex="data.mobile"></div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>电话</label></div>
+    				<div class="ctn-wrap"><input id="telephone" class="ui-input" ms-duplex="data.telephone"></div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>Email</label></div>
+    				<div class="ctn-wrap"><input id="email" class="ui-input" ms-duplex="data.email"></div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>地址</label></div>
+    				<div class="ctn-wrap"><input id="address" class="ui-input" ms-duplex="data.address"></div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>下次联系</label></div>
+    				<div class="ctn-wrap"><input id="nextstep" class="ui-input" ms-duplex="data.nextstep"></div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>联系时间</label></div>
+    				<div class="ctn-wrap"><input id="nextstep_date" class="ui-input ui-datepicker-input" ms-duplex="data.nextstep_date"></div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>备注</label></div>
+    				<div class="ctn-wrap"><textarea id="remark" class="ui-input" ms-duplex="data.remark"></textarea></div>
+    			</li>
+    		</ul>
+    	</form>
+    </div>
+</div>
+</@layout>

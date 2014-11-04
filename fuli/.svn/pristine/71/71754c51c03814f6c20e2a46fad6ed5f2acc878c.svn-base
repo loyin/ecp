@@ -1,0 +1,56 @@
+package net.loyin.util.wechat.bean.act;
+
+
+/**
+ * 开门纳福活动
+ * @author RedHome
+ * @date 2014-01-14
+ */
+public class WcActNafuRcd {
+
+	private int fid;
+	private String fromUserName;	//标识
+	private long createTime;		//时间
+	private int sortorder;			//轮次
+	private int door;				//门
+	private String award;			//奖品
+	public int getFid() {
+		return fid;
+	}
+	public void setFid(int fid) {
+		this.fid = fid;
+	}
+	public String getFromUserName() {
+		return fromUserName;
+	}
+	public void setFromUserName(String fromUserName) {
+		this.fromUserName = fromUserName;
+	}
+	public long getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(long createTime) {
+		this.createTime = createTime;
+	}
+	public int getSortorder() {
+		return sortorder;
+	}
+	public void setSortorder(int sortorder) {
+		this.sortorder = sortorder;
+	}
+	public int getDoor() {
+		return door;
+	}
+	public void setDoor(int door) {
+		this.door = door;
+	}
+	public String getAward() {
+		return award;
+	}
+	public void setAward(String award) {
+		this.award = award;
+	}
+
+
+
+}

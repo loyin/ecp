@@ -1,0 +1,124 @@
+<#include "../../inc/layout.html">
+<@layout title="订单" js="scm/order/view.js">
+<style>
+body{background: #fff;}
+.table1 td{padding:2px;}
+u{width:200px;}
+</style>
+<div class="manage-wrapper" ms-controller="ctrl">
+    <div class="manage-wrap">
+    				<table style="width:100%;" class="table1">
+    				<tr>
+    					<td width="100px" align="right"><span ms-if="type>1">客户：</span><span ms-if="type<2">供应商：</span></td>
+    					<td width="20%">
+	    					{{data.customer_name}}
+    					</td>
+    					<td width="100px" align="right">单据日期：</td>
+    					<td width="20%">{{data.sign_date}}</td>
+    					<td width="100px;" align="right">单据编号：</td>
+    					<td width="20%">{{data.billsn}}</td>
+    				</tr>
+    				<tr>
+    					<td ms-if="data.ordertype==0||data.ordertype==2" width="100px" align="right">有效期限：</td>
+    					<td ms-if="data.ordertype==0||data.ordertype==2">{{data.start_date}}至{{data.end_date}}
+	    				</td>
+    					<td width="100px" align="right"><span ms-if="type==0||type==2">发货</span><span ms-if="type==1||type==3">退货</span>日期：</td>
+    					<td>{{data.delivery_date}}</td>
+    					<td align="right"><span ms-if="data.ordertype>1">销售员</span><span ms-if="data.ordertype<=1">采购员</span>：</td>
+    					<td>{{data.head_name}}</td>
+    					<td align="right" ms-if="data.ordertype==1||data.ordertype==3">原订单编号：</td>
+    					<td ms-if="data.ordertype==1||data.ordertype==3">{{data.ordersn}}</td>
+    				</tr>
+    				</table>
+    		</ul>
+    		<br>
+    		<table class="table table-hover table-striped table_thead_fixed table-bordered table-condensed" id="prodcutTable">
+  				<thead>
+  					<tr>
+  						<th width="50px">&nbsp;</th>
+  						<th width="167px">商品</th>
+  						<th width="167px">单位</th>
+  						<th width="167px" ms-if="type<2">采购价</th>
+  						<th width="167px" ms-if="type>1">销售价</th>
+  						<th width="167px" ms-if="type==4">报价</th>
+  						<th width="167px">折扣率(%)</th>
+  						<th width="167px">折扣金额</th>
+  						<th width="167px">数量</th>
+  						<th width="167px">金额</th>
+  						<th width="167px">税率(%)</th>
+  						<th width="167px">税额</th>
+  						<th width="167px">价税合计</th>
+  						<th width="167px">备注</th>
+  					</tr>
+  				</thead>
+  				<tbody style="max-height:400px;">
+  					<tr ms-repeat="data.productlist">
+  						<td width="50px">{{$index+1}}</td>
+  						<td>{{el.product_name}}</td>
+	          			<td>{{el.unit|custParame}}</td>
+  						<td>{{el.sale_price|money}}</td><#-- 此价格当为销售时为销售价格则为采购价格 -->
+  						<td ms-if="type==4">{{el.quoted_price|money}}</td>
+  						<td>{{el.zkl}}</td>
+  						<td>{{el.zhamt|money}}</td>
+  						<td>{{el.amount}}</td>
+  						<td>{{el.amt|money}}</td>
+  						<td>{{el.tax_rate}}</td>
+  						<td>{{el.tax|money}}</td>
+  						<td>{{fixedNum((el.amt*(1+el.tax_rate/100)))|money}}</td>
+  						<td>{{el.description}}</td>
+  					</tr>
+  				</tbody>
+  				<tfoot>
+  					<tr>
+  						<td ms-attr-colspan="type==4?6:5" align="right"><b>合计：</b></td>
+  						<td>{{fixedNum(sumzhamt)}}</td>
+  						<td>{{fixedNum(sumAmount)}}</td>
+  						<td>{{fixedNum(sumAmt)}}</td>
+						<td></td>
+  						<td>{{fixedNum(sumTax)}}</td>
+  						<td>{{fixedNum(sumPTax)}}</td>
+  						<td></td>
+  					</tr>
+  				</tfoot>
+    		</table>
+    		<div id="amountArea">
+          <p>
+            	折扣率:&nbsp;&nbsp;{{data.rebate}}%&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            	折扣额:&nbsp;&nbsp;{{data.rebate_amt}}元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            	订单金额:&nbsp;&nbsp;{{fixedNum(data.order_amt)|money}}元(大写：{{fixedNum(data.order_amt)|atoc}})<input type="hidden" ms-duplex="data.order_amt" ms-value="{{sumPTax-data.rebate_amt}}">
+           </p>
+           <p>创建人：<u>{{data.creater_name}}</u>&nbsp;&nbsp;&nbsp;创建时间：<u>{{data.create_datetime}}</u>&nbsp;&nbsp;&nbsp;修改人：<u>{{data.updater_name}}</u>&nbsp;&nbsp;修改时间：<u>{{data.update_datetime}}</u></p>
+           <p>
+			 备注：
+           <br>
+           {{data.remark}}
+           </p>
+           <p ms-if="data.ordertype==0||data.ordertype==2||data.ordertype==4">
+			 合同条款：
+           <br>
+           {{data.pact|html}}
+           </p>
+       </div>
+       <div ms-if="audit_hidden==false">
+       <table class="table table-hover table-striped table_thead_fixed table-bordered table-condensed">
+       	<thead>
+       		<tr>
+       		<th>审核人</th>
+       		<th>审核结果</th>
+       		<th>审核时间</th>
+       		<th>批注</th>
+       		</tr>
+       	</thead>
+       	<tbody>
+       		<tr ms-repeat="auditDetailList">
+       			<td>{{el.auditor_name}}</td>
+       			<td>{{el.audit_status|audit_status}}</td>
+       			<td>{{el.audit_datetime}}</td>
+       			<td>{{el.remark}}</td>
+       		</tr>
+       	</tbody>
+       </table>
+       </div>
+    </div>
+</div>
+</@layout>

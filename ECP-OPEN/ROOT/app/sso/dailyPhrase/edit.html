@@ -1,0 +1,24 @@
+<#include "../../inc/layout.html">
+<@layout title="日精进" js="sso/dailyPhrase/edit.js">
+<style>
+body{background: #fff;}
+</style>
+<div class="manage-wrapper" ms-controller="ctrl">
+    <div class="manage-wrap base-form">
+    	<form action=""id="base_form">
+    		<ul class="mod-form-rows" >
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="sort_num">顺序号</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" required="required" ms-duplex="data.sort_num" id="sort_num" maxlength="3"placeholder="请输入顺序数字"></div>
+    			</li>
+    		</ul>
+    		<ul class="mod-form-rows">
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="content">每日一语</label></div>
+    				<div class="ctn-wrap"><textarea ms-duplex="data.content" id="content" class="ui-input"  rows="5" required="required" maxlength="250" placeholder=""></textarea></div>
+    			</li>
+    		</ul>
+    	</form>
+    </div>
+</div>
+</@layout>

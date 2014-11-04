@@ -1,0 +1,74 @@
+<#include "../../inc/layout.html">
+<@layout title="现金银行" js="fa/account/rpt.js">
+<style>
+html{overflow:auto;}
+.comboDiv{position:absolute;left:90px;}
+.comboDiv div{height:30px;}
+</style>
+<div class="wrapper" ms-controller="view">
+  <div class="mod-search cf" ms-if="nprint">
+    <div class="fl">
+      <ul class="ul-inline">
+        <li>
+        	<label>账号:</label>
+        	<select class="ui-input" style="width:200px;" ms-duplex="query.account_id">
+        		<option value="">全部</option>
+        		<option ms-repeat="accountList" ms-value="el.id">{{el.name}}</option>
+        	</select>
+        </li>
+        <li>
+          <label>日期:</label>
+          <input type="text" id="beginDate" class="ui-input ui-datepicker-input" ms-duplex="query.start_date">
+          <span>-</span>
+          <input type="text" id="endDate" class="ui-input ui-datepicker-input"ms-duplex="query.end_date">
+        </li>
+        <li>
+        <a class="ui-btn mrb" ms-click="loadData" title="查询"><i class="fa fa-search"></i></a>
+        </li>
+      </ul>
+    </div>
+    <div class="fr">
+    <a class="ui-btn mrb" ms-click="printRpt" title="打印"><i class="fa fa-print"></i></a>
+<!--     <a class="ui-btn mrb" id="btn_down" title="导出"><i class="fa fa-download"></i></a> -->
+    </div>
+  </div>
+  <div class="no-query" ms-if="list.length==0"></div>
+  <div class="bills" ms-if="list.length>0">
+    <p style="font-size:24px;text-align:center;">
+    	现金银行报表
+    </p>
+    <p>
+    日期：{{query.start_date}}至{{query.end_date}}<span class="fr">制表人：{{user.realname}}&nbsp;&nbsp;制表日期：${(now?string('yyyy年MM月dd日'))}</span>
+    </p>
+	<table class="table table-bordered table-striped able-hover">
+		<thead>
+			<tr>
+				<th>账户名称</th>
+				<th>账号</th>
+				<th>日期</th>
+				<th>收入</th>
+				<th>支出</th>
+				<th>帐户余额</th>
+				<th>来往单位</th>
+				<th>备注</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ms-repeat="list">
+				<td ms-if="el.name=='小计'" colspan="3" align="right">{{el.name}}</td>
+				<td ms-if="el.name!='小计'">{{el.name}}</td>
+				<td ms-if="el.name!='小计'">{{el.account}}</td>
+				<td ms-if="el.name!='小计'">{{el.create_date}}</td>
+				<td align="right">{{el.amt_in|money}}</td>
+				<td align="right">{{el.amt_out|money}}</td>
+				<td align="right">{{el.balance|money}}</td>
+				<td>{{el.customer_name}}</td>
+				<td>{{el.remark}}</td>
+			</tr>
+		</tbody>
+	</table>
+  </div>
+</div>
+<script>
+var type=${type!0};</script>
+</@layout>

@@ -1,0 +1,49 @@
+package net.loyin.util.wechat.bean;
+
+public class WcRpt {
+	private int rptId;
+	private String token;
+	private long dateTime;
+	private int rptSum;
+	private String rptFlag;
+
+	public int getRptId() {
+		return rptId;
+	}
+
+	public void setRptId(int rptId) {
+		this.rptId = rptId;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
+	public long getDateTime() {
+		return dateTime;
+	}
+
+	public void setDateTime(long dateTime) {
+		this.dateTime = dateTime;
+	}
+
+	public int getRptSum() {
+		return rptSum;
+	}
+
+	public void setRptSum(int rptSum) {
+		this.rptSum = rptSum;
+	}
+
+	public String getRptFlag() {
+		return rptFlag;
+	}
+
+	public void setRptFlag(String rptFlag) {
+		this.rptFlag = rptFlag;
+	}
+}

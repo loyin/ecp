@@ -1,0 +1,43 @@
+<#include "../inc/layout.html"> 
+<@layout title="APP">
+<style>
+.input{width:400px;}</style>
+<div class="h_a">APP信息</div>
+		<form class="J_ajaxForm" action="${root!}/app/save" method="post" id="myform">
+		<input type="hidden" name="id" value="${(po.id)!}">
+			<div class="table_full">
+				<table width="100%">
+					<tr>
+						<th width="100">APP名称</th>
+						<td><input type="text" name="name" value="${(po.name)!}" class="input"><span class="must_red">*</span></td>
+					</tr>
+					<tr>
+						<th width="100">类别</th>
+						<td><select name="lb">
+							<#list applb as lb>
+							<option value="${lb}" <#if (po.lb)??&&(po.lb==lb)>selected="selected"</#if>>${lb}</option>
+							</#list>
+							</select><span class="must_red">*</span></td>
+					</tr>
+					<tr>
+						<th width="100">图标</th>
+						<td><input type="text" name="img" value="${(po.img)!}" class="input"><span class="must_red">*</span></td>
+					</tr>
+					<tr>
+						<th width="100">链接</th>
+						<td><input type="text" name="url" value="${(po.url)!}" class="input"><span class="must_red">*</span></td>
+					</tr>
+					<tr>
+						<th width="100">人气指数</th>
+						<td><input type="text" name="rq" value="${(po.rq)!0}" class="input"><span class="must_red">*</span>0-5的数字</td>
+					</tr>
+				</table>
+			</div>
+			<div class="btn_wrap">
+				<div class="btn_wrap_pd">
+					<button class="btn btn_submit mr10 J_ajax_submit_btn" type="submit"><#if (po.id)??>修改<#else>添加</#if></button>
+					<a class="btn" href="${root!}/app/list">返回</a>
+				</div>
+			</div>
+		</form>
+</@layout>

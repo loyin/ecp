@@ -1,0 +1,23 @@
+<#include "../../inc/layout.html">
+<@layout title="仓库" js="scm/stock/initImpl.js">
+<div class="manage-wrapper" ms-controller="ctrl">
+    <div class="manage-wrap">
+    	<form action=""id="base_form">
+		<input type="hidden" name="id" id="id" ms-duplex="data.id">
+    		<ul class="mod-form-rows base-form" >
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="name">步骤</label></div>
+    				<div class="ctn-wrap">1、<a href="${root!}/excel/库存初始化.xls">下载</a>导入模板文件。
+    				2、上传编辑后的文件。</div>
+    			</li>
+    		</ul>
+    		<ul class="mod-form-rows">
+    			<li class="row-item pb0">
+    				<div class="label-wrap"><label for="remark">文件</label></div>
+    				<div class="ctn-wrap"><span id="upfile_btn"></span></div>
+    			</li>
+    		</ul>
+    	</form>
+    </div>
+</div>
+</@layout>

@@ -1,0 +1,6 @@
+ALTER TABLE `sp_wx_user`
+	ADD COLUMN `jbn` SMALLINT(6) NOT NULL DEFAULT '0' COMMENT '酒帮成员编号' AFTER `jbm`;
+ALTER TABLE `sp_wx_user`
+	ALTER `unsubscribe_time` DROP DEFAULT;
+ALTER TABLE `sp_wx_user`
+	CHANGE COLUMN `unsubscribe_time` `unsubscribe_time` DATETIME NULL COMMENT '取消关注时间' AFTER `headimgurl`;

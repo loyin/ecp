@@ -1,0 +1,16 @@
+package net.loyin.ctrl;
+
+import net.loyin.jfinal.anatation.RouteBind;
+import net.loyin.model.sys.Jiubang;
+
+@RouteBind(path = "/jiubang")
+public class JiubangCtrl extends AdminBaseController<Jiubang> {
+	public JiubangCtrl(){
+		this.tableName=Jiubang.tableName;
+		this.modelClass=Jiubang.class;
+	}
+	public void edit(){
+		super.edit();
+		this.setAttr("JiubangList", Jiubang.dao.find("select * from "+tableName));
+	}
+}

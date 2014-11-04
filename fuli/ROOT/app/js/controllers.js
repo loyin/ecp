@@ -209,3 +209,7 @@ userModule.controller('myMsgCtrl',//私人消息
 		function($rootScope,$scope, $http, $state, $stateParams) {
 	
 });
+userModule.controller('transferCtrl',//金币转账
+		function($rootScope,$scope, $http, $state, $stateParams) {
+	
+});

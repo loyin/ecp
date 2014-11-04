@@ -1,0 +1,43 @@
+<#include "../../inc/layout.html">
+<@layout title="盘点" js="scm/stockCheck/index.js">
+<script>var type=${type!0};</script>
+<div class="wrapper" ms-controller="view">
+  <div class="mod-search cf">
+    <div class="fl">
+    	<ul class="ul-inline">
+	        <li>
+	          <input type="text"  ms-duplex="query.keyword" class="ui-input con" value="" placeholder="请输入查询关键字">
+	        </li>
+	        <li>
+	          <label>日期:</label>
+	          <input type="text" ms-duplex="query.start_date" class="ui-input ui-datepicker-input" placeholder="起始日期">
+	          <span>-</span>
+	          <input type="text" ms-duplex="query.end_date" class="ui-input ui-datepicker-input" placeholder="截止日期">
+	        </li>
+	       	<li>
+	        <a class="ui-btn" id="search" ms-click="reloadData" title="查询"><i class="fa fa-search"></i></a>
+	        <a class="ui-btn" id="refresh" ms-click="resetQry" title="重置查询条件"><i class="fa fa-refresh"></i></a>
+	        </li>
+	        <li>
+	        <div class="dropdown">
+			  <a class="ui-btn dropdown-toggle" data-toggle="dropdown">{{fastQryText}}<span class="caret"></span></a>
+			  <ul class="dropdown-menu">
+			  <li ms-repeat="fastQry" ms-class="divider:el.sl"><a ms-click="qry($index)">{{el.text}}<i ms-if="$index==4" class="fa red fa-trash-o"></i></a></li>
+			  </ul>
+			</div>
+        </li>
+	      </ul>
+    </div>
+    <div class="fr">
+    <a class="ui-btn ui-btn-sp mrb" id="add" title="新增"><i class="fa fa-plus"></i></a>
+    <a class="ui-btn mrb"id="btn-batchDel"title="批量删除"><i class="fa red fa-trash-o"></i></a>
+    <a ms-visible="query.qryType==4"class="ui-btn mrb" id="btn-batchReply" title="批量恢复"><i class="fa fa-reply"></i>恢复</a>
+    </div>
+  </div>
+  <div class="grid-wrap">
+    <table id="grid">
+    </table>
+    <div id="page"></div>
+  </div>
+</div>
+</@layout>

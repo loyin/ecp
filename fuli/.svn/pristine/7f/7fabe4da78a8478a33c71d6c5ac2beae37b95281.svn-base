@@ -1,0 +1,52 @@
+package net.loyin.util.wechat.bean.act;
+
+/**
+ * 开门红活动
+ *
+ * @author Mr_von
+ * @创建时间 2013-12-27 上午11:45:05
+ *
+ */
+public class WcActHongRcd {
+	private int hrid;
+	private int hid;
+	private long createTime;
+	private String cookie;
+
+	public WcActHongRcd() {
+
+	}
+
+	public int getHrid() {
+		return hrid;
+	}
+
+	public void setHrid(int hrid) {
+		this.hrid = hrid;
+	}
+
+	public int getHid() {
+		return hid;
+	}
+
+	public void setHid(int hid) {
+		this.hid = hid;
+	}
+
+	public long getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(long createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getCookie() {
+		return cookie;
+	}
+
+	public void setCookie(String cookie) {
+		this.cookie = cookie;
+	}
+
+}

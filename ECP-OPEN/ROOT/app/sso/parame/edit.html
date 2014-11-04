@@ -1,0 +1,48 @@
+<#include "../../inc/layout.html">
+<@layout title="系统自定义参数" js="sso/parame/edit.js">
+<style>
+body{background:#fff;}
+</style>
+<div class="manage-wrapper" ms-controller="ctrl">
+    <div class="manage-wrap">
+    	<form action=""id="base_form">
+    		<input type="hidden" name="id" id="id" ms-duplex="data.id">
+    		<input type="hidden" name="parent_id" id="parent_id"ms-duplex="data.parent_id">
+    		<ul class="mod-form-rows manage-wrap" >
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="name">名称</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" name="name" ms-duplex="data.name"data-rule="required;"  maxlength="10"id="name" placeholder="请输入名称"></div>
+    			</li>
+    			<li class="row-item odd ">
+    				<div class="label-wrap"><label>是否终态</label></div>
+    				<div class="ctn-wrap" id="is_end"><label class="radio" ms-click="chk(0)" ms-class="checked:data.is_end==0">否</label>
+				          <label class="radio" ms-class="checked:data.is_end==1" ms-click="chk(1)">是</label>
+					</div>
+    			</li>
+    			<li class="row-item odd ">
+    				<div class="label-wrap"><label>类别</label></div>
+    				<div class="ctn-wrap">
+    					<select id="type" class="ui-input" ms-duplex="data.type" name="type" data-rule="required">
+			          	<option value="">全部</option>
+			          	<option ms-repeat="parameType" ms-value="$index">{{el}}</option>
+			          </select>
+					</div>
+    			</li>
+    			<li class="row-item odd ">
+    				<div class="label-wrap"><label for="parent_name">父级参数</label></div>
+    				<div class="ctn-wrap">
+					<input type="text" class="ui-input" id="parent_name" readonly ms-duplex="data.parent_name"></div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>排序号</label></div>
+    				<div class="ctn-wrap"><input type="text" class="ui-input" name="sort_num"ms-duplex="data.sort_num" value="1" id="sort_num" data-rule="digits"></div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="description">备注</label></div>
+    				<div class="ctn-wrap"><textarea name="description" id="description" class="ui-input" cols="15"ms-duplex="data.description" placeholder="添加备注信息"></textarea></div>
+    			</li>
+    		</ul>
+    	</form>
+    </div>
+</div>
+</@layout>

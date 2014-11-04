@@ -1,0 +1,37 @@
+<#include "../../inc/layout.html">
+<@layout title="操作日志" js="/sso/operlog/index.js">
+<div class="wrapper">
+  <div class="mod-search cf">
+    <div class="fl">
+      <ul class="ul-inline">
+        <li>
+          <input type="text" id="keyword" class="ui-input ui-input-ph con" value="" placeholder="请输入操作人员帐号" style="width:100px">
+        </li>
+        <li>
+        <label>模块名称:</label>
+          <input type="text" id="module_name" class="ui-input" style="width:150px">
+        </li>
+        <li>
+        <label>操作名称:</label>
+          <input type="text" id="action_name" class="ui-input" style="width:150px">
+        </li>        
+        <li>
+          <label>操作时间:</label>
+          <input type="text" id="beginDate" value="" class="ui-input ui-datepicker-input">
+          <span>-</span>
+          <input type="text" id="endDate" value="" class="ui-input ui-datepicker-input">
+        </li>
+       <li><a class="ui-btn mrb" id="search" title="查询"><i class="fa fa-search"></i></a></li>
+      </ul>
+    </div>
+    <div class="fr">
+  
+    </div>
+  </div>
+  <div class="grid-wrap">
+    <table id="grid">
+    </table>
+    <div id="page"></div>
+  </div>
+</div>
+</@layout>

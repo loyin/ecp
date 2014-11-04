@@ -1,0 +1,68 @@
+<#include "../../inc/layout.html">
+<@layout title="商品价目表" js="scm/productPriceOrder/edit.js">
+<style>
+body{background: #fff;}
+.comboDiv{position:absolute;}
+.table .ui-input{width:100%;}
+</style>
+<div class="manage-wrapper" ms-controller="ctrl">
+    <div class="manage-wrap">
+    	<form action=""id="base_form">
+		<input type="hidden" ms-duplex="data.id" id="id" >
+    		<ul class="mod-form-rows base-form" >
+    			<li class="row-item odd">
+    				<input type="hidden" ms-duplex="data.category" id="category">
+    				<div class="label-wrap"><label for="subject">主题</label></div>
+    				<div class="ctn-wrap">
+					<input type="text" value="" class="ui-input" id="subject" ms-duplex="data.subject" data-rule="required"></div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="status">有效日期</label></div>
+    				<div class="ctn-wrap" id="status">
+    					<input type="text" id="start_date" value="" ms-duplex="data.start_date" class="ui-input ui-datepicker-input" style="width:100px;" data-rule="required">
+          					<span>至</span>
+          				<input type="text" id="end_date" ms-duplex="data.end_date" value="" class="ui-input ui-datepicker-input" style="width:100px;" data-rule="required">
+					</div>
+    			</li>
+    		</ul>
+    		<p><b>商品列表</b></p>
+    		<div class="grid-wrap" style="max-height:300px;overflow:auto;">
+    		<table class="table table-hover table-striped table_thead_fixed table-bordered" id="prodcutTable">
+  				<thead>
+  					<tr>
+  						<th width="50px">&nbsp;</th>
+  						<th width="50px">&nbsp;</th>
+  						<th width="167px">商品</th>
+  						<th width="167px">成本价(元)</th>
+  						<th width="167px">销售价(元)</th>
+  						<th width="167px">数量</th>
+  					</tr>
+  				</thead>
+  				<tbody style="max-height:400px;">
+  					<tr ms-repeat="data.productlist">
+  						<td width="50px">{{$index+1}}</td>
+  						<td width="50px"><nobr><i class="fa fa-plus mrb" ms-click="addRow" title="移除"></i><i class="fa fa-trash" ms-click="delRow" title="移除"></i></nobr></td>
+  						<td>
+	          			<input type="text" id="customer" class="ui-input" autocomplete="off"
+	          			 ms-keyup="qryProduct(this.value,$index)"ms-click="qryProduct(this.value,$index)"
+	          			  ms-duplex="el.product_name" data-rule="required;">
+	          			<div class="comboDiv" style="width:260px;left:94px;"ms-visible="productComboDiv==$index">
+	          				<div ms-repeat="productlist" ms-click="chooseProduct(el,productComboDiv)">{{el.sn}}&nbsp;&nbsp;{{el.name}}</div>
+	          			</div></td>
+						<td><input class="ui-input" data-rule="required;money" id="cost_{{$index}}" ms-duplex="el.cost"></td>
+  						<td><input class="ui-input" data-rule="required;money" id="saleprice_{{$index}}" ms-duplex="el.price"></td>
+  						<td><input class="ui-input" data-rule="required;number" id="amount_{{$index}}" ms-duplex="el.amount"></td>
+  					</tr>
+  				</tbody>
+    		</table>
+		    </div>
+		    <ul class="mod-form-rows base-form">
+    			<li class="row-item pb0">
+<!--     				<div class="label-wrap"><label for="remark">备注</label></div> -->
+    				<div class="ctn-wrap"><textarea ms-duplex="data.remark" id="remark" class="ui-input" style="width:720px;" placeholder="添加备注信息"></textarea></div>
+    			</li>
+    		</ul>
+    	</form>
+    </div>
+</div>
+</@layout>

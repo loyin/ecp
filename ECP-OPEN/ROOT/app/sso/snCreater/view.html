@@ -1,0 +1,48 @@
+<#include "../../inc/layout.html">
+<@layout title="序号规则管理" js="sso/snCreater/view.js">
+<style>
+body{background: #fff;}
+</style>
+<div class="manage-wrapper" ms-controller="ctrl">
+    <div class="manage-wrap">
+    		<ul class="mod-form-rows base-form" >
+    			<li class="row-item">
+    				<div class="label-wrap"><label>编码</label></div>
+    				<div class="ctn-wrap">{{data.code}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>名称</label></div>
+    				<div class="ctn-wrap">{{data.name}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>前缀</label></div>
+    				<div class="ctn-wrap">{{data.qz}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>启用日期</label></div>
+    				<div class="ctn-wrap">{{data.qyrq|yn}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>日期格式</label></div>
+    				<div class="ctn-wrap">{{data.rqgs}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>当前序号</label></div>
+    				<div class="ctn-wrap">{{data.dqxh}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>更新周期</label></div>
+    				<div class="ctn-wrap">{{data.sfmrgx|gxtyp}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>更新日期</label></div>
+    				<div class="ctn-wrap">{{data.udate}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>序号位数</label></div>
+    				<div class="ctn-wrap">{{data.ws}}</div>
+    			</li>
+    		</ul>
+    </div>
+</div>
+</@layout>

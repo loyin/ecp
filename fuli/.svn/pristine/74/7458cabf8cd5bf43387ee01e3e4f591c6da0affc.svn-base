@@ -1,0 +1,57 @@
+<#include "../inc/layout.html"> 
+<@layout title="文章">
+<script type="text/javascript" src="${root!}/static/js/kindeditor/kindeditor-min.js"></script>
+<script type="text/javascript">
+var editor;
+$(function(){
+	editor=KindEditor.create('#content', {autoHeightMode : true,themeType : 'default',uploadJson : '${root!}/file/up',fileManagerJson : '${root!}/file/manager',allowFileManager :false});
+});
+</script>
+<style>
+.w300{width:300px;}
+</style>
+		<div class="common-form">
+			<form method="post" class="J_ajaxForm" action="${root!}/article/save">
+				<input type="hidden" name="id" value="${(po.id)!}">
+				<div class="h_a">文章</div>
+				<div class="table_list">
+					<table cellpadding="0" cellspacing="0" class="table_form" width="100%">
+						<tbody>
+							<tr>
+								<td width="200">类别:</td>
+								<td><select name="cateid" class="normal_select">
+								<#list cateList as r>
+								<#if ((r.pid)!0) !=0>
+				 				<#else>
+								<option value="${r.id}" <#if (r.id==(po.cateid)!0)||r.id==(cateid!'0')?number>selected="selected"</#if>>${r.name}</option>
+									<#list cateList as r1>
+									<#if (r1.pid)??&& r1.pid==r.id>
+										<option value="${r1.id}" <#if (r.id==(po.cateid)!0)||r.id==(cateid!'0')?number>selected="selected"</#if>>&nbsp;&nbsp;&nbsp;└─${r1.name}</option>
+									</#if>
+									</#list>
+								</#if>
+								</#list>
+								</select>
+							</tr>
+							<tr>
+								<td width="200">标题:</td>
+								<td><input type="text" class="input w300" name="title" value="${(po.title)!}"></td>
+							</tr>
+							<tr>
+								<td colspan="2">
+								<textarea class="keditor" style="display:none;width:100%;height:500px;" name="content" id="content">${(po.content)!}</textarea>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="btn_wrap">
+					<div class="btn_wrap_pd">
+						<button class="btn btn_submit mr10 J_ajax_submit_btn" onclick="editor.sync();editor.sync();"
+							type="submit"><#if (po.id)??>修改<#else>添加</#if></button>
+						<a class="btn" href="${root!}/article/list">返回</a>
+					</div>
+				</div>
+			</form>
+		</div>
+ ·</@layout>

@@ -1,0 +1,80 @@
+package net.loyin.util.wechat.bean;
+
+import java.util.List;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import net.loyin.util.wechat.bean.weixin.ArticleItem;
+import net.loyin.util.wechat.bean.weixin.CDATAdapter;
+
+@XmlRootElement(name = "xml")
+public class WeChatRespNewsBean {
+	private String toUserName;
+	private String fromUserName;
+	private Long createTime;
+	private String msgType;
+	private Integer articleCount;
+	private List<ArticleItem> items;
+
+	public Integer getArticleCount() {
+		return articleCount;
+	}
+
+	@XmlElement(name = "ArticleCount")
+	public void setArticleCount(Integer articleCount) {
+		this.articleCount = articleCount;
+	}
+
+	@XmlElementWrapper(name = "Articles")
+	@XmlElement(name = "item", type = ArticleItem.class)
+	public List<ArticleItem> getItems() {
+		return items;
+	}
+
+	public void setItems(List<ArticleItem> items) {
+		this.items = items;
+	}
+
+	public String getToUserName() {
+		return toUserName;
+	}
+
+	@XmlElement(name = "ToUserName")
+	@XmlJavaTypeAdapter(value = CDATAdapter.class)
+	public void setToUserName(String toUserName) {
+		this.toUserName = toUserName;
+	}
+
+	public String getFromUserName() {
+		return fromUserName;
+	}
+
+	@XmlElement(name = "FromUserName")
+	@XmlJavaTypeAdapter(value = CDATAdapter.class)
+	public void setFromUserName(String fromUserName) {
+		this.fromUserName = fromUserName;
+	}
+
+	public Long getCreateTime() {
+		return createTime;
+	}
+
+	@XmlElement(name = "CreateTime")
+	public void setCreateTime(Long createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getMsgType() {
+		return msgType;
+	}
+
+	@XmlElement(name = "MsgType")
+	@XmlJavaTypeAdapter(value = CDATAdapter.class)
+	public void setMsgType(String msgType) {
+		this.msgType = msgType;
+	}
+
+}

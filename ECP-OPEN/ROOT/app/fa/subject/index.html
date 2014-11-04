@@ -1,0 +1,26 @@
+<#include "../../inc/layout.html">
+<@layout title="科目" js="fa/subject/index.js">
+<div class="wrapper" ms-controller="ctrl">
+  <div class="mod-search cf">
+    <div class="fl">
+      <ul class="ul-inline">
+        <li>
+        <label>类别:</label>
+          <select id="type" class="ui-input" ms-change="search()" ms-duplex="data.type">
+          	<option value="">全部</option>
+          	<option ms-repeat="type" ms-value="$index">{{el}}</option>
+          </select>
+        </li>
+      </ul>
+    </div>
+    <div class="fr">
+    <a class="ui-btn ui-btn-sp mrb" id="add" title="新增自定义参数"><i class="fa fa-plus"></i>新增</a>
+    </div>
+  </div>
+  <div class="grid-wrap">
+    <table id="grid">
+    </table>
+    <div id="page"></div>
+  </div>
+</div>
+</@layout>

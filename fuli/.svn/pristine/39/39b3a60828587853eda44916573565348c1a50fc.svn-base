@@ -1,0 +1,65 @@
+<#include "inc/weixin_layout.html">
+<@layout title='在线申请帮主资格'>
+<h2 class="rich_media_title" id="activity-name">我的信息</h2>
+<div class="rich_media_meta_list">
+	<a class="rich_media_meta link nickname" href="javascript:viewProfile();"
+		id="post-user">古酿定制酒</a>
+</div>
+<div id="page-content">
+<form id="form1">
+<input type="hidden" name="id" value="${(po.id)!}">
+<input type="hidden" name="openid" value="${(po.openid)!}">
+<div id="contenter">
+  <div class="list">
+<ul>
+<li>
+<label>姓名</label>
+</li>
+<li>
+<input type="text" name="uname" value="${(po.uname)!}">
+</li>
+<li>
+<label>手机</label>
+</li>
+<li>
+<input type="text" name="phone" value="${(po.phone)!}">
+</li>
+<li>
+<label>单位</label>
+</li>
+<li>
+<input type="text" name="danwei" value="${(po.danwei)!}">
+</li>
+<li>
+<label>地址</label>
+</li>
+<li>
+<input type="text" name="addr" value="${(po.addr)!}">
+</li>
+<li>
+<label>开户银行</label>
+</li>
+<li>
+<input type="text" name="bank" value="${(po.bank)!}">
+</li>
+<li><label>银行卡号</label>
+</li>
+<li>
+<input type="text" name="account" value="${(po.account)!}">
+</li>
+</ul>
+</div>
+</form>
+<a href="javascript:void()" id="subtn">提交</a>
+<script>
+$(function(){
+	$("#subtn").click(function(){
+		$.ajax({url:'${root!}/saveAppliForm',data:$("#form1").serialize(),type:'POST',dataType:'json',
+			success:function(data){
+			alert(data.msg);
+		}});
+	});
+});
+</script>
+</div>
+</@layout>

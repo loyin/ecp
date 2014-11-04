@@ -1,0 +1,176 @@
+package net.loyin.ctrl;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import net.loyin.jfinal.anatation.RouteBind;
+import net.loyin.model.sys.OperaLog;
+import net.loyin.model.sys.Role;
+import net.loyin.model.sys.User;
+import net.loyin.util.PropertiesContent;
+import net.loyin.util.mail.MailSenderInfo;
+import net.loyin.util.mail.SimpleMailSender;
+import net.loyin.util.safe.MD5;
+
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
+
+/** 用户管理 
+ * 
+ * @author 龙影
+ */
+@RouteBind(path = "/user")
+public class UserCtrl extends AdminBaseController<User> {
+	public static String pwd_def=null;
+	public UserCtrl() {
+		this.tableName = User.tableName;
+		modelClass = User.class;
+	}
+	public void list(){
+		List<Object> param = new ArrayList<Object>();
+		StringBuffer where = new StringBuffer();
+		/** 添加查询字段条件*/
+		qryField(where, param);
+		sortField(where);
+		Page<Record> p = Db.paginate(getPageNo(), getPageSize(), "select t.*,r.name roloename ", "from " + this.tableName+ " t,"+Role.tableName+" r where r.id=t.role_id " + where.toString(), param.toArray());
+		this.setAttr("page", p);
+	}
+	
+	/**个人信息查看*/
+	public void view(){
+		this.psn();
+	}
+	public void edit(){
+		this.view();
+		this.setAttr("roleList",Role.dao.find("select id,name from "+Role.tableName+" where status=1 order by name asc"));
+	}
+	/**个人信息修改*/
+	public void psn(){
+		this.setAttr("po", this.getCurrentUser());
+	}
+	public void save(){
+		Map<String,Object> msg=new HashMap<String,Object>();
+		msg.put("success", false);
+		try{
+			if(pwd_def==null)
+				pwd_def=MD5.getMD5ofStr(PropertiesContent.get("users_pwd","123456"));
+			User u=(User) this.getModel2(User.class);
+			Long id=u.getLong("id");
+			if(id==null||id==0){
+				u.set("pass",pwd_def);
+				u.save();
+				OperaLog.dao.saveLog(this.getCurrentUserId(), getIp(), "新增用户：姓名:"+u.getStr("uname")+"|用户名:"+u.getStr("userno"),1);
+			}else{
+				u.update();
+				OperaLog.dao.saveLog(this.getCurrentUserId(), getIp(), "修改用户：姓名:"+u.getStr("uname")+"|用户名:"+u.getStr("userno"),1);
+			}
+			msg.put("success", true);
+			msg.put("msg", "保存用户信息成功！");
+		}catch(Exception e){
+			log.error("修改用户信息",e);
+			msg.put("msg", "保存用户错误！请检查是否输入正确信息！");
+		}
+		this.renderJson_(msg);
+		
+	}
+	/**上传头像等*/
+	public void savePsn(){
+		Map<String,Object> msg=new HashMap<String,Object>();
+		msg.put("success", false);
+		try{
+			User user=(User)this.getModel2(User.class);
+			user.update();
+			msg.put("success", true);
+			msg.put("msg", "保存修改个人信息成功！");
+			OperaLog.dao.saveLog(this.getCurrentUserId(), getIp(), "个人信息修改",1);
+		}catch(Exception e){
+			log.error("修改个人信息",e);
+			msg.put("msg", "保存修改错误！请检查是否输入正确信息！");
+		}
+		this.renderJson_(msg);
+		
+	}
+	/**查找密码*/
+	public void findpwd(){
+		String userno=this.getPara("userno");
+		String email=this.getPara("email");
+		Map<String,Object> msg=new HashMap<String,Object>();
+		msg.put("success", false);
+		if(userno==null||"".equals(userno.trim())||email==null||"".equals(email.trim())){
+			msg.put("msg", "用户名和邮箱不能为空！");
+		}else{
+			User u=User.dao.qryByUseroAndEmail(userno, email);
+			if(u==null){
+				msg.put("msg","用户名和邮箱不匹配！请检查是否输入正确！");
+			}else{
+				try{
+					SimpleMailSender sender=new SimpleMailSender();
+					MailSenderInfo mailInfo=new MailSenderInfo();
+					mailInfo.setToAddress(new String[]{email});
+					StringBuffer sb=new StringBuffer();
+					String pwd=idGenerater.timeTo62();
+					sb.append("已经重新给您生成一个新的密码<b>&nbsp;&nbsp;"+pwd+"&nbsp;&nbsp;</b>；请牢记<br>");
+					mailInfo.setContent(sb.toString());
+					mailInfo.setSubject("用户名【"+userno+"】密码找回");
+					sender.sendHtmlMail(mailInfo);
+					u.set("pass",MD5.getMD5ofStr(pwd));
+					u.update();
+					msg.put("success",true);
+					msg.put("msg", "邮件发送成功，请查收邮件查看新密码。");
+				}catch(Exception e){
+					log.error(e);
+					msg.put("msg", "邮件发送失败，请检查邮件系统是否正常！请联系系统管理员解决。");
+				}
+			}
+		}
+		this.renderJson_(msg);
+	}
+	/*public void expout(){
+		List list=User.dao.find("select * from "+tableName);
+		ExcelRender excelRender=new ExcelRender("tongxunlu.xls",new String[]{"姓名","性别","院系/单位","职务","手机号码","邮箱","QQ"},
+													new String[]{"uname","sex","yxdw","zw","mobile","email","qq"},list);
+		this.render(excelRender);
+	}*/
+	public void del(){
+		super.del();
+		OperaLog.dao.saveLog(this.getCurrentUserId(), getIp(), "删除用户",1);
+	}
+	public void savePwd(){
+		Map<String,Object> msg=new HashMap<String,Object>();
+		msg.put("success", false);
+		String oldpwd=this.getPara("oldpwd");
+		String newpwd=this.getPara("newpwd");
+		String reppwd=this.getPara("reppwd");
+		if(oldpwd==null||"".equals(oldpwd)){
+			msg.put("msg","当前密码不能为空！");
+		}else
+		if(newpwd==null||"".equals(newpwd.trim())){
+			msg.put("msg","新密码不能为空！");
+		}else
+		if(reppwd==null||"".equals(reppwd.trim())){
+			msg.put("msg","确认密码不能为空！");
+		}else
+		if(newpwd.trim().equals(reppwd.trim())==false){
+			msg.put("msg","确认密码和新密码不一致！");
+		}else{
+			User u= this.getCurrentUser();
+			if(u.getStr("pass").equals(MD5.getMD5ofStr(oldpwd))==false){
+				msg.put("msg","当前密码不正确！");
+			}else{
+				try{
+					Db.update("update "+User.tableName+" set pass=? where id=?",MD5.getMD5ofStr(newpwd),this.getCurrentUserId());
+					msg.put("msg","密码已经修改，请牢记新密码！");
+					OperaLog.dao.saveLog(this.getCurrentUserId(), getIp(), "退出",1);
+					msg.put("success", true);
+				}catch(Exception e){
+					log.error("修改密码",e);
+					msg.put("msg","密码修改错误！请重试或联系管理员。");
+				}
+			}
+		}
+		this.renderJson_(msg);
+	}
+}

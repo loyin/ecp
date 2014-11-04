@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<process displayName="请假" name="leave">
+<start displayName="start1" layout="20,28,-1,-1" name="start1">
+<transition g="" name="transition1" offset="0,0" to="approveDept"/>
+</start>
+<end displayName="end1" layout="453,31,-1,-1" name="end1"/>
+<task assignee="approveDept.operator" displayName="上级审批" form="leave/approveDept.html" layout="116,25,-1,-1" name="approveDept" performType="ANY">
+<transition g="" name="transition3" offset="0,0" to="decision1"/>
+</task>
+<decision displayName="decision1" expr="#day &gt; 2 ? 'transition5' : 'transition4'" layout="270,28,-1,-1" name="decision1">
+<transition displayName="小于等于N天" expr="#day&lt;=#N" g="" name="transition4" offset="0,0" to="end1"/>
+<transition displayName="大于N天" expr="#day&gt;#N" g="" name="transition5" offset="0,0" to="approveBoss"/>
+</decision>
+<task assignee="approveBoss.operator" displayName="上级上司审批" form="leave/approveBoss.html" layout="250,121,-1,-1" name="approveBoss" performType="ANY">
+<transition g="" name="transition6" offset="0,0" to="end1"/>
+</task>
+</process>

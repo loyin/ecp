@@ -1,0 +1,145 @@
+﻿@charset "utf-8";
+/* CSS Document */
+body{font-size:12px; font-family:"微软雅黑","黑体", Arial;color:#5F7392;margin:0;padding:0; position:relative;}
+html, body, div, span, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, code,del, dfn, em, img, q, dl, dt, dd, ol, ul, li,fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td{border:0;list-style:none;margin:0;padding:0;}
+input,select,textarea{font-size:12px;font-family: Arial,"微软雅黑","黑体","宋体"; line-height:18px; padding:0; margin:0; color:#4F4F4F;outline: none}
+p{ line-height:20px;}
+a{text-decoration:none;outline:none; color:#007FFF}
+a:hover{ color:#80BDE3}
+a,a:focus{ outline:none;}
+a,img{ border:none;}
+.underline{ text-decoration:underline}
+img{ vertical-align:middle;}
+table{ border-collapse:collapse;  border-spacing: 0;}
+td{ word-break:break-all; word-wrap:break-word}
+textarea{　resize:none}
+/*float*/
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+.clearfix{display:inline-block;}
+.clearfix {display:block; }
+.fl{float:left;}
+.fr{float:right;}
+.clear{ clear:both}
+/*common*/
+.tc{ text-align:center}
+.tr{ text-align:right}
+.tl{ text-align:left}
+.underline{ text-decoration:underline}
+.hide{ display:none}
+.pos-rel{ position:relative}
+h1, h2, h3, h4, h5, h6{ font-weight:400; font-size:14px;}
+.ft14{ font-size:14px !important;}
+.ft16{ font-size:16px !important;}
+.ft18{ font-size:18px !important;}
+
+.wrapper{ width:1000px; margin:0 auto; background:#fff;}
+
+/*控件*/
+input[type="checkbox"]{ _vertical-align:-1px; vertical-align:-2px; margin-right:3px;}
+input[type="radio"]{  _vertical-align:-1px; vertical-align:-2px;  margin-right:3px;}
+textarea{ border:1px solid #B6C0CD;border-radius:3px; padding:5px; overflow:auto; resize:none;box-shadow:inset 1px 1px 3px #DBDBDB}
+.areaSmall{ width:200px; height:40px; resize:none; }
+.areaBig{ width:470px; height:100px; resize:none; }
+
+.datagrid .areaSmall{ float:left}
+.inp-error{ border-color:#f00}
+.defaultVal{ color:#ccc}
+.select{ height:28px; *height:22px; line-height:28px;*line-height:22px; padding:4px 0px;*padding:0; border-radius:5px; border:1px solid #999}
+.required{ color:#f00; margin-right:5px; vertical-align:middle; font-size:16px;}
+.inp-txt{ height:18px; line-height:18px; padding:5px; border:1px solid #B6C0CD; color:#333; -moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px;}
+.inp-error{ border-color:#FF4000}
+.btn100{
+	display:inline-block;
+	width:100px;
+	height:30px;
+	line-height:30px;
+	background:url(img/btn_appcreat.png) no-repeat;
+	text-align:center;
+	vertical-align:middle;
+	color:#fff;
+}
+.btn120{display:inline-block;width:120px;height:28px;line-height:28px;background:url(img/btn120.png) no-repeat;text-align:center;vertical-align:middle;
+color:#5F7392;box-shadow:1px 1px 2px #DBDBDB}
+.btn120:hover{ color:#5F7392}
+.btn-big{ display:inline-block; width:240px; height:35px; line-height:35px; color:#fff; background:url(img/loginBtn.png) no-repeat; text-align:center; border:0 none; font-size:14px;}
+.btn-big-nogo{ background:url(img/loginBtnNo.png)}
+.btn-big:hover{ color:#fff;}
+.btn240{ display:inline-block; width:240px; height:35px; line-height:35px; color:#5F7292; background:url(img/btn240.png) no-repeat; text-align:center; border:0 none; font-size:14px;}
+.btn240:hover{ color:#5F7292;}
+
+.btn-center{
+	text-align:center;
+	padding:20px 0
+}
+.btn-center a{
+	margin:0 10px;
+}
+.btn-right{
+	text-align:right;
+	padding:10px 0
+}
+.btn-right a{
+	margin-right:10px;
+}
+.header{
+	height:90px;
+	background:url(img/hd.png) bottom repeat-x
+}
+.header .top-line{ height:4px; line-height:4px; background:url(img/bg.png) repeat-x; overflow:hidden;}
+.header .wrapper{ background:none;}
+.header .top{ height:24px; line-height:24px; padding-top:3px; text-align:right;color:#b3b3b3;}
+.header .top a{color:#b3b3b3; margin:0 10px;}
+
+.nav h1{ float:left;padding-top:15px;}
+.nav h1 a{ display:block; width:260px; height:30px; text-indent:-9999px;}
+.main-nav{ float:right;}
+.main-nav li{ float:left;height:30px;line-height:30px; padding:15px;}
+.main-nav li a{ font-size:16px;color:#F3F3F4;}
+.main-nav .current,.main-nav a:hover{color:#46D616;}
+
+/*登陆页面*/
+.login-wrap{ height:485px; background:url(img/login.png) center center no-repeat; }
+.login-wrap .wrapper{ position:relative}
+.login{ background: url(img/bg_login.png);width:260px; position:absolute;top:20px;right:0;padding:0 20px;}
+.login .form-title{color:#76869F; font-size:18px; border-bottom:1px solid #A7B3C2;height:36px;line-height:36px; padding-top:10px;}
+.login .form-cnt{padding:10px;}
+.login .form-error{ height:28px; line-height:28px; background:#FFFBCC; border:1px solid #FF4101; color:#FF4101; padding-left:10px; margin-bottom:5px; display:none}
+.login .label{ display:block; font-size:12px;color:#5F7292;height:24px;line-height:24px;}
+.login .inp-txt{width:228px;}
+.login .form-item{ margin-bottom:10px;}
+.login .form-code{ height:55px; line-height:30px;}
+.login .form-code .inp-txt{ width:100px; float:left; margin-right:20px;}
+.login .form-code img{ width:80px; height:30px; float:left; margin-right:10px; cursor:pointer}
+.login .form-code a{ display:block; width:14px; height:15px; background:url(img/refresh.png) no-repeat; float:left; text-indent:-9999px; margin-top:7px;}
+.login .form-txt{ height:30px; line-height:30px;}
+
+.login-txt{ position:absolute; top:80px; left:380px;width:230px; height:150px; z-index:100}
+.login-txt h2,.login-txt p{ text-indent:-9999px;}
+.login-txt a{ display:block; width:100px; height:30px; position: absolute; top:112px; right:0; text-indent:-9999px; z-index:110}
+
+.footer{ padding:10px 0; background:url(img/ft.png) repeat-x; color:#fff; width:100% ;}
+.footer p{ line-height:30px; text-align:center}
+.footer p a{ color:#fff; margin:0 5px;}
+
+.footDiv{height:220px; overflow:hidden; /*background:#eee;*/}
+.footDiv .div0{text-align:center;}
+.footDiv .wal{width:660px; height:220px; padding-top:20px; overflow:hidden; position:relative; left:55px;}
+.footDiv li{float:left; width:165px; overflow:hidden;}
+.footDiv dd{padding-top:15px;}
+
+.wal{width:980px; margin:0px auto; overflow:hidden;}
+.wal h5{font-size: 20px;border-bottom: 1px solid #e4e4e4;width: 60%;}
+.black, .black a{color:#3C3C3C;}
+.black a:hover{color:#81AC30;}
+.alert-danger {
+color: #a94442;
+background-color: #f2dede;
+border-color: #ebccd1;
+}
+.alert {
+padding: 15px;
+margin-bottom: 20px;
+border: 1px solid transparent;
+border-radius: 4px;
+}

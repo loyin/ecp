@@ -1,0 +1,38 @@
+package net.loyin.util.wechat.bean.ztApi;
+
+import java.util.List;
+
+/**
+ * 账单查询：其他清单数组结构
+ * 
+ * @author EJ-Mr.Von
+ */
+public class BqrOther {
+	private double amount;
+	private String number;
+	private List<Item> otherItem;
+
+	public double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(double amount) {
+		this.amount = amount;
+	}
+
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
+	}
+
+	public List<Item> getOtherItem() {
+		return otherItem;
+	}
+
+	public void setOtherItem(List<Item> otherItem) {
+		this.otherItem = otherItem;
+	}
+}

@@ -1,0 +1,77 @@
+<#include "../../inc/layout.html">
+<@layout title="科目收支明细" js="fa/payReceivOrder/rpt1.js">
+<style>
+html{overflow:auto;}
+.comboDiv{position:absolute;left:90px;}
+.comboDiv div{height:30px;}
+</style>
+<div class="wrapper" ms-controller="view">
+  <div class="mod-search cf" ms-if="nprint">
+    <div class="fl">
+      <ul class="ul-inline">
+        <li>
+        	<input type="text" ms-duplex="query.keyword" class="ui-input" style="width:230px;" placeholder="请输入单据编号、来往单位编号或名称">
+        </li>
+        <li>
+        	<label>科目:</label>
+        	<span id="subject"></span>
+        </li>
+        <li>
+          <label>日期:</label>
+          <input type="text" id="beginDate" class="ui-input ui-datepicker-input" ms-duplex="query.start_date">
+          <span>-</span>
+          <input type="text" id="endDate" class="ui-input ui-datepicker-input"ms-duplex="query.end_date">
+        </li>
+        <li>
+        <a class="ui-btn mrb" ms-click="loadData" title="查询"><i class="fa fa-search"></i></a>
+        </li>
+      </ul>
+    </div>
+    <div class="fr">
+    <a class="ui-btn mrb" ms-click="printRpt" title="打印"><i class="fa fa-print"></i></a>
+<!--     <a class="ui-btn mrb" id="btn_down" title="导出"><i class="fa fa-download"></i></a> -->
+    </div>
+  </div>
+  <div class="no-query" ms-if="list.length==0"></div>
+  <div class="bills" ms-if="list.length>0">
+    <p style="font-size:24px;text-align:center;">
+    	财务科目收支明细表
+    </p>
+    <p>
+    日期：{{query.start_date}}至{{query.end_date}}<span class="fr">制表人：{{user.realname}}&nbsp;&nbsp;制表日期：${(now?string('yyyy年MM月dd日'))}</span>
+    </p>
+	<table class="table table-bordered table-striped able-hover">
+		<thead>
+			<tr>
+				<th>行号</th>
+				<th>科目</th>
+				<th>日期</th>
+				<th>单据编号</th>
+				<th>收入</th>
+				<th>支出</th>
+				<th>来往单位</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ms-repeat="list">
+				<td>{{$index+1}}</td>
+				<td>{{el.subject_id|subject}}</td>
+				<td>{{el.pay_datetime}}</td>
+				<td>{{el.billsn}}</td>
+				<td align="right">{{el.amt_in|money}}</td>
+				<td align="right">{{el.amt_out|money}}</td>
+				<td>{{el.customer_name}}</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td align="right" colspan="4" rowspan="2">合计</td>
+				<td align="right">{{amt_in_total|money}}</td>
+				<td align="right">{{amt_out_total|money}}</td>
+				<td align="right">{{(amt_in_total-amt_out_total)|money}}</td>
+			</tr>
+		</tfoot>
+	</table>
+  </div>
+</div>
+</@layout>

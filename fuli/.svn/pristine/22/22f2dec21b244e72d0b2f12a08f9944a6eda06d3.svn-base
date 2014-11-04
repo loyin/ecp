@@ -1,0 +1,112 @@
+package net.loyin.model.sys;
+
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
+import java.util.Map;
+
+import net.loyin.jfinal.anatation.TableBind;
+import net.loyin.util.PropertiesContent;
+
+import com.jfinal.aop.Before;
+import com.jfinal.plugin.activerecord.Db;
+import com.jfinal.plugin.activerecord.Model;
+import com.jfinal.plugin.activerecord.Record;
+import com.jfinal.plugin.activerecord.tx.Tx;
+/**
+ * 微信订单
+ * @author xd
+ */
+@TableBind(name="sp_wx_order")
+public class WxOrder extends Model<WxOrder> {
+	private static final long serialVersionUID = -5978356525715363974L;
+	public static final String tableName="sp_wx_order";
+	public static WxOrder dao=new WxOrder();
+	@Before(Tx.class)
+	public void install(Map<String,Object> attrs){
+		BigDecimal orderTotalPrice=new BigDecimal(Float.parseFloat(attrs.get("order_total_price").toString())/100);
+		BigDecimal product_price=new BigDecimal(Float.parseFloat(attrs.get("product_price").toString())/100);
+		String product_price_discount=PropertiesContent.get("product_price_discount","0.85");
+		MathContext mc = new MathContext(2, RoundingMode.HALF_DOWN);
+		//精度为2，舍入模式为大于0.5进1，否则舍弃。 
+		product_price=product_price.divide(new BigDecimal(product_price_discount),mc);
+		int product_count=Integer.parseInt(attrs.get("product_count").toString());//产品数量
+		attrs.put("order_total_price",orderTotalPrice);//订单金额 转成元
+		attrs.put("product_price",product_price);//商品价格 转成元
+		attrs.put("order_express_price",new BigDecimal(Float.parseFloat(attrs.get("order_express_price").toString())/100));//运费 转成元
+		WxOrder wxOrder=new WxOrder();
+		wxOrder.setAttrs(attrs);
+		wxOrder.save();
+		String openid_=(String)attrs.get("buyer_openid");
+		WxUser u=WxUser.dao.findByOpenId(openid_);
+		int shopcount_=u.getInt("shopcount");
+		u.set("shopcount", shopcount_+1);
+		BigDecimal amt=u.getBigDecimal("amt");
+		if(amt==null){
+			amt=new BigDecimal(0);
+		}
+		BigDecimal fanli=u.getBigDecimal("fanli");
+		if(fanli==null){
+			fanli=new BigDecimal(0);
+		}
+		/**购买打折*/
+		double buyfanli=0;
+		/**首次购买折扣*/
+		double first_buy_discount=Double.parseDouble(PropertiesContent.get("first_buy_discount"));
+		/**购买折扣*/
+		double buy_discount=Double.parseDouble(PropertiesContent.get("buy_discount"));
+		//计算打折返利
+		if(shopcount_==0){//打8折 初次购买
+			buyfanli=product_price.doubleValue()*first_buy_discount*product_count;
+		}else{//打88折
+			buyfanli=product_price.doubleValue()*buy_discount*product_count;
+		}
+		fanli=fanli.add(new BigDecimal(buyfanli));
+		amt=amt.add(orderTotalPrice);
+		u.set("amt",amt);//统计消费金额 即订单金额
+		u.set("fanli",fanli);//总返利
+		u.set("buyct", 1);//设置计算帮主奖金用 0时为已经统计过或未购买了，需要重新购买后才能计算其帮主奖金
+		u.set("js",1);//设置需要结算标识
+		u.update();
+		/*计算酒帮主奖金及返利*/
+		String jbopenid=u.getStr("jbopenid");
+		String openid=u.getStr("openid");
+		WxIncome.dao.insert(buyfanli, 0, openid);
+		/*
+		//前50名自动设置为帮主：
+		Record r= Db.findFirst("select count(1) ct from sp_wx_user where jbm =2 ");
+		Long count= Long.parseLong(r.get("ct").toString());
+		if(count<50)
+		Db.update("update sp_wx_user set jbm=2 where openid=? and jbm!=2 ",openid);
+		*/
+		if(jbopenid!=null){
+			//计算其帮主获得的20%的返利
+			double fanli1=product_price.doubleValue()*first_buy_discount*product_count;
+			Db.update("update "+u.tableName+" set fanli=fanli+? where openid=?",fanli1,jbopenid);
+			WxIncome.dao.insert(fanli1, 0, jbopenid);
+			//获取目前酒帮成员购买次数 即是否8个成员都购买了
+			jbBons(jbopenid);
+		}
+	}
+	/**计算酒帮主的酒帮奖金*/
+	public void jbBons(String openid){
+		WxUser u=WxUser.dao.findByOpenId(openid);
+		if(u!=null){
+			Record r = Db.findFirst("SELECT ifnull(sum(u.buyct),0)ct FROM "+ WxUser.tableName+ " u WHERE u.buyct!=0 and u.jbopenid=?",openid);
+			if(r!=null){
+				Integer count=Integer.parseInt(r.get("ct").toString());
+				if(count>=PropertiesContent.getToInteger("JIUBANG_MENBER_LIMIT_COUNT",8)){
+					Record b=Db.findFirst("select ifnull(sum(i.amt),0)/2 amt from "+WxIncome.tableName+" i,"+WxUser.tableName+" u where u.openid=i.openid and u.jbopenid=? and stat=0",openid);
+					double bonus=Double.parseDouble(b.get("amt").toString());
+					WxIncome.dao.insert(bonus, 1, openid);
+					Db.update("update sp_wx_user set bonus=bonus+? where openid=?",bonus,openid);
+					Db.update("update sp_wxincome i,sp_wx_user u set stat=1 where  u.openid=i.openid and (u.jbopenid=?) and stat=0",openid);
+				}
+			}
+			String jbopenid=u.getStr("jbopenid");
+			if(jbopenid!=null&&!"".equals(jbopenid)){
+				jbBons(jbopenid);
+			}
+		}
+	}
+}

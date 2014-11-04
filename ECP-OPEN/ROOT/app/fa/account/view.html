@@ -1,0 +1,36 @@
+<#include "../../inc/layout.html">
+<@layout title="财务账户" js="fa/account/view.js">
+<style>
+body{background:#fff;}
+</style>
+<div class="manage-wrapper" ms-controller="view">
+    <div class="manage-wrap">
+    		<ul class="mod-form-rows manage-wrap" >
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label for="name">名称</label></div>
+    				<div class="ctn-wrap">{{data.name}}</div>
+    			</li>
+    			<li class="row-item odd ">
+    				<div class="label-wrap"><label>类型</label></div>
+					<div class="ctn-wrap">{{data.yh|yh}}</div>
+    			</li>
+    			<li class="row-item odd ">
+    				<div class="label-wrap"><label for="parent_name">开户银行</label></div>
+    				<div class="ctn-wrap">{{data.bankname}}</div>
+    			</li>
+    			<li class="row-item odd ">
+    				<div class="label-wrap"><label for="parent_name">开户名称</label></div>
+    				<div class="ctn-wrap">{{data.khmc}}</div>
+    			</li>
+    			<li class="row-item odd ">
+    				<div class="label-wrap"><label for="parent_name">账户</label></div>
+    				<div class="ctn-wrap">{{data.account}}</div>
+    			</li>
+    			<li class="row-item odd ">
+    				<div class="label-wrap"><label for="parent_name">金额</label></div>
+    				<div class="ctn-wrap">{{data.amt|money}}</div>
+    			</li>
+    		</ul>
+    </div>
+</div>
+</@layout>

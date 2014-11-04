@@ -1,0 +1,23 @@
+package net.loyin.util.wechat.bean.weixin.custom.base;
+
+public class ImageVideo {
+	private String media_id;
+	private String thumb_media_id;
+
+	public String getMedia_id() {
+		return media_id;
+	}
+
+	public void setMedia_id(String mediaId) {
+		media_id = mediaId;
+	}
+
+	public String getThumb_media_id() {
+		return thumb_media_id;
+	}
+
+	public void setThumb_media_id(String thumbMediaId) {
+		thumb_media_id = thumbMediaId;
+	}
+
+}

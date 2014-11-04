@@ -1,0 +1,72 @@
+package net.loyin.util.wechat;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import net.loyin.util.wechat.bean.Message;
+
+public class TradeheaderUtil {
+	/** SHA加密内容，验证报文 */
+	public static String getTradeheader(Message message, Date time, int random, String MD5, String phone) {
+		String Username = message.getUsername();
+		String BusCode = message.getBusCode();
+		String ServiceCode = message.getServiceCode();
+		String Version = message.getVersion();
+		String AppID = message.getAppID();
+		String PartnerCode = message.getPartnerCode();
+		String ReqCode = Username + new SimpleDateFormat("yyyyMMddSSS").format(time) + random + 100000;
+		String ReqTime = new SimpleDateFormat("yyyy:MM:dd:hh:mm:ss:SSS").format(time);
+		String AccountID = phone;
+		String AccountType = message.getAccountType();
+		String CityCode = message.getCityCode();
+		String ReqType = message.getReqType();
+		String ReqCode2 = message.getReqCode2();
+		String SrcOrgID = message.getSrcOrgID();
+		String SrcSysSign = message.getSrcSysSign();
+		String tradeheader = "<TradeHeader>" + "<BusCode>" + BusCode + "</BusCode>" + "<ServiceCode>" + ServiceCode + "</ServiceCode>" + "<Version>" + Version + "</Version>" + "<AppID>" + AppID + "</AppID>" + "<PartnerCode>" + PartnerCode
+				+ "</PartnerCode>" + "<MD5>" + MD5 + "</MD5>" + "<ReqCode>" + ReqCode + "</ReqCode>" + "<ReqTime>" + ReqTime + "</ReqTime>" + "<DigitalSign/>" + "<Request>" + "<AccountID>" + AccountID + "</AccountID>" + "<AccountType>" + AccountType
+				+ "</AccountType>" + "<CityCode>" + CityCode + "</CityCode>" + "<UserToken/>" + "<SmsCode/>" + "<ReqType>" + ReqType + "</ReqType>" + "<ReqCode>" + ReqCode2 + "</ReqCode>" + "</Request>" + "<PartnerInfo>" + "<SrcOrgID>" + SrcOrgID
+				+ "</SrcOrgID>" + "<SrcSysID/>" + "<SrcSysSign>" + SrcSysSign + "</SrcSysSign>" + "</PartnerInfo>" + "</TradeHeader>";
+		return tradeheader;
+	}
+
+	/**
+	 * SHA加密内容，交易报文
+	 * 
+	 * @param message
+	 *            短信设置信息
+	 * @param time
+	 *            时间
+	 * @param random
+	 *            随机数
+	 * @param MD5
+	 * @param phone
+	 *            手机号码
+	 * @param smsCode
+	 *            验证码
+	 * @return
+	 */
+	public static String getTradeheader(Message message, Date time, int random, String MD5, String phone, String smsCode) {
+		String Username = message.getUsername();
+		// String Password = message.getPassword();
+		String BusCode = message.getBusCode();
+		String ServiceCode = message.getTransServiceCode();
+		String Version = message.getVersion();
+		String AppID = message.getAppID();
+		String PartnerCode = message.getPartnerCode();
+		String ReqCode = Username + new SimpleDateFormat("yyyyMMddSSS").format(time) + random + 100000;
+		String ReqTime = new SimpleDateFormat("yyyy:MM:dd:hh:mm:ss:SSS").format(time);
+		String AccountID = phone;
+		String AccountType = message.getAccountType();
+		String CityCode = message.getCityCode();
+		String ReqType = message.getReqType();
+		String ReqCode2 = message.getReqCode2();
+		String SrcOrgID = message.getSrcOrgID();
+		String SrcSysSign = message.getSrcSysSign();
+		String tradeheader = "<TradeHeader>" + "<BusCode>" + BusCode + "</BusCode>" + "<ServiceCode>" + ServiceCode + "</ServiceCode>" + "<Version>" + Version + "</Version>" + "<AppID>" + AppID + "</AppID>" + "<PartnerCode>" + PartnerCode
+				+ "</PartnerCode>" + "<MD5>" + MD5 + "</MD5>" + "<ReqCode>" + ReqCode + "</ReqCode>" + "<ReqTime>" + ReqTime + "</ReqTime>" + "<DigitalSign/>" + "<Request>" + "<AccountID>" + AccountID + "</AccountID>" + "<AccountType>" + AccountType
+				+ "</AccountType>" + "<CityCode>" + CityCode + "</CityCode>" + "<UserToken>" + smsCode + "</UserToken>" + "<SmsCode>" + smsCode + "</SmsCode>" + "<ReqType>" + ReqType + "</ReqType>" + "<ReqCode>" + ReqCode2 + "</ReqCode>"
+				+ "</Request>" + "<PartnerInfo>" + "<SrcOrgID>" + SrcOrgID + "</SrcOrgID>" + "<SrcSysID/>" + "<SrcSysSign>" + SrcSysSign + "</SrcSysSign>" + "</PartnerInfo>" + "</TradeHeader>";
+		return tradeheader;
+	}
+}

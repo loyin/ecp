@@ -1,0 +1,2 @@
+crossdomain.xml 为camera.swf照相头像需要的 存放在file目录和根目录下
+locale.xml 为camera.swf照相头像需要的 存放在同一目录下

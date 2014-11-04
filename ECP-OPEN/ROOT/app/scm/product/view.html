@@ -1,0 +1,54 @@
+<#include "../../inc/layout.html">
+<@layout title="商品" js="scm/product/view.js">
+<style>
+body{background: #fff;}
+</style>
+<div class="manage-wrapper" ms-controller="view">
+    <div class="manage-wrap">
+    		<ul class="mod-form-rows base-form" >
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>类别</label></div>
+    				<div class="ctn-wrap">{{data.category|custParame}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>状态</label></div>
+    				<div class="ctn-wrap">{{data.status|status}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>编号</label></div>
+    				<div class="ctn-wrap">{{data.billsn}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>名称</label></div>
+    				<div class="ctn-wrap">{{data.name}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>型号</label></div>
+    				<div class="ctn-wrap">{{data.model}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>计量单位</label></div>
+    				<div class="ctn-wrap">{{data.unit|custParame}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>采购价(元)</label></div>
+    				<div class="ctn-wrap">{{data.purchase_price|money}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>销售价(元)</label></div>
+    				<div class="ctn-wrap">{{data.sale_price|money}}</div>
+    			</li>
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>库存预警</label></div>
+    				<div class="ctn-wrap">{{data.stock_warn}}</div>
+    			</li>
+    		</ul>
+    		<ul class="mod-form-rows">
+    			<li class="row-item pb0">
+    				<div class="label-wrap"><label>备注</label></div>
+    				<div class="ctn-wrap">{{data.remark}}</div>
+    			</li>
+    		</ul>
+    </div>
+</div>
+</@layout>

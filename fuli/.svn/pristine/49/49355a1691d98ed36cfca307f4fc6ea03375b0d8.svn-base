@@ -1,0 +1,103 @@
+package net.loyin.interceptor;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import jxl.common.Logger;
+import net.loyin.jfinal.model.IdGenerater;
+import net.loyin.model.sys.User;
+import net.loyin.util.PropertiesContent;
+import net.loyin.util.TextUtil;
+import net.loyin.util.safe.CipherUtil;
+
+import org.apache.commons.lang.ArrayUtils;
+
+import com.jfinal.aop.Interceptor;
+import com.jfinal.core.ActionInvocation;
+import com.jfinal.core.Controller;
+
+/**
+ * 基础拦截器父类
+ * @author 刘声凤 2014年1月25日
+ */
+public abstract class BaseInterceptor implements Interceptor {
+	private static Logger log=Logger.getLogger(BaseInterceptor.class);
+	protected static IdGenerater idGenerater = new IdGenerater();
+	/**权限检测*/
+	protected static Boolean power_check;
+	/**登录状态验证排除url*/
+	protected static String[] power_url_exclude;
+	protected static SimpleDateFormat datef=new SimpleDateFormat("yyyy-MM-dd");
+	protected static String root;
+	/** 获取当前系统操作人ID */
+	public Long getCurrentUserId(Controller ctrl){
+		String login_user_id=ctrl.getCookie("login_user_id");
+		ctrl.setAttr("login_user_id", login_user_id);
+		login_user_id=CipherUtil.decryptData(login_user_id);
+		if(login_user_id!=null){
+			login_user_id=login_user_id.split("_")[1];
+		}else{
+			login_user_id="0";
+		}
+		return idGenerater.to10(login_user_id);
+	}
+	private static String regdate;
+	private static Date regDate;
+	@Override
+	public void intercept(ActionInvocation ai) {
+		/*try {
+			if(regdate==null){
+				regdate=PropertiesContent.get("regdate","2100-12-31");
+				regDate=datef.parse(regdate);
+			}
+			if(regDate.before(new Date())){
+				System.exit(1);
+				throw new Exception("服务到期！请联系供应商！有效期时间至："+regdate);
+			}
+		} catch (Exception e) {
+			log.error("服务器停止",e);
+			System.exit(1);
+		}*/
+		if(power_check==null){
+			power_check=PropertiesContent.getToBool("power_check",false);
+		}
+		if(power_url_exclude==null)
+			power_url_exclude=PropertiesContent.get("power_url_exclude","").split(",");
+		Controller ctrl=ai.getController();
+		if(root==null){
+			root=ctrl.getRequest().getContextPath();
+		}
+		ctrl.setAttr("root",root);
+		String ck=ai.getControllerKey();
+		String mth=ai.getMethodName();
+		/**判断登录超时*/
+		Long onlineUserId=this.getCurrentUserId(ctrl);//(Long)ctrl.getSession().getAttribute("onlineUserId");
+		//String u=(ck+"/"+mth).replaceAll("//","");
+		String u=ctrl.getRequest().getRequestURI();
+		System.out.println("访问URI="+u);
+		if((!ArrayUtils.contains(power_url_exclude,u))&&(onlineUserId==null||onlineUserId==0L)){
+			if(!mth.contains("save")&&!mth.contains("save")&&!mth.contains("del")&&!mth.contains("update")){
+				ctrl.removeCookie("login_user_id");
+				ctrl.redirect("/");
+			}else{
+				ctrl.renderJson("{\"success\":false,\"msg\":\"登录超时请重新登录！\"}");
+			}
+			ai.invoke();
+			return;
+		}
+
+		ctrl.setAttr("nowtime", new Date());
+		Long uid=this.getCurrentUserId(ctrl);
+		User user=User.dao.findById(uid);
+		ctrl.setAttr("Login_User",user);
+		ctrl.setAttr("PropertiesContent",PropertiesContent.me);//config参数
+		ctrl.setAttr("IdGenerater", IdGenerater.me);//id构建器
+		ctrl.setAttr("TextUtil", TextUtil.me);
+		ctrl.setAttr("request",ctrl.getRequest());
+		/**添加参数DAO*/
+		ctrl.keepPara();
+		doIntercept(ai);
+		ai.invoke();//注意 一定要执行此方法
+	}
+	public abstract void doIntercept(ActionInvocation ai);
+}

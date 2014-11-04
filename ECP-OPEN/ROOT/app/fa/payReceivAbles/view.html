@@ -1,0 +1,57 @@
+<#include "../../inc/layout.html">
+<@layout title="应收应付" js="fa/payReceivAbles/view.js">
+<style>
+body{background:#fff;}
+</style>
+<div class="manage-wrapper" ms-controller="view">
+    <div class="manage-wrap base-form">
+    		<input type="hidden" name="id" id="id" ms-duplex="data.id">
+    		<ul class="mod-form-rows" >
+    			<li class="row-item oneRow">
+    				<div class="label-wrap"><label>主题</label></div>
+					<div class="ctn-wrap">{{data.name}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>类型</label></div>
+					<div class="ctn-wrap">{{data.type|type}}</div>
+    			</li>
+    			<li class="row-item odd ">
+    				<div class="label-wrap"><label>结算状态</label></div>
+    				<div class="ctn-wrap">{{data.status|status|html}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>合同订单号</label></div>
+    				<div class="ctn-wrap">{{data.billsn}}</div>
+    			</li>
+    			<li class="row-item odd ">
+    				<div class="label-wrap"><label>来往单位</label></div>
+    				<div class="ctn-wrap">{{data.customer_name}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>负责人</label></div>
+    				<div class="ctn-wrap">{{data.head_name}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="amt">订单金额</label></div>
+    				<div class="ctn-wrap">{{data.amt|money}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="amt">已结金额</label></div>
+    				<div class="ctn-wrap">{{data.pay_amt|money}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label for="amt">最近付款时间</label></div>
+    				<div class="ctn-wrap">{{data.pay_datetime}}</div>
+    			</li>
+    			<li class="row-item odd ">
+    				<div class="label-wrap"><label>创建人</label></div>
+    				<div class="ctn-wrap">{{data.creater_name}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>创建时间</label></div>
+    				<div class="ctn-wrap">{{data.create_datetime}}</div>
+    			</li>
+    		</ul>
+    </div>
+</div>
+</@layout>

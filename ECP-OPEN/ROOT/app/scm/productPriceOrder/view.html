@@ -1,0 +1,61 @@
+<#include "../../inc/layout.html">
+<@layout title="商品价目表" js="scm/productPriceOrder/view.js">
+<style>
+body{background: #fff;}
+.comboDiv{position:absolute;}
+.table .ui-input{width:100%;}
+</style>
+<div class="manage-wrapper" ms-controller="ctrl">
+    <div class="manage-wrap">
+    		<ul class="mod-form-rows base-form" >
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>主题</label></div>
+    				<div class="ctn-wrap">{{data.subject}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>有效日期</label></div>
+    				<div class="ctn-wrap">{{data.start_date}}<span>至</span>{{data.end_date}}</div>
+    			</li>
+    		</ul>
+    		<p><b>商品列表</b></p>
+    		<div class="grid-wrap" style="max-height:300px;overflow:auto;">
+    		<table class="table table-hover table-striped table_thead_fixed table-bordered">
+  				<thead>
+  					<tr>
+  						<th width="50px">&nbsp;</th>
+  						<th width="167px">商品</th>
+  						<th width="167px">成本价(元)</th>
+  						<th width="167px">销售价(元)</th>
+  						<th width="167px">数量</th>
+  					</tr>
+  				</thead>
+  				<tbody style="max-height:400px;">
+  					<tr ms-repeat="data.productlist">
+  						<td width="50px">{{$index+1}}</td>
+  						<td>{{el.product_name}}</td>
+						<td>{{el.cost|money}}</td>
+  						<td>{{el.price|money}}</td>
+  						<td>{{el.amount}}</td>
+  					</tr>
+  				</tbody>
+    		</table>
+		    </div>
+		    <ul class="mod-form-rows base-form">
+    			<li class="row-item pb0">
+    				<div class="label-wrap"><label>备注</label></div>
+    				<div class="ctn-wrap">{{data.remark}}</div>
+    			</li>
+    		</ul>
+    		<ul class="mod-form-rows base-form" >
+    			<li class="row-item odd">
+    				<div class="label-wrap"><label>创建人</label></div>
+    				<div class="ctn-wrap">{{data.creater_realname}}</div>
+    			</li>
+    			<li class="row-item">
+    				<div class="label-wrap"><label>创建时间</label></div>
+    				<div class="ctn-wrap">{{data.create_datetime}}</div>
+    			</li>
+    		</ul>
+    </div>
+</div>
+</@layout>

@@ -1,0 +1,58 @@
+<#include "../inc/layout.html"> <@layout title="微信菜单">
+<#assign typ=(typ!'-1')?number>
+<div class="nav">
+	<ul class="cc">
+		<li class="current">【${nickname!}】的酒帮成员列表</li>
+	</ul>
+</div>
+	<div class="table_list">
+		<table width="100%">
+			<thead>
+				<tr>
+					<td class="bold">姓名</td>
+					<td class="bold">昵称</td>
+					<td class="bold">头像</td>
+					<td class="bold">性别</td>
+					<td class="bold">手机</td>
+					<td class="bold">购买次数</td>
+					<td class="bold">消费合计(元)</td>
+					<td class="bold">返利(元)</td>
+					<td class="bold">酒帮奖金总计(元)</td>
+					<td class="bold">本期酒帮奖金(元)</td>
+					<td class="bold">类型</td>
+					<td class="bold">关注时间</td>
+					<td class="bold">省</td>
+					<td class="bold">市</td>
+					<td class="bold">操作</td>
+				</tr>
+			</thead>
+			<tbody>
+				<#list page.list as u>
+				<tr>
+					<td>${(u.uname)!}</td>
+					<td>${(u.nickname)!}</td>
+					<td align='center'><img src="${(u.headimgurl)!}" height="35px;"></td>
+					<td>${sex[(u.sex)!0]}</td>
+					<td>${(u.phone)!}</td>
+					<td>${(u.shopcount)!0}</td>
+					<td>${((u.amt)!0)?string('#,##0.00')}</td>
+					<td>${((u.fanli)!0)?string('#,##0.00')}</td>
+					<td>${((u.bonus)!0)?string('#,##0.00')}</td>
+					<td>${((u.bonus1)!0)?string('#,##0.00')}</td>
+					<td><#if u.jbm gt -1>${jbm[(u.jbm)!0]}</#if></td>
+					<td><#if (u.subscribe_time)??>${TextUtil.fromInt(u.subscribe_time)?string("yyyy-MM-dd HH:mm:ss")}</#if></td>
+					<td>${(u.province)!}</td>
+					<td>${(u.city)!}</td>
+					<td class="text-c">
+					<#--<a class="J_ajax_del" href="${root!}/wxuser//${u.id}">查消息</a>| -->
+					<#if u.jbm==2>
+					<a href="javascript:open_iframe_dialog('${root!}/wxuser/jbmlist?jbopenid=${u.openid}&headimgurl=${u.headimgurl!}&nickname=${(u.nickname)!}','${u.nickname}的酒帮成员');">成员</a>|
+					</#if>
+						<a href="javascript:open_iframe_dialog('${root!}/wxuser/msg?openid=${u.openid}&headimgurl=${u.headimgurl!}&nickname=${(u.nickname)!}','发送微信消息-${u.nickname}');">发消息</a>
+					</td>
+				</tr>
+				</#list>
+			</tbody>
+		</table>
+	</div>
+</@layout>

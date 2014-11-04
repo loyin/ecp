@@ -1,0 +1,132 @@
+package net.loyin.ctrl;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStreamReader;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import net.loyin.jfinal.anatation.RouteBind;
+import net.loyin.util.FileTool;
+import net.loyin.util.PropertiesContent;
+
+/**
+ * 数据库备份及还原
+ * @author 刘声凤 2014年6月23日
+ */
+@SuppressWarnings("rawtypes")
+@RouteBind(path = "dbm")
+public class DatabaseBackupCtrl extends AdminBaseController {
+	public static String mysql_backdir;
+	public void init(){
+		if (mysql_backdir == null)
+			mysql_backdir = PropertiesContent.get("mysql_backdir");
+	}
+	public void list() {
+		init();
+		File dir = new File(mysql_backdir);
+		if (dir.exists() == false) {
+			dir.mkdirs();
+		}
+		File[] files = dir.listFiles();
+		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+		if (files != null && files.length > 0) {
+			for (File f : files) {
+				Map<String, String> map = new HashMap<String, String>();
+				map.put("F", f.getName());
+				map.put("SIZE",FileTool.me.FormetFileSize(f.length()));
+				list.add(map);
+			}
+		}
+		this.setAttr("list", list);
+	}
+	public void list1(){
+		list();
+	}
+	public void backUp() {
+		// mysqldump -uroot -p123456 igs > D:\\temp\\igs_001.sql
+		try {
+			init();
+			String f = dateTimeFormat1.format(new Date());
+			String jdbc_dbType=PropertiesContent.get("jdbc.dbType");
+			// {mysql_dir}mysqldump.exe" -u {jdbc.username} -p {jdbc.password} ecp -F >"{mysql_backdir}{\u5907\u4EFD\u6587\u4EF6}"
+			String command = MessageFormat.format(
+					PropertiesContent.get("mysql_backup_cmd"),
+					PropertiesContent.get(jdbc_dbType+".jdbc.username"),
+					PropertiesContent.get(jdbc_dbType+".jdbc.password"), mysql_backdir, f);
+			System.out.println(command);
+			Process p = Runtime.getRuntime().exec("cmd /c " + command);
+			int tag = p.waitFor();// 等待进程终止
+			if (tag != 0) {
+				BufferedReader reader = new BufferedReader(
+						new InputStreamReader(p.getErrorStream()));
+				String s = "";
+				while ((s = reader.readLine()) != null) {
+					String s1 = new String(s.getBytes("GBK"), "ISO-8859-1");
+					String s2 = new String(s1.getBytes("ISO-8859-1"), "UTF-8");
+					System.out.println("mysql==>" + s2);
+				}
+			}
+			this.rendJson_(true, "备份成功！备份文件为：" + f);
+		} catch (Exception ex) {
+			log.error("备份数据库异常", ex);
+			this.rendJson_(false, "备份失败！");
+		}
+	}
+	public void restore() {
+		String f = this.getPara(0);
+		try {
+			init();
+			// {mysql_dir}mysqldump.exe" -u {jdbc.username} -p {jdbc.password} ecp -F >"{mysql_backdir}{\u5907\u4EFD\u6587\u4EF6}"
+			String command = MessageFormat.format(
+					PropertiesContent.get("mysql_restore_cmd"),
+					PropertiesContent.get("jdbc.username"),
+					PropertiesContent.get("jdbc.password"), mysql_backdir, f);
+			System.out.println(command);
+			Process p = Runtime.getRuntime().exec("cmd /c " + command);
+			int tag = p.waitFor();// 等待进程终止
+			if (tag != 0) {
+				BufferedReader reader = new BufferedReader(
+						new InputStreamReader(p.getErrorStream()));
+				String s = "";
+				while ((s = reader.readLine()) != null) {
+					String s1 = new String(s.getBytes("GBK"), "ISO-8859-1");
+					String s2 = new String(s1.getBytes("ISO-8859-1"), "UTF-8");
+					System.out.println("mysql==>" + s2);
+				}
+			}
+			this.rendJson_(true, "恢复成功！备份文件为：" + f);
+		} catch (Exception ex) {
+			log.error("恢复数据库异常", ex);
+			this.rendJson_(false, "恢复失败！");
+		}
+	}
+
+	public void del() {
+		try {
+			init();
+			String f = this.getPara(0);
+			if (f != null) {
+				new File(mysql_backdir + f).delete();
+			} else {
+				String ids=this.getPara("ids");
+				if(ids!=null&&!"".equals(ids)){
+					String[] s=ids.split(",");
+					for(String f_:s){
+						new File(mysql_backdir + f_).delete();
+					}
+				}
+			}
+		} catch (Exception e) {
+
+		}
+		this.rendJson_(true,"删除备份文件成功！");
+	}
+	public void download(){
+		
+	}
+}

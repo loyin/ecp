@@ -1,0 +1,20 @@
+<#include "../../inc/layout.html">
+<@layout title="组织机构" js="sso/position/index.js">
+<div class="wrapper">
+  <div class="mod-search cf">
+    <div class="fl">
+      
+    </div>
+    <div class="fr">
+    <a class="ui-btn ui-btn-sp mrb" id="addDepartment" title="新增部门"><i class="fa fa-plus"></i>新增部门</a>
+    <a class="ui-btn mrb" id="addPosition" title="新增岗位"><i class="fa fa-plus"></i>新增岗位</a>
+    <a class="ui-btn" rel="pageTab" tabid="setting-user" href="${root!}/sso/user"><i class="fa fa-user"></i>用户</a>
+    </div>
+  </div>
+  <div class="grid-wrap">
+    <table id="grid">
+    </table>
+    <div id="page"></div>
+  </div>
+</div>
+</@layout>

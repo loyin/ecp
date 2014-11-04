@@ -1,0 +1,34 @@
+<#include "../../inc/layout.html">
+<@layout title="组织机构">
+<div class="wrapper">
+  <div class="mod-search cf">
+    <div class="fl">
+      <ul class="ul-inline">
+        <li>
+          <input type="text" id="keyword" class="ui-input con" value="" placeholder="请输入标题">
+        </li>
+        <li>
+          <label>接收日期:</label>
+          <input type="text" id="beginDate" value="" class="ui-input ui-datepicker-input">
+          <span>-</span>
+          <input type="text" id="endDate" value="" class="ui-input ui-datepicker-input">
+        </li>
+        <li>
+        <label class="check"><input type="checkbox" name="status" value="0">只显示未读</label>
+        <a class="ui-btn mrb" id="search" title="查询"><i class="fa fa-search"></i></a></li>
+      </ul>
+    </div>
+    <div class="fr">
+    <a class="ui-btn mrb" id="import" title="导出">设置已读</a>
+    <a class="ui-btn mrb" id="import" title="导出">设置未读</a>
+    <a href="#" class="ui-btn" id="btn-batchDel" title="批量删除"><i class="red fa fa-trash-o"></i></a>
+    </div>
+  </div>
+  <div class="grid-wrap">
+    <table id="grid">
+    </table>
+    <div id="page"></div>
+  </div>
+</div>
+<script type="text/javascript" src="${root}/app/sso/message/index.js"></script>
+</@layout>

@@ -1,0 +1,112 @@
+package net.loyin.util.wechat.bean.act;
+
+public class ActXq {
+
+	private int xqid;
+	private String fromUserName;
+	private String phone;
+	private int createTime;
+	private String name;
+	private String idcard;
+	private String photoUrl;
+	private String cardUrl;
+	private String age;
+	private String edu;
+	private String province;
+	private String city;
+	private String cars;
+	private String height;
+	private String revenue;
+
+	public int getXqid() {
+		return xqid;
+	}
+	public void setXqid(int xqid) {
+		this.xqid = xqid;
+	}
+	public String getFromUserName() {
+		return fromUserName;
+	}
+	public void setFromUserName(String fromUserName) {
+		this.fromUserName = fromUserName;
+	}
+	public int getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(int createTime) {
+		this.createTime = createTime;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getIdcard() {
+		return idcard;
+	}
+	public void setIdcard(String idcard) {
+		this.idcard = idcard;
+	}
+	public String getCardUrl() {
+		return cardUrl;
+	}
+	public void setCardUrl(String cardUrl) {
+		this.cardUrl = cardUrl;
+	}
+	public String getAge() {
+		return age;
+	}
+	public void setAge(String age) {
+		this.age = age;
+	}
+	public String getEdu() {
+		return edu;
+	}
+	public void setEdu(String edu) {
+		this.edu = edu;
+	}
+	public String getProvince() {
+		return province;
+	}
+	public void setProvince(String province) {
+		this.province = province;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public String getCars() {
+		return cars;
+	}
+	public void setCars(String cars) {
+		this.cars = cars;
+	}
+	public String getHeight() {
+		return height;
+	}
+	public void setHeight(String height) {
+		this.height = height;
+	}
+	public String getRevenue() {
+		return revenue;
+	}
+	public void setRevenue(String revenue) {
+		this.revenue = revenue;
+	}
+	public String getPhotoUrl() {
+		return photoUrl;
+	}
+	public void setPhotoUrl(String photoUrl) {
+		this.photoUrl = photoUrl;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+}

@@ -1,0 +1,29 @@
+<config>
+    <!--jdbc的数据库访问与事务拦截器
+    <bean class="org.snaker.engine.access.jdbc.JdbcAccess"/>
+    <bean class="org.snaker.engine.access.transaction.DataSourceTransactionInterceptor"/>
+    -->
+    <!--
+    <bean class="org.snaker.engine.access.transaction.JtaTransactionInterceptor"/>
+     -->
+    <!--hibernate3的数据库访问与事务拦截器
+    <bean class="org.snaker.engine.access.hibernate3.HibernateAccess"/>
+    <bean class="org.snaker.engine.access.transaction.Hibernate3TransactionInterceptor"/>
+    -->
+    <!--mybatis的数据库访问与事务拦截器
+    <bean class="org.snaker.engine.access.mybatis.MybatisAccess"/>
+    <bean class="org.snaker.engine.access.transaction.MybatisTransactionInterceptor"/>
+    -->
+    <!-- 数据库方言配置。如果使用orm框架已自带了方言的支持，这里不需要配置
+    <bean class="org.snaker.engine.access.dialect.OracleDialect"/>
+    <bean class="org.snaker.engine.access.dialect.MySqlDialect"/>
+    <bean class="org.snaker.engine.access.dialect.SQLServerDialect"/>
+     -->
+    <bean class="org.snaker.jfinal.access.JfinalAccess"/>
+	<bean class="org.snaker.jfinal.access.JfinalTransactionInterceptor"/>
+    <!-- 任务拦截器，这里可配置多个拦截器，在任务执行后进行拦截处理(如：记录日志、短信提醒等) -->
+    <bean class="org.snaker.engine.impl.LogInterceptor"/>
+ 
+    <!-- 表达式引擎配置 -->
+    <bean class="org.snaker.engine.impl.JuelExpression"/>
+</config>
