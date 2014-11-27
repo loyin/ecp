@@ -21,9 +21,6 @@
 
 捐助支付宝账号：loyinonline@163.com 刘声凤。
 
-支付宝二维码：
-![支付宝：刘声凤 loyinonline@163.com](http://www.loyin.net/alipay.png)
-
 ##
 
 捐赠记录：
