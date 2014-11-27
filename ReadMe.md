@@ -16,3 +16,24 @@
 	主界面：</p><p><img src="http://static.oschina.net/uploads/space/2014/1104/142716_YfP8_105457.png" alt=""></p><p>
 	功能菜单：</p><p><img src="http://static.oschina.net/uploads/space/2014/1104/142840_1SZD_105457.png" alt=""></p>
 		</div>
+		
+非常感谢如下朋友对我的捐助。
+
+捐助支付宝账号：loyinonline@163.com 刘声凤。
+
+支付宝二维码：
+![支付宝：刘声凤 loyinonline@163.com](http://www.loyin.net/alipay.png)
+
+##
+
+捐赠记录：
+
+2014-11-27 张金  200  感谢您的代码分享，钱不多，一点心意
+
+2014-11-17 徐初伟  10.00
+
+2014-11-11 刘高峰 100.00
+
+2014-11-11 刘高峰 10.00    求QQ号码。我的xxxxx加
+
+
